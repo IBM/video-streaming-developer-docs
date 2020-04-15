@@ -1,68 +1,24 @@
+- title: Overview
+  pages:
+    - path: /channel-api/overview
 - title: Getting started
   pages:
-    - path: /getting-started
-- title: Demo
+    - path: /channel-api/getting-started
+- title: Broadcast settings
   pages:
-    - path: /demo
-- title: Gallery
+    - title: Broadcasting devices
+      path: /channel-api/broadcasting-devices
+    - title: Ingest settings
+      path: /channel-api/ingest-settings
+- title: Another apiOverview
   pages:
-    - path: /gallery
-- title: Contributions
+    - path: /another-api/overview
+- title: Another apiGetting started
   pages:
-    - path: /contributions
-- title: Guides
+    - path: /another-api/getting-started
+- title: Another api Broadcast settings
   pages:
-    - title: Configuration
-      path: /guides/configuration
-    - title: Shadowing
-      path: /guides/shadowing
-    - title: Styling
-      path: /guides/styling
-    - title: Navigation
-      path: /guides/navigation/sidebar
-- title: Components
-  pages:
-    - title: Accordion
-      path: /components/Accordion
-    - title: AnchorLinks
-      path: /components/AnchorLinks
-    - title: ArtDirection
-      path: /components/ArtDirection
-    - title: ArticleCard
-      path: /components/ArticleCard
-    - title: Aside
-      path: /components/Aside
-    - title: Caption
-      path: /components/Caption
-    - title: Code blocks
-      path: /components/code-blocks
-    - title: DoDontExample
-      path: /components/DoDontExample
-    - title: DoDontRow
-      path: /components/DoDontRow
-    - title: FeatureCard
-      path: /components/FeatureCard
-    - title: Grid
-      path: /components/Grid
-    - title: ImageCard
-      path: /components/ImageCard
-    - title: ImageGallery
-      path: /components/ImageGallery
-    - title: InlineNotification
-      path: /components/InlineNotification
-    - title: Markdown
-      path: /components/markdown
-    - title: MediumPosts
-      path: /components/MediumPosts
-    - title: MDX
-      path: /components/MDX
-    - title: PageDescription
-      path: /components/PageDescription
-    - title: ResourceCard
-      path: /components/ResourceCard
-    - title: Tabs
-      path: /components/Tabs
-    - title: Title
-      path: /components/Title
-    - title: Video
-      path: /components/Video
+    - title: Another api Broadcasting devices
+      path: /another-api/broadcasting-devices
+    - title: Another api Ingest settings
+      path: /another-api/ingest-settings
