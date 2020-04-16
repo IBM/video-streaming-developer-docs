@@ -1,3 +1,14 @@
+- title: Overview
+  pages:
+    - path: /api-basics-overview
+- title: Authentication
+  pages:
+    - path: /api-basics-authentication
+- title: Testing APIs
+  pages:
+    - path: /api-basics-testing-apis
+
+
 - title: Getting started
   pages:
     - path: /channel-api-getting-started
@@ -88,6 +99,9 @@
 - title: Channel hooks
   pages:
     - path: /channel-api-channel-hooks
+
+
+
 - title: Another apiOverview
   pages:
     - path: /another-api/overview

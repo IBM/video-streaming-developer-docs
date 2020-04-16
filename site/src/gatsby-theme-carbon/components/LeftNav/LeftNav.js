@@ -40,7 +40,7 @@ const LeftNav = props => {
   const pathName = windowGlobal.location.pathname;
   const mainPathNameArray = windowGlobal.location.pathname.split('/');
   let mainPathName;
-  const availableMainPaths = ['channel-api', 'another-api'];
+  const availableMainPaths = ['api-basics', 'channel-api', 'another-api'];
 
   if (mainPathNameArray.length && mainPathNameArray[1]) {
       availableMainPaths.forEach((availableMainPath) => {
@@ -49,6 +49,8 @@ const LeftNav = props => {
           }
       });
   }
+
+  console.log(1, mainPathName);
 
   if (!mainPathName || availableMainPaths.indexOf(mainPathName) < 0) {
       return <LeftNavWrapper expanded={false}>
