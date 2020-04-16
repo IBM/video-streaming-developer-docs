@@ -102,15 +102,55 @@
 
 
 
-- title: Another apiOverview
+
+- title: Getting started
   pages:
-    - path: /another-api/overview
-- title: Another apiGetting started
+    - path: /viewer-authentication-api-getting-started
+- title: Implementing viewer authentication
   pages:
-    - path: /another-api/getting-started
-- title: Another api Broadcast settings
+    - path: /viewer-authentication-api-implementing-viewer-authentication
+- title: Hash lifetime and expiration
   pages:
-    - title: Another api Broadcasting devices
-      path: /another-api/broadcasting-devices
-    - title: Another api Ingest settings
-      path: /another-api/ingest-settings
+    - path: /viewer-authentication-api-hash-lifetime-and-expiration
+- title: Using viewer authentication with other services
+  pages:
+    - path: /viewer-authentication-api-using-viewer-authentication-with-other-services
+- title: Hash Authentication Test
+  pages:
+    - path: /viewer-authentication-api-hash-authentication-test
+
+
+
+- title: Getting started
+  pages:
+    - path: /player-api-getting-started
+- title: Usage
+  pages:
+    - path: /player-api-usage
+- title: Examples
+  pages:
+    - title: Basic embed
+      path: /player-api-examples/basic-embed
+    - title: Responsive embed
+      path: /player-api-examples/responsive-embed
+    - title: Fullscreen functionality
+      path: /player-api-examples/fullscreen-functionality
+    - title: Dynamic insertion
+      path: /player-api-examples/dynamic-insertion
+    - title: Multiview
+      path: /player-api-examples/multiview
+    - title: Multiple instances
+      path: /player-api-examples/multiple-instances
+    - title: Custom UI
+      path: /player-api-examples/custom-ui
+
+
+- title: Getting started
+  pages:
+    - path: /analytics-api-getting-started
+- title: Using the Analytics API
+  pages:
+    - title: Unique viewers
+      path: /analytics-api-examples/unique-viewers
+    - title: View segments
+      path: /analytics-api-examples/view-segments

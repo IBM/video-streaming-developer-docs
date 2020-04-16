@@ -72,6 +72,30 @@ const Header = ({ children }) => {
         >
           Channel Api
         </Link>
+          <Link
+              className={cx(headerName, {
+                  [collapsed]: searchIsOpen,
+              }, 'headerLink')}
+              to="/viewer-authentication-api-getting-started"
+          >
+              Viewer Authentication Api
+          </Link>
+          <Link
+              className={cx(headerName, {
+                  [collapsed]: searchIsOpen,
+              }, 'headerLink')}
+              to="/player-api-getting-started"
+          >
+              Player Api
+          </Link>
+          <Link
+              className={cx(headerName, {
+                  [collapsed]: searchIsOpen,
+              }, 'headerLink')}
+              to="/analytics-api-getting-started"
+          >
+              Analytics Api
+          </Link>
         <HeaderGlobalBar>
           {isSearchEnabled && <GlobalSearch />}
           <HeaderGlobalAction
