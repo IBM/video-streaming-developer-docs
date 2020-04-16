@@ -43,7 +43,11 @@ const LeftNav = props => {
   const availableMainPaths = ['channel-api', 'another-api'];
 
   if (mainPathNameArray.length && mainPathNameArray[1]) {
-      mainPathName = mainPathNameArray[1];
+      availableMainPaths.forEach((availableMainPath) => {
+          if (mainPathNameArray[1].indexOf(availableMainPath) === 0) {
+            mainPathName = availableMainPath;
+          }
+      });
   }
 
   if (!mainPathName || availableMainPaths.indexOf(mainPathName) < 0) {

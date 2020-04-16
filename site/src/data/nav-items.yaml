@@ -1,15 +1,93 @@
-- title: Overview
-  pages:
-    - path: /channel-api/overview
 - title: Getting started
   pages:
-    - path: /channel-api/getting-started
+    - path: /channel-api-getting-started
+- title: Basic channel management
+  pages:
+    - path: /channel-api-basic-channel-management
 - title: Broadcast settings
   pages:
     - title: Broadcasting devices
-      path: /channel-api/broadcasting-devices
+      path: /channel-api-broadcast-settings/broadcasting-devices
     - title: Ingest settings
-      path: /channel-api/ingest-settings
+      path: /channel-api-broadcast-settings/ingest-settings
+    - title: Multi-quality streaming
+      path: /channel-api-broadcast-settings/multi-quality-streaming
+- title: Recording videos
+  pages:
+    - path: /channel-api-recording-videos
+- title: Video management
+  pages:
+    - title: Basic video management
+      path: /channel-api-video-management/basic-video-management
+    - title: Upload videos
+      path: /channel-api-video-management/upload-videos
+    - title: Copy a video
+      path: /channel-api-video-management/copy-a-video
+    - title: Manage video labels
+      path: /channel-api-video-management/manage-video-labels
+    - title: Download your videos
+      path: /channel-api-video-management/download-your-videos
+    - title: Set video thumbnail
+      path: /channel-api-video-management/set-video-thumbnail
+    - title: Trim a video
+      path: /channel-api-video-management/trim-a-video
+    - title: Control video expiration
+      path: /channel-api-video-management/control-video-expiration
+    - title: Manage video chapters
+      path: /channel-api-video-management/manage-video-chapters
+    - title: Manage captions
+      path: /channel-api-video-management/manage-captions
+- title: Playlists
+  pages:
+    - path: /channel-api-playlists
+- title: Security
+  pages:
+    - title: Password protection
+      path: /channel-api-security/password-protection
+    - title: Viewer authentication
+      path: /channel-api-security/viewer-authentication
+    - title: Embed restriction
+      path: /channel-api-security/embed-restriction
+    - title: Sharing control
+      path: /channel-api-security/sharing-control
+- title: White label broadcasting
+  pages:
+    - title: Overview
+      path: /channel-api-white-label-broadcasting/overview
+    - title: Customize player branding
+      path: /channel-api-white-label-broadcasting/customize-player-branding
+    - title: Hide viewer numbers in player
+      path: /channel-api-white-label-broadcasting/hide-viewer-numbers-in-player
+    - title: Hide channel page
+      path: /channel-api-white-label-broadcasting/hide-channel-page
+- title: Custom metadata
+  pages:
+    - title: Metadata fields
+      path: /channel-api-custom-metadata/metadata-fields
+    - title: Channel metadata values
+      path: /channel-api-custom-metadata/channel-metadata-values
+    - title: Hide viewer numbers in player
+      path: /channel-api-custom-metadata/hide-viewer-numbers-in-player
+- title: Channel page design
+  pages:
+    - title: Overview
+      path: /channel-api-channel-page-design/overview
+    - title: Displaying metadata
+      path: /channel-api-channel-page-design/displaying-metadata
+    - title: Channel picture
+      path: /channel-api-channel-page-design/channel-picture
+    - title: Page background color
+      path: /channel-api-channel-page-design/page-background-color
+    - title: Featured videos
+      path: /channel-api-channel-page-design/featured-videos
+    - title: Playlists on channel page
+      path: /channel-api-channel-page-design/playlists-on-channel-page
+- title: Events
+  pages:
+    - path: /channel-api-events
+- title: Channel hooks
+  pages:
+    - path: /channel-api-channel-hooks
 - title: Another apiOverview
   pages:
     - path: /another-api/overview
