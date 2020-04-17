@@ -38,8 +38,7 @@ const LeftNav = props => {
   }
 
   const pathName = windowGlobal.location.pathname;
-  const mainPathNameArray = windowGlobal.location.pathname.split('/');
-  let mainPathName;
+  let mainPathName = '';
   const availableMainPaths = [
       'api-basics',
       'channel-api',
@@ -48,13 +47,11 @@ const LeftNav = props => {
       'analytics-api'
   ];
 
-  if (mainPathNameArray.length && mainPathNameArray[1]) {
-      availableMainPaths.forEach((availableMainPath) => {
-          if (mainPathNameArray[1].indexOf(availableMainPath) >= 0) {
-            mainPathName = availableMainPath;
-          }
-      });
-  }
+  availableMainPaths.forEach((availableMainPath) => {
+      if (pathName.indexOf(availableMainPath) >= 0) {
+        mainPathName = availableMainPath;
+      }
+  });
 
   if (!mainPathName || availableMainPaths.indexOf(mainPathName) < 0) {
       return <LeftNavWrapper expanded={false}>
