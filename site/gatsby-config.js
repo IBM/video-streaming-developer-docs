@@ -11,7 +11,7 @@ module.exports = {
       options: {
         name: 'Carbon Design Gatsby Theme',
         short_name: 'Gatsby Theme Carbon',
-        start_url: '/channel-api-getting-started',
+        start_url: '/',
         background_color: '#ffffff',
         theme_color: '#0062ff',
         display: 'browser',
