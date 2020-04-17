@@ -4,14 +4,14 @@ module.exports = {
     description: 'A Gatsby theme for the carbon design system',
     keywords: 'gatsby,theme,carbon',
   },
-  pathPrefix: `/developers/site/public`,
+  pathPrefix: `/ustream-web/developers/site/public`,
   plugins: [
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Carbon Design Gatsby Theme',
         short_name: 'Gatsby Theme Carbon',
-        start_url: '/',
+        start_url: '/channel-api-getting-started',
         background_color: '#ffffff',
         theme_color: '#0062ff',
         display: 'browser',
