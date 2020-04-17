@@ -50,7 +50,7 @@ const LeftNav = props => {
 
   if (mainPathNameArray.length && mainPathNameArray[1]) {
       availableMainPaths.forEach((availableMainPath) => {
-          if (mainPathNameArray[1].indexOf(availableMainPath) === 0) {
+          if (mainPathNameArray[1].indexOf(availableMainPath) >= 0) {
             mainPathName = availableMainPath;
           }
       });
@@ -70,7 +70,7 @@ const LeftNav = props => {
       </LeftNavWrapper>
   }
 
-  if (pathName.indexOf('/' + mainPathName) === 0) {
+  if (pathName.indexOf('/' + mainPathName) >= 0) {
       navItems = navItems.filter((item) => {
           let showMainMenu = false;
           const pages = item.pages;
