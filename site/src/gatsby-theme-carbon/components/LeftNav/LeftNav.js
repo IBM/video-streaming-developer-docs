@@ -104,12 +104,8 @@ const LeftNav = props => {
         defaultExpanded
         aria-label="Side navigation"
         className={classnames({
-          [sideNavDark]: props.theme === 'dark' || props.homepage,
           'bx--side-nav--website': true,
-          'bx--side-nav--website--dark':
-            props.theme === 'dark' || props.homepage,
-          'bx--side-nav--website--light':
-            props.theme !== 'dark' && !props.homepage,
+          'bx--side-nav--website--light': true
         })}
       >
         <Title>{title}</Title>
