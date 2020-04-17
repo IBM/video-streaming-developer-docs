@@ -10,9 +10,11 @@ import {
 import {
     grid,
     listItemVs,
-} from './Footer.module.scss';
+} from './FooterSecondary.module.scss';
 
-const Footer = ({ Content, links, Logo }) => {
+console.log(listItem);
+
+    const Footer = ({ links, Logo }) => {
     const { firstCol, secondCol } = links;
 
     return (

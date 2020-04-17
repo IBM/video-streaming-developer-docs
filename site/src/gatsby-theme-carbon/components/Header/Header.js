@@ -26,7 +26,7 @@ import {
 
 import {
     headerLink,
-} from './Header.module.scss';
+} from './HeaderSecondary.module.scss';
 
 const Header = ({ children }) => {
   const {
