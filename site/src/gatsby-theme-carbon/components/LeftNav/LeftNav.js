@@ -5,11 +5,11 @@ import { useNavItems } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavI
 
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
-import LeftNavResourceLinks from 'gatsby-theme-carbon/src/components/LeftNav/ResourceLinks';
 import { useWindowSize } from 'gatsby-theme-carbon/src/util/hooks';
 
 import LeftNavWrapper from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavWrapper';
 import { sideNavDark } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNav.module.scss';
+import Title from './Title';
 
 const LeftNav = props => {
   const { leftNavIsOpen, toggleNavState } = useContext(NavContext);
@@ -30,9 +30,6 @@ const LeftNav = props => {
               defaultExpanded
               aria-label="Side navigation"
           >
-              <SideNavItems>
-                  <LeftNavResourceLinks />
-              </SideNavItems>
           </SideNav>
       </LeftNavWrapper>
   }
@@ -47,6 +44,14 @@ const LeftNav = props => {
       'analytics-api'
   ];
 
+  const titles = {
+      'api-basics': 'API basics',
+      'channel-api': 'Channel API',
+      'viewer-authentication-api': 'Viewer Authentication API',
+      'player-api': 'Player API',
+      'analytics-api': 'Analytics API'
+  };
+
   availableMainPaths.forEach((availableMainPath) => {
       if (pathName.indexOf(availableMainPath) >= 0) {
         mainPathName = availableMainPath;
@@ -54,17 +59,13 @@ const LeftNav = props => {
   });
 
   if (!mainPathName || availableMainPaths.indexOf(mainPathName) < 0) {
-      return <LeftNavWrapper expanded={false}>
-          <SideNav
-              expanded
-              defaultExpanded
-              aria-label="Side navigation"
-          >
-              <SideNavItems>
-                  <LeftNavResourceLinks />
-              </SideNavItems>
-          </SideNav>
-      </LeftNavWrapper>
+      return <></>;
+  }
+
+  let title = null;
+
+  if (mainPathName) {
+      title = titles[mainPathName];
   }
 
   if (pathName.indexOf('/' + mainPathName) >= 0) {
@@ -91,6 +92,10 @@ const LeftNav = props => {
         )
     );
 
+  if (!title) {
+      return <></>;
+  }
+
   // TODO: replace old addon website styles with sass modules, move to wrapper
   return (
     <LeftNavWrapper expanded={leftNavIsOpen}>
@@ -107,9 +112,9 @@ const LeftNav = props => {
             props.theme !== 'dark' && !props.homepage,
         })}
       >
+        <Title>{title}</Title>
         <SideNavItems>
           {renderNavItems()}
-          <LeftNavResourceLinks />
         </SideNavItems>
       </SideNav>
     </LeftNavWrapper>
