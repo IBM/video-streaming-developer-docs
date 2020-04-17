@@ -24,7 +24,9 @@ import {
   switcherButton,
 } from 'gatsby-theme-carbon/src/components/Header/Header.module.scss';
 
-import './header.scss';
+import {
+    headerLink,
+} from './Header.module.scss';
 
 const Header = ({ children }) => {
   const {
@@ -51,7 +53,7 @@ const Header = ({ children }) => {
         <Link
           className={cx(headerName, {
             [collapsed]: searchIsOpen,
-          }, 'headerLink')}
+          }, headerLink)}
           to="/"
         >
           {children}
@@ -59,7 +61,7 @@ const Header = ({ children }) => {
         <Link
             className={cx(headerName, {
               [collapsed]: searchIsOpen,
-            }, 'headerLink')}
+            }, headerLink)}
             to="/api-basics-overview"
         >
           Api basics
@@ -67,7 +69,7 @@ const Header = ({ children }) => {
         <Link
             className={cx(headerName, {
               [collapsed]: searchIsOpen,
-            }, 'headerLink')}
+            }, headerLink)}
             to="/channel-api-getting-started"
         >
           Channel Api
@@ -75,7 +77,7 @@ const Header = ({ children }) => {
           <Link
               className={cx(headerName, {
                   [collapsed]: searchIsOpen,
-              }, 'headerLink')}
+              }, headerLink)}
               to="/viewer-authentication-api-getting-started"
           >
               Viewer Authentication Api
@@ -83,7 +85,7 @@ const Header = ({ children }) => {
           <Link
               className={cx(headerName, {
                   [collapsed]: searchIsOpen,
-              }, 'headerLink')}
+              }, headerLink)}
               to="/player-api-getting-started"
           >
               Player Api
@@ -91,7 +93,7 @@ const Header = ({ children }) => {
           <Link
               className={cx(headerName, {
                   [collapsed]: searchIsOpen,
-              }, 'headerLink')}
+              }, headerLink)}
               to="/analytics-api-getting-started"
           >
               Analytics Api
