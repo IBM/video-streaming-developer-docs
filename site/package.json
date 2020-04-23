@@ -19,6 +19,7 @@
   "dependencies": {
     "gatsby": "^2.19.0",
     "gatsby-theme-carbon": "^1.20.0",
+    "gh-pages": "^2.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
