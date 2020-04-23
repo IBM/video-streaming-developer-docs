@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from 'gatsby-theme-carbon/src/components/Footer';
+import Footer from './Footer/Footer';
 
 const Content = ({ buildTime }) => (
   <>
@@ -25,15 +25,16 @@ const Content = ({ buildTime }) => (
 
 const links = {
   firstCol: [
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
+    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Contact' },
+    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Privacy' },
+    { href: 'https://www.ibm.com/legal', linkText: 'Terms of use' },
+    { href: 'https://www.ibm.com/us-en/?ar=1', linkText: 'Accessibility' },
   ],
   secondCol: [
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
-    { href: 'https://ibm.com/design', linkText: 'Shadowed link' },
+    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Copyright policy' },
+    { href: 'https://www.ibm.com/legal', linkText: 'Cookie preferences' },
+    { href: 'https://www.ibm.com/legal', linkText: 'Terms and conditions for IBM Video Streaming' },
+    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Acceptable use policy' },
   ],
 };
 

@@ -5,11 +5,11 @@ import { useNavItems } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavI
 
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
-import LeftNavResourceLinks from 'gatsby-theme-carbon/src/components/LeftNav/ResourceLinks';
 import { useWindowSize } from 'gatsby-theme-carbon/src/util/hooks';
 
 import LeftNavWrapper from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavWrapper';
 import { sideNavDark } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNav.module.scss';
+import Title from './Title';
 
 const LeftNav = props => {
   const { leftNavIsOpen, toggleNavState } = useContext(NavContext);
@@ -29,17 +29,17 @@ const LeftNav = props => {
               expanded
               defaultExpanded
               aria-label="Side navigation"
+              className={classnames({
+                  'bx--side-nav--website': true,
+                  'bx--side-nav--website--light': true
+              })}
           >
-              <SideNavItems>
-                  <LeftNavResourceLinks />
-              </SideNavItems>
           </SideNav>
       </LeftNavWrapper>
   }
 
   const pathName = windowGlobal.location.pathname;
-  const mainPathNameArray = windowGlobal.location.pathname.split('/');
-  let mainPathName;
+  let mainPathName = '';
   const availableMainPaths = [
       'api-basics',
       'channel-api',
@@ -48,29 +48,31 @@ const LeftNav = props => {
       'analytics-api'
   ];
 
-  if (mainPathNameArray.length && mainPathNameArray[1]) {
-      availableMainPaths.forEach((availableMainPath) => {
-          if (mainPathNameArray[1].indexOf(availableMainPath) === 0) {
-            mainPathName = availableMainPath;
-          }
-      });
-  }
+  const titles = {
+      'api-basics': 'API basics',
+      'channel-api': 'Channel API',
+      'viewer-authentication-api': 'Viewer Authentication API',
+      'player-api': 'Player API',
+      'analytics-api': 'Analytics API'
+  };
+
+  availableMainPaths.forEach((availableMainPath) => {
+      if (pathName.indexOf(availableMainPath) >= 0) {
+        mainPathName = availableMainPath;
+      }
+  });
 
   if (!mainPathName || availableMainPaths.indexOf(mainPathName) < 0) {
-      return <LeftNavWrapper expanded={false}>
-          <SideNav
-              expanded
-              defaultExpanded
-              aria-label="Side navigation"
-          >
-              <SideNavItems>
-                  <LeftNavResourceLinks />
-              </SideNavItems>
-          </SideNav>
-      </LeftNavWrapper>
+      return <></>;
   }
 
-  if (pathName.indexOf('/' + mainPathName) === 0) {
+  let title = null;
+
+  if (mainPathName) {
+      title = titles[mainPathName];
+  }
+
+  if (pathName.indexOf('/' + mainPathName) >= 0) {
       navItems = navItems.filter((item) => {
           let showMainMenu = false;
           const pages = item.pages;
@@ -94,6 +96,10 @@ const LeftNav = props => {
         )
     );
 
+  if (!title) {
+      return <></>;
+  }
+
   // TODO: replace old addon website styles with sass modules, move to wrapper
   return (
     <LeftNavWrapper expanded={leftNavIsOpen}>
@@ -102,17 +108,13 @@ const LeftNav = props => {
         defaultExpanded
         aria-label="Side navigation"
         className={classnames({
-          [sideNavDark]: props.theme === 'dark' || props.homepage,
           'bx--side-nav--website': true,
-          'bx--side-nav--website--dark':
-            props.theme === 'dark' || props.homepage,
-          'bx--side-nav--website--light':
-            props.theme !== 'dark' && !props.homepage,
+          'bx--side-nav--website--light': true
         })}
       >
+        <Title>{title}</Title>
         <SideNavItems>
           {renderNavItems()}
-          <LeftNavResourceLinks />
         </SideNavItems>
       </SideNav>
     </LeftNavWrapper>
