@@ -64,7 +64,7 @@ const Header = ({ children }) => {
             }, headerLink)}
             to="/api-basics-overview"
         >
-          Api basics
+          API basics
         </Link>
         <Link
             className={cx(headerName, {
@@ -72,7 +72,7 @@ const Header = ({ children }) => {
             }, headerLink)}
             to="/channel-api-getting-started"
         >
-          Channel Api
+          Channel API
         </Link>
           <Link
               className={cx(headerName, {
@@ -80,7 +80,7 @@ const Header = ({ children }) => {
               }, headerLink)}
               to="/viewer-authentication-api-getting-started"
           >
-              Viewer Authentication Api
+              Viewer Authentication API
           </Link>
           <Link
               className={cx(headerName, {
@@ -88,7 +88,7 @@ const Header = ({ children }) => {
               }, headerLink)}
               to="/player-api-getting-started"
           >
-              Player Api
+              Player API
           </Link>
           <Link
               className={cx(headerName, {
@@ -96,7 +96,7 @@ const Header = ({ children }) => {
               }, headerLink)}
               to="/analytics-api-getting-started"
           >
-              Analytics Api
+              Analytics API
           </Link>
         <HeaderGlobalBar>
           {isSearchEnabled && <GlobalSearch />}
