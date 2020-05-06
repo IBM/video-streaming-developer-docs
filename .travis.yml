@@ -3,7 +3,7 @@ node_js:
   - "10"
 deploy:
   provider: script
-  script: cd site && npm install && npm run deploy_from_ci
+  script: npm install && npm run deploy_from_ci
   skip_cleanup: true
   on:
     branch: master
