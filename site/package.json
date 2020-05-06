@@ -9,7 +9,6 @@
     "clean": "gatsby clean",
     "build:prefix": "gatsby build --prefix-paths",
     "serve:prefix": "gatsby serve --prefix-paths",
-    "test:prefix": "yarn build:prefix && yarn serve:prefix",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d public",
     "deploy_from_ci": "npm run build && gh-pages -m 'build: travis build and deploy' -d public -r https://$GH_TOKEN@github.ibm.com/ustream-web/developers.git",
