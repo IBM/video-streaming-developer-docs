@@ -56,8 +56,10 @@ const Header = ({ children }) => {
             </HeaderMenuItem>
             <HeaderMenu aria-label="Link 4" menuLinkName="APIs">
                 <HeaderMenuItem href={withPrefix("/api-basics-overview")}>API basics</HeaderMenuItem>
-                <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
+                <HeaderMenuItem href={withPrefix("/channel-api-getting-started")}>Channel API</HeaderMenuItem>
+                <HeaderMenuItem href={withPrefix("/viewer-authentication-api-getting-started")}>Viewer Authentication API</HeaderMenuItem>
+                <HeaderMenuItem href={withPrefix("/player-api-getting-started")}>Player API</HeaderMenuItem>
+                <HeaderMenuItem href={withPrefix("/analytics-api-getting-started")}>Analytics API</HeaderMenuItem>
             </HeaderMenu>
         </>
     );
