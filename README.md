@@ -16,13 +16,13 @@ For example, you want to update the [Channel API/Security/Embed Restriction](htt
 You can use Github UI to edit this file or you can checkout the repo and edit locally.
 For local development you can find instructions below.
 
-For examples check out this article template file: [TODO ARTICLE TEMPLATE](https://github.ibm.com/ustream-web/developers/src/pages)
+Check out this article template file for available mdx components: [TODO ARTICLE TEMPLATE](https://github.ibm.com/ustream-web/developers/src/pages)
 
 
 ## Local development
 1. Prerequisite: 
-- Install NodeJS - `brew install node`
-- Install Gatsby CLI - `npm install -g gatsby-cli`
+  - Install NodeJS - `brew install node`
+  - Install Gatsby CLI - `npm install -g gatsby-cli`
 
 2. Check out the repo
 3. CD into the repo dir
