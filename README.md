@@ -22,12 +22,11 @@ Check out this article template file for available mdx components: [TODO ARTICLE
 ## Local development
 1. Prerequisite: 
   - Install NodeJS - `brew install node`
-  - Install Gatsby CLI - `npm install -g gatsby-cli`
 
 2. Check out the repo
 3. CD into the repo dir
 4. Install the dependencies - `npm install`
-5. Run the site locally - `npm run dev` or `gatsby develop`
+5. Run the site locally - `npm run dev`
 
 
 ## Deployment

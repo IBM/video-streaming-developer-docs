@@ -4,25 +4,26 @@
   "version": "1.20.0",
   "license": "Apache 2.0",
   "scripts": {
-    "build:clean": "yarn clean && gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "build": "gatsby build --prefix-paths",
+    "build:clean": "npm run clean && gatsby build",
     "build:prefix": "gatsby build --prefix-paths",
-    "serve:prefix": "gatsby serve --prefix-paths",
-    "predeploy": "npm run build",
+    "dev": "gatsby develop",
+    "dev:clean": "gatsby clean && gatsby develop",
+    "clean": "gatsby clean",
     "deploy": "gh-pages -d public",
     "deploy_from_ci": "npm run build && gh-pages -m 'build: travis build and deploy' -d public -r https://$GH_TOKEN@github.ibm.com/ustream-web/developers.git",
-    "build": "gatsby build --prefix-paths",
-    "dev": "gatsby develop",
-    "dev:clean": "gatsby clean && gatsby develop"
+    "predeploy": "npm run build",
+    "serve": "gatsby serve",
+    "serve:prefix": "gatsby serve --prefix-paths"
   },
   "dependencies": {
-    "gatsby": "^2.19.0",
-    "gatsby-theme-carbon": "^1.20.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "gatsby": "^2.21.17",
+    "gatsby-theme-carbon": "^1.24.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "gatsby-cli": "2.12.12",
     "gh-pages": "^2.2.0"
   }
 }
