@@ -1,24 +1,36 @@
-# Gatsby Theme Carbon Starter
+# Developer Tools
+:construction:A documentation site for IBM Video Streaming APIs, SDKs and use cases - [Preview URL](https://pages.github.ibm.com/ustream-web/developers/) :construction:
 
-## What is this?
+## About
+This site is the redesigned one of the old developer tools site: https://developers.video.ibm.com/
 
-> Gatsby has implemented a new feature called [themes](https://www.gatsbyjs.org/docs/themes/). Themes encapsulate all of the configuration and implementation details of Gatsby websites. This is a starter-kit (boilerplate) that has a dependancy on the `gatsby-theme-carbon` package. It includes some sample content in the `src/pages` directory.
+With this repository Video Streaming developers can easily update their API and SDK documentations.
+The site content is in `mdx` format.
+MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
 
-## What’s included?
+## How To
+The site content and page structure can be found here: `developers/src/pages/`
 
-- Carbon Elements and Carbon React
-- [Emotion](https://emotion.sh) for React component styling
-- [gatsby-mdx](https://gatsby-mdx.netlify.com/) with brand new markdown components
+For example, you want to update the [Channel API/Security/Embed Restriction](https://pages.github.ibm.com/ustream-web/developers/channel-api-security/embed-restriction) page. Just navigate to `developers/src/pages/channel-api-security/` folder and update the `embed-restriction.mdx` file.
 
-## How do I use it?
+You can use Github UI to edit this file or you can checkout the repo and edit locally.
+For local development you can find instructions below.
 
-`gatsby-theme-carbon` at it’s core relies on [mdx](https://mdxjs.com/) for page creation. Check out the `src/pages` directory for some examples for using mdx.
+For examples check out this article template file: [TODO ARTICLE TEMPLATE](https://github.ibm.com/ustream-web/developers/src/pages)
 
-A key feature of Gatsby themes is component shadowing. By simply placing a component into the `src/gatsby-theme-carbon/components` location, you can override components used by the theme. You can read more about component shadowing [here](https://www.gatsbyjs.org/docs/themes/api-reference#component-shadowing).
 
-You’re also free to make your own components and use them in your MDX pages.
+## Local development
+1. Prerequisite: 
+- Install NodeJS - `brew install node`
+- Install Gatsby CLI - `npm install -g gatsby-cli`
 
-## What’s Next?
+2. Check out the repo
+3. CD into the repo dir
+4. Install the dependencies - `npm install`
+5. Run the site locally - `npm run dev` or `gatsby develop`
 
-- Migrating reusable MDX components
-- Parameters to configure Carbon theme
+
+## Deployment
+The build and deployment process is automated with Travis CI and triggered by pushing to the master branch.
+
+You can check the deployment logs here: https://travis.ibm.com/ustream-web/developers
