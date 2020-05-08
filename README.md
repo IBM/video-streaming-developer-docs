@@ -48,8 +48,8 @@ The build and deployment process is automated with Travis CI and triggered by pu
 
 You can check the deployment logs here: https://travis.ibm.com/ustream-web/developers
 
-You can push to master, or merge with a pull request to master. 
-On push, deployment will start automatically, triggered by Travis.
+For a change, please create a branch, and make a pull request to master.
+On every push to master, deployment will start automatically, triggered by Travis.
 After 5-10 minutes, the changes will takes effect on the developer site live environment
 https://pages.github.ibm.com/ustream-web/developers
 
