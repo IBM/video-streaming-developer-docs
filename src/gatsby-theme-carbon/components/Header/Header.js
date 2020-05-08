@@ -70,7 +70,7 @@ const Header = ({ children }) => {
                     className={cx(headerName, {
                         [collapsed]: searchIsOpen,
                     }, headerLink)}
-                    to="/channel-api-getting-started"
+                    to="/channel-api-topic"
                 >
                     Channel API
                 </Link>

@@ -1,0 +1,96 @@
+---
+title: Topic
+description: Task
+---
+
+<PageDescription>
+
+Task
+
+</PageDescription>
+
+This should start with a resource description…
+
+`This is some important note.`
+
+```markdown
+**GET** https://api.video.ibm.com/channels/`{channel_id}`.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+`-OR-`
+
+The query parameters for the GET request:
+
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                          |
+| ---------- | ------- | ---------- | ---------------------------------------------------- |
+| `page`     | integer | OPTIONAL   | Requested page number (value is 1 by default)        |
+| `pagesize` | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)|
+
+`-OR-`
+
+The parameters for the PUT request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION |
+| ---------- | ------- | ---------- | ----------- |
+| `param1`   | string  | REQUIRED   |             |
+| `param2`   | integer | OPTIONAL   |             |
+
+### Success response
+
+For this request an empty response is returned.
+
+`-OR-`
+
+On success, a response with HTTP status "`200 OK / 201 Created / 202 Accepted / 204 No Content`" is returned.
+
+`-OR-`
+
+On success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `channel` key.
+
+`-OR-`
+
+On success a response with HTTP status “200 OK” is returned with an array under a `captions` key. The elements of the array contain the following key-value pairs for each `caption`:
+
+| KEY             | TYPE    | DESCRIPTION |
+| --------------- | ------- | ----------- |
+| `key1`          | string  |             |
+| `key2`          | number  |             |
+| `key3`          | boolean |             |
+| `key4`          | object  | A set of key-value pairs containing information about `key4 settings` with the following attributes: `child1`, `child2` |
+| - `key4.child1` | string  |             |
+| - `key4.child2` | number  |             |
+| `key5`          | array   |             |
+
+Example for success response:
+
+```json
+{"success": true}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE    | ERROR CONDITIONS |
+| ----------------------- | -------------- | ---------------- |
+| 401 Unauthorized        | `unauthorized` | The provided access token is missing, revoked, expired or malformed |
+| 404 Not Found           | `not_found`    | Channel was not found |
+| 503 Service Unavailable |                | There is a temporary error on the server which makes it impossible to serve the request |
+
+`(^ minimal) – OR – (with all possible codes v )`
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE              | ERROR CONDITIONS  |
+| ----------------------- | ------------------------ | ----------------- |
+| 400 Bad Request         | `input_validation_error` | Validation failed |
+| 401 Unauthorized        | `invalid_token`          | The provided access token is missing, revoked, expired or malformed |
+| 402 Payment Required    | `invalid_request`        | The user does not have the benefit |
+| 403 Forbidden           | `lack_of_ownership`      | The API user is not allowed to manage the given channel |
+| 404 Not Found           | `not_found`              | Channel was not found |
+| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request |

@@ -9,6 +9,9 @@
     - path: /api-basics-testing-apis
 
 
+- title: Topic
+  pages:
+    - path: /channel-api-topic
 - title: Getting started
   pages:
     - path: /channel-api-getting-started

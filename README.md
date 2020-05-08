@@ -28,8 +28,34 @@ Check out this article template file for available mdx components: [TODO ARTICLE
 4. Install the dependencies - `npm install`
 5. Run the site locally - `npm run dev`
 
+## Creating a new page
+
+in order to create a new page, you have to 
+
+1. extend the nav items file:
+src/data/nav-items.yaml
+Each api url must starts with the api name. `api-basics`, `channel-api`, `viewer-authentication`, `player-api`, `analytics-api`
+2. pages are in markdown format. Create the new mdx file in the `src/pages/` directory, or edit an existing mdx file.
+Pages can be in the root in the pages directory. For example `/player-api-usage`,
+or it can be in a separate directory, `/player-api-examples/basic-embed`. Use directory is page if grouped in a main menu, use file if it stands alone.
+Examples of the page contants can be found here:
+src/pages/channel-api-topic.mdx
+https://pages.github.ibm.com/ustream-web/developers/channel-api-topic
 
 ## Deployment
+
 The build and deployment process is automated with Travis CI and triggered by pushing to the master branch.
 
 You can check the deployment logs here: https://travis.ibm.com/ustream-web/developers
+
+You can push to master, or merge with a pull request to master. 
+On push, deployment will start automatically, triggered by Travis.
+After 5-10 minutes, the changes will takes effect on the developer site live environment
+https://pages.github.ibm.com/ustream-web/developers
+
+### additional details
+
+Travis runs `gatsby build --prefix-paths`, which generates the production code in the /public directory.   
+Then gh-pages node command will copy the /public directory's content into gh-pages branch.
+The gitlab pages url serves the content of the gh-pages branch.
+
