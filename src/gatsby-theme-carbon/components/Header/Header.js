@@ -13,6 +13,7 @@ import cx from 'classnames';
 import GlobalSearch from 'gatsby-theme-carbon/src/components/GlobalSearch';
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import useMetadata from 'gatsby-theme-carbon/src/util/hooks/useMetadata';
+import { withPrefix } from "gatsby"
 
 import {
     header,
@@ -27,6 +28,8 @@ import {
 import {
     headerLink,
 } from './HeaderSecondary.module.scss';
+import HeaderMenu from "carbon-components-react/lib/components/UIShell/HeaderMenu";
+import HeaderMenuItem from "carbon-components-react/lib/components/UIShell/HeaderMenuItem";
 
 const Header = ({ children }) => {
     const {
@@ -36,6 +39,24 @@ const Header = ({ children }) => {
         searchIsOpen,
     } = useContext(NavContext);
     const { isSearchEnabled } = useMetadata();
+    const items = [
+        {
+            id: "option-1",
+            text: "Option 1",
+        },
+        {
+            id: "option-2",
+            text: "Option 2",
+        },
+        {
+            id: "option-3",
+            text: "Option 3",
+        },
+        {
+            id: "option-4",
+            text: "Option 4",
+        },
+    ];
 
     return (
         <>
@@ -98,6 +119,25 @@ const Header = ({ children }) => {
                 >
                     Analytics API
                 </Link>
+                <ul aria-label="IBM [Platform]" className={'bx--header__menu-bar'} role="menubar">
+                    <HeaderMenu aria-label="APIs" menuLinkName="APIs">
+                        <HeaderMenuItem href={withPrefix('/api-basics-overview')}>
+                            API basics
+                        </HeaderMenuItem>
+                        <HeaderMenuItem href={withPrefix('/channel-api-topic')}>
+                            Channel API
+                        </HeaderMenuItem>
+                        <HeaderMenuItem href={withPrefix('/viewer-authentication-api-getting-started')}>
+                            Viewer Authentication API
+                        </HeaderMenuItem>
+                        <HeaderMenuItem href={withPrefix('/player-api-getting-started')}>
+                            Player API
+                        </HeaderMenuItem>
+                        <HeaderMenuItem href={withPrefix('/analytics-api-getting-started')}>
+                            Analytics API
+                        </HeaderMenuItem>
+                    </HeaderMenu>
+                </ul>
                 <HeaderGlobalBar>
                     {isSearchEnabled && <GlobalSearch />}
                     <HeaderGlobalAction

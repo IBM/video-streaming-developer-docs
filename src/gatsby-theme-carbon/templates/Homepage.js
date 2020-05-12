@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon';
+import { HomepageBanner } from 'gatsby-theme-carbon';
 import HomepageTemplate from './HomepageTemplate';
 
 import Carbon from '../../images/carbon.jpg';
