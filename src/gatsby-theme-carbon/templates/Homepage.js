@@ -1,51 +1,18 @@
 import React from 'react';
-import Layout from 'gatsby-theme-carbon/src/components/Layout';
-import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon/src/components/Homepage';
-import Carbon from 'gatsby-theme-carbon/src/images/carbon.jpg';
-import Main from 'gatsby-theme-carbon/src/components/Main';
+import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon';
+import HomepageTemplate from './HomepageTemplate';
 
-import BackToTopBtn from 'gatsby-theme-carbon/src/components/BackToTopBtn';
-import NextPrevious from 'gatsby-theme-carbon/src/components/NextPrevious';
+import Carbon from '../../images/carbon.jpg';
 
-const Homepage = ({
-                      children,
-                      Banner,
-                      location,
-                      pageContext,
-                  }) => {
-    const { frontmatter = {}, titleType } = pageContext;
-    const { title, description, keywords } = frontmatter;
-    return (
-        <Layout
-            pageTitle={title}
-            pageDescription={description}
-            pageKeywords={keywords}
-            titleType={titleType}
-            homepage
-            theme="dark"
-        >
-            {Banner}
-            <Main>{children}</Main>
-            <NextPrevious location={location} pageContext={pageContext} />
-            <BackToTopBtn />
-        </Layout>
-    );
-};
-Homepage.defaultProps = {
-    Banner: (
-        <HomepageBanner
-            renderText={() => (
-                <h1>
-                    IBM Video Streaming APIs
-                </h1>
-            )}
-            image={Carbon}
-        />
-    ),
-    FirstCallout: <HomepageCallout />,
-    SecondCallout: (
-        <HomepageCallout color="inverse01" backgroundColor="#061f80" />
-    ),
+const BannerText = () => <h1>Banner component</h1>;
+
+const customProps = {
+    Banner: <HomepageBanner renderText={BannerText} image={Carbon} />
 };
 
-export default Homepage;
+// spreading the original props gives us props.children (mdx content)
+function ShadowedHomepage(props) {
+    return <HomepageTemplate {...props} {...customProps} />;
+}
+
+export default ShadowedHomepage;
