@@ -1,13 +1,27 @@
 import React from 'react';
-import { HomepageBanner } from 'gatsby-theme-carbon';
+import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon';
 import HomepageTemplate from './HomepageTemplate';
+import { calloutLink } from './Homepage.module.scss';
 
-import Carbon from '../../images/carbon.jpg';
+import Carbon from '../../images/hero@2x.png';
 
-const BannerText = () => <h1>Banner component</h1>;
+
+const FirstLeftText = () => <p>Developer Tools</p>;
+const FirstRightText = () => <p>Customize and control the viewing experience for your audience or create your own streaming applications, analyze engagement and telemetry data with the APIs and SDKs of the IBM Video Streaming platform.</p>;
+
+
+const BannerText = () => <h1></h1>;
 
 const customProps = {
-    Banner: <HomepageBanner renderText={BannerText} image={Carbon} />
+    Banner: <HomepageBanner renderText={BannerText} image={Carbon} />,
+    FirstCallout: (
+        <HomepageCallout
+          backgroundColor="#030303"
+          color="white"
+          leftText={FirstLeftText}
+          rightText={FirstRightText}
+        />
+      ),
 };
 
 // spreading the original props gives us props.children (mdx content)

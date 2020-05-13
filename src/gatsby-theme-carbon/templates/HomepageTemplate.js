@@ -10,6 +10,7 @@ import NextPrevious from 'gatsby-theme-carbon/src/components/NextPrevious';
 const Homepage = ({
   children,
   Banner,
+  FirstCallout,
   location,
   pageContext,
 }) => {
@@ -25,6 +26,7 @@ const Homepage = ({
       theme="dark"
     >
       {Banner}
+      {FirstCallout}
       <Main>{children}</Main>
       <NextPrevious isHomepage location={location} pageContext={pageContext} />
       <BackToTopBtn />
