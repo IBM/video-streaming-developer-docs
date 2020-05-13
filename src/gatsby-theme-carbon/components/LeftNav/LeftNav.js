@@ -45,7 +45,9 @@ const LeftNav = props => {
       'channel-api',
       'viewer-authentication-api',
       'player-api',
-      'analytics-api'
+      'analytics-api',
+      'broadcaster-sdk',
+      'player-sdk'
   ];
 
   const titles = {
@@ -53,7 +55,9 @@ const LeftNav = props => {
       'channel-api': 'Channel API',
       'viewer-authentication-api': 'Viewer Authentication API',
       'player-api': 'Player API',
-      'analytics-api': 'Analytics API'
+      'analytics-api': 'Analytics API',
+      'broadcaster-sdk': 'Broadcaster SDK',
+      'player-sdk': 'Player SDK'
   };
 
   availableMainPaths.forEach((availableMainPath) => {

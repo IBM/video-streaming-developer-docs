@@ -100,10 +100,10 @@ const Header = ({ children }) => {
                 </ul>
                 <ul aria-label="IBM [Platform]" className={'bx--header__menu-bar'} role="menubar">
                     <HeaderMenu aria-label="SDKs" menuLinkName="SDKs">
-                        <HeaderMenuItem href={withPrefix('/')}>
+                        <HeaderMenuItem href={withPrefix('/broadcaster-sdk')}>
                             Broadcaster SDK
                         </HeaderMenuItem>
-                        <HeaderMenuItem href={withPrefix('/')}>
+                        <HeaderMenuItem href={withPrefix('/player-sdk')}>
                             Player SDK
                         </HeaderMenuItem>
                     </HeaderMenu>
