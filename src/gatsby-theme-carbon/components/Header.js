@@ -3,7 +3,7 @@ import Header from './Header/Header';
 
 const CustomHeader = props => (
   <Header {...props}>
-    Video Streaming
+    IBM&nbsp;<span>Video Streaming</span>&nbsp;Developers
   </Header>
 );
 

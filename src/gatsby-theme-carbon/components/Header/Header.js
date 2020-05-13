@@ -79,46 +79,6 @@ const Header = ({ children }) => {
                 >
                     {children}
                 </Link>
-                <Link
-                    className={cx(headerName, {
-                        [collapsed]: searchIsOpen,
-                    }, headerLink)}
-                    to="/api-basics-overview"
-                >
-                    API basics
-                </Link>
-                <Link
-                    className={cx(headerName, {
-                        [collapsed]: searchIsOpen,
-                    }, headerLink)}
-                    to="/channel-api-topic"
-                >
-                    Channel API
-                </Link>
-                <Link
-                    className={cx(headerName, {
-                        [collapsed]: searchIsOpen,
-                    }, headerLink)}
-                    to="/viewer-authentication-api-getting-started"
-                >
-                    Viewer Authentication API
-                </Link>
-                <Link
-                    className={cx(headerName, {
-                        [collapsed]: searchIsOpen,
-                    }, headerLink)}
-                    to="/player-api-getting-started"
-                >
-                    Player API
-                </Link>
-                <Link
-                    className={cx(headerName, {
-                        [collapsed]: searchIsOpen,
-                    }, headerLink)}
-                    to="/analytics-api-getting-started"
-                >
-                    Analytics API
-                </Link>
                 <ul aria-label="IBM [Platform]" className={'bx--header__menu-bar'} role="menubar">
                     <HeaderMenu aria-label="APIs" menuLinkName="APIs">
                         <HeaderMenuItem href={withPrefix('/api-basics-overview')}>
@@ -135,6 +95,16 @@ const Header = ({ children }) => {
                         </HeaderMenuItem>
                         <HeaderMenuItem href={withPrefix('/analytics-api-getting-started')}>
                             Analytics API
+                        </HeaderMenuItem>
+                    </HeaderMenu>
+                </ul>
+                <ul aria-label="IBM [Platform]" className={'bx--header__menu-bar'} role="menubar">
+                    <HeaderMenu aria-label="SDKs" menuLinkName="SDKs">
+                        <HeaderMenuItem href={withPrefix('/')}>
+                            Broadcaster SDK
+                        </HeaderMenuItem>
+                        <HeaderMenuItem href={withPrefix('/')}>
+                            Player SDK
                         </HeaderMenuItem>
                     </HeaderMenu>
                 </ul>
