@@ -1,7 +1,6 @@
 import React from 'react';
 import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon';
 import HomepageTemplate from './HomepageTemplate';
-import { calloutLink } from './Homepage.module.scss';
 
 import Carbon from '../../images/hero@2x.png';
 

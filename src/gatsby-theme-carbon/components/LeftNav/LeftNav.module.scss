@@ -5,4 +5,25 @@
   color: #161616;
   border-bottom: 1px solid #E0E0E0;
   background-color: #F4F4F4;
+  list-style-type: none;
+
+  &:hover {
+    background-color: #F4F4F4 !important;
+  }
+}
+
+.sideNav {
+  padding-top: 0 !important;
+
+  :global(.bx--side-nav__items) {
+    padding: 0;
+  }
+
+  :global(.bx--side-nav__header-navigation) {
+    margin: 1rem 0;
+  }
+}
+
+:global(.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu a.bx--header__menu-item) {
+  padding-left: 32px !important;
 }

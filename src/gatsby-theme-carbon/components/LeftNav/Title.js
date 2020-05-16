@@ -2,12 +2,13 @@ import React from 'react';
 import {
     title,
 } from './LeftNav.module.scss';
+import cx from "classnames";
 
 const Title = ({ children }) => {
     return (
-        <p className={title}>
+        <li className={cx("bx--side-nav__item", title)}>
             {children}
-        </p>
+        </li>
     );
 };
 

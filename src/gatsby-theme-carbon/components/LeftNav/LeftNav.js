@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import classnames from 'classnames';
 import { SideNav, SideNavItems } from 'carbon-components-react';
 import { useNavItems } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItemProvider';
@@ -7,122 +7,110 @@ import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
 import { useWindowSize } from 'gatsby-theme-carbon/src/util/hooks';
 
-import LeftNavWrapper from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavWrapper';
-import { sideNavDark } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNav.module.scss';
+import { sideNav } from './LeftNav.module.scss';
 import Title from './Title';
+import HeaderSideNavItems from "carbon-components-react/lib/components/UIShell/HeaderSideNavItems";
+import HeaderMenus from "../Header/HeaderMenus";
 
-const LeftNav = props => {
-  const { leftNavIsOpen, toggleNavState } = useContext(NavContext);
-  const windowSize = useWindowSize();
+const LeftNav = () => {
+    const { leftNavIsOpen, toggleNavState } = useContext(NavContext);
+    const windowSize = useWindowSize();
 
-  if (windowSize.innerWidth > 1056 && !leftNavIsOpen) {
-    toggleNavState('leftNavIsOpen', 'open');
-  }
+    useEffect(() => {
+        if (windowSize.innerWidth > 1056 && !leftNavIsOpen) {
+            toggleNavState('leftNavIsOpen', 'open');
+        }
+    });
 
-  let navItems = useNavItems();
+    let navItems = useNavItems();
 
-  const windowGlobal = typeof window !== 'undefined' && window;
+    const windowGlobal = typeof window !== 'undefined' && window;
 
-  if (!windowGlobal || !windowGlobal.location) {
-      return <LeftNavWrapper expanded={false}>
-          <SideNav
-              expanded
-              defaultExpanded
-              aria-label="Side navigation"
-              className={classnames({
-                  'bx--side-nav--website': true,
-                  'bx--side-nav--website--light': true
-              })}
-          >
-          </SideNav>
-      </LeftNavWrapper>
-  }
+    const pathName = windowGlobal.location.pathname;
+    let mainPathName = '';
+    const availableMainPaths = [
+        'api-basics',
+        'channel-api',
+        'viewer-authentication-api',
+        'player-api',
+        'analytics-api',
+        'broadcaster-sdk',
+        'player-sdk'
+    ];
 
-  const pathName = windowGlobal.location.pathname;
-  let mainPathName = '';
-  const availableMainPaths = [
-      'api-basics',
-      'channel-api',
-      'viewer-authentication-api',
-      'player-api',
-      'analytics-api',
-      'broadcaster-sdk',
-      'player-sdk'
-  ];
+    const titles = {
+        'api-basics': 'API basics',
+        'channel-api': 'Channel API',
+        'viewer-authentication-api': 'Viewer Authentication API',
+        'player-api': 'Player API',
+        'analytics-api': 'Analytics API',
+        'broadcaster-sdk': 'Broadcaster SDK',
+        'player-sdk': 'Player SDK'
+    };
 
-  const titles = {
-      'api-basics': 'API basics',
-      'channel-api': 'Channel API',
-      'viewer-authentication-api': 'Viewer Authentication API',
-      'player-api': 'Player API',
-      'analytics-api': 'Analytics API',
-      'broadcaster-sdk': 'Broadcaster SDK',
-      'player-sdk': 'Player SDK'
-  };
+    availableMainPaths.forEach((availableMainPath) => {
+        if (pathName.indexOf(availableMainPath) >= 0) {
+            mainPathName = availableMainPath;
+        }
+    });
 
-  availableMainPaths.forEach((availableMainPath) => {
-      if (pathName.indexOf(availableMainPath) >= 0) {
-        mainPathName = availableMainPath;
-      }
-  });
+    let title = null;
 
-  if (!mainPathName || availableMainPaths.indexOf(mainPathName) < 0) {
-      return <></>;
-  }
+    if (mainPathName) {
+        title = titles[mainPathName];
+    }
 
-  let title = null;
+    if (pathName.indexOf('/' + mainPathName) >= 0 && mainPathName) {
+        navItems = navItems.filter((item) => {
+            let showMainMenu = false;
+            const pages = item.pages;
 
-  if (mainPathName) {
-      title = titles[mainPathName];
-  }
+            pages.forEach((subItem) => {
+                const showSubMenu = subItem.path.indexOf('/' + mainPathName) === 0;
 
-  if (pathName.indexOf('/' + mainPathName) >= 0) {
-      navItems = navItems.filter((item) => {
-          let showMainMenu = false;
-          const pages = item.pages;
+                if (showSubMenu) {
+                    showMainMenu = true;
+                }
+            });
 
-          pages.forEach((subItem) => {
-              const showSubMenu = subItem.path.indexOf('/' + mainPathName) === 0;
+            return showMainMenu;
+        });
+    } else {
+        navItems = [];
+    }
 
-              if (showSubMenu) {
-                  showMainMenu = true;
-              }
-          });
-
-          return showMainMenu;
-      });
-  }
-
-  const renderNavItems = () =>
+    const renderNavItems = () =>
         navItems
-        .map((item, i) => (
-          <LeftNavItem items={item.pages} category={item.title} key={i} />
-        )
+            .map((item, i) => (
+                    <LeftNavItem items={item.pages} category={item.title} key={i} />
+                )
+            );
+
+    if (!navItems.length && !leftNavIsOpen) {
+        return (
+            <></>
+        );
+    }
+
+    // TODO: replace old addon website styles with sass modules, move to wrapper
+    return (
+        <SideNav
+            expanded={leftNavIsOpen}
+            aria-label="Side navigation"
+            className={classnames({
+                'bx--side-nav--website': true,
+                'bx--side-nav--website--light': true
+            }, sideNav)}
+        >
+            <SideNavItems>
+                <HeaderSideNavItems hasDivider={false}>
+                    <HeaderMenus />
+                </HeaderSideNavItems>
+                {title && <Title>{title}</Title>}
+                {renderNavItems()}
+            </SideNavItems>
+        </SideNav>
     );
-
-  if (!title) {
-      return <></>;
-  }
-
-  // TODO: replace old addon website styles with sass modules, move to wrapper
-  return (
-    <LeftNavWrapper expanded={leftNavIsOpen}>
-      <SideNav
-        expanded
-        defaultExpanded
-        aria-label="Side navigation"
-        className={classnames({
-          'bx--side-nav--website': true,
-          'bx--side-nav--website--light': true
-        })}
-      >
-        <Title>{title}</Title>
-        <SideNavItems>
-          {renderNavItems()}
-        </SideNavItems>
-      </SideNav>
-    </LeftNavWrapper>
-  );
 };
 
 export default LeftNav;
