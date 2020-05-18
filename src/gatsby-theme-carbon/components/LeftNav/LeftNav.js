@@ -9,20 +9,22 @@ import { useWindowSize } from 'gatsby-theme-carbon/src/util/hooks';
 
 import { sideNav } from './LeftNav.module.scss';
 import Title from './Title';
-import HeaderSideNavItems from "carbon-components-react/lib/components/UIShell/HeaderSideNavItems";
-import HeaderMenus from "../Header/HeaderMenus";
+import {
+    HeaderSideNavItems,
+} from 'carbon-components-react';
+import HeaderMenus from '../Header/HeaderMenus';
 
 const LeftNav = () => {
     const { leftNavIsOpen, toggleNavState } = useContext(NavContext);
     const windowSize = useWindowSize();
 
+    let navItems = useNavItems();
+
     useEffect(() => {
-        if (windowSize.innerWidth > 1056 && !leftNavIsOpen) {
+        if (windowSize.innerWidth > 1056 && !leftNavIsOpen && navItems.length) {
             toggleNavState('leftNavIsOpen', 'open');
         }
     });
-
-    let navItems = useNavItems();
 
     const windowGlobal = typeof window !== 'undefined' && window;
 

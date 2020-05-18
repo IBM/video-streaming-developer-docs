@@ -1,27 +1,29 @@
 import React, {useContext} from 'react';
-import Header from "carbon-components-react/lib/components/UIShell/Header";
-import HeaderName from "carbon-components-react/lib/components/UIShell/HeaderName";
-import HeaderNavigation from "carbon-components-react/lib/components/UIShell/HeaderNavigation";
-import SkipToContent from "carbon-components-react/lib/components/UIShell/SkipToContent";
-import HeaderMenuButton from "carbon-components-react/lib/components/UIShell/HeaderMenuButton";
-import LeftNav from "./LeftNav/LeftNav";
-import HeaderGlobalBar from "carbon-components-react/lib/components/UIShell/HeaderGlobalBar";
-import HeaderGlobalAction from "carbon-components-react/lib/components/UIShell/HeaderGlobalAction";
+import {
+    Header,
+    HeaderName,
+    HeaderNavigation,
+    SkipToContent,
+    HeaderMenuButton,
+    HeaderGlobalBar,
+    HeaderGlobalAction
+} from 'carbon-components-react';
+import LeftNav from './LeftNav/LeftNav';
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
-import useMetadata from "gatsby-theme-carbon/src/util/hooks/useMetadata";
-import GlobalSearch from "gatsby-theme-carbon/src/components/GlobalSearch";
-import cx from "classnames";
+import useMetadata from 'gatsby-theme-carbon/src/util/hooks/useMetadata';
+import GlobalSearch from 'gatsby-theme-carbon/src/components/GlobalSearch';
+import cx from 'classnames';
 import {
     collapsed,
     header,
     headerButton, skipToContent,
     switcherButton,
     switcherButtonOpen
-} from "gatsby-theme-carbon/src/components/Header/Header.module.scss";
-import {AppSwitcher20, Close20} from "@carbon/icons-react";
-import {headerNameShadow, headerShadow} from "./HeaderShadow.module.scss";
-import HeaderMenus from "./Header/HeaderMenus";
-import {withPrefix} from "gatsby-link";
+} from 'gatsby-theme-carbon/src/components/Header/Header.module.scss';
+import {AppSwitcher20, Close20} from '@carbon/icons-react';
+import {headerNameShadow, headerShadow} from './HeaderShadow.module.scss';
+import HeaderMenus from './Header/HeaderMenus';
+import {withPrefix} from 'gatsby-link';
 
 const CustomHeader = ({ homepage, is404, theme }) => {
     const {

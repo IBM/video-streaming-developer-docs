@@ -2,7 +2,7 @@ import React from 'react';
 import {
     title,
 } from './LeftNav.module.scss';
-import cx from "classnames";
+import cx from 'classnames';
 
 const Title = ({ children }) => {
     return (

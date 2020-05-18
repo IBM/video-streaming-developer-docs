@@ -1,8 +1,10 @@
 import React from 'react';
 
-import HeaderMenu from "carbon-components-react/lib/components/UIShell/HeaderMenu";
-import HeaderMenuItem from "carbon-components-react/lib/components/UIShell/HeaderMenuItem";
-import {withPrefix} from "gatsby-link";
+import {
+    HeaderMenu,
+    HeaderMenuItem,
+} from 'carbon-components-react';
+import {withPrefix} from 'gatsby-link';
 
 const HeaderMenus = () => {
     return (
