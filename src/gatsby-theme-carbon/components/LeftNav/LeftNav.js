@@ -5,7 +5,6 @@ import { useNavItems } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavI
 
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
-import { useWindowSize } from 'gatsby-theme-carbon/src/util/hooks';
 
 import { sideNav } from './LeftNav.module.scss';
 import Title from './Title';
@@ -15,32 +14,19 @@ import {
 import HeaderMenus from '../Header/HeaderMenus';
 
 const LeftNav = () => {
-    const { leftNavIsOpen, toggleNavState } = useContext(NavContext);
-    const windowSize = useWindowSize();
+    let { leftNavIsOpen } = useContext(NavContext);
 
     let navItems = useNavItems();
 
     useEffect(() => {
-        if (windowSize.innerWidth > 1056 && !leftNavIsOpen && navItems.length) {
-            toggleNavState('leftNavIsOpen', 'open');
-        }
-    });
+        leftNavIsOpen = !!navItems.length;
+    }, [navItems]);
 
     const windowGlobal = typeof window !== 'undefined' && window;
 
     const pathName = windowGlobal.location.pathname;
     let mainPathName = '';
-    const availableMainPaths = [
-        'api-basics',
-        'channel-api',
-        'viewer-authentication-api',
-        'player-api',
-        'analytics-api',
-        'broadcaster-sdk',
-        'player-sdk'
-    ];
-
-    const titles = {
+    const availableMainPaths = {
         'api-basics': 'API basics',
         'channel-api': 'Channel API',
         'viewer-authentication-api': 'Viewer Authentication API',
@@ -50,7 +36,7 @@ const LeftNav = () => {
         'player-sdk': 'Player SDK'
     };
 
-    availableMainPaths.forEach((availableMainPath) => {
+    Object.keys(availableMainPaths).forEach((availableMainPath) => {
         if (pathName.indexOf(availableMainPath) >= 0) {
             mainPathName = availableMainPath;
         }
@@ -59,7 +45,7 @@ const LeftNav = () => {
     let title = null;
 
     if (mainPathName) {
-        title = titles[mainPathName];
+        title = availableMainPaths[mainPathName];
     }
 
     if (pathName.indexOf('/' + mainPathName) >= 0 && mainPathName) {
@@ -89,9 +75,7 @@ const LeftNav = () => {
             );
 
     if (!navItems.length && !leftNavIsOpen) {
-        return (
-            <></>
-        );
+        return '';
     }
 
     // TODO: replace old addon website styles with sass modules, move to wrapper
