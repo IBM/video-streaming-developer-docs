@@ -1,4 +1,5 @@
 import React from 'react';
+import Content from "./Content";
 
 import {
     HeaderMenu,
@@ -9,31 +10,15 @@ import {withPrefix} from 'gatsby-link';
 const HeaderMenus = () => {
     return (
         <>
-            <HeaderMenu aria-label="APIs" menuLinkName="APIs">
-                <HeaderMenuItem href={withPrefix('/api-basics-overview')}>
-                    API basics
-                </HeaderMenuItem>
-                <HeaderMenuItem href={withPrefix('/channel-api-topic')}>
-                    Channel API
-                </HeaderMenuItem>
-                <HeaderMenuItem href={withPrefix('/viewer-authentication-api-getting-started')}>
-                    Viewer Authentication API
-                </HeaderMenuItem>
-                <HeaderMenuItem href={withPrefix('/player-api-getting-started')}>
-                    Player API
-                </HeaderMenuItem>
-                <HeaderMenuItem href={withPrefix('/analytics-api-getting-started')}>
-                    Analytics API
-                </HeaderMenuItem>
-            </HeaderMenu>
-            <HeaderMenu aria-label="SDKs" menuLinkName="SDKs">
-                <HeaderMenuItem href={withPrefix('/broadcaster-sdk')}>
-                    Broadcaster SDK
-                </HeaderMenuItem>
-                <HeaderMenuItem href={withPrefix('/player-sdk')}>
-                    Player SDK
-                </HeaderMenuItem>
-            </HeaderMenu>
+            {Content.map((mainMenu, i) => (
+                <HeaderMenu aria-label={mainMenu.title} menuLinkName={mainMenu.title} key={i}>
+                    {mainMenu.pages.map((subMenu, i) => (
+                        <HeaderMenuItem href={withPrefix(subMenu.path)} key={i}>
+                            {subMenu.title}
+                        </HeaderMenuItem>
+                    ))}
+                </HeaderMenu>
+            ))}
         </>
     );
 };

@@ -5,15 +5,15 @@ import { useNavItems } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavI
 
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
+import LeftNavHeaderMenus from '../Header/LeftNavHeaderMenus';
 
 import { sideNav } from './LeftNav.module.scss';
 import Title from './Title';
 import {
     HeaderSideNavItems,
 } from 'carbon-components-react';
-import HeaderMenus from '../Header/HeaderMenus';
 
-const LeftNav = () => {
+const LeftNav = props => {
     let { leftNavIsOpen } = useContext(NavContext);
 
     let navItems = useNavItems();
@@ -85,12 +85,12 @@ const LeftNav = () => {
             aria-label="Side navigation"
             className={classnames({
                 'bx--side-nav--website': true,
-                'bx--side-nav--website--light': true
+                'bx--side-nav--website--light': !props.homepage
             }, sideNav)}
         >
             <SideNavItems>
-                <HeaderSideNavItems hasDivider={false}>
-                    <HeaderMenus />
+                <HeaderSideNavItems>
+                    <LeftNavHeaderMenus />
                 </HeaderSideNavItems>
                 {title && <Title>{title}</Title>}
                 {renderNavItems()}
