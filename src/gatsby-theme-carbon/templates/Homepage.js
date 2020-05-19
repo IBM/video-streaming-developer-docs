@@ -9,10 +9,8 @@ const FirstLeftText = () => <p>Developer Tools</p>;
 const FirstRightText = () => <p>Customize and control the viewing experience for your audience or create your own streaming applications, analyze engagement and telemetry data with the APIs and SDKs of the IBM Video Streaming platform.</p>;
 
 
-const BannerText = () => <h1></h1>;
-
 const customProps = {
-    Banner: <HomepageBanner renderText={BannerText} image={Carbon} />,
+    Banner: <HomepageBanner renderText={() => false} image={Carbon} />,
     FirstCallout: (
         <HomepageCallout
           backgroundColor="#030303"
