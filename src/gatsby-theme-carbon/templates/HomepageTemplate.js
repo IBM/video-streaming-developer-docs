@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from 'gatsby-theme-carbon/src/components/Layout';
+import Layout from '../components/Layout';
 import { HomepageBanner } from 'gatsby-theme-carbon/src/components/Homepage';
 import Carbon from '../../images/carbon.jpg';
 import Main from 'gatsby-theme-carbon/src/components/Main';

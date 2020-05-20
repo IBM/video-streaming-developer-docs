@@ -12,8 +12,6 @@ import {
     listItemVs,
 } from './FooterSecondary.module.scss';
 
-console.log(listItem);
-
     const Footer = ({ links, Logo }) => {
     const { firstCol, secondCol } = links;
 
