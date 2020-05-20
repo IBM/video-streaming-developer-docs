@@ -22,9 +22,13 @@ const LeftNav = props => {
         leftNavIsOpen = !!navItems.length;
     }, [navItems]);
 
-    const windowGlobal = typeof window !== 'undefined' && window;
 
-    const pathName = windowGlobal.location.pathname;
+    if (!props.location) {
+        return '';
+    }
+
+    const location = props.location;
+    const pathName = location.pathname;
     let mainPathName = '';
     const availableMainPaths = {
         'api-basics': 'API basics',
