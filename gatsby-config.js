@@ -5,6 +5,8 @@ module.exports = {
     keywords: 'gatsby,video,video streaming,developer,developers,sdk,api,player,ios,android,broadcast',
   },
   pathPrefix: `/ustream-web/developers`,
+  //local build
+  //pathPrefix: `/developers/public/`,
   plugins: [
     {
       resolve: 'gatsby-plugin-manifest',

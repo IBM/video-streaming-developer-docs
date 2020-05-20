@@ -18,6 +18,7 @@ const Layout = ({
                     pageDescription,
                     pageKeywords,
                     tabs,
+                    location
                 }) => {
     const is404 = children.key === null;
 
@@ -42,7 +43,7 @@ const Layout = ({
                 pageDescription={pageDescription}
                 pageKeywords={pageKeywords}
             />
-            <Header homepage={homepage} is404Page={is404} theme={theme} />
+            <Header homepage={homepage} is404Page={is404} theme={theme} location={location}/>
             <Switcher />
             <Container homepage={homepage} theme={theme}>
                 {children}

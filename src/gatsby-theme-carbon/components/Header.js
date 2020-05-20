@@ -25,7 +25,7 @@ import {headerNameShadow, headerShadow} from './HeaderShadow.module.scss';
 import HeaderMenus from './Header/HeaderMenus';
 import {withPrefix} from 'gatsby-link';
 
-const CustomHeader = ({ homepage, is404, theme }) => {
+const CustomHeader = ({ homepage, is404, theme, location }) => {
     const {
         leftNavIsOpen,
         toggleNavState,
@@ -74,7 +74,7 @@ const CustomHeader = ({ homepage, is404, theme }) => {
                         {switcherIsOpen ? <Close20 /> : <AppSwitcher20 />}
                     </HeaderGlobalAction>
                 </HeaderGlobalBar>
-                <LeftNav homepage={homepage} is404Page={is404} theme={theme}/>
+                <LeftNav homepage={homepage} is404Page={is404} theme={theme} location={location}/>
             </Header>
         </>
     )};
