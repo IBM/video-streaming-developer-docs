@@ -8,7 +8,6 @@
   pages:
     - path: /api-basics-testing-apis
 
-
 - title: Topic
   pages:
     - path: /channel-api-topic
@@ -103,9 +102,6 @@
   pages:
     - path: /channel-api-channel-hooks
 
-
-
-
 - title: Getting started
   pages:
     - path: /viewer-authentication-api-getting-started
@@ -121,8 +117,6 @@
 - title: Hash Authentication Test
   pages:
     - path: /viewer-authentication-api-hash-authentication-test
-
-
 
 - title: Getting started
   pages:
@@ -146,7 +140,6 @@
       path: /player-api-examples/multiple-instances
     - title: Custom UI
       path: /player-api-examples/custom-ui
-
 
 - title: Getting started
   pages:

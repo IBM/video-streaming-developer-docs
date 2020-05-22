@@ -3,12 +3,12 @@
   font-weight: 600;
   padding: 16px 16px 14px 16px;
   color: #161616;
-  border-bottom: 1px solid #E0E0E0;
-  background-color: #F4F4F4;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f4f4f4;
   list-style-type: none;
 
   &:hover {
-    background-color: #F4F4F4 !important;
+    background-color: #f4f4f4 !important;
   }
 }
 
@@ -24,6 +24,9 @@
   }
 }
 
-:global(.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu a.bx--header__menu-item) {
+:global(.bx--side-nav
+    .bx--header__menu-title[aria-expanded="true"]
+    + .bx--header__menu
+    a.bx--header__menu-item) {
   padding-left: 32px !important;
 }
