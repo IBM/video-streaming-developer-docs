@@ -59,3 +59,8 @@ Travis runs `gatsby build --prefix-paths`, which generates the production code i
 Then gh-pages node command will copy the /public directory's content into gh-pages branch.
 The gitlab pages url serves the content of the gh-pages branch.
 
+### Tips
+To add MDX support for your editor:
+- PHPStorm IDE: https://youtrack.jetbrains.com/issue/WEB-32599#focus=streamItem-27-3699900.0-0
+- VS Code: https://github.com/silvenon/vscode-mdx 
+
