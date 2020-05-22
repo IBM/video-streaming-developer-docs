@@ -14,6 +14,7 @@
     "deploy_from_ci": "npm run build && gh-pages -m 'build: travis build and deploy' -d public -r https://$GH_TOKEN@github.ibm.com/ustream-web/developers.git",
     "predeploy": "npm run build",
     "serve": "gatsby serve",
+    "format": "prettier --write \"**/*.{css,scss,json,html,yaml}\"",
     "serve:prefix": "gatsby serve --prefix-paths"
   },
   "dependencies": {
@@ -24,6 +25,46 @@
   },
   "devDependencies": {
     "gatsby-cli": "2.12.12",
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-wesbos": "0.0.19",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "husky": "^4.2.3",
+    "lerna": "^3.16.2",
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2",
+    "stylelint": "^13.2.1",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-scss": "^3.16.0"
+  },
+  "eslintIgnore": [
+    "**/node_modules/",
+    "**/public/",
+    "**/.cache/",
+    "**/build/"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.{css,scss,json,html,yaml}": [
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix"
+    ]
   }
 }
