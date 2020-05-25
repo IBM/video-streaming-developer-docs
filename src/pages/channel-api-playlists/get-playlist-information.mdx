@@ -1,0 +1,151 @@
+---
+title: Get playlist information
+description: List the playlists on a channel
+---
+
+## List the playlists on a channel
+
+Returns data of playlists created on a specific channel.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/playlists.json
+```
+
+### Parameters
+
+The parameters for the GET request:
+
+| PARAMETER                          | TYPE    | IMPORTANCE | DESCRIPTION                                                                   |
+| ---------------------------------- | ------- | ---------- | ----------------------------------------------------------------------------- |
+| `page`                             | integer | OPTIONAL   | Requested page number (value is 1 by default)                                 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`pagesize` | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                         |
+| `filter[include_empty]`            | integer | OPTIONAL   | If the value is true then empty playlists will be returned (false by default) |
+
+### Success response
+
+On success, a set of key-value pairs is returned under a `playlists` element.
+
+| PARAMETER        | TYPE   | DESCRIPTION                                                                                                                                                                                |
+| ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`             | string | Unique ID of the playlist.                                                                                                                                                                 |
+| `title`          | string | Title of the playlist                                                                                                                                                                      |
+| `behavior`       | string | Possible values: `static, dynamic`                                                                                                                                                         |
+| `total_duration` | string | The sum of the duration of the videos added to the playlist in seconds.                                                                                                                    |
+| `thumbnail`      | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180, image_640x360, image_1920x1080`) |
+| `created_at`     | number | Time of creation returned as a Unix timestamp                                                                                                                                              |
+| `updated_at`     | number | Time of last update returned as a Unix timestamp                                                                                                                                           |
+| `channel_id`     | number | The unique ID of the channel                                                                                                                                                               |
+
+Example for success response:
+
+```
+{
+	"playlists": [
+		{
+			"id": "111",
+			"title": "Title of a playlist",
+			"behavior": "static",
+			"total_duration": "176.256",
+			"thumbnail": {
+				"default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_192x108": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_112x63": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_128x72": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_256x144": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_320x180": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_640x360": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+				"image_1920x1080": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+			},
+			"created_at": 1484127917,
+			"updated_at": 1486569501,
+			"channel_id": 11223344
+		},
+		...
+	]
+}
+```
+
+The paging information can be found under the `paging` key. Example:
+
+```
+"paging": {
+	"previous": "https://api.video.ibm.com/channels/CHANNEL_ID/playlists.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+	"next": "https://api.video.ibm.com/channels/CHANNEL_ID/playlists.json?pagesize=PAGE_SIZE&page=NEXT_PAGE",
+	"page_count": 8,
+	"item_count": 38
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Channel does not exist                                                                  |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get playlist details
+
+Returns data of a specific playlist.
+
+```
+GET https://api.video.ibm.com/playlists/{playlist_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success, a set of key-value pairs is returned under a `playlists` element.
+
+| KEY              | TYPE   | DESCRIPTION                                                                                                                                                                                |
+| ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`             | string | Unique ID of the playlist.                                                                                                                                                                 |
+| `title`          | string | Title of the playlist                                                                                                                                                                      |
+| `behavior`       | string | Possible values: `static` (...), `...` (...)                                                                                                                                               |
+| `total_duration` | string | The sum of the duration of the videos added to the playlist in seconds                                                                                                                     |
+| `thumbnail`      | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180, image_640x360, image_1920x1080`) |
+| `created_at`     | number | Time of creation returned as a Unix timestamp                                                                                                                                              |
+| `updated_at`     | number | Time of last update returned as a Unix timestamp                                                                                                                                           |
+| `channel_id`     | number | The unique ID of the channel                                                                                                                                                               |
+
+Example for success response:
+
+```
+{
+"playlist": {
+		"id": "111",
+		"title": "Title of a playlist",
+		"behavior": "static",
+		"total_duration": "176.256",
+		"thumbnail": {
+			"default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_192x108": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_112x63": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_128x72": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_256x144": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_320x180": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_640x360": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+			"image_1920x1080": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+		},
+		"created_at": 1484127917,
+		"updated_at": 1486569501,
+		"channel_id": 11223344
+	}
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 ForbiddenForbidden  | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel or playlist does not exist                                                      |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
