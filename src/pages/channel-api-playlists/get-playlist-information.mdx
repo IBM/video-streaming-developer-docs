@@ -7,19 +7,19 @@ description: List the playlists on a channel
 
 Returns data of playlists created on a specific channel.
 
-```markdown
-**GET** https://api.video.ibm.com/channels/{channel_id}/playlists.json
+```
+GET https://api.video.ibm.com/channels/{channel_id}/playlists.json
 ```
 
 ### Parameters
 
 The parameters for the GET request:
 
-| PARAMETER                          | TYPE    | IMPORTANCE | DESCRIPTION                                                                   |
-| ---------------------------------- | ------- | ---------- | ----------------------------------------------------------------------------- |
-| `page`                             | integer | OPTIONAL   | Requested page number (value is 1 by default)                                 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`pagesize` | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                         |
-| `filter[include_empty]`            | integer | OPTIONAL   | If the value is true then empty playlists will be returned (false by default) |
+| PARAMETER               | TYPE    | IMPORTANCE | DESCRIPTION                                                                   |
+| ----------------------- | ------- | ---------- | ----------------------------------------------------------------------------- |
+| `page`                  | integer | OPTIONAL   | Requested page number (value is 1 by default)                                 |
+| `pagesize`              | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                         |
+| `filter[include_empty]` | integer | OPTIONAL   | If the value is true then empty playlists will be returned (false by default) |
 
 ### Success response
 
@@ -38,7 +38,7 @@ On success, a set of key-value pairs is returned under a `playlists` element.
 
 Example for success response:
 
-```javascript
+```json
 {
 	"playlists": [
 		{
@@ -67,7 +67,7 @@ Example for success response:
 
 The paging information can be found under the `paging` key. Example:
 
-```javascript
+```json
 "paging": {
 	"previous": "https://api.video.ibm.com/channels/CHANNEL_ID/playlists.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
 	"next": "https://api.video.ibm.com/channels/CHANNEL_ID/playlists.json?pagesize=PAGE_SIZE&page=NEXT_PAGE",
@@ -90,8 +90,8 @@ Possible error responses:
 
 Returns data of a specific playlist.
 
-```markdown
-**GET** https://api.video.ibm.com/playlists/{playlist_id}.json
+```
+GET https://api.video.ibm.com/playlists/{playlist_id}.json
 ```
 
 ### Parameters
@@ -115,7 +115,7 @@ On success, a set of key-value pairs is returned under a `playlists` element.
 
 Example for success response:
 
-```javascript
+```json
 {
 "playlist": {
 		"id": "111",
