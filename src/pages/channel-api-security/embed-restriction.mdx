@@ -3,8 +3,169 @@ title: Embed restriction
 description: Embed restriction
 ---
 
-<PageDescription>
+All IBM Video Streaming channels can be embedded anywhere across the internet by default.
+By restricting the embed URLs, you can control the viewing experience and limit distribution to your own preferred partners.
 
-Embed restriction
+## Get embed lock status
 
-</PageDescription>
+This request returns the embed lock status.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/locks/embed.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success, a key-value structure is returned.
+
+| KEY      | TYPE   | DESCRIPTION                                                                    |
+| -------- | ------ | ------------------------------------------------------------------------------ |
+| `locked` | string | Returns “TRUE” if the embed lock is enabled on the channel, otherwise “FALSE”. |
+
+Example for success response:
+
+```json
+{
+  "locked": "TRUE"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 404 Not Found           | `not_found` | Channel not found                                                                       |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Modify embed lock
+
+Enable or disable embed lock on a channel. When embed lock is enabled (locked == TRUE), embedding the content of this channel is allowed only on [whitelisted URLs](#get-embed-lock-url-whitelist).
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/locks/embed.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                                                                              |
+| --------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------- |
+| `locked`  | string | REQUIRED   | Set embed lock on channel when parameter `locked == “TRUE”`. Remove embed lock when `locked == “FALSE”`. |
+
+### Success response
+
+On success a response with HTTP status “204 No Content” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_request`   | The request parameter is missing or invalid                                             |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get embed lock URL whitelist
+
+This request returns the list of whitelisted URLs.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/locks/embed/allowed-urls.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with the following key-value structures.
+
+| KEY            | TYPE  | DESCRIPTION                                                                                                    |
+| -------------- | ----- | -------------------------------------------------------------------------------------------------------------- |
+| `allowed_urls` | array | URL list from the allowed URLs embed lock list no matter where it was set. Empty array if `locked == “FALSE”`. |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Add URL to embed lock URL whitelist
+
+Add a specific URL to the whitelist that contains all URLs where embedding of channel content is allowed when embed lock is enabled.
+
+```
+POST
+https://api.video.ibm.com/channels/{channel_id}/locks/embed/allowed-urls.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                          |
+| --------- | ------ | ---------- | ------------------------------------ |
+| `url`     | string | REQUIRED   | The URL to be added to the whitelist |
+
+You can add one URL per API call.
+
+### Success response
+
+On success a response with HTTP status “201 Created” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_request`   | The request parameter is missing or invalid                                             |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Empty the embed lock URL whitelist
+
+Remove all URLs from the embed lock whitelist.
+
+```
+DELETE https://api.video.ibm.com/channels/{channel_id}/locks/embed/allowed-urls.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
