@@ -60,6 +60,8 @@
       path: /channel-api-playlists/manage-content-of-playlist
 - title: Security
   pages:
+    - title: Overview
+      path: /channel-api-security/overview
     - title: Password protection
       path: /channel-api-security/password-protection
     - title: Viewer authentication
