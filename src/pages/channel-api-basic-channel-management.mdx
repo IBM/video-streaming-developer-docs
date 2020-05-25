@@ -1,18 +1,13 @@
 ---
 title: Basic channel management
-description: Get list of the user's channels
 ---
 
-<PageDescription>
-
-Get list of the user's channels
-
-</PageDescription>
+## Get list of the user's channels
 
 Get a detailed list of the user's channels with information on various settings.
 
-```
-GET https://api.video.ibm.com/users/self/channels.json
+```markdown
+**GET** https://api.video.ibm.com/users/self/channels.json
 ```
 
 ### Parameters
@@ -37,12 +32,12 @@ On success, a set of key-value pairs is returned under a `channel` element.
 | `description`     | string  |  |
 | `default`         | boolean  | Key is returned with `true` value if this is the default channel for the user.  |
 | `owner` | object | A set of key-value pairs containing information about the owner with the following attributes: `id`, `username`, `picture` |
-| - `id` | string | The user ID of the channel owner |
-| - `owner.username` | string | The username of the channel owner |
-| - `owner.picture` | string | The URL of the image |
+| `owner.id` | string | The user ID of the channel owner |
+| `owner.username` | string | The username of the channel owner |
+| `owner.picture` | string | The URL of the image |
 | `authority` | object | A set of key-value pairs containing information about the authority of the user to access the channel. Includes the following attributes: `reason` |
-| - `authority.reason` | string | Possible values are: `own`, `shared` |
-| - `picture` | object | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs. |
+| `authority.reason` | string | Possible values are: `own`, `shared` |
+| `authority.picture` | object | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs. |
 | `live_thumbnail` | string | Listed when the channel is online |
 
 The paging information can be found inside the paging element. 
@@ -61,7 +56,7 @@ The paging information can be found inside the paging element.
 Example for pagination data in success response:
 
 
-```
+```json
 {
 	"paging": {
 		"previous": {
@@ -93,8 +88,8 @@ Possible error responses:
 
 Get information on channel settings. 
 
-```
-GET https://api.video.ibm.com/channels/channel_id.json
+```markdown
+**GET** https://api.video.ibm.com/channels/`{channel_id}`.json
 ```
 
 ### Parameters
@@ -148,7 +143,7 @@ On success, a set of key-value pairs is returned under a channel element.
 Example for success response:
 
 
-```
+```json
 {
 	"channel": {
 		"id": "1111",
@@ -199,8 +194,8 @@ Possible error responses:
 
 Create a new channel for the current account.
 
-```
-POST https://api.video.ibm.com/users/self/channels.json
+```markdown
+**POST** https://api.video.ibm.com/users/self/channels.json
 ```
 
 
@@ -260,8 +255,8 @@ Possible error responses:
 
 Change the title, description and tags of a channel.
 
-```
-PUT https://api.video.ibm.com/channels/channel_id.json
+```markdown
+**PUT** https://api.video.ibm.com/channels/`{channel_id}`.json
 ```
 
 ### Parameters
@@ -295,8 +290,8 @@ Possible error responses:
 
 Delete the selected channel.
 
-```
-DELETE https://api.video.ibm.com/channels/channel_id.json
+```markdown
+**DELETE** https://api.video.ibm.com/channels/`{channel_id}`.json
 ```
 
 ### Parameters
