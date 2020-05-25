@@ -25,7 +25,7 @@ const HeaderMenus = () => {
                     >
                         {mainMenu.pages.map((subMenu, i) => (
                             <SideNavMenuItem
-                                to={withPrefix(subMenu.path)}
+                                to={subMenu.path}
                                 onClick={() => {
                                     toggleNavState('leftNavIsOpen', 'close');
                                 }}
