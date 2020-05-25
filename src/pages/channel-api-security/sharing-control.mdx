@@ -3,8 +3,34 @@ title: Sharing control
 description: Sharing control
 ---
 
-<PageDescription>
+## Set sharing control
 
-Sharing control
+Enable or disable the sharing feature for the viewer.
 
-</PageDescription>
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/settings/viewer.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE    | IMPORTANCE | DESCRIPTION               |
+| --------- | ------- | ---------- | ------------------------- |
+| `sharing` | boolean | REQUIRED   | Enable or disable sharing |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_sharing`   | The specified sharing is invalid or unsupported                                         |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
