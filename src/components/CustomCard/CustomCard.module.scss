@@ -1,7 +1,6 @@
 .customCard {
   height: 100%;
-  border-top: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
+  margin-left: 1px;
 
   svg {
     fill: #0f62fe;
@@ -21,9 +20,13 @@
 
 .customCardTitle {
   margin-bottom: 64px;
+  color: #161616;
 }
 
 .customCardContent {
   flex: 1 0 auto;
   margin-bottom: 34px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #393939;
 }
