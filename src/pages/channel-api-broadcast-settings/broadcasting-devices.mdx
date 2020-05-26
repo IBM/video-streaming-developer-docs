@@ -3,8 +3,154 @@ title: Broadcasting devices
 description: Broadcasting devices
 ---
 
-<PageDescription>
+## List all broadcasting devices
 
-Broadcasting devices
+Returns information on devices that have access to broadcast to your channels.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/users/self/device-passwords.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                           |
+| ---------- | ------- | ---------- | ----------------------------------------------------- |
+| `page`     | integer | OPTIONAL   | Requested page number (value is 1 by default)         |
+| `pagesize` | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50) |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a device_passwords object.
+
+| KEY           | TYPE   | DESCRIPTION                                                                                    |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| `device_name` | string | Name of the device                                                                             |
+| `user_name`   | string | Username of the device                                                                         |
+| `created_at`  | number | The date and time when the device password was created (Unix timestamp)                        |
+| `valid_from`  | number | The date and time after which the device password can be used for logging in (Unix timestamp). |
+| `valid_until` | number | The date and time until the device password can be used for logging in (Unix timestamp).       |
+
+Example for success response:
+
+```json
+{
+  "device_passwords": [
+    {
+      "device_name": "Sample Device 1",
+      "user_name": "xnwj3mseuka",
+      "created_at": 1497441340,
+      "valid_from": 1497443340,
+      "valid_until": null
+    },
+    {
+      "device_name": "Sample Device 2",
+      "user_name": "ymvbk9bu7f8",
+      "created_at": 1497341340,
+      "valid_from": 1497341880,
+      "valid_until": 1497381880
+    }
+  ],
+  "paging": []
+}
+```
+
+The paging information can be found under the paging key. Example:
+
+```json
+{
+  "paging": {
+    "previous": "https://api.video.ibm.com/users/self/device-passwords.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+    "next": "https://api.video.ibm.com/users/self/device-passwords.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Channel was not found                                                                   |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Create access for device
+
+Generate username and password for a new device to broadcast on your channels.
+
+```
+POST https://api.video.ibm.com/users/self/device-passwords.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER     | TYPE      | IMPORTANCE | DESCRIPTION                                                                                    |
+| ------------- | --------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| `device_name` | string    | REQUIRED   | Name of the device                                                                             |
+| `valid_from`  | timestamp | REQUIRED   | The date and time after which the device password can be used for logging in (Unix timestamp). |
+| `valid_until` | timestamp | OPTIONAL   | The date and time until the device password can be used for logging in (Unix timestamp).       |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs.
+
+| KEY           | TYPE   | DESCRIPTION                                                                                    |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| `device_name` | string | Name of the device                                                                             |
+| `user_name`   | string | Generated username of device                                                                   |
+| `password`    | string | Generated password                                                                             |
+| `valid_from`  | number | The date and time after which the device password can be used for logging in (Unix timestamp). |
+| `valid_until` | number | The date and time until the device password can be used for logging in (Unix timestamp).       |
+
+Example for success response:
+
+```json
+{
+  "device_name": "Sample Device 4",
+  "user_name": "jgun36pdc79",
+  "password": "jgcxathqhyqcdxp",
+  "valid_from": 1497571200,
+  "valid_until": 1500249600
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE              | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `input_validation_error` | Any required parameter is missing                                                       |
+| 401 Unauthorized        | `unathorized`            | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found`              | Channel was not found                                                                   |
+| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Revoke access from device
+
+Revoke access to your channels from a broadcasting device.
+
+```
+POST https://api.video.ibm.com/users/self/device-passwords/{user_name}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE  | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------ | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | unauthorized | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |              | There is a temporary error on the server which makes it impossible to serve the request |

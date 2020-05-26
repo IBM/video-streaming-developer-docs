@@ -1,10 +1,41 @@
 ---
 title: Ingest settings
-description: Ingest settings
+description: If you wish to use a non-IBM Video Streaming provided broadcaster application or appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc.), you will need a stream key or channel key to authenticate with IBM Video Streaming proving that broadcasting to that particular channel is allowed. Also you should get the ingest point where your device or application should connect.
 ---
 
 <PageDescription>
 
-Ingest settings
+If you wish to use a non-IBM Video Streaming provided broadcaster application or appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc.), you will need a stream key or channel key to authenticate with IBM Video Streaming proving that broadcasting to that particular channel is allowed. Also you should get the ingest point where your device or application should connect.
 
 </PageDescription>
+
+## Get ingest settings
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/ingest.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under an ingest element.
+
+| KEY             | TYPE   | DESCRIPTION                                                                                                                                                                                                                          |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `rtmp_url`      | string | Ingest URL of the channel                                                                                                                                                                                                            |
+| `rtmps_url`     | string | Secure ingest URL of the channel                                                                                                                                                                                                     |
+| `channel_key`   | string | Permanent authentication key for broadcasting on the specified channel                                                                                                                                                               |
+| `streaming_key` | string | Temporary authentication key for broadcasting on the specified channel which will expire after 10 minutes. If you request settings again within 10 minutes the original key will extend, after 10 minutes new key will be generated. |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
