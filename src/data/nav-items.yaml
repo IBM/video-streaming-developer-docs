@@ -101,9 +101,6 @@
 - title: Events
   pages:
     - path: /channel-api-events
-- title: Channel hooks
-  pages:
-    - path: /channel-api-channel-hooks
 
 - title: Getting started
   pages:
