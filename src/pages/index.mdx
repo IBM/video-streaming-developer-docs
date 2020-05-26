@@ -1,21 +1,58 @@
 import HomepageTemplate from 'gatsby-theme-carbon/src/templates/Homepage';
+import CustomCard from '../components/CustomCard/CustomCard.js';
+import '../styles/custom-card-group.scss';
 export default HomepageTemplate;
 
-## APIs
+<div className="custom-card-group">
+  <div className="custom-card-group__third">
+    <CustomCard title="APIs" href="/api-basics-overview" theme="dark"></CustomCard>
+  </div>
+  <div>
+    <div className="custom-card-group__half-height">
+      <div className="custom-card-group__flex-helper">
+        <CustomCard title="Channel API" href="/channel-api-getting-started" theme="dark">
+          Have total control over IBM Video Streaming accounts and channels. Build a full white-label streaming platform
+          or create multiple channels under a single account.
+        </CustomCard>
+      </div>
+      <div className="custom-card-group__flex-helper">
+        <CustomCard title="Viewer Authentication API" href="/viewer-authentication-api-getting-started" theme="dark">
+          Connect IBM Video Streaming to your own user database or directory information service and manage access
+          control using your existing security tools for both live and recorded content.
+        </CustomCard>
+      </div>
+    </div>
+    <div className="custom-card-group__half-height">
+      <div className="custom-card-group__flex-helper">
+        <CustomCard title="Player API" href="/player-api-getting-started" theme="dark">
+          Control the features of the IBM Video Streaming player and customize its layout, while maintaining a
+          continuous, interactive data connection with IBM Video Streaming backend.
+        </CustomCard>
+      </div>
+      <div className="custom-card-group__flex-helper">
+        <CustomCard title="Analytics API" href="/analytics-api-getting-started" theme="dark">
+          Tap into the engagement and telemetry data of IBM Video Streaming. Create filters for live and VOD un-sampled
+          data and get a customized data feed for further processing.
+        </CustomCard>
+      </div>
+    </div>
+  </div>
+</div>
 
-<PageDescription>
-
-
-</PageDescription>
-
-[API basics](/api-basics-overview)
-
-[Channel API](/channel-api-getting-started)
-
-[Viewer Authentication API](/viewer-authentication-api-getting-started)
-
-[Player API](/player-api-getting-started)
-
-[Analytics API](/analytics-api-getting-started)
-
-d
+<div className="custom-card-group">
+  <div className="custom-card-group__third">
+    <CustomCard title="SDKs" theme="dark"></CustomCard>
+  </div>
+  <div className="custom-card-group__third">
+    <CustomCard title="Broadcaster SDK" href="/broadcaster-sdk" theme="dark">
+      Broadcaster SDKs for macOS, iOS and Android enable enterprises to create their custom and personalized mobile
+      broadcasting solution.
+    </CustomCard>
+  </div>
+  <div className="custom-card-group__third">
+    <CustomCard title="Player SDK" href="/player-sdk" theme="dark">
+      Player SDKs for iOS, Android and tvOS, allowing application developers and publishers to seamlessly integrate live
+      and recorded video feeds into a fully customized app experience.
+    </CustomCard>
+  </div>
+</div>

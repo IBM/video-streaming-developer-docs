@@ -1,0 +1,16 @@
+.custom-card-group {
+  display: flex;
+
+  &__third {
+    flex: 0 0 calc(100% / 3);
+  }
+
+  &__half-height {
+    display: flex;
+    height: 50%;
+  }
+
+  &__flex-helper {
+    flex: 1 0 50%;
+  }
+}
