@@ -1,0 +1,115 @@
+---
+title: Create and manage playlists
+description: Create and manage playlists
+---
+
+## Create a playlist
+
+Create a new playlist on a channel.
+
+```
+POST https://api.video.ibm.com/channels/{channel_id}/playlists.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER    | TYPE    | IMPORTANCE | DESCRIPTION                                                               |
+| ------------ | ------- | ---------- | ------------------------------------------------------------------------- |
+| `title`      | string  | REQUIRED   | Title of the playlist                                                     |
+| `is_enabled` | integer | OPTIONAL   | Supported values: `1` (enabled), `0` (disabled). Value is `1` by default. |
+
+Example:
+
+```
+POST playlists.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer ###TOKEN###
+Content-Type: application/x-www-form-urlencoded
+
+title=API+Testing+Playlist&is_enabled=1
+```
+
+### Success response
+
+On success, a response with HTTP status “201 Created” is returned.
+The response will contain the following headers:
+
+| HEADER     | TYPE   | DESCRIPTION                 |
+| ---------- | ------ | --------------------------- |
+| `Location` | string | The URL of the new playlist |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE         | ERROR CONDITIONS                                                    |
+| ------------------ | ------------------- | ------------------------------------------------------------------- |
+| 400 Bad Request    | `bad_request`       | The playlist title is missing                                       |
+| 401 Unauthorized   | `invalid_token`     | The provided access token is missing, revoked, expired or malformed |
+| 403 Forbidden      | `lack_of_ownership` | The API user is not allowed to manage the given channel             |
+| 404 Not Found      | `not_found`         | Channel was not found                                               |
+| 503                |                     | Service Unavailable                                                 |
+
+There is a temporary error on the server which makes it impossible to serve the request
+
+## Modify a playlist
+
+Change the title of an existing playlist.
+
+```
+PUT https://api.video.ibm.com/playlists/{playlist_id}.json
+```
+
+### Parameters
+
+The parameters for the GET request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                   |
+| --------- | ------ | ---------- | ----------------------------- |
+| `title`   | string | REQUIRED   | The new title of the playlist |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | The playlist title is missing                                                           |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Playlist was not found                                                                  |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete a playlist
+
+Delete an existing playlist.
+
+```
+PUT https://api.video.ibm.com/playlists/{playlist_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Playlist was not found                                                                  |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+

@@ -1,0 +1,210 @@
+---
+title: Manage Content of Playlist
+description: List the playlists on a channel
+---
+
+## List the videos of a playlist
+
+Returns data of videos in a specific playlist.
+
+```
+GET https://api.video.ibm.com/playlists/{playlist_id}/videos.json
+```
+
+### Parameters
+
+The parameters for the GET request:
+
+| PARAMETER      | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                                                              |
+| -------------- | ------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page`         | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                                                                                                                                            |
+| `pagesize`     | integer | OPTIONAL   | Requested page size (value is 200 by default, max. 200)                                                                                                                                                                                                                                                  |
+| `detail_level` | string  | OPTIONAL   | Verbosity level. Possible value: `minimal` In case of `minimal` verbosity level, the result set is limited to `id` and `links` data. If the channel is protected (see [Security section](/channel-api-security/password-protection)), only `minimal` data can be retrieved without a valid access token. |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `videos` element.
+
+| KEY           | TYPE    | DESCRIPTION                                                                                                           |
+| ------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
+| `key1`        | string  |                                                                                                                       |
+| `key2`        | number  |                                                                                                                       |
+| `key3`        | boolean |                                                                                                                       |
+| `key4`        | object  | A set of key-value pairs containing information about key4 settings with the following attributes: `child1`, `child2` |
+| `key4.child1` | string  |                                                                                                                       |
+| `key4.child2` | number  |                                                                                                                       |
+| `key5`        | array   |                                                                                                                       |
+
+Example for success response:
+
+```
+
+```
+
+### Error responses
+
+This request has no error responses.
+
+OR
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE              | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `input_validation_error` | Validation failed                                                                       |
+| 401 Unauthorized        |                          | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`        | The user does not have the benefit                                                      |
+| 403 Forbidden           | `lack_of_ownership`      | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`              | Channel not found                                                                       |
+| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Add video to a playlist
+
+Add a video to an existing playlist on the channel.
+
+```
+PUT https://api.video.ibm.com/playlists/{playlist_id}/videos/{video_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+The response will contain the following collection limit headers:
+
+| HEADER                   | TYPE    | DESCRIPTION                                                  |
+| ------------------------ | ------- | ------------------------------------------------------------ |
+| `X-Collection-Limit`     | integer | The maximum number of videos that can be added to a playlist |
+| `X-Collection-Remaining` | integer | How many more videos can be added to the playlist            |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE           | ERROR VALUE         | ERROR CONDITIONS                                                                                         |
+| ---------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized             | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                                      |
+| 403 Forbidden                | `lack_of_ownership` | The API user is not allowed to manage the given playlist or video.                                       |
+| 404 Not Found                | `not_found`         | Playlist was not found                                                                                   |
+| 413 Request Entity Too Large | `limit_reached`     | The number of videos in the playlist has reached the limit. Check the returned collection limit headers. |
+| 503 Service Unavailable      |                     | There is a temporary error on the server which makes it impossible to serve the request                  |
+
+## Get details of a video in a playlist
+
+Returns data of video in a specific playlist.
+
+```
+GET https://api.video.ibm.com/playlists/{playlist_id}/videos/{video_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `video` element.
+
+| KEY                    | TYPE   | DESCRIPTION                                                                                                                                                                                                                              |
+| ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                   | string | Unique ID of the video                                                                                                                                                                                                                   |
+| `title`                | string | Video title                                                                                                                                                                                                                              |
+| `number_of_thumbnails` | number |
+| `picture_revision`     | number | The revision of the thumbnail picture                                                                                                                                                                                                    |
+| `channel_id`           | string | Unique ID of the channel                                                                                                                                                                                                                 |
+| `views`                | number | Number of views                                                                                                                                                                                                                          |
+| `thumbnail`            | string |                                                                                                                                                                                                                                          |
+| `created_at`           | number | The date and time when the video was created (Unix timestamp) By default, it has the same value as the added_at field, but it can be edited by channel admins to better reflect the real content creation date and time for the viewers. |
+| `added_at`             | number | The date and time when the video was added (uploaded or recorded) to IBM Video Streaming (Unix timestamp)                                                                                                                                |
+| `url`                  | string | Video URL                                                                                                                                                                                                                                |
+| `type`                 | string |                                                                                                                                                                                                                                          |
+| `order`                | number | The position of the video in the playlist                                                                                                                                                                                                |
+| `description`          | string | Video description                                                                                                                                                                                                                        |
+| `chapters`             | array  |                                                                                                                                                                                                                                          |
+| `length`               | string | Video length in seconds                                                                                                                                                                                                                  |
+
+Example for success response:
+
+```
+
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                                                                                                                                                                     |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                                                                                                                                                                  |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                                                                                                                                                              |
+| 404 Not Found           | `not_found`         | This error code is returned in the following cases: The playlist does not exist In case of channel playlist, the channel does not exists or the playlists on the channel page are not enabled The given video is not in the playlist |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request                                                                                                                                              |
+
+## Reposition a video in a playlist
+
+Change the position of a video in a playlist.
+
+```
+PUT https://api.video.ibm.com/playlists/{playlist_id}/videos/{video_id}/position.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                    |
+| ---------- | ------- | ---------- | ---------------------------------------------- |
+| `position` | integer | REQUIRED   | The new position of the video in the playlist. |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | The position parameter is either missing or out of range                                |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | The playlist does not exist or the video is not on the playlist                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Remove a video from a playlist
+
+Removes video from the playlist, not deleting it from the channel.
+
+```
+DELETE https://api.video.ibm.com/playlists/{playlist_id}/videos/{video_id}/position.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned.
+
+The response will contain the following collection limit headers:
+
+| HEADER                   | TYPE    | DESCRIPTION                                                  |
+| ------------------------ | ------- | ------------------------------------------------------------ |
+| `X-Collection-Limit`     | integer | The maximum number of videos that can be added to a playlist |
+| `X-Collection-Remaining` | integer | How many more videos can be added to the playlist            |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | The playlist does not exist or the video is not on the playlist                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

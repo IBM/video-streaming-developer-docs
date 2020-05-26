@@ -52,7 +52,12 @@
       path: /channel-api-video-management/manage-captions
 - title: Playlists
   pages:
-    - path: /channel-api-playlists
+    - title: Get playlist information
+      path: /channel-api-playlists/get-playlist-information
+    - title: Create and Manage Playlists
+      path: /channel-api-playlists/create-and-manage-playlists
+    - title: Manage Content of Playlist
+      path: /channel-api-playlists/manage-content-of-playlist
 - title: Security
   pages:
     - title: Password protection
