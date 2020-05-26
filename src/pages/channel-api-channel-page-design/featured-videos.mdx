@@ -1,10 +1,123 @@
 ---
-title: Featured videos
-description: Featured videos
+title: Featured videos on channel page
+description: Featured videos on channel page
 ---
 
-<PageDescription>
+## Get list of featured videos
 
-Featured videos
+Returns data of featured videos listed on the channel page.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/channels/{channel_id}/featured-videos.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER      | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                                                          |
+| -------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page`         | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                                                                                                                                        |
+| `pagesize`     | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                                                                                                                                                                                                                |
+| `detail_level` | string  | OPTIONAL   | Verbosity level. Possible value: `minimal`. In case of `minimal` verbosity level, the result set is limited to `id` and `links` data. If the channel is protected (<Link to="/channel-api-security">see Security section</Link>), only `minimal` data can be retrieved without a valid access token. |
+
+### Success response
+
+On success, a set of key-value pairs is returned under a videos element.
+
+| KEY                  | TYPE   | DESCRIPTION |
+| -------------------- | ------ | ----------- |
+| `id`                 | string |             |
+| `title`              | string |             |
+| `url`                | string |             |
+| `length`             | string |             |
+| `created_at`         | number |             |
+| `added_at`           | number |             |
+| `file_size`          | string |             |
+| `views`              | number |             |
+| `thumbnail`          | object |             |
+| `links`              | object |             |
+| `links.channel`      | object |             |
+| `links.channel.href` | string |             |
+| `links.channel.id`   | string |             |
+
+Example for success response:
+
+```
+
+```
+
+The paging information can be found under the paging key.
+Example:
+
+```json
+{
+  "paging": {
+    "previous": "https://api.video.ibm.com/channels/CHANNEL_ID/featured-videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+    "next": "https://api.video.ibm.com/channels/CHANNEL_ID/featured-videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE",
+    "page_count": 8,
+    "item_count": 38
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                                                                 |
+| ----------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                                                              |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                                                          |
+| 404 Not Found           | `not_found`         | This error code is returned in the following cases: The channel does not exist; The featured videos on the channel are not shown |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request                                          |
+
+## Update featured videos
+
+This should start with a resource description…
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/featured-videos.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE    | IMPORTANCE | DESCRIPTION                                           |
+| --------- | ------- | ---------- | ----------------------------------------------------- |
+| video_ids | `array` | REQUIRED   | Video IDs to be added to the channel featured videos. |
+
+Example:
+
+```
+POST /channels/{channel_id}/featured-videos.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+video_ids[]=111&video_ids[]=222
+```
+
+The token in the request above is only an example.
+
+### Success response
+
+The response will contain the following collection limit headers:
+
+| HEADER                   | TYPE   | DESCRIPTION                                                    |
+| ------------------------ | ------ | -------------------------------------------------------------- |
+| `X-Collection-Limit`     | string | The maximum number of videos that can be featured on a channel |
+| `X-Collection-Remaining` | number | How many more videos can be featured on the channel            |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE           | ERROR VALUE         | ERROR CONDITIONS                                                                                                     |
+| ---------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized             |                     | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden                | `lack_of_ownership` | The API user is not allowed to manage the given channel                                                              |
+| 404 Not Found                | `not_found`         | Channel not found                                                                                                    |
+| 413 Request Entity Too Large | `limit_reached`     | The number of videos in the featured videos list have reached the limit. Check the returned collection limit headers |
+| 503 Service Unavailable      |                     | There is a temporary error on the server which makes it impossible to serve the request                              |

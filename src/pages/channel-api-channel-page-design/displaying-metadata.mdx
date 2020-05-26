@@ -3,8 +3,96 @@ title: Displaying metadata
 description: Displaying metadata
 ---
 
-<PageDescription>
+## Get the display settings of the custom metadata fields
 
-Displaying metadata
+Get information on how custom metadata is displayed on the channel page.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/channels/{channel_id}/custom-metadata-display.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with the following key-value structures.
+
+| KEY                 | TYPE  | DESCRIPTION                                                                 |
+| ------------------- | ----- | --------------------------------------------------------------------------- |
+| `metadata_displays` | array | Array containing the display settings of custom metadata fields (see below) |
+
+The array of data for `metadata_displays` contains the following key-value structures.
+
+| KEY          | TYPE    | DESCRIPTION                                               |
+| ------------ | ------- | --------------------------------------------------------- |
+| `channel_id` | string  | The unique id of the channel                              |
+| `field_id`   | string  | The unique id of the custom metadata field                |
+| `is_link`    | boolean | Value is `true` if the field is a link to similar content |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Channel not found                                                                       |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Set the display settings of a custom metadata field
+
+Set how a custom metadata field is displayed on the channel page.
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/custom-metadata-display/{field_id}.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE    | IMPORTANCE | DESCRIPTION                                               |
+| --------- | ------- | ---------- | --------------------------------------------------------- |
+| `is_link` | boolean | REQUIRED   | Value is `true` if the field is a link to similar content |
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | A required parameter is missing                                                         |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Custom metadata field not found                                                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Remove a metadata field from channel page
+
+Delete the display settings of a custom metadata field and remove the field from the channel page.
+
+```
+DELETE https://api.video.ibm.com/channels/{channel_id}/custom-metadata-display/{field_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the benefit                                                      |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Custom metadata field not found                                                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
