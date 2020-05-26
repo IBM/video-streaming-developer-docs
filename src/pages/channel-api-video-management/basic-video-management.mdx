@@ -3,8 +3,356 @@ title: Basic video management
 description: Basic video management
 ---
 
-<PageDescription>
+## List the videos of the user
 
-Basic video management
+Returns data of videos of the current user.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/users/self/videos.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER         | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                                                                          |
+| ----------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `page`            | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                        |
+| `pagesize`        | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                                                                                                |
+| `q`               | string  | OPTIONAL   | Search for text in video related data. Only works for public videos, and if no filter parameter is set.                                                                              |
+| `sort`            | string  | OPTIONAL   | Set sorting order of the videos. Possible values: `"recent"` – orders based on the `created_at` field; `"popular"` – orders based on the views field. The default value is `recent`. |
+| `filter[protect]` | set     | OPTIONAL   | Filter videos by protection levels. Values: `public`, `private` (default: `empty`). The values should be comma separated without whitespace included.                                |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
+
+`The media_urls field is being deprecated. For video download URLs please see the Downloading videos section.`
+
+| KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`              | string | Unique ID of the video                                                                                                                                                                                                                                                                                                |
+| `title`           | string | Video title                                                                                                                                                                                                                                                                                                           |
+| `description`     | string | Video description                                                                                                                                                                                                                                                                                                     |
+| `url`             | string | Video URL                                                                                                                                                                                                                                                                                                             |
+| `length`          | string | Video length in seconds                                                                                                                                                                                                                                                                                               |
+| `created_at`      | number | The date and time when the video was created (Unix timestamp). By default, it has the same value as the `added_at` field, but it can be edited by channel admins to better reflect the real content creation date and time for the viewers.                                                                           |
+| `added_at`        | number | The date and time when the video was added (uploaded or recorded) to IBM Video Streaming (Unix timestamp)                                                                                                                                                                                                             |
+| `file_size`       | string | Video file size in bytes                                                                                                                                                                                                                                                                                              |
+| `views`           | number | Number views on the video                                                                                                                                                                                                                                                                                             |
+| `thumbnail`       | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`)                                                                                                                        |
+| `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
+| `caption matches` | array  | This field is only present if the `q` parameter is used. The result set contains captions (as string value for a `caption` attribute) matching the search query along with their start and end time (values as numbers for `start_sec` and `end_sec` attributes). Only maximum of 100 matching captions are returned. |
+
+Example for success response:
+
+```json
+{
+  "videos": [
+    {
+      "id": "111",
+      "title": "Title of video",
+      "description": "Description of video",
+      "url": "http://www.ustream.tv/recorded/111",
+      "length": "12345.123456",
+      "created_at": 1399388736,
+      "added_at": 1399388736,
+      "file_size": "120000",
+      "views": 0,
+      "thumbnail": {
+        "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_192x108": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_112x63": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_128x72": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_256x144": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_320x180": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_640x360": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_1920x1080": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+      },
+      "media_urls": {
+        "flv": "http://tcdn.ustream.tv/video/111"
+      },
+      "links": {
+        "channel": {
+          "href": "https://api.video.ibm.com/channels/1.json"
+        }
+      },
+      "caption_matches": [
+        {
+          "start_sec": 31.01,
+          "end_sec": 35.7,
+          "caption": "of are actually tying your shoes incorrectly yeah yeah"
+        },
+        {
+          "start_sec": 46.81,
+          "end_sec": 48.85,
+          "caption": "for me very expensive pair of shoes"
+        },
+        {
+          "start_sec": 49.09,
+          "end_sec": 51.88,
+          "caption": "but those shoes came with round nylon laces"
+        }
+      ]
+    },
+    { "...": "..." }
+  ]
+}
+```
+
+The paging information can be found under the `paging` key. Example:
+
+```json
+{
+  "paging": {
+    "previous": "https://api.video.ibm.com/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+    "next": "https://api.video.ibm.com/channels/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE   | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | invalid_token | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |               | There is a temporary error on the server which makes it impossible to serve the request |
+
+## List the videos of a channel
+
+Returns data of videos on a specific channel.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/videos.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER         | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                                                                          |
+| ----------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `page`            | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                        |
+| `pagesize`        | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                                                                                                |
+| `q`               | string  | OPTIONAL   | Search for text in video related data. Only works for public videos, and if no filter parameter is set.                                                                              |
+| `sort`            | string  | OPTIONAL   | Set sorting order of the videos. Possible values: `"recent"` – orders based on the `created_at` field; `popular` – orders based on the `views` field. The default value is "recent". |
+| `filter[protect]` | set     | OPTIONAL   | Filter videos by protection levels. Values: `public`, `private` (default: `empty`). The values should be comma separated without whitespace included.                                |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
+The `media_urls` field is being deprecated. For video download URLs please see the Downloading videos section.
+
+| KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                     |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`              | string | Unique ID of the video                                                                                                                                                                                                                                                                                          |
+| `title`           | string | Video title                                                                                                                                                                                                                                                                                                     |
+| `description`     | string | Video description                                                                                                                                                                                                                                                                                               |
+| `url`             | string | Video URL                                                                                                                                                                                                                                                                                                       |
+| `length`          | string | Video length in seconds                                                                                                                                                                                                                                                                                         |
+| `created_at`      | number | The date and time when the video was created (Unix timestamp). By default, it has the same value as the `added_at` field, but it can be edited by channel admins to better reflect the real content creation date and time for the viewers.                                                                       |
+| `added_at`        | number | The date and time when the video was added (uploaded or recorded) to IBM Video Streaming (Unix timestamp)                                                                                                                                                                                                       |
+| `file_size`       | string | Video file size in bytes                                                                                                                                                                                                                                                                                        |
+| `views`           | number | Number views on the video                                                                                                                                                                                                                                                                                       |
+| `thumbnail`       | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`)                                                                                                                            |
+| `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                               |
+| `caption matches` | array  | This field is only present if the `q` parameter is used. The result set contains captions (as string value for a caption attribute) matching the search query along with their start and end time (values as numbers for `start_sec` and `end_sec` attributes). Only maximum of 100 matching captions are returned. |
+
+Example for success response:
+
+```json
+{
+  "videos": [
+    {
+      "id": "111",
+      "title": "Title of video",
+      "description": "Description of video",
+      "url": "http://www.ustream.tv/recorded/111",
+      "length": "12345.123456",
+      "created_at": 1399388736,
+      "added_at": 1399388736,
+      "file_size": "120000",
+      "views": 0,
+      "thumbnail": {
+        "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_192x108": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_112x63": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_128x72": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_256x144": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_320x180": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_640x360": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg",
+        "image_1920x1080": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+      },
+      "media_urls": {
+        "flv": "http://tcdn.ustream.tv/video/111"
+      },
+      "links": {
+        "channel": {
+          "href": "https://api.video.ibm.com/channels/1.json"
+        }
+      },
+      "caption_matches": [
+        {
+          "start_sec": 31.01,
+          "end_sec": 35.7,
+          "caption": "of are actually tying your shoes incorrectly yeah yeah"
+        },
+        {
+          "start_sec": 46.81,
+          "end_sec": 48.85,
+          "caption": "for me very expensive pair of shoes"
+        },
+        {
+          "start_sec": 49.09,
+          "end_sec": 51.88,
+          "caption": "but those shoes came with round nylon laces"
+        }
+      ]
+    },
+    { "...": "..." }
+  ]
+}
+```
+
+The paging information can be found under the `paging` key. Example:
+
+```
+{
+    "paging": {
+        "previous": "https://api.video.ibm.com/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
+        "next": "https://api.video.ibm.com/channels/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=NEXT_PAGE"
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE     | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token` | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found`     | Channel does not exist                                                                  |
+| 503 Service Unavailable |                 | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get video details
+
+Returns data of a specific video.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER    | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------ | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| detail_level | string | OPTIONAL   | Verbosity level. Possible values: `minimal` – The result set is limited to the id, title, owner, picture and locks fields. `owner` – Requires a valid access token, and it will also return more sensitive information about the channel (for example the DHLS link if this feature is available for you). If the channel is protected (see Security section), only minimal data can be retrieved without a valid access token. |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
+The `media_urls` field is being deprecated. For video download URLs please see the Downloading videos section.
+
+| KEY                  | TYPE   | DESCRIPTION                                                                                                                                                                                                                               |
+| -------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                 | string | Unique ID of the video                                                                                                                                                                                                                    |
+| `title`              | string | Video title                                                                                                                                                                                                                               |
+| `description`        | string | Video description                                                                                                                                                                                                                         |
+| `url`                | string | Video URL                                                                                                                                                                                                                                 |
+| `length`             | string | Video length in seconds                                                                                                                                                                                                                   |
+| `created_at`         | number | The date and time when the video was created (Unix timestamp). By default, it has the same value as the `added_at` field, but it can be edited by channel admins to better reflect the real content creation date and time for the viewers. |
+| `added_at`           | number | The date and time when the video was added (uploaded or recorded) to IBM Video Streaming (Unix timestamp)                                                                                                                                 |
+| `file_size`          | string | Video file size in bytes                                                                                                                                                                                                                  |
+| `views`              | number | Number views on the video                                                                                                                                                                                                                 |
+| `protect`            | string | Protection level (visibility) of the video. Possible values: `private` or `public`                                                                                                                                                            |
+| `thumbnail`          | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`)                                                      |
+| `media_urls`         | object | (This field is being deprecated.)                                                                                                                                                                                                         |
+| `links`              | object |                                                                                                                                                                                                                                           |
+| `links.channel`      | object |                                                                                                                                                                                                                                           |
+| `links.channel.href` | string |                                                                                                                                                                                                                                           |
+| `links.channel.id`   | string |                                                                                                                                                                                                                                           |
+| `chapters`           | array  |                                                                                                                                                                                                                                           |
+| `tinyurl`            | string |                                                                                                                                                                                                                                           |
+| `schedule`           |        |                                                                                                                                                                                                                                           |
+| `owner`              | object | A set of key-value pairs containing information about the owner with the following attributes: `id`, `username`, `picture`                                                                                                                      |
+| `owner.id`           | string | The user ID of the channel owner                                                                                                                                                                                                          |
+| `owner.username`     | string | The username of the channel owner                                                                                                                                                                                                         |
+| `owner.picture`      | string | The URL of the image                                                                                                                                                                                                                      |
+| `locks`              | array  | ...                                                                                                                                                                                                                                       |
+| `locks.embed`        | string | ...                                                                                                                                                                                                                                       |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Video not found                                                                         |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Modify video details
+
+Change title, description or protection level of a video.
+
+```
+PUT https://api.video.ibm.com/videos/{video_id}.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER     | TYPE   | IMPORTANCE | DESCRIPTION                                                   |
+| ------------- | ------ | ---------- | ------------------------------------------------------------- |
+| `title`       | string | OPTIONAL   | Video title                                                   |
+| `description` | string | OPTIONAL   | Video description                                             |
+| `protect`     | string | OPTIONAL   | Video protection level. Supported values: `public`, `private` |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_value`     | The specified value is invalid or unsupported                                           |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete a video
+
+Delete a video from the current account permanently.
+
+```
+DELETE https://api.video.ibm.com/videos/{video_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

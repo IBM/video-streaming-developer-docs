@@ -1,10 +1,298 @@
 ---
-title: Manage captions
-description: Manage captions
+title: Manage video captions
+description: Manage video captions
 ---
 
-<PageDescription>
+List all captions of a video
+Returns the details of all captions for a specific video.
 
-Manage captions
+```
+GET https://api.video.ibm.com/videos/{video_id}/captions.json
+```
 
-</PageDescription>
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with an array under a `captions` key. The elements of the array contain the following key-value pairs for each caption:
+
+| KEY          | TYPE    | DESCRIPTION                                                                                                        |
+| ------------ | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| `is_default` | boolean | If value is true, the video player automatically displays this caption. A video can only have one default caption. |
+| `is_visible` | boolean | If value is true, this caption is available in the video player.                                                   |
+| `language`   | string  | The language of the caption                                                                                        |
+| `status`     | string  | Possible values: `processing`, `active`                                                                            |
+| `video_id`   | string  | Unique ID of the video                                                                                             |
+
+Example for success response:
+
+```json
+{
+  "captions": [
+    {
+      "is_default": true,
+      "is_visible": false,
+      "language": "en-00",
+      "status": "active",
+      "video_id": "10001"
+    },
+    {
+      "is_default": false,
+      "is_visible": false,
+      "language": "en-UK",
+      "status": "processing",
+      "video_id": "10001"
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get caption details
+
+Returns the details of a specific caption of a video.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/captions/{language}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a caption key.
+
+| KEY          | TYPE    | DESCRIPTION                                                                                                        |
+| ------------ | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| `is_default` | boolean | If value is `true`, the video player automatically displays this caption. A video can only have one default caption. |
+| `is_visible` | boolean | If value is `true`, this caption is available in the video player.                                                   |
+| `language`   | string  | The language of the caption                                                                                        |
+| `status`     | string  | Possible values: `processing`, `active`                                                                                |
+| `video_id`   | string  | Unique ID of the video                                                                                             |
+
+Example for success response:
+
+```json
+{
+  "caption": {
+    "is_default": true,
+    "is_visible": false,
+    "language": "en-00",
+    "status": "active",
+    "video_id": "10001"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Modify caption settings
+
+Change if a video caption is available in a video and if it is displayed automatically.
+
+```
+PUT https://api.video.ibm.com/videos/{video_id}/captions/{language}.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER    | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                     |
+| ------------ | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `is_visible` | boolean | REQUIRED   | Set this value to `true` to make this caption available in the video player.                                                      |
+| `is_default` | boolean | REQUIRED   | Set this value to `true` to make the video player automatically displays this caption. A video can only have one default caption. |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `caption` key.
+
+| KEY          | TYPE    | DESCRIPTION                                                                                                        |
+| ------------ | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| `is_default` | boolean | If value is `true`, the video player automatically displays this caption. A video can only have one default caption. |
+| `is_visible` | boolean | If value is `true`, this caption is available in the video player.                                                   |
+| `language`   | string  | The language of the caption                                                                                        |
+| `status`     | string  | Possible values: `processing`, `active`                                                                            |
+| `video_id`   | string  | Unique ID of the video                                                                                             |
+
+Example for success response:
+
+```json
+{
+  "caption": {
+    "is_default": true,
+    "is_visible": false,
+    "language": "en-00",
+    "status": "active",
+    "video_id": "10001"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Download VTT file
+
+Returns the content of the caption in WebVTT format.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/captions/{language}/vtt
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the content of the caption in WebVTT format. Example for success response:
+
+```
+WEBVTT
+
+00:09.000 --> 00:11.000
+We are in New York City
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE       | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | unauthorized      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | lack_of_ownership | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | not_found         | Video was not found                                                                     |
+| 503 Service Unavailable |                   | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Upload a caption
+
+Upload a new caption for a video in WebVTT format.
+
+```
+PUT https://api.video.ibm.com/videos/{video_id}/captions/{language}/vtt
+```
+
+### Parameters
+
+Example for the request:
+
+```
+PUT videos/{video_id}/captions/en-00/vtt HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer xxxxxxxxxxxxxx
+Content-Type: text/vtt
+
+WEBVTT
+
+00:09.000 --> 00:11.000
+We are in New York City
+```
+
+The token in the request above is only an example.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the content of the caption in WebVTT format. Example for success response:
+
+```
+WEBVTT
+
+00:09.000 --> 00:11.000
+We are in New York City
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 404 Bad Request         | `not_valid_vtt`     | The caption has errors                                                                  |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## List possible languages
+
+Returns all possible languages with their codes.
+
+```
+GET https://api.video.ibm.com/caption-languages.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with an array under a `languages` key. The elements of the array contain the following key-value pairs for each language:
+
+| KEY    | TYPE   | DESCRIPTION                 |
+| ------ | ------ | --------------------------- |
+| `code` | string | Unique code of the language |
+| `name` | string | Name of the language        |
+
+Example for success response:
+
+```json
+{
+  "languages": [
+    {
+      "code": "en-00",
+      "name": "English"
+    },
+    {
+      "code": "en-US",
+      "name": "English (US)"
+    },
+    {
+      "code": "en-UK",
+      "name": "English (UK)"
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE    | ERROR CONDITIONS                                                                        |
+| ----------------------- | -------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `unauthorized` | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |                | There is a temporary error on the server which makes it impossible to serve the request |

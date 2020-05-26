@@ -3,8 +3,227 @@ title: Manage video chapters
 description: Manage video chapters
 ---
 
-<PageDescription>
+## List all chapters of a video
 
-Manage video chapters
+Returns the details of all chapters for a specific video.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/videos/{video_id}/chapters.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with an array under a chapters key. The elements of the array contain the following key-value pairs for each video chapter:
+
+| KEY        | TYPE   | DESCRIPTION                                        |
+| ---------- | ------ | -------------------------------------------------- |
+| `id`       | string | Chapter ID                                         |
+| `title`    | string | Chapter title                                      |
+| `position` | number | The beginning of the chapter, provided in seconds. |
+
+Example for success response:
+
+```json
+{
+  "chapters": [
+    {
+      "id": "17878",
+      "title": "First chapter",
+      "position": 10
+    },
+    {
+      "id": "17879",
+      "title": "Second chapter",
+      "position": 60
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Add new chapter to the video
+
+Set title and position of a new chapter for a video.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/chapters.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                        |
+| ---------- | ------- | ---------- | -------------------------------------------------- |
+| `title`    | string  | REQUIRED   | Chapter title                                      |
+| `position` | integer | REQUIRED   | The beginning of the chapter, provided in seconds. |
+
+### Success response
+
+On success, a response with HTTP status "201 Created" is returned with the following key-value pairs under a `chapters` key.
+
+| KEY        | TYPE   | DESCRIPTION                                        |
+| ---------- | ------ | -------------------------------------------------- |
+| `id`       | string | Chapter ID                                         |
+| `title`    | string | Chapter title                                      |
+| `position` | number | The beginning of the chapter, provided in seconds. |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_value`     | Validation failed                                                                       |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get chapter info
+
+Returns the information on a specific chapter of a video.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/chapters/{chapter_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `chapter` key.
+
+| KEY        | TYPE   | DESCRIPTION                                        |
+| ---------- | ------ | -------------------------------------------------- |
+| `id`       | string | Chapter ID                                         |
+| `title`    | string | Chapter title                                      |
+| `position` | number | The beginning of the chapter, provided in seconds. |
+
+Example for success response:
+
+```json
+{
+  "chapter": {
+    "id": "17878",
+    "title": "First chapter",
+    "position": 10
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Modify video chapter
+
+Change title or position of an existing video chapter.
+
+```
+PUT https://api.video.ibm.com/videos/{video_id}/chapters/{chapter_id}.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                        |
+| ---------- | ------- | ---------- | -------------------------------------------------- |
+| `title`    | string  | REQUIRED   | Chapter title                                      |
+| `position` | integer | REQUIRED   | The beginning of the chapter, provided in seconds. |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_value`     | Validation failed                                                                       |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete video chapter
+
+Delete an existing video chapter.
+
+```
+DELETE https://api.video.ibm.com/videos/{video_id}/chapters/{chapter_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_value`     | Validation failed                                                                       |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete all chapters of a video
+
+Delete all existing chapters of a video.
+
+```
+DELETE https://api.video.ibm.com/videos/{video_id}/chapters.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_value`     | Validation failed                                                                       |
+| 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

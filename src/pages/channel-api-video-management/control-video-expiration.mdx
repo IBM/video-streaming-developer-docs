@@ -3,8 +3,70 @@ title: Control video expiration
 description: Control video expiration
 ---
 
-<PageDescription>
+A video gets deleted when expires. These videos can be saved by setting the time of the expiration.
 
-Control video expiration
+## Get video expiration
 
-</PageDescription>
+Returns information on when the video will expire.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/expiration.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under an `expiration` key.
+
+| KEY          | TYPE   | DESCRIPTION                                                                                                                                                   |
+| ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `rule`       | string | Possible values: never, at_given_time                                                                                                                         |
+| `expires_at` | number | If value of `rule` field is `at_given_time`, this field contains the Unix timestamp of the expiration. (If the value is `never`, this field is not provided.) |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                                                 |
+| ----------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                                              |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                                          |
+| 403 Forbidden           | `forbidden`         | Managing the expiration is disabled at system level or user has no permission to manage the expiration of videos |
+| 404 Not Found           | `not_found`         | Video was not found                                                                                              |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request                          |
+
+## Set video expiration
+
+You can set the video to never expire.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/expiration.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION              |
+| --------- | ------ | ---------- | ------------------------ |
+| `rule`    | string | REQUIRED   | Supported value: `never` |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                                                 |
+| ----------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 404 Bad Request         | `bad_request`       | rule is not provided value is not valid.                                                                         |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                                              |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                                          |
+| 403 Forbidden           | `forbidden`         | Managing the expiration is disabled at system level or user has no permission to manage the expiration of videos |
+| 404 Not Found           | `not_found`         | Video was not found                                                                                              |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request                          |

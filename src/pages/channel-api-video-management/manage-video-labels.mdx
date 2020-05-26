@@ -3,8 +3,265 @@ title: Manage video labels
 description: Manage video labels
 ---
 
-<PageDescription>
+A video can have multiple labels. With these API calls you can get information on labels of a video, or add and remove labels to/from a video.
 
-Manage video labels
+## Get list of all labels
 
-</PageDescription>
+Returns all video labels in the current account.
+
+```
+GET https://api.video.ibm.com/users/self/labels.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `labels` key (grouped by values of label IDs).
+
+| KEY           | TYPE   | DESCRIPTION            |
+| ------------- | ------ | ---------------------- |
+| `label_id`    | number | Unique ID of the label |
+| `label_name`  | string | Label name             |
+| `label_color` | string | Color of the label     |
+
+Example for success response:
+
+```json
+{
+  "labels": {
+    "1771": {
+      "label_id": 1771,
+      "label_name": "marketing",
+      "label_color": "color-2"
+    },
+    "1772": {
+      "label_id": 1772,
+      "label_name": "training",
+      "label_color": "color-3"
+    }
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Create a new label
+
+Create a new video label for the current account.
+
+```
+POST https://api.video.ibm.com/users/self/labels.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER    | TYPE   | IMPORTANCE | DESCRIPTION           |
+| ------------ | ------ | ---------- | --------------------- |
+| `label_name` | string | REQUIRED   | The name of the label |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `label` element (grouped by value of label ID).
+
+| KEY           | TYPE   | DESCRIPTION            |
+| ------------- | ------ | ---------------------- |
+| `label_id`    | number | Unique ID of the label |
+| `label_name`  | string | Label name             |
+| `label_color` | string | Color of the label     |
+
+Example for success response:
+
+```json
+{
+  "label": {
+    "25187": {
+      "label_id": 25187,
+      "label_name": "some label",
+      "label_color": "color-6"
+    }
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Modify a label
+
+Change the name of a label.
+
+```
+PUT https://api.video.ibm.com/users/self/label/{label_id}.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER    | TYPE   | IMPORTANCE | DESCRIPTION           |
+| ------------ | ------ | ---------- | --------------------- |
+| `label_name` | string | REQUIRED   | The name of the label |
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE            | ERROR CONDITIONS                                                                        |
+| ----------------------- | ---------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `label_already_exists` |                                                                                         |
+| 401 Unauthorized        | `invalid_token`        | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |                        | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete a label
+
+Delete a video label from the current account.
+
+```
+DELETE https://api.video.ibm.com/users/self/label/{label_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
+|401 Unauthorized|`invalid_token`|The provided access token is missing, revoked, expired or malformed|
+|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+
+## Get the labels of a video
+
+Returns the labels assigned to a video.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/labels.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `labels` key.
+
+| KEY           | TYPE   | DESCRIPTION            |
+| ------------- | ------ | ---------------------- |
+| `label_id`    | number | Unique ID of the label |
+| `label_name`  | string | Label name             |
+| `label_color` | string | Color of the label     |
+
+Example for success response:
+
+```
+
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Add labels to a video
+
+Add existing labels to a video.
+
+```
+PUT https://api.video.ibm.com/videos/{video_id}/labels.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER   | TYPE  | IMPORTANCE | DESCRIPTION                            |
+| ----------- | ----- | ---------- | -------------------------------------- |
+| `label_ids` | array | REQUIRED   | IDs of labels to be added to the video |
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
+|404 Bad Request|bad_request|Label IDs are not an an array|
+|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
+|404 Not Found|not_found|Video was not found|
+|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+
+## Remove labels from a video
+
+Remove specific labels from a video.
+
+```
+DELETE https://api.video.ibm.com/videos/{video_id}/labels.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER   | TYPE  | IMPORTANCE | DESCRIPTION                               |
+| ----------- | ----- | ---------- | ----------------------------------------- |
+| `label_ids` | array | REQUIRED   | IDs of label to be removed from the video |
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Channel was not found                                                                   |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE              | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `input_validation_error` | Validation failed                                                                       |
+| 401 Unauthorized        | `invalid_token`          | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`        | The user does not have the benefit                                                      |
+| 403 Forbidden           | `lack_of_ownership`      | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`              | Channel was not found                                                                   |
+| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request |

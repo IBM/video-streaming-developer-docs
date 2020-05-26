@@ -3,8 +3,74 @@ title: Set video thumbnail
 description: Set video thumbnail
 ---
 
-<PageDescription>
+You can set a video thumbnail by uploading an image or selecting a frame.
 
-Set video thumbnail
+## Upload image for video thumbnail
 
-</PageDescription>
+You can upload a thumbnail via [multipart requests](https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2) (`multipart/form-data`). The field name must be `thumbnail`. JPG, PNG and GIF file formats are supported. The image should be less than 10 MB in size and smaller than 4,000 × 4,000 px.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/thumbnail.json
+```
+
+Example request with CURL:
+
+```
+curl \
+	-X POST 'https://api.video.ibm.com/videos/123456/thumbnail.json' \
+	-H 'Authorization: Bearer abcdef123456' \
+	-F 'thumbnail=@thumbnail.jpg;type=image/jpeg'
+```
+
+
+You can use the `-v` or the `--trace thumbnail.jpg` options to debug your request.
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
+|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
+|404 Not Found|`not_found`|Video was not found|
+|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+
+## Select a frame for video thumbnail
+
+Set a frame of the video as the thumbnail image.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/thumbnail/frame.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+|PARAMETER|TYPE|IMPORTANCE|DESCRIPTION|
+|-|-|-|-|
+|`position`|float|REQUIRED|The position of the selected frame in seconds|
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
+|-|-|-|
+|401 Unauthorized|`invalid_token`|The provided access token is missing, revoked, expired or malformed|
+|403 Forbidden|`lack_of_ownership`|The API user is not allowed to manage the given video|
+|404 Not Found|`not_found`|Video was not found|
+|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+
+

@@ -3,8 +3,77 @@ title: Copy a video
 description: Copy a video
 ---
 
-<PageDescription>
+Save a part of on existing video as a new video. The new video will be available on the same channel as the original one and it will be unpublished by default.
 
-Copy a video
+## Create copy
 
-</PageDescription>
+Copy is an async process, you will get a request ID in the response.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/copy.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER     | TYPE    | IMPORTANCE | DESCRIPTION                   |
+| ------------- | ------- | ---------- | ----------------------------- |
+| `start`       | integer | REQUIRED   | Copy video from this second   |
+| `end`         | integer | REQUIRED   | Copy video until this second  |
+| `title`       | string  | REQUIRED   | Title of the new video        |
+| `description` | string  | OPTIONAL   | Description of the new video. |
+
+Minimum copy length is 10 seconds.
+
+### Success response
+
+On success a response with HTTP status “202 Accepted” is returned with the following key-value pairs.
+
+| KEY          | TYPE   | DESCRIPTION                                            |
+| ------------ | ------ | ------------------------------------------------------ |
+| `request_id` | string | ID of the copy request                                 |
+| `status_url` | string | URL where you can check the status of the copy request |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid copy parameters (minimum copy length is 10 seconds)                             |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Check copy status
+
+Get information on the status of the requested copy process.
+
+```
+GET https://api.video.ibm.com/videos-copy-status/{request_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `chapters` key.
+
+| KEY           | TYPE    | DESCRIPTION                       |
+| ------------- | ------- | --------------------------------- |
+| `is_finished` | boolean | Status of the copy process        |
+| `video_id`    | string  | ID of the new video               |
+| `video_url`   | string  | The URL of the new video resource |
+
+### Error responses
+
+Possible error responses:
+
+|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
+|-|-|-|
+|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
+|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|

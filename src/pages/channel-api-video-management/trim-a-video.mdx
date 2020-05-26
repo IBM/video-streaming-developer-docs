@@ -3,8 +3,109 @@ title: Trim a video
 description: Trim a video
 ---
 
-<PageDescription>
+## Get video playback start and end point
 
-Trim a video
+Returns video playback start and end point in seconds.
 
-</PageDescription>
+If video is not trimmed, it will return 0 as start point and the original end point.
+
+```
+GET https://api.video.ibm.com/videos/{video_id}/trim.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `trim` key.
+
+| KEY     | TYPE   | DESCRIPTION                        |
+| ------- | ------ | ---------------------------------- |
+| `start` | number | Video is trimmed from this second  |
+| `end`   | number | Video is trimmed until this second |
+
+Example for success response:
+
+```json
+{
+  "trim": {
+    "start": 323,
+    "end": 252
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Channel was not found                                                                   |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Set trim
+
+Set video playback start and end point in seconds. Trimming does not affect the original video file.
+
+`Unsaved auto-recorded videos will become saved when trimming them.`
+
+```
+PUT https://api.video.ibm.com/videos/{video_id}/trim.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE    | IMPORTANCE | DESCRIPTION                  |
+| --------- | ------- | ---------- | ---------------------------- |
+| `start`   | integer | REQUIRED   | Trim video from this second  |
+| `end`     | integer | REQUIRED   | Trim video until this second |
+
+Minimum trim length is 10 seconds.
+
+### Success response
+
+On success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid start or end time (minimum trim length is 10 seconds)                           |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Remove trim
+
+Remove trim settings from a video.
+
+```
+DELETE https://api.video.ibm.com/videos/{video_id}/trim.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Video was not found                                                                     |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
