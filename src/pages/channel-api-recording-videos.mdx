@@ -3,8 +3,165 @@ title: Recording videos
 description: Recording videos
 ---
 
-<PageDescription>
+## Get time limit of recorded videos
 
-Recording videos
+Returns the maximum allowed length of recorded videos for the channel.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/channels/{channel_id}/limits/recording.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with the following key-value pair.
+
+|KEY|TYPE|DESCRIPTION|
+|time|number|Time limit in seconds|
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel was not found                                                                   |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get recording status
+
+Returns information on recording status during broadcast on a channel.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/recorder.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned. If the channel has a live broadcast, it also returns the following key-value pairs under a `video` element.
+
+| KEY   | TYPE   | DESCRIPTION                                   |
+| ----- | ------ | --------------------------------------------- |
+| `id`  | string | Unique ID of the video that is being recorded |
+| `url` | string | Video URL                                     |
+
+Example for success response:
+
+```json
+{
+  "video": {
+    "id": "11111",
+    "url": "https://api.video.ibm.com/videos/11111.json"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
+|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
+|404 Not Found|`not_found`|Channel was not found|
+|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+
+## Start/stop recording
+
+Control recording during live broadcast on a channel.
+
+```
+POST https://api.video.ibm.com/channels/{channel_id}/recorder.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                         |
+| --------- | ------ | ---------- | ----------------------------------- |
+| `command` | string | REQUIRED   | Supported values: `start` or `stop` |
+
+Example for the request:
+
+```
+POST /channels/42/recorder.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+command=stop
+```
+
+### Success response
+
+On success a response with HTTP status "202 Accepted" is returned. If the channel has a live broadcast, it also returns the following key-value pairs under a video element.
+
+| KEY | TYPE   | DESCRIPTION                                   |
+| --- | ------ | --------------------------------------------- |
+| id  | string | Unique ID of the video that is being recorded |
+| url | string | Video URL                                     |
+
+There's no direct feedback on the results of the operation.
+
+Example for success response:
+
+```json
+{
+  "video": {
+    "id": "11111",
+    "url": "https://api.video.ibm.com/videos/11111.json"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | not_found   | Channel was not found                                                                   |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Control auto-recording
+
+Videos can be automatically created when broadcasting. The behavior can be controlled by this resource.
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/settings/autorecord.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                     |
+| --------- | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`   | string | REQUIRED   | Supported values: `disabled` – no auto-recorded video gets created for the channel when broadcasting; `private` – the new auto-record will be private by default; `public` – the created auto-records will be public by default |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_value`     | The specified value is invalid or unsupported                                           |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the benefit                                                      |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel was not found                                                                   |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
