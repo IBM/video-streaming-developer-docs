@@ -1,11 +1,26 @@
 import HomepageTemplate from 'gatsby-theme-carbon/src/templates/Homepage';
 import CustomCard from '../components/CustomCard/CustomCard.js';
 import '../styles/custom-card-group.scss';
+import '../styles/decorator-animation.scss';
 export default HomepageTemplate;
 
 <div className="custom-card-group">
   <div className="custom-card-group__third">
-    <CustomCard title="APIs" href="/api-basics-overview" theme="dark"></CustomCard>
+    <CustomCard title="APIs" href="/api-basics-overview" theme="dark" decorator>
+      <div className="oval-decor">
+        <div className="oval-decor__inner">
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+          <div className="oval-item"></div>
+        </div>
+      </div>
+    </CustomCard>
   </div>
   <div>
     <div className="custom-card-group__half-height">
@@ -41,7 +56,20 @@ export default HomepageTemplate;
 
 <div className="custom-card-group">
   <div className="custom-card-group__third">
-    <CustomCard title="SDKs" theme="dark"></CustomCard>
+    <CustomCard title="SDKs" theme="dark" decorator>
+      <div className="rectangle-decor">
+        <div className="rectangle-decor__inner">
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+          <div className="rectangle-item"></div>
+        </div>
+      </div>
+    </CustomCard>
   </div>
   <div className="custom-card-group__third">
     <CustomCard title="Broadcaster SDK" href="/broadcaster-sdk" theme="dark">

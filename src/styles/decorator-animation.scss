@@ -1,0 +1,189 @@
+$rectangleSize: 16px;
+
+.oval-decor {
+  position: relative;
+  height: 100%;
+  background: #030303;
+
+  &__inner {
+    position: relative;
+    width: 1024px;
+    height: 512px;
+    top: 68px;
+    left: -128px;
+
+    .oval-item {
+      position: absolute;
+      box-sizing: border-box;
+      border: 2px solid #c31d64;
+      border-radius: 100%;
+      opacity: 0.3;
+      animation: pulse 3s infinite linear;
+
+      &:nth-child(1) {
+        left: calc(305px - 207px);
+        top: calc(1044px - 1044px);
+        height: 512px;
+        width: 512px;
+        animation-delay: 0s;
+      }
+
+      &:nth-child(2) {
+        left: calc(-207px - 207px);
+        top: calc(1044px - 1044px);
+        height: 512px;
+        width: 512px;
+        animation-delay: 1s;
+      }
+
+      &:nth-child(3) {
+        left: calc(305px - 207px);
+        top: calc(1268px - 1044px);
+        height: 64px;
+        width: 64px;
+        animation-delay: 1.5s;
+      }
+
+      &:nth-child(4) {
+        left: calc(177px - 207px);
+        top: calc(1268px - 1044px);
+        height: 64px;
+        width: 64px;
+        animation-delay: 2s;
+      }
+
+      &:nth-child(5) {
+        left: calc(241px - 207px);
+        top: calc(1236px - 1044px);
+        height: 128px;
+        width: 128px;
+        animation-delay: 2.5s;
+      }
+
+      &:nth-child(6) {
+        left: calc(305px - 207px);
+        top: calc(1236px - 1044px);
+        height: 128px;
+        width: 128px;
+        animation-delay: 3s;
+      }
+
+      &:nth-child(7) {
+        left: calc(49px - 207px);
+        top: calc(1172px - 1044px);
+        height: 256px;
+        width: 256px;
+        animation-delay: 3.5s;
+      }
+
+      &:nth-child(8) {
+        left: calc(305px - 207px);
+        top: calc(1172px - 1044px);
+        height: 256px;
+        width: 256px;
+        animation-delay: 4s;
+      }
+
+      &:nth-child(9) {
+        left: calc(49px - 207px);
+        top: calc(1044px - 1044px);
+        height: 512px;
+        width: 512px;
+        animation-delay: 4.5s;
+      }
+    }
+  }
+}
+
+.rectangle-decor {
+  position: relative;
+  height: 100%;
+  background: #030303;
+
+  &__inner {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 74px;
+    left: 20px;
+
+    .rectangle-item {
+      position: absolute;
+      height: 125.5px;
+      width: 125.5px;
+      border: 1px solid #0062ff;
+      opacity: 0.3;
+      animation: pulse 3s infinite linear;
+
+      &:nth-child(1) {
+        width: $rectangleSize;
+        height: $rectangleSize;
+        top: calc(#{$rectangleSize} * 4);
+        left: calc(#{$rectangleSize} * 4);
+        animation-delay: 0s;
+      }
+
+      &:nth-child(2) {
+        width: calc(#{$rectangleSize} * 2);
+        height: calc(#{$rectangleSize} * 2);
+        top: calc(#{$rectangleSize} * 4);
+        left: calc(#{$rectangleSize} * 4);
+        animation-delay: 0.5s;
+      }
+
+      &:nth-child(3) {
+        width: calc(#{$rectangleSize} * 4);
+        height: calc(#{$rectangleSize} * 4);
+        top: calc(#{$rectangleSize} * 4);
+        left: calc(#{$rectangleSize} * 4);
+        animation-delay: 1s;
+      }
+
+      &:nth-child(4) {
+        width: calc(#{$rectangleSize} * 4);
+        height: calc(#{$rectangleSize} * 4);
+        animation-delay: 1.5s;
+      }
+
+      &:nth-child(5) {
+        width: calc(#{$rectangleSize} * 8);
+        height: calc(#{$rectangleSize} * 8);
+        animation-delay: 2s;
+      }
+
+      &:nth-child(6) {
+        width: calc(#{$rectangleSize} * 8);
+        height: calc(#{$rectangleSize} * 8);
+        top: calc(#{$rectangleSize} * 8);
+        left: calc(#{$rectangleSize} * 8);
+        animation-delay: 2.5s;
+      }
+
+      &:nth-child(7) {
+        width: calc(#{$rectangleSize} * 16);
+        height: calc(#{$rectangleSize} * 16);
+        animation-delay: 3s;
+      }
+
+      &:nth-child(8) {
+        width: calc(#{$rectangleSize} * 16);
+        height: calc(#{$rectangleSize} * 16);
+        top: calc(#{$rectangleSize} * -16);
+        left: calc(#{$rectangleSize} * 16);
+        animation-delay: 3.5s;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
