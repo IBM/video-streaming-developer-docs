@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "wesbos",
-    "prettier"
-  ],
+  "extends": ["wesbos", "prettier"],
   "rules": {
     "react/prop-types": 0,
     "react/destructuring-assignment": 0,
@@ -14,13 +11,13 @@
       "error",
       {
         "bracketSpacing": true,
-        "trailingComma": "es5",
         "singleQuote": true,
+        "trailingComma": "all",
         "printWidth": 120
       }
     ]
   },
   "settings": {
-    "import/core-modules": ["carbon-components-react", "classnames", "gatsby-link", "@carbon/icons-react"]
+    "import/core-modules": ["carbon-components-react", "classnames", "gatsby-link", "@carbon/icons-react", "prop-types"]
   }
 }
