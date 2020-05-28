@@ -52,9 +52,11 @@ const CustomHeader = ({ homepage, is404, theme, location }) => {
         >
           IBM&nbsp;<span>Video Streaming</span>&nbsp;Developers
         </HeaderName>
-        <HeaderNavigation aria-label={label}>
-          <HeaderMenus homepage={homepage} />
-        </HeaderNavigation>
+        {!homepage && (
+          <HeaderNavigation aria-label={label}>
+            <HeaderMenus />
+          </HeaderNavigation>
+        )}
         <HeaderGlobalBar>
           {isSearchEnabled && <GlobalSearch />}
           <HeaderGlobalAction

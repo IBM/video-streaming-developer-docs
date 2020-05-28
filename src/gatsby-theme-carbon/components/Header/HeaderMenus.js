@@ -3,8 +3,7 @@ import { HeaderMenu, HeaderMenuItem } from 'carbon-components-react';
 import { withPrefix } from 'gatsby-link';
 import Content from './Content';
 
-const HeaderMenus = ({ homepage }) => {
-  if (homepage) return false;
+const HeaderMenus = () => {
   return (
     <>
       {Content.map((mainMenu, index) => (
