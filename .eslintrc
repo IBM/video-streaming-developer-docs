@@ -21,6 +21,6 @@
     ]
   },
   "settings": {
-    "import/core-modules": ["carbon-components-react", "classnames", "gatsby-link"]
+    "import/core-modules": ["carbon-components-react", "classnames", "gatsby-link", "@carbon/icons-react"]
   }
 }
