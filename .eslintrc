@@ -19,5 +19,8 @@
         "printWidth": 120
       }
     ]
+  },
+  "settings": {
+    "import/core-modules": ["carbon-components-react", "classnames", "gatsby-link"]
   }
 }
