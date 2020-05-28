@@ -18,6 +18,14 @@
     ]
   },
   "settings": {
-    "import/core-modules": ["carbon-components-react", "classnames", "gatsby-link", "@carbon/icons-react", "prop-types"]
+    "import/core-modules": [
+      "@carbon/icons-react",
+      "carbon-components-react",
+      "classnames",
+      "gatsby-link",
+      "prop-types",
+      "smooth-scroll",
+      "slugify"
+    ]
   }
 }

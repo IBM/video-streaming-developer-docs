@@ -26,16 +26,11 @@ const Default = ({ pageContext, children, location, Title }) => {
   `);
 
   // let gatsby handle prefixing
-  const slug = pathPrefix
-    ? location.pathname.replace(pathPrefix, '')
-    : location.pathname;
+  const slug = pathPrefix ? location.pathname.replace(pathPrefix, '') : location.pathname;
 
   const getCurrentTab = () => {
     if (!tabs) return '';
-    return (
-      slug.split('/').filter(Boolean).slice(-1)[0] ||
-      slugify(tabs[0], { lower: true })
-    );
+    return slug.split('/').filter(Boolean).slice(-1)[0] || slugify(tabs[0], { lower: true });
   };
 
   const currentTab = getCurrentTab();
@@ -56,13 +51,7 @@ const Default = ({ pageContext, children, location, Title }) => {
         {children}
         <EditLink relativePagePath={relativePagePath} />
       </Main>
-      <NextPrevious
-        pageContext={pageContext}
-        location={location}
-        slug={slug}
-        tabs={tabs}
-        currentTab={currentTab}
-      />
+      <NextPrevious pageContext={pageContext} location={location} slug={slug} tabs={tabs} currentTab={currentTab} />
       <Utils />
     </Layout>
   );
