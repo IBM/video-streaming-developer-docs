@@ -4,8 +4,8 @@ import React, { useLayoutEffect } from 'react';
 import Container from 'gatsby-theme-carbon/src/components/Container';
 import Meta from './Meta';
 import Header from './Header';
-import Switcher from './Switcher/Switcher';
 import Footer from './Footer';
+import Switcher from './Switcher/Switcher';
 
 import 'gatsby-theme-carbon/src/styles/index.scss';
 

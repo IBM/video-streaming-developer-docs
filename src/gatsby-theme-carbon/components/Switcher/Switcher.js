@@ -1,7 +1,13 @@
 import React, { useContext } from 'react';
 import cx from 'classnames';
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
-import { nav, open, divider, link, linkDisabled } from 'gatsby-theme-carbon/src/components/Switcher/Switcher.module.scss';
+import {
+  nav,
+  open,
+  divider,
+  link,
+  linkDisabled,
+} from 'gatsby-theme-carbon/src/components/Switcher/Switcher.module.scss';
 
 const Switcher = ({ children }) => {
   const { switcherIsOpen } = useContext(NavContext);
@@ -18,18 +24,13 @@ const Switcher = ({ children }) => {
   );
 };
 
-export const SwitcherDivider = props => (
+export const SwitcherDivider = (props) => (
   <li className={divider}>
     <span {...props} />
   </li>
 );
 
-export const SwitcherLink = ({
-  disabled,
-  children,
-  href: hrefProp,
-  ...rest
-}) => {
+export const SwitcherLink = ({ disabled, children, href: hrefProp, ...rest }) => {
   const href = disabled || !hrefProp ? undefined : hrefProp;
   const className = disabled ? linkDisabled : link;
   const { switcherIsOpen } = useContext(NavContext);
@@ -55,9 +56,7 @@ export const SwitcherLink = ({
 const DefaultChildren = () => {
   return (
     <>
-      <SwitcherLink href="https://video.ibm.com/">
-        IBM Watson Media
-      </SwitcherLink>
+      <SwitcherLink href="https://video.ibm.com/">IBM Watson Media</SwitcherLink>
 
       <SwitcherDivider>Learn more</SwitcherDivider>
 

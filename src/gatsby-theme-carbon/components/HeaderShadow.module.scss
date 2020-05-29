@@ -1,5 +1,5 @@
 .headerShadow .headerNameShadow {
-  @include carbon--type-style("body-short-02");
+  @include carbon--type-style('body-short-02');
   transition: opacity $duration--fast-02 $carbon--standard-easing;
   color: $inverse-01;
   text-decoration: none;
@@ -9,6 +9,7 @@
   border-top: 1px solid transparent;
   display: flex;
   align-items: center;
+
   &:focus {
     outline: 2px solid $inverse-01;
     outline-offset: -2px;

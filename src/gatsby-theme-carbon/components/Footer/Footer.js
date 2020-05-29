@@ -111,13 +111,13 @@ Footer.propTypes = {
       PropTypes.shape({
         href: PropTypes.string,
         linkText: PropTypes.string,
-      })
+      }),
     ),
     secondCol: PropTypes.arrayOf(
       PropTypes.shape({
         href: PropTypes.string,
         linkText: PropTypes.string,
-      })
+      }),
     ),
   }),
 

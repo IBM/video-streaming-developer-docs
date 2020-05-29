@@ -1,26 +1,22 @@
 import React from 'react';
-import Content from "./Content";
-
-import {
-    HeaderMenu,
-    HeaderMenuItem,
-} from 'carbon-components-react';
-import {withPrefix} from 'gatsby-link';
+import { HeaderMenu, HeaderMenuItem } from 'carbon-components-react';
+import { withPrefix } from 'gatsby-link';
+import Content from './Content';
 
 const HeaderMenus = () => {
-    return (
-        <>
-            {Content.map((mainMenu, i) => (
-                <HeaderMenu aria-label={mainMenu.title} menuLinkName={mainMenu.title} key={i}>
-                    {mainMenu.pages.map((subMenu, i) => (
-                        <HeaderMenuItem href={withPrefix(subMenu.path)} key={i}>
-                            {subMenu.title}
-                        </HeaderMenuItem>
-                    ))}
-                </HeaderMenu>
-            ))}
-        </>
-    );
+  return (
+    <>
+      {Content.map((mainMenu, index) => (
+        <HeaderMenu aria-label={mainMenu.title} menuLinkName={mainMenu.title} key={index}>
+          {mainMenu.pages.map((subMenu, key) => (
+            <HeaderMenuItem href={withPrefix(subMenu.path)} key={key}>
+              {subMenu.title}
+            </HeaderMenuItem>
+          ))}
+        </HeaderMenu>
+      ))}
+    </>
+  );
 };
 
 export default HeaderMenus;
