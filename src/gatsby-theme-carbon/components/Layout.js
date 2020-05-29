@@ -2,7 +2,7 @@
 import React, { useLayoutEffect } from 'react';
 
 import Container from 'gatsby-theme-carbon/src/components/Container';
-import Meta from 'gatsby-theme-carbon/src/components/Meta';
+import Meta from './Meta';
 import Header from './Header';
 import Footer from './Footer';
 import Switcher from './Switcher/Switcher';

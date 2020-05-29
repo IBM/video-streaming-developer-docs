@@ -1,39 +1,35 @@
 import React from 'react';
 import Footer from './Footer/Footer';
 
-const Content = ({ buildTime }) => (
-  <>
-    <p>
-      The <code>Content</code> component receives a <code>buildTime</code> prop that to display your site's build time:{' '}
-      {buildTime}
-    </p>
-    <p>
-      By importing the <strong>Footer</strong> component from gatsby-theme-carbon, we can supply our own props.
-    </p>
-    <p>The default export from a shadowed component will replace that component in the theme.</p>
-    <p>
-      <a href="https://www.gatsbyjs.org/docs/themes/api-reference/#component-shadowing">
-        More about component shadowing
-      </a>
-    </p>
-  </>
-);
-
 const links = {
   firstCol: [
-    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Contact' },
+    { href: 'https://video.ibm.com/contact-us', linkText: 'Contact' },
     { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Privacy' },
-    { href: 'https://www.ibm.com/legal', linkText: 'Terms of use' },
-    { href: 'https://www.ibm.com/us-en/?ar=1', linkText: 'Accessibility' },
+    { href: 'https://www.ibm.com/legal/us/en/', linkText: 'Terms of use' },
+    {
+      href: 'https://www-03.ibm.com/software/sla/sladb.nsf/sla/sd-7525-06',
+      linkText: 'Terms and conditions for IBM Video Streaming',
+    },
   ],
   secondCol: [
-    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Copyright policy' },
-    { href: 'https://www.ibm.com/legal', linkText: 'Cookie preferences' },
-    { href: 'https://www.ibm.com/legal', linkText: 'Terms and conditions for IBM Video Streaming' },
-    { href: 'https://www.ibm.com/privacy/us/en/', linkText: 'Acceptable use policy' },
+    { href: 'https://www.ibm.com/accessibility/us/en/', linkText: 'Accessibility' },
+    { href: 'https://video.ibm.com/copyright-policy', linkText: 'Copyright Policy' },
+    { href: 'https://video.ibm.com/acceptableusepolicy', linkText: 'Acceptable use policy' },
+    {
+      href: 'https://video.ibm.com/',
+      linkText: 'Cookie preferences',
+      onClick: (e) => {
+        e.preventDefault();
+        const teconsentLink = document.querySelector('#teconsent > a');
+        const event = new MouseEvent('click');
+        if (teconsentLink) {
+          teconsentLink.dispatchEvent(event);
+        }
+      },
+    },
   ],
 };
 
-const CustomFooter = () => <Footer links={links} Content={Content} />;
+const CustomFooter = () => <Footer links={links} Content={() => ''} />;
 
 export default CustomFooter;

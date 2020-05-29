@@ -1,10 +1,125 @@
 ---
 title: Metadata fields
-description: Metadata fields
+description: Channel API Custom metadata Metadata fields
 ---
 
-<PageDescription>
+## Get list of metadata fields
 
-Metadata fields
+Get the list of the custom metadata fields for the current account.
 
-</PageDescription>
+```
+GET https://api.video.ibm.com/custom-metadata-fields.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER      | TYPE   | IMPORTANCE | DESCRIPTION                                                                                          |
+| -------------- | ------ | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `filter[type]` | string | REQUIRED   | `channel` if you need custom metadata for a channel, `video` if you need custom metadata for a video |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with the following key-value structures.
+
+| KEY      | TYPE  | DESCRIPTION                          |
+| -------- | ----- | ------------------------------------ |
+| `fields` | array | Array of data for fields (see below) |
+
+The array of data for `fields` contains the following key-value structures.
+
+| KEY            | TYPE    | DESCRIPTION                                                                                                                                     |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number  | The unique ID of the field                                                                                                                      |
+| `display_name` | string  | Name displayed for the field                                                                                                                    |
+| `name`         | string  | Name of the field                                                                                                                               |
+| `type`         | string  | Data type of the field                                                                                                                          |
+| `content_type` | string  | Content type of the field. Possible values are `channel` or `video`                                                                             |
+| `description`  | string  | Description of the field                                                                                                                        |
+| `is_required`  | boolean | Value is `true` if the field is required                                                                                                        |
+| `enum_items`   | array   | Array of enum values containing the field name with the `item` key                                                                              |
+| `children`     | array   | An array of data for field children with the following attributes: `name`, `display_name`, `content_type`, `type`, `description`, `is_required` |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE   | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request` | When filter[type] is missing                                                            |
+| 401 Unauthorized        |               | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |               | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Create new metadata field
+
+Create a new custom metadata field.
+
+```
+POST https://api.ustream.tv/custom-metadata-fields.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER      | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                          |
+| -------------- | ------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `name`         | string  | REQUIRED   | Name of the field                                                                                                    |
+| `display_name` | string  | REQUIRED   | Display name                                                                                                         |
+| `content_type` | string  | REQUIRED   | Supported values are channel or video                                                                                |
+| `type`         | string  | REQUIRED   | Data type of the field. Supported values: `string`, `float`, `tag_list`, `bool`, `enum`, `group`, `datetime`, `link` |
+| `is_required`  | boolean | REQUIRED   | Value is `true` if the field is required                                                                               |
+| `description`  | string  | OPTIONAL   | The description of the field                                                                                         |
+| `enum_items`   | array   | OPTIONAL   | Array of enum items                                                                                                  |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned with a set of key-value structures under a field element.
+
+| KEY            | TYPE    | DESCRIPTION                                                                                                                                     |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number  | The unique ID of the field                                                                                                                      |
+| `name`         | string  | Name of the field                                                                                                                               |
+| `type`         | string  | Data type of the field                                                                                                                          |
+| `content_type` | string  | Content type of the field. Possible values are `channel` or `video`                                                                             |
+| `description`  | string  | Description of the field                                                                                                                        |
+| `is_required`  | boolean | Value is `true` if the field is required                                                                                                          |
+| `enum_items`   | array   | Array of enum values containing the field name with the `item` key                                                                              |
+| `children`     | object  | An array of data for field children with the following attributes: `name`, `display_name`, `content_type`, `type`, `description`, `is_required` |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | bad_request | Metadata field definition is not valid                                                  |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Delete metadata field
+
+Delete a custom metadata field.
+
+```
+DELETE https://api.ustream.tv/custom-metadata-fields/{field_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | not_found   | Metadata field id is not valid                                                          |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |

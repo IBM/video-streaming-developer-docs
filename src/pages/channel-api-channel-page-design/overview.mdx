@@ -1,10 +1,29 @@
 ---
 title: Overview
-description: Overview
+description: Channel API Channel page design Overview
 ---
 
-<PageDescription>
+import CustomCard from '../../components/CustomCard/CustomCard.js';
 
-Overview
-
-</PageDescription>
+<Row className="resource-card-group">
+  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: "1px" }}>
+    <CustomCard title="Displaying metadata" href="/channel-api-channel-page-design/displaying-metadata">
+      ...
+    </CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: "1px" }}>
+    <CustomCard title="Channel picture" href="/channel-api-channel-page-design/channel-picture">
+      ...
+    </CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Featured videos on channel page" href="/channel-api-channel-page-design/featured-videos">
+      ...
+    </CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Playlists on channel page" href="/channel-api-channel-page-design/playlists-on-channel-page">
+      ...
+    </CustomCard>
+  </Column>
+</Row>

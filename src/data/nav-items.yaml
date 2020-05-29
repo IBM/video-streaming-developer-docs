@@ -86,8 +86,8 @@
       path: /channel-api-custom-metadata/metadata-fields
     - title: Channel metadata values
       path: /channel-api-custom-metadata/channel-metadata-values
-    - title: Hide viewer numbers in player
-      path: /channel-api-custom-metadata/hide-viewer-numbers-in-player
+    - title: Video metadata values
+      path: /channel-api-custom-metadata/video-metadata-values
 - title: Channel page design
   pages:
     - title: Overview
