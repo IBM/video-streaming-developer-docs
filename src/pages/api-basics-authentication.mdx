@@ -7,14 +7,8 @@ description: Authentication
 
 The OAuth 2.0 protocol provides several flows (workflows) for authorizing a user and obtaining an access token. It depends on the type and architecture of the client which flow is the most suitable. The following flows are supported:
 
-- **Implicit:** Suitable for standalone, native clients (desktop / mobile).
 - **Authorization Code:** Suitable for third-party websites which contain a client and a server component.
 - **Client Credentials:** Best choice for users developing server-side applications to manage their content / settings.
-
-### Implicit flow
-
-1. The user enters its credentials to a secure login webpage.
-2. After logging in, the browser is redirected to a special URL (defined by the client), passing the access token in the URL.
 
 ### Authorization Code flow
 
@@ -38,7 +32,7 @@ With normal user level tokens these resources dedicated to clients are inaccessi
 | ---------------------- | ---------------------------------------------- |
 | Location               | https://authentication.video.ibm.com/authorize |
 | Supported HTTP methods | GET, POST                                      |
-| Supported flows        | Authorization Code, Implicit                   |
+| Supported flows        | Authorization Code                             |
 
 The authorization endpoint is a secure web page that contains a login form. The client should show this page to the user in an embedded browser. When the user completes the login process, the browser is redirected to a special URL. The client can capture this redirect call, and obtain the authorization code or access token (depending on the flow type).
 
@@ -50,7 +44,7 @@ The parameters below specify the behavior of the authorization endpoint. They ha
 
 | PARAMETER       | TYPE   | IMPORTANCE                                                                               | DESCRIPTION                                                                                                                                                                      |
 | --------------- | ------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `response_type` | string | REQUIRED                                                                                 | `code` for Authorization Code flow; `token` for Implicit flow                                                                                                                    |
+| `response_type` | string | REQUIRED                                                                                 | `code` for Authorization Code flow                                                                                                                                               |
 | `client_id`     | string | REQUIRED40 character string that identifies the client. Provided by IBM Video Streaming. |
 | `redirect_uri`  | string | REQUIRED                                                                                 | The URI where the browser will redirect after the authentication process. This URI must be registered at IBM Video Streaming.                                                    |
 | `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri, to prevent XSRF attacks. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details. |
@@ -75,17 +69,6 @@ If the `response_type` parameter is `code`, the following properties are returne
 | -------- | ------------------------------------------------------------------- |
 | `code`   | An authorization code (40 character length, hexa encoded sha1 hash) |
 | `state`  | If state was sent to the endpoint, we send it back                  |
-
-#### Implicit flow
-
-If the `response_type` is `token`, the following properties are returned:
-
-| PROPERTY       | DESCRIPTION                                               |
-| -------------- | --------------------------------------------------------- |
-| `access_token` | Access token (40-character length, hex encoded sha1 hash) |
-| `expires_in`   | Token's current lifetime, in seconds                      |
-| `token_type`   | Will be `bearer`                                          |
-| `state`        | If state was sent to the endpoint, we send it back        |
 
 ### Error handling
 
@@ -221,48 +204,7 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 | `token_type`    | Will be bearer                                                                                                                                                                   |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
 
-#### Example
-
-The following is an example with implicit flow, requesting for access tokens on the authorization page.
-
-1 - The client opens a browser with the authorization endpoint:
-
-```
-https://authentication.video.ibm.com/authorize
-?response_type=token
-&client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD
-&redirect_uri=http://example.com/token
-&device_name=My%20Device
-&scope=broadcaster
-&state=XYZ
-```
-
-2a - The user enters his/her credentials and presses the Allow button. The browser is redirected to the following URL:
-
-```
-http://example.com/token
-?access_token=1a446888dfaa921e189479409d638d680dfdbf77
-&token_type=bearer
-&state=XYZ
-```
-
-2b - The user cancels the authorization page or presses Deny after authentication. The browser is redirected to the following URL:
-
-```
-http://example.com/token?error=access_denied&state=XYZe38bcfdfbf46d659&redirect_uri=http://example.com/get_access_token
-```
-
-### Error responses
-
-If there is an error, the token endpoint returns a HTTP status code indicating the error and a JSON object with the following format:
-
-```
-{
-    "error": "{ERROR_VALUE}"
-}
-```
-
-Possible error responses:
+#### Possible error responses:
 
 | HTTP RESPONSE CODE  | ERROR VALUE              | ERROR CONDITIONS                                                                                                                            |
 | ------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
