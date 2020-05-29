@@ -3,8 +3,49 @@ title: Testing APIs
 description: Testing APIs
 ---
 
-<PageDescription>
+## Test an API from command line (with curl)
 
-Testing APIs
+### Get an access token
 
-</PageDescription>
+```
+https://api.video.ibm.com/oauth2/authorize
+?response_type=token
+&client_id=057ce944b015ec9fdf546dfbbe1b7af4b19e8158
+&redirect_uri=https://www.ustream.tv/oauth2/redirect
+&device_name=MyDevice
+&state=XYZ
+```
+
+After logging in, the browser is redirected to a special URL (defined by the Client), passing the Access Token in the URL. As you can see in the examples below, you should use Authorization HTTP header with token in the requests: `Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950`
+
+### Create a channel (POST)
+
+```
+curl \
+    -i \
+    -X POST \
+    -H "Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950" \
+    -d "title=Whatever+Test+1234" \
+    https://api.video.ibm.com/users/self/channels.json
+```
+
+```
+HTTP/1.1 201 CREATED
+Server: nginx/1.2.6
+Date: Tue, 15 Jan 2013 13:08:06 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 123
+Connection: keep-alive
+Vary: Host
+X-Powered-By: PHP/5.3.20-1~dotdeb.0
+Cache-Control: no-store
+Accept-Ranges: bytes
+X-Varnish: 703443498
+Age: 0
+Via: 1.1 varnish
+{"channel":{"id":"13091307","title":"Whatever Test
+```
+
+```
+1234","url":"whatever-test-1234","tiny_url":"http://ustre.am/SVE7"}}
+```
