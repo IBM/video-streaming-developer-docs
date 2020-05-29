@@ -83,7 +83,7 @@ const LeftNav = ({ location, homepage }) => {
           'bx--side-nav--website': true,
           'bx--side-nav--website--light': !homepage,
         },
-        sideNav
+        sideNav,
       )}
     >
       <SideNavItems>
