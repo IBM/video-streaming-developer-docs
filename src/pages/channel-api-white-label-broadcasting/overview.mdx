@@ -1,10 +1,24 @@
 ---
 title: Overview
-description: Overview
+description: Channel API White label broadcasting Overview
 ---
 
-<PageDescription>
+import CustomCard from '../../components/CustomCard/CustomCard.js';
 
-Overview
-
-</PageDescription>
+<Row className="resource-card-group">
+  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: "1px" }}>
+    <CustomCard title="Customize player branding" href="/channel-api-white-label-broadcasting/customize-player-branding">
+      Control the branding of the player by uploading your own logo and removing the IBM watermark.
+    </CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: "1px" }}>
+    <CustomCard title="Hide viewer numbers in player" href="/channel-api-white-label-broadcasting/hide-viewer-numbers-in-player">
+      The current and total number of viewers of a live channel will not be visible in the player.
+    </CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Hide channel page" href="/channel-api-white-label-broadcasting/hide-channel-page">
+      If page lock is enabled, your channel and videos will not be found anywhere on video.ibm.com. Viewers will only be able to watch embedded players on external websites. 
+    </CustomCard>
+  </Column>
+</Row>

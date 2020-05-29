@@ -1,10 +1,36 @@
 ---
 title: Hide viewer numbers in player
-description: Hide viewer numbers in player
+description: Channel API White label broadcasting Hide viewer numbers in player
 ---
 
-<PageDescription>
+## Hide viewer numbers
 
-Hide viewer numbers in player
+The current and total number of viewers of a live channel will not be visible in the player.
 
-</PageDescription>
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/settings/hide-viewers.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE    | IMPORTANCE | DESCRIPTION                                                                            |
+| --------- | ------- | ---------- | -------------------------------------------------------------------------------------- |
+| `value`   | boolean | REQUIRED   | Enable or disable hiding the viewer numbers (when value is `true`, numbers are hidden) |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid` value     | The specified value is invalid or unsupported.                                          |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

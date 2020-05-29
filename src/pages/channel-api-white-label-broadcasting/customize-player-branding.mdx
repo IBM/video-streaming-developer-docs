@@ -1,10 +1,179 @@
 ---
 title: Customize player branding
-description: Customize player branding
+description: Channel API White label broadcasting Customize player branding
 ---
 
-<PageDescription>
+Control the branding of the player by uploading your own logo and removing the IBM watermark.
 
-Customize player branding
+### Available branding types
 
-</PageDescription>
+| TYPE            | DESCRIPTION                                                             |
+| --------------- | ----------------------------------------------------------------------- |
+| `co-branding`   | Display your logo in the player.                                        |
+| `full branding` | Display your logo in the player and remove the IBM watermark.           |
+| `no branding`   | Remove the IBM watermark without uploading a logo (white label player). |
+
+### Check branding type
+
+Get the type of player branding set on a channel.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/branding.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success, a set of key-value pair is returned under a `branding` element.
+
+| KEY    | TYPE   | DESCRIPTION                                                                                                                                                                                                 |
+| ------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type` | string | The type of branding set on the channel. Possible values: `co` (co-branding), `full` (full-branding) or `no` (no branding). The `disabled` value is returned if player branding is not set for the channel. |
+
+Example for success response:
+
+```json
+{
+  "branding": {
+    "type": "full"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE       | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                   | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request` | The user does not have the benefit                                                      |
+| 404 Not Found           | `not_found`       | Channel not found                                                                       |
+| 503 Service Unavailable |                   | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Set branding type
+
+Set the type of player branding on a channel and enable the feature.
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/branding.json
+```
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                  |
+| --------- | ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `type`    | string | REQUIRED   | The type of branding set on the channel. Supported values: `co` (co-branding), `full` (full-branding) or `no` (no branding). |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `input_type`        | The specified type is invalid or unsupported                                            |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the embed_restriction benefit                                    |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Disable branding
+
+Removes custom branding. Only the IBM watermark will be displayed in the player.
+
+```
+DELETE https://api.video.ibm.com/channels/{channel_id}/branding.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+This request has no error responses.
+
+## Modify logo settings
+
+Change position, margin and click URL of the logo for custom branding.
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/branding/logo/{logo_id}/settings.json
+```
+
+Only 0 is supported as `logo_id` currently.
+
+### Parameters
+
+The parameters for the PUT request:
+
+| PARAMETER  | TYPE             | IMPORTANCE | DESCRIPTION                                                                                                                                           |
+| ---------- | ---------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `position` | string           | REQUIRED   | Logo position. Supported values: `top-left`, `top-middle`, `top-right`, `middle-left`, `middle-right`, `bottom-left`, `bottom-middle`, `bottom-right` |
+| `margin`   | unsigned integer | REQUIRED   | Size of margin (in pixels)                                                                                                                            |
+| `link`     | string           | REQUIRED   | Logo click URL (valid URL or empty string). The type parameter must be passed in the HTTP body, not in the URL.                                       |
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_position`  | The specified position is invalid or unsupported                                        |
+| 400 Bad Request         | `invalid_margin`    | The specified margin is invalid                                                         |
+| 400 Bad Request         | `invalid_link`      | The specified link is invalid                                                           |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the benefit                                                      |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Upload logo
+
+Upload the image file of the logo for custom branding.
+
+```
+PUT https://api.video.ibm.com/channels/{channel_id}/branding/logo/{logo_id}.json
+```
+
+Only 0 is supported as `logo_id` currently.
+
+### Request
+
+The logo must be passed in the HTTP body. Supported image types are image/jpeg, image/png, image/gif, recommended size is maximum 288 x 96 pixels. Maximum file size is 10 MB.
+
+### Success response
+
+On success a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `invalid_file`      | Validation failed                                                                       |
+| 400 Bad Request         | `invalid_image`     |                                                                                         |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the benefit.                                                     |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
