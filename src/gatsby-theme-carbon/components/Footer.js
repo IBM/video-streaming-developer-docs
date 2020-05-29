@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from 'gatsby-theme-carbon/src/components/Footer';
+import Footer from './Footer/Footer';
 
 const links = {
   firstCol: [
@@ -15,7 +15,18 @@ const links = {
     { href: 'https://www.ibm.com/accessibility/us/en/', linkText: 'Accessibility' },
     { href: 'https://video.ibm.com/copyright-policy', linkText: 'Copyright Policy' },
     { href: 'https://video.ibm.com/acceptableusepolicy', linkText: 'Acceptable use policy' },
-    { href: 'https://video.ibm.com/', linkText: 'Cookie preferences' },
+    {
+      href: 'https://video.ibm.com/',
+      linkText: 'Cookie preferences',
+      onClick: (e) => {
+        e.preventDefault();
+        const teconsentLink = document.querySelector('#teconsent > a');
+        const event = new MouseEvent('click');
+        if (teconsentLink) {
+          teconsentLink.dispatchEvent(event);
+        }
+      },
+    },
   ],
 };
 
