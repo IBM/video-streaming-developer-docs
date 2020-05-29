@@ -40,7 +40,7 @@ The authorization endpoint is a secure web page that contains a login form. The 
 
 The parameters below specify the behavior of the authorization endpoint. They have to be set in GET or POST HTTP parameters.
 
-#### Supported OAuth 2.0 standard parameters
+<Title>Supported OAuth 2.0 standard parameters</Title>
 
 | PARAMETER       | TYPE   | IMPORTANCE                                                                               | DESCRIPTION                                                                                                                                                                      |
 | --------------- | ------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -50,7 +50,7 @@ The parameters below specify the behavior of the authorization endpoint. They ha
 | `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri, to prevent XSRF attacks. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details. |
 | `scope`         | string | OPTIONAL                                                                                 | This value is offline for `offline` scope, `broadcaster` for broadcaster scope, or space separated URL encoded list of these strings                                             |
 
-#### IBM Video Streaming specific extra parameters
+<Title>IBM Video Streaming specific extra parameters</Title>
 
 | PARAMETER     | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                   |
 | ------------- | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -194,7 +194,7 @@ Example HTTP header:
 Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 ```
 
-#### Success response
+<Title>Success response</Title>
 
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -204,7 +204,7 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 | `token_type`    | Will be bearer                                                                                                                                                                   |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
 
-#### Possible error responses:
+<Title>Possible error responses</Title>
 
 | HTTP RESPONSE CODE  | ERROR VALUE              | ERROR CONDITIONS                                                                                                                            |
 | ------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
