@@ -4,26 +4,31 @@ description: Channel API Channel page design Overview
 ---
 
 import CustomCard from '../../components/CustomCard/CustomCard.js';
+import { withPrefix } from 'gatsby-link';
 
 <Row className="resource-card-group">
-  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: "1px" }}>
-    <CustomCard title="Displaying metadata" href="/channel-api-channel-page-design/displaying-metadata">
-      ...
-    </CustomCard>
+  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: '1px' }}>
+    <CustomCard
+      title="Displaying metadata"
+      href={withPrefix('/channel-api-channel-page-design/displaying-metadata')}
+    ></CustomCard>
   </Column>
-  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: "1px" }}>
-    <CustomCard title="Channel picture" href="/channel-api-channel-page-design/channel-picture">
-      ...
-    </CustomCard>
-  </Column>
-  <Column colMd={4} colLg={4} noGutterSm>
-    <CustomCard title="Featured videos on channel page" href="/channel-api-channel-page-design/featured-videos">
-      ...
-    </CustomCard>
+  <Column colMd={4} colLg={4} noGutterSm style={{ marginBottom: '1px' }}>
+    <CustomCard
+      title="Channel picture"
+      href={withPrefix('/channel-api-channel-page-design/channel-picture')}
+    ></CustomCard>
   </Column>
   <Column colMd={4} colLg={4} noGutterSm>
-    <CustomCard title="Playlists on channel page" href="/channel-api-channel-page-design/playlists-on-channel-page">
-      ...
-    </CustomCard>
+    <CustomCard
+      title="Featured videos on channel page"
+      href={withPrefix('/channel-api-channel-page-design/featured-videos')}
+    ></CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard
+      title="Playlists on channel page"
+      href={withPrefix('/channel-api-channel-page-design/playlists-on-channel-page')}
+    ></CustomCard>
   </Column>
 </Row>
