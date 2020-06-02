@@ -1,12 +1,19 @@
 ---
-title: Player SDK
-description: Test
+title: Player SDK Overview
+description: Player SDK Overview
 ---
 
-<PageDescription>
+import CustomCard from '../components/CustomCard/CustomCard.js';
+import { withPrefix } from 'gatsby-link';
 
-Just a test
-
-</PageDescription>
-
-This should start with a resource description…
+<Row className="resource-card-group">
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Player SDK Android" href={withPrefix('/player-sdk-android/getting-started')}></CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Player SDK iOS" href={withPrefix('/player-sdk-ios/getting-started')}></CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Player SDK tvOS" href={withPrefix('/player-sdk-tvos/getting-started')}></CustomCard>
+  </Column>
+</Row>
