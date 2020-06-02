@@ -1,0 +1,41 @@
+---
+title: PHP Sample Code
+description: IBM Video Streaming provides an example PHP library for some basic API calls. Here you can find what's needed to run the example calls, and download the library.
+---
+
+## How to use
+
+IBM Video Streaming provides an example PHP library for some basic API calls. Here you can find what's needed to run the example calls, and download the library.
+
+### Prerequisites
+
+You need PHP, and Composer to install the dependencies. The dependencies are defined in the composer.json file.
+
+If you have the dependencies installed, you can run the script with the following command:
+
+`php ustream_api.php`
+
+You need a IBM Video Streaming account with API credentials, and you have to specify:
+
+- your username
+- your password
+- your client id
+- your client secret
+- a video id
+
+At certain points of the script. Look for capitalized texts between angle brackets, like `<VIDEO ID>`, that's what needs to be changed to actual user info.
+
+You also need to specify the name of the video file you want to upload. The video has to be in the same folder as the script.
+
+### Library contents
+
+The PHP library contains examples for the following endpoints:
+
+- Authentication
+- List channels
+- List videos
+- Upload a video
+- Download a video
+- Request a downloadable video
+
+[You can download the library here](https://github.com/ustream/api-docs/raw/gh-pages/assets/ustream_api_example.zip)

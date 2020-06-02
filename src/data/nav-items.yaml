@@ -97,6 +97,12 @@
 - title: Events
   pages:
     - path: /channel-api-events
+- title: PHP Sample Code
+  pages:
+    - path: /channel-api-php-sample-code
+- title: Third-party Node.JS SDK
+  pages:
+    - path: /channel-api-third-party-nodejs-sdk
 
 - title: Getting started
   pages:
