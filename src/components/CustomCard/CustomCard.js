@@ -14,18 +14,33 @@ import {
 
 const CustomCard = ({ href, title, children, theme, decorator }) => (
   <div className={`${customCard}`}>
-    <a
-      href={href}
-      className={`bx--tile bx--tile--clickable ${customCardInner} ${theme === 'dark' ? customCardDark : ''} ${
-        decorator ? customCardContentDecorator : ''
-      }`}
-    >
-      <h4 className={customCardTitle}>{title}</h4>
-      <div className={customCardContent}>{children}</div>
-      <div className={customCardIcon}>
-        <ArrowRight20 aria-label="Open" />
+    {href && (
+      <a
+        href={href}
+        className={`bx--tile bx--tile--clickable ${customCardInner} ${theme === 'dark' ? customCardDark : ''} ${
+          decorator ? customCardContentDecorator : ''
+        }`}
+      >
+        <h4 className={customCardTitle}>{title}</h4>
+        <div className={customCardContent}>{children}</div>
+        <div className={customCardIcon}>
+          <ArrowRight20 aria-label="Open" />
+        </div>
+      </a>
+    )}
+    {!href && (
+      <div
+        className={`bx--tile ${customCardInner} ${theme === 'dark' ? customCardDark : ''} ${
+          decorator ? customCardContentDecorator : ''
+        }`}
+      >
+        <h4 className={customCardTitle}>{title}</h4>
+        <div className={customCardContent}>{children}</div>
+        <div className={customCardIcon}>
+          <ArrowRight20 aria-label="Open" />
+        </div>
       </div>
-    </a>
+    )}
   </div>
 );
 

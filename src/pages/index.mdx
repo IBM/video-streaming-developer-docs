@@ -2,23 +2,23 @@ import HomepageTemplate from 'gatsby-theme-carbon/src/templates/Homepage';
 import CustomCard from '../components/CustomCard/CustomCard.js';
 import '../styles/custom-card-group.scss';
 import '../styles/decorator-animation.scss';
-import {withPrefix} from "gatsby-link";
+import { withPrefix } from 'gatsby-link';
 export default HomepageTemplate;
 
-<div className="custom-card-group">
+<div className="custom-card-group decor-animation-trigger">
   <div className="custom-card-group__third">
-    <CustomCard title="APIs" href={withPrefix('/api-basics-overview')} theme="dark" decorator>
+    <CustomCard title="APIs" theme="dark" decorator>
       <div className="oval-decor">
         <div className="oval-decor__inner">
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
-          <div className="oval-item"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
+          <div className="oval-item decor-target"></div>
         </div>
       </div>
     </CustomCard>
@@ -32,7 +32,11 @@ export default HomepageTemplate;
         </CustomCard>
       </div>
       <div className="custom-card-group__flex-helper">
-        <CustomCard title="Viewer Authentication API" href={withPrefix('/viewer-authentication-api-getting-started')} theme="dark">
+        <CustomCard
+          title="Viewer Authentication API"
+          href={withPrefix('/viewer-authentication-api-getting-started')}
+          theme="dark"
+        >
           Connect IBM Video Streaming to your own user database or directory information service and manage access
           control using your existing security tools for both live and recorded content.
         </CustomCard>
@@ -55,19 +59,19 @@ export default HomepageTemplate;
   </div>
 </div>
 
-<div className="custom-card-group">
+<div className="custom-card-group decor-animation-trigger">
   <div className="custom-card-group__third">
     <CustomCard title="SDKs" theme="dark" decorator>
       <div className="rectangle-decor">
         <div className="rectangle-decor__inner">
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
-          <div className="rectangle-item"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
+          <div className="rectangle-item decor-target"></div>
         </div>
       </div>
     </CustomCard>

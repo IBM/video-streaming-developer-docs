@@ -1,5 +1,59 @@
 $rectangleSize: 16px;
 
+.decor-animation-trigger {
+  .decor-target {
+    opacity: 0.3;
+    animation: pulse-out 0.8s;
+  }
+
+  &:hover {
+    .decor-target {
+      animation: pulse 3s infinite 3s alternate;
+      animation-direction: alternate;
+
+      &:nth-child(1) {
+        animation-delay: 0s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: 1s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 1.5s;
+      }
+
+      &:nth-child(4) {
+        animation-delay: 2s;
+      }
+
+      &:nth-child(5) {
+        animation-delay: 2.5s;
+      }
+
+      &:nth-child(6) {
+        animation-delay: 3s;
+      }
+
+      &:nth-child(7) {
+        animation-delay: 3.5s;
+      }
+
+      &:nth-child(8) {
+        animation-delay: 4s;
+      }
+
+      &:nth-child(9) {
+        left: calc(49px - 207px);
+        top: calc(1044px - 1044px);
+        height: 512px;
+        width: 512px;
+        animation-delay: 4.5s;
+      }
+    }
+  }
+}
+
 .oval-decor {
   position: relative;
   height: 100%;
@@ -17,15 +71,12 @@ $rectangleSize: 16px;
       box-sizing: border-box;
       border: 2px solid #c31d64;
       border-radius: 100%;
-      opacity: 0.3;
-      animation: pulse 3s infinite linear;
 
       &:nth-child(1) {
         left: calc(305px - 207px);
         top: calc(1044px - 1044px);
         height: 512px;
         width: 512px;
-        animation-delay: 0s;
       }
 
       &:nth-child(2) {
@@ -33,7 +84,6 @@ $rectangleSize: 16px;
         top: calc(1044px - 1044px);
         height: 512px;
         width: 512px;
-        animation-delay: 1s;
       }
 
       &:nth-child(3) {
@@ -41,7 +91,6 @@ $rectangleSize: 16px;
         top: calc(1268px - 1044px);
         height: 64px;
         width: 64px;
-        animation-delay: 1.5s;
       }
 
       &:nth-child(4) {
@@ -49,7 +98,6 @@ $rectangleSize: 16px;
         top: calc(1268px - 1044px);
         height: 64px;
         width: 64px;
-        animation-delay: 2s;
       }
 
       &:nth-child(5) {
@@ -57,7 +105,6 @@ $rectangleSize: 16px;
         top: calc(1236px - 1044px);
         height: 128px;
         width: 128px;
-        animation-delay: 2.5s;
       }
 
       &:nth-child(6) {
@@ -65,7 +112,6 @@ $rectangleSize: 16px;
         top: calc(1236px - 1044px);
         height: 128px;
         width: 128px;
-        animation-delay: 3s;
       }
 
       &:nth-child(7) {
@@ -73,7 +119,6 @@ $rectangleSize: 16px;
         top: calc(1172px - 1044px);
         height: 256px;
         width: 256px;
-        animation-delay: 3.5s;
       }
 
       &:nth-child(8) {
@@ -81,7 +126,6 @@ $rectangleSize: 16px;
         top: calc(1172px - 1044px);
         height: 256px;
         width: 256px;
-        animation-delay: 4s;
       }
 
       &:nth-child(9) {
@@ -89,7 +133,6 @@ $rectangleSize: 16px;
         top: calc(1044px - 1044px);
         height: 512px;
         width: 512px;
-        animation-delay: 4.5s;
       }
     }
   }
@@ -112,15 +155,12 @@ $rectangleSize: 16px;
       height: 125.5px;
       width: 125.5px;
       border: 1px solid #0062ff;
-      opacity: 0.3;
-      animation: pulse 3s infinite linear;
 
       &:nth-child(1) {
         width: $rectangleSize;
         height: $rectangleSize;
         top: calc(#{$rectangleSize} * 4);
         left: calc(#{$rectangleSize} * 4);
-        animation-delay: 0s;
       }
 
       &:nth-child(2) {
@@ -128,7 +168,6 @@ $rectangleSize: 16px;
         height: calc(#{$rectangleSize} * 2);
         top: calc(#{$rectangleSize} * 4);
         left: calc(#{$rectangleSize} * 4);
-        animation-delay: 0.5s;
       }
 
       &:nth-child(3) {
@@ -136,41 +175,35 @@ $rectangleSize: 16px;
         height: calc(#{$rectangleSize} * 4);
         top: calc(#{$rectangleSize} * 4);
         left: calc(#{$rectangleSize} * 4);
-        animation-delay: 1s;
       }
 
       &:nth-child(4) {
-        width: calc(#{$rectangleSize} * 4);
-        height: calc(#{$rectangleSize} * 4);
-        animation-delay: 1.5s;
+        width: calc((#{$rectangleSize} * 4) + 1px);
+        height: calc((#{$rectangleSize} * 4) + 1px);
       }
 
       &:nth-child(5) {
         width: calc(#{$rectangleSize} * 8);
         height: calc(#{$rectangleSize} * 8);
-        animation-delay: 2s;
       }
 
       &:nth-child(6) {
-        width: calc(#{$rectangleSize} * 8);
-        height: calc(#{$rectangleSize} * 8);
-        top: calc(#{$rectangleSize} * 8);
-        left: calc(#{$rectangleSize} * 8);
-        animation-delay: 2.5s;
+        width: calc((#{$rectangleSize} * 8) + 1px);
+        height: calc((#{$rectangleSize} * 8) + 1px);
+        top: calc((#{$rectangleSize} * 8) - 1px);
+        left: calc((#{$rectangleSize} * 8) - 1px);
       }
 
       &:nth-child(7) {
         width: calc(#{$rectangleSize} * 16);
         height: calc(#{$rectangleSize} * 16);
-        animation-delay: 3s;
       }
 
       &:nth-child(8) {
         width: calc(#{$rectangleSize} * 16);
         height: calc(#{$rectangleSize} * 16);
-        top: calc(#{$rectangleSize} * -16);
-        left: calc(#{$rectangleSize} * 16);
-        animation-delay: 3.5s;
+        top: calc((#{$rectangleSize} * -16) + 1px);
+        left: calc((#{$rectangleSize} * 16) - 1px);
       }
     }
   }
@@ -181,7 +214,16 @@ $rectangleSize: 16px;
     opacity: 0.3;
   }
   50% {
-    opacity: 1;
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes pulse-out {
+  0% {
+    opacity: 0.5;
   }
   100% {
     opacity: 0.3;
