@@ -3,8 +3,31 @@ title: Getting started
 description: Getting started
 ---
 
-<PageDescription>
+## Introduction
 
-Getting started
+Viewer Authentication API lets you implement custom authentication for authenticating viewers of live and recorded videos served by IBM Video Streaming.
 
-</PageDescription>
+You need the following before you start implementing viewer authentication:
+
+- **Channel**, which you can create on the Your channels page of your IBM Video Streaming dashboard
+- **Client id**, which you can obtain on the API/SDK access page of your IBM Video Streaming dashboard
+- **Token**, which you can obtain through the IBM Video Streaming authorization endpoint
+- **Secret** key, a string that will be used to create the hash in the authentication response your service passes to the IBM Video Streaming player. This secret key needs to be provided by you.
+
+## Viewer authentication flow
+
+To implement the viewer authentication flow you need to create an application that includes the following:
+
+- Screens your viewers need to go through to authenticate
+- Backend code that validates these authentication requests
+- Process to pass the authentication response to the IBM Video Streaming player
+
+![Viewer Authentication Flow](/static-content/advanced-auth-2x.png)
+![Viewer Authentication Flow](/static-content/advanced-auth2-2x.png)
+
+1. When the viewer clicks the log in button in the IBM Video Streaming player the entry point of your custom authentication flow is displayed in an iframe in the player.
+2. When the authentication is completed your service passes an authentication response to the player.
+3. If the authentication was successful, the player passes the authentication response to IBM Video Streaming infrastructure in a validation request.
+4. The IBM Video Streaming infrastructure validates the authentication response received from your service and passes a validation response to the player. If the response is positive, the viewer can start watching the video.
+
+

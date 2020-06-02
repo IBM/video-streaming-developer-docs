@@ -3,8 +3,46 @@ title: Using viewer authentication with other services
 description: Using viewer authentication with other services
 ---
 
-<PageDescription>
+Besides the player there are some services (such as Chat, Q&A and Combined Embed) that may also require viewer authentication. In order to make the authentication work, additional steps need to be taken at the end of the authentication flow.
 
-Using viewer authentication with other services
+These services provide an url, that has to be used instead of the default pass url. This url is sent in the hashConsumer query parameter by the service to the application.
 
-</PageDescription>
+Example url in the hashConsumer in case of Chat:
+
+```
+https://www.ustream.tv/chat/authorize/12345678?resource=%2Fchat%2F12345678
+```
+
+Example script in native PHP that can authenticate the player and the services as well
+
+```js
+// Given a json token has already been constructed
+$json = json_encode($response);
+
+// Default hash consumer for the player
+$hashConsumer = 'http://www.ustream.tv/embed/hashlock/pass';
+$query = [];
+
+// Check if there is a special hash consumer
+if (!empty($_GET['hashConsumer'])) {
+    $hashConsumer = $_GET['hashConsumer'];
+
+    // It's recommended to use a better URL parsing
+    // technique (like PSR-7 implementations)
+    $parts = parse_url($hashConsumer);
+
+    if (!empty($parts['query'])) {
+        parse_str($parts['query'], $query);
+    }
+
+    // Instead of concatenating url parts it's recommended to use
+    // a better URL parsing technique (like PSR-7 implementations)
+    $hashConsumer = $parts['scheme'].'://'.$parts['host'].$parts['path'];
+}
+
+$query['hash'] = $json;
+
+$hashConsumer = $hashConsumer.'?'.http_build_query($query);
+
+header('Location: '.$hashConsumer);
+```

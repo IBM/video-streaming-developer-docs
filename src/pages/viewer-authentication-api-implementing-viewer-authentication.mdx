@@ -3,8 +3,222 @@ title: Implementing viewer authentication
 description: Implementing viewer authentication
 ---
 
-<PageDescription>
+## Channel level
 
-Implementing viewer authentication
+```
+PUT	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash/advanced.FORMAT (format can be json or xml)
+```
 
-</PageDescription>
+<Title>Parameters</Title>
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                |
+| --------- | ------ | ---------- | ------------------------------------------ |
+| `url`     | string | REQUIRED   | URL of the authentication flow entry point |
+| `secret`  | string | REQUIRED   | Secret key                                 |
+
+<Title>Response</Title>
+
+HTTP response codes returned when the action is successful:
+
+| HTTP RESPONSE CODE | DESCRIPTION                                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| 201 Created        | Viewer authentication has been set up on the channel with the new hash.                              |
+| 204 No Content     | Viewer authentication has been set up on the channel by updating the existing hash with the new one. |
+
+Specific error codes returned when the action failed:
+
+| ERROR VALUE         | HTTP RESPONSE   | CODE DESCRIPTION                                           |
+| ------------------- | --------------- | ---------------------------------------------------------- |
+| `invalid_request`   | 400 Bad Request | One or more required parameters are missing (secret, url). |
+| `invalid_type`      | 400 Bad Request | The URL is invalid.                                        |
+| `lack_of_ownership` | 403 Forbidden   | The api user is not allowed to manage the given channel    |
+| `not_found`         | 404 Not found   | Channel not found                                          |
+
+## Video level
+
+By default videos inherit the authentication settings from channels but it can be overridden on a video by video basis.
+
+### Set up viewer authentication for a video
+
+```
+PUT	https://api.video.ibm.com/videos/VIDEO_ID/locks/hash.json
+```
+
+<Title>Parameters</Title>
+
+| PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                |
+| --------- | ------ | ---------- | ------------------------------------------ |
+| `url`     | string | REQUIRED   | URL of the authentication flow entry point |
+| `secret`  | string | REQUIRED   | Secret key                                 |
+
+<Title>Response</Title>
+
+HTTP response code returned when the action is successful:
+
+| HTTP RESPONSE CODE | DESCRIPTION                                        |
+| ------------------ | -------------------------------------------------- |
+| 204 No content     | Viewer authentication has been set up on the video |
+
+## Implementing the authentication response
+
+If the authentication was successful your service has to pass an authentication response to the player. The authentication response must be a JSON encoded array which contains the following:
+
+- list of parameters that have been hashed
+- the MD5 hash of the string that has been created by concatenating the parameters and the shared secret key with pipe "|" characters
+
+Example script in PHP for creating the authentication response when the authentication was successful
+
+```js
+// We create the array of parameters.
+// The parameters can be anything.
+$userData = [
+    "username" => $_GET["user"],
+    "someString" => "someValue"
+];
+
+// We create the hash by hashing
+// the parameters array contents and
+// the secret key
+// concatenated together with a pipe character.
+$hash = md5(implode('|', $userData) . '|' . $SHARED_SECRET_KEY);
+
+// We put the array of parameters and the hash into the response.
+$response = array_chunk(
+    array_merge($userData, ["hash" => $hash]),
+    1,
+    true
+);
+
+// We encode the response into JSON format.
+$json = json_encode($response);
+```
+
+<InlineNotification kind="info">
+  The order of the parameters should match their order in the array when creating the hash.
+</InlineNotification>
+
+To pass the response to the player your service has to redirect the page to the IBM Video Streaming return URL with passing the response in JSON format as a get parameter. You can test the API response at the [Hash Authentication Test](/viewer-authentication-api-hash-authentication-test) page.
+
+```
+https://www.ustream.tv/embed/hashlock/pass?hash=RESPONSE_IN_JSON_FORMAT
+```
+
+If the authentication failed your service has to pass a "false" string as the authentication response to the player.
+
+```
+https://www.ustream.tv/embed/hashlock/pass?hash=false
+```
+
+## Managing viewer authentication settings
+
+### Getting channel viewer authentication settings
+
+```
+GET	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash.FORMAT (format can be json or xml)
+```
+
+#### Parameters
+
+This request has no parameters.
+
+#### Response
+
+On success, key-value pairs are returned under a "hashlock" key.
+
+Example:
+
+```json
+{
+  "hashlock": {
+    "type": "advanced",
+    "url": "https://align.ustream.tv/auth/123",
+    "message": null,
+    "button_caption": null,
+    "popup_width": "0",
+    "popup_height": "0"
+  }
+}
+```
+
+Specific error codes returned when the action failed:
+
+| ERROR VALUE         | HTTP RESPONSE CODE | DESCRIPTION                                             |
+| ------------------- | ------------------ | ------------------------------------------------------- |
+| `lack_of_ownership` | 403 Forbidden      | The api user is not allowed to manage the given channel |
+| `not_found`         | 404 Not found      | Channel not found                                       |
+
+### Removing channel viewer authentication
+
+```
+DELETE	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash.FORMAT (format can be json or xml)
+```
+
+#### Parameters
+
+This request has no parameters.
+
+#### Response
+
+On success the 200 OK HTTP response code is returned.
+
+Specific error codes returned when the action failed:
+
+| ERROR VALUE         | HTTP RESPONSE CODE | DESCRIPTION                                             |
+| ------------------- | ------------------ | ------------------------------------------------------- |
+| `lack_of_ownership` | 403 Forbidden      | The api user is not allowed to manage the given channel |
+| `not_found`         | 404 Not found      | Channel not found                                       |
+
+### Getting video viewer authentication settings
+
+```
+GET	https://api.video.ibm.com/videos/VIDEO_ID/locks/hash.json
+```
+
+#### Parameters
+
+This request has no parameters.
+
+#### Response
+
+On success, key-value pairs are returned under a "hashlock" key.
+
+<Title>Example</Title>
+
+```json
+{
+  "hashlock": {
+    "url": "https://auth.yourdomain.com/video-authentication",
+    "secret": "TOP_SECRET_KEY"
+  }
+}
+```
+
+Specific error codes returned when the action failed:
+
+| ERROR VALUE         | HTTP RESPONSE CODE | DESCRIPTION                                             |
+| ------------------- | ------------------ | ------------------------------------------------------- |
+| `lack_of_ownership` | 403 Forbidden      | The api user is not allowed to manage the given channel |
+| `not_found`         | 404 Not found      | Video or specific authentication settings not found     |
+
+### Removing specific video viewer authentication settings
+
+If you remove specific settings then video will inherit the authentication settings from the channel.
+
+```
+DELETE	https://api.video.ibm.com/videos/VIDEO_ID/locks/hash.json
+```
+
+#### Parameters
+
+This request has no parameters.
+
+#### Response
+
+On success the 204 No Content HTTP response code is returned.
+
+Specific error codes returned when the action failed:
+
+| ERROR VALUE         | HTTP RESPONSE CODE | DESCRIPTION                                             |
+| ------------------- | ------------------ | ------------------------------------------------------- |
+| `lack_of_ownership` | 403 Forbidden      | The api user is not allowed to manage the given channel |
+| `not_found`         | 404 Not found      | Video or specific authentication settings not foun      |
