@@ -8,25 +8,31 @@ import { withPrefix } from 'gatsby-link';
 
 <Row className="resource-card-group">
   <Column colMd={4} colLg={4} noGutterSm>
-    <CustomCard title="Password protection" href={withPrefix('/channel-api-security/password-protection')}>
-      When password protection is enabled, viewers must enter a password to view the show.
-    </CustomCard>
+    <CustomCard
+      title="Password protection"
+      href={withPrefix('/channel-api-security/password-protection')}
+      content="When password protection is enabled, viewers must enter a password to view the show."
+    ></CustomCard>
   </Column>
   <Column colMd={4} colLg={4} noGutterSm>
-    <CustomCard title="Advanced viewer authentication" href={withPrefix('/channel-api-security/viewer-authentication')}>
-      Viewer Authentication lets you implement custom authentication for authenticating viewers of live and recorded
-      videos served by IBM Video Streaming.
-    </CustomCard>
+    <CustomCard
+      title="Advanced viewer authentication"
+      href={withPrefix('/channel-api-security/viewer-authentication')}
+      content="Viewer Authentication lets you implement custom authentication for authenticating viewers of live and recorded videos served by IBM Video Streaming."
+    ></CustomCard>
   </Column>
   <Column colMd={4} colLg={4} noGutterSm>
-    <CustomCard title="Embed Restriction" href={withPrefix('/channel-api-security/embed-restriction')}>
-      By restricting the embed URLs, you can control the viewing experience and limit distribution to your own preferred
-      partners.
-    </CustomCard>
+    <CustomCard
+      title="Embed Restriction"
+      href={withPrefix('/channel-api-security/embed-restriction')}
+      content="By restricting the embed URLs, you can control the viewing experience and limit distribution to your own preferred partners."
+    ></CustomCard>
   </Column>
   <Column colMd={4} colLg={4} noGutterSm>
-    <CustomCard title="Sharing Control" href={withPrefix('/channel-api-security/sharing-control')}>
-      Enable or disable the sharing feature for the viewer.
-    </CustomCard>
+    <CustomCard
+      title="Sharing Control"
+      href={withPrefix('/channel-api-security/sharing-control')}
+      content="Enable or disable the sharing feature for the viewer."
+    ></CustomCard>
   </Column>
 </Row>

@@ -4,23 +4,12 @@
   margin: 0 1px;
   padding-bottom: 2px;
 
+  a {
+    text-decoration: none;
+  }
+
   svg {
     fill: #0f62fe;
-  }
-}
-
-.customCardInner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: var(--cds-spacing-05, 1rem) 10% var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
-  text-decoration: none;
-  transition: background 70ms;
-  background: var(--cds-ui-background, #ffffff);
-
-  &.customCardDark {
-    background: #262626;
   }
 }
 
@@ -35,21 +24,6 @@
   font-size: 16px;
   line-height: 24px;
   color: #393939;
-}
-
-.customCardDark {
-  &:hover,
-  &:focus {
-    background-color: #353535;
-  }
-
-  .customCardTitle {
-    color: #f4f4f4;
-  }
-
-  .customCardContent {
-    color: #c6c6c6;
-  }
 }
 
 .customCardContentDecorator {
@@ -70,5 +44,37 @@
     margin-bottom: 0;
     overflow: hidden;
     z-index: 0;
+  }
+}
+
+.customCardInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--cds-spacing-05, 1rem) 10% var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
+  text-decoration: none;
+  transition: background 70ms;
+  background: var(--cds-ui-background, #ffffff);
+
+  &:hover {
+    background: var(--cds-hover-ui, #e5e5e5);
+  }
+
+  &.customCardDark {
+    background: #262626;
+
+    &:hover,
+    &:focus {
+      background-color: #353535;
+    }
+
+    .customCardTitle {
+      color: #f4f4f4;
+    }
+
+    .customCardContent {
+      color: #c6c6c6;
+    }
   }
 }
