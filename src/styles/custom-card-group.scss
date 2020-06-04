@@ -1,6 +1,10 @@
 .custom-card-group {
   display: flex;
 
+  @media (max-width: 640px) {
+    display: block;
+  }
+
   &__third {
     flex: 0 0 calc(100% / 3);
   }
@@ -8,9 +12,19 @@
   &__half-height {
     display: flex;
     height: 50%;
+
+    @media (max-width: 640px) {
+      display: block;
+    }
   }
 
   &__flex-helper {
-    flex: 1 0 50%;
+    flex: 1 1 50%;
+  }
+
+  @media (max-width: 640px) {
+    .collapse-on-mobile {
+      display: none;
+    }
   }
 }
