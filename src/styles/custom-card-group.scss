@@ -11,6 +11,12 @@
   }
 
   &__flex-helper {
-    flex: 1 0 50%;
+    flex: 1 1 50%;
+  }
+
+  @media (max-width: 640px) {
+    .collapse-on-mobile {
+      display: none;
+    }
   }
 }
