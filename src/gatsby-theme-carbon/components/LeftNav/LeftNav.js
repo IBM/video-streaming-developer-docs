@@ -10,13 +10,9 @@ import Title from './Title';
 import { sideNav } from './LeftNav.module.scss';
 
 const LeftNav = ({ location, homepage, is404 }) => {
-  let { leftNavIsOpen } = useContext(NavContext);
+  const { leftNavIsOpen } = useContext(NavContext);
 
   let navItems = useNavItems();
-
-  useEffect(() => {
-    leftNavIsOpen = !!navItems.length;
-  }, [navItems]);
 
   if (!location) {
     return '';
