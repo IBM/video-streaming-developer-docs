@@ -24,6 +24,10 @@
   }
 }
 
+:global(.bx--side-nav--emptycontent .bx--side-nav__header-navigation) {
+  display: block !important;
+}
+
 :global(.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu a.bx--header__menu-item) {
   padding-left: 32px !important;
 }

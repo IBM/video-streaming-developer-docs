@@ -7,10 +7,9 @@ import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem'
 import LeftNavHeaderMenus from '../Header/LeftNavHeaderMenus';
 
 import Title from './Title';
-import Content from '../Header/Content';
 import { sideNav } from './LeftNav.module.scss';
 
-const LeftNav = ({ location, homepage }) => {
+const LeftNav = ({ location, homepage, is404 }) => {
   let { leftNavIsOpen } = useContext(NavContext);
 
   let navItems = useNavItems();
@@ -47,7 +46,9 @@ const LeftNav = ({ location, homepage }) => {
     title = availableMainPaths[mainPathName];
   }
 
-  if (pathname.indexOf(`/${mainPathName}`) >= 0 && mainPathName) {
+  if (homepage || is404) {
+    navItems = [];
+  } else {
     navItems = navItems.filter((item) => {
       let showMainMenu = false;
       const { pages } = item;
@@ -62,18 +63,11 @@ const LeftNav = ({ location, homepage }) => {
 
       return showMainMenu;
     });
-  } else {
-    navItems = Content;
   }
 
   const renderNavItems = () =>
     navItems.map((item, i) => <LeftNavItem items={item.pages} category={item.title} key={i} />);
 
-  if (!navItems.length && !leftNavIsOpen) {
-    return '';
-  }
-
-  // TODO: replace old addon website styles with sass modules, move to wrapper
   return (
     <SideNav
       expanded={leftNavIsOpen}
@@ -82,6 +76,7 @@ const LeftNav = ({ location, homepage }) => {
         {
           'bx--side-nav--website': true,
           'bx--side-nav--website--light': !homepage,
+          'bx--side-nav--emptycontent': homepage || is404,
         },
         sideNav,
       )}
