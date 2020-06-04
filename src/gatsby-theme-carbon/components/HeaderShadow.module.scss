@@ -14,6 +14,12 @@
     outline: 2px solid $inverse-01;
     outline-offset: -2px;
   }
+
+  @media (max-width: 640px) {
+    &.collapsed {
+      display: none;
+    }
+  }
 }
 
 .headerShadow .headerNameShadow span {

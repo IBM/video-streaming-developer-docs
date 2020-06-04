@@ -15,7 +15,6 @@ import GlobalSearch from 'gatsby-theme-carbon/src/components/GlobalSearch';
 import cx from 'classnames';
 import { AppSwitcher20, Close20 } from '@carbon/icons-react';
 import {
-  collapsed,
   header,
   headerButton,
   skipToContent,
@@ -24,7 +23,7 @@ import {
 } from 'gatsby-theme-carbon/src/components/Header/Header.module.scss';
 import LeftNav from './LeftNav/LeftNav';
 import HeaderMenus from './Header/HeaderMenus';
-import { headerNameShadow, headerShadow } from './HeaderShadow.module.scss';
+import { headerNameShadow, headerShadow, collapsed } from './HeaderShadow.module.scss';
 
 const CustomHeader = ({ homepage, is404, theme, location }) => {
   const { leftNavIsOpen, toggleNavState, switcherIsOpen, searchIsOpen } = useContext(NavContext);
