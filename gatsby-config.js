@@ -25,8 +25,9 @@ module.exports = {
       options: {
         isSearchEnabled: true,
         repository: {
-          baseUrl: 'https://github.com/carbon-design-system/gatsby-theme-carbon',
-          subDirectory: '/packages/example',
+          baseUrl: 'https://github.ibm.com/ustream-web/developers/',
+          subDirectory: '',
+          branch: 'master',
         },
       },
     },
