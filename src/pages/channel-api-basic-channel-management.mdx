@@ -28,7 +28,7 @@ On success, a set of key-value pairs is returned under a `channel` element.
 | ------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                | string  | Identifier of the channel                                                                                                                                                                                                                                                  |
 | `title`             | string  | Title of the channel                                                                                                                                                                                                                                                       |
-| `url`               | string  | Long web URL of the channel: `https://www.ustream.tv/channel/{channel_id}`                                                                                                                                                                                                 |
+| `url`               | string  | Long web URL of the channel: `https://video.ibm.com/channel/{channel_id}`                                                                                                                                                                                                 |
 | `broadcast_urls`    | array   | Array of RTMP URLs (strings) where the client can broadcast. Client should fall-back to the second/third one if it provided and the previous element seems failing. Provided only in case of client explicitly asks for with a `broadcaster` detail_level query parameter. |
 | `status`            | string  | Possible values: `online` or `offline`. `online` means that the stream is viewable on the IBM Video Streaming website.                                                                                                                                                     |
 | `description`       | string  |                                                                                                                                                                                                                                                                            |
@@ -85,7 +85,7 @@ Possible error responses:
 Get information on channel settings.
 
 ```markdown
-GET https://api.video.ibm.com/channels/`{channel_id}`.json
+GET https://api.video.ibm.com/channels/{channel_id}.json
 ```
 
 ### Parameters
@@ -107,7 +107,7 @@ On success, a set of key-value pairs is returned under a channel element.
 | picture            | object | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs.                                                                                                                                                                                                           |
 | description        | string | The description of the channel                                                                                                                                                                                                                                                                                                     |
 | tags               | array  | Array of strings containing the tags applied to the channel                                                                                                                                                                                                                                                                        |
-| url                | string | Long web URL of the channel: https://www.ustream.tv/channel/{channel_id}                                                                                                                                                                                                                                                           |
+| url                | string | Long web URL of the channel: https://video.ibm.com/channel/{channel_id}                                                                                                                                                                                                                                                           |
 | status             | string | Possible values are live or offair                                                                                                                                                                                                                                                                                                 |
 | last_broadcast_at  | number | Time of last broadcast returned as a Unix timestamp                                                                                                                                                                                                                                                                                |
 | tinyurl            | string | Shortened web URL of the channel (https://ustre.am/{channel_id}) - suitable for sharing on Twitter / Facebook                                                                                                                                                                                                                      |
@@ -200,7 +200,7 @@ Example for the request:
 
 ```
 POST users/self/channels.json HTTP/1.1
-Host: api.ustream.tv
+Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
@@ -217,8 +217,8 @@ On success, a set of key-value pairs is returned under a channel element.
 | -------- | ------ | -------------------------------------------------------------------------------------- |
 | id       | string | The unique id of the channel                                                           |
 | title    | string | Channel title                                                                          |
-| url      | string | URL of the channel with string id: https://www.ustream.tv/channel/{channel_id:string}  |
-| tiny_url | string | URL of the channel with numeric id: https://www.ustream.tv/channel/id/{channel_id:num} |
+| url      | string | URL of the channel with string id: https://video.ibm.com/channel/{channel_id:string}  |
+| tiny_url | string | URL of the channel with numeric id: https:/video.ibm.com/channel/id/{channel_id:num} |
 
 ### Error responses
 
@@ -236,7 +236,7 @@ Possible error responses:
 Change the title, description and tags of a channel.
 
 ```markdown
-PUT https://api.video.ibm.com/channels/`{channel_id}`.json
+PUT https://api.video.ibm.com/channels/{channel_id}.json
 ```
 
 ### Parameters
@@ -270,7 +270,7 @@ Possible error responses:
 Delete the selected channel.
 
 ```markdown
-DELETE https://api.video.ibm.com/channels/`{channel_id}`.json
+DELETE https://api.video.ibm.com/channels/{channel_id}.json
 ```
 
 ### Parameters
