@@ -7,6 +7,9 @@
 - title: Testing APIs
   pages:
     - path: /api-basics-testing-apis
+- title: Native app support
+  pages:
+    - path: /api-basics-native-apps
 
 - title: Basic channel management
   pages:
