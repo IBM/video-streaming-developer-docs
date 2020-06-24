@@ -18,7 +18,7 @@ The webpages and HTTP services invoked in during an authorization process are ca
 IBM Video Streaming has the following endpoints:
 
 - **Authorization endpoint:** this is the webpage where the user enters his/her credentials.
-- **Token endpoint:** this is the HTTP service where the access token can be obtained in an authorization code flow (when using the implicit flow, the access token can be obtained directly from the authorization endpoint).
+- **Token endpoint:** this is the HTTP service where the access token can be obtained in an authorization code flow.
 
 ## Access Token
 
@@ -34,4 +34,4 @@ IBM Video Streaming currently supports the following scope for access tokens:
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `broadcaster` | If this scope is enabled, the access token can be used for broadcasting with the IBM Video Streaming Broadcasting Library. This scope is enabled only for MAC tokens.                                                                                                                            |
 | `openid`      | The basic (and required) scope for OIDC is openid, which indicates that an application intends to use the OIDC protocol to verify a user's identity. Beyond that, an application can ask for additional scopes by listing the requested scope names in the scope parameter, separated by spaces. |
-| `email`       | Returns the email claim, which contains the user's email address, and email_verified, which is a boolean indicating whether the email address was verified by the user.                                                                                                                          |
+| `email`       | Returns the email claim, which contains the user's email address, and email_verified, which is a boolean indicating whether the email address was verified by the authentication service.                                                                                                        |

@@ -10,7 +10,7 @@ These services provide an url, that has to be used instead of the default pass u
 Example url in the hashConsumer in case of Chat:
 
 ```
-https://www.ustream.tv/chat/authorize/12345678?resource=%2Fchat%2F12345678
+https://video.ibm.com/chat/authorize/12345678?resource=%2Fchat%2F12345678
 ```
 
 Example script in native PHP that can authenticate the player and the services as well
@@ -20,7 +20,7 @@ Example script in native PHP that can authenticate the player and the services a
 $json = json_encode($response);
 
 // Default hash consumer for the player
-$hashConsumer = 'http://www.ustream.tv/embed/hashlock/pass';
+$hashConsumer = 'https://video.ibm.com/embed/hashlock/pass';
 $query = [];
 
 // Check if there is a special hash consumer

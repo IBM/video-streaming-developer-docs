@@ -100,13 +100,7 @@ $json = json_encode($response);
 To pass the response to the player your service has to redirect the page to the IBM Video Streaming return URL with passing the response in JSON format as a get parameter. You can test the API response at the [Hash Authentication Test](/viewer-authentication-api-hash-authentication-test) page.
 
 ```
-https://www.ustream.tv/embed/hashlock/pass?hash=RESPONSE_IN_JSON_FORMAT
-```
-
-If the authentication failed your service has to pass a "false" string as the authentication response to the player.
-
-```
-https://www.ustream.tv/embed/hashlock/pass?hash=false
+https://video.ibm.com/embed/hashlock/pass?hash=RESPONSE_IN_JSON_FORMAT
 ```
 
 ## Managing viewer authentication settings
@@ -131,7 +125,7 @@ Example:
 {
   "hashlock": {
     "type": "advanced",
-    "url": "https://align.ustream.tv/auth/123",
+    "url": "https://yourdomain.com/auth/123",
     "message": null,
     "button_caption": null,
     "popup_width": "0",
