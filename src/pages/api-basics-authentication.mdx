@@ -45,7 +45,7 @@ The parameters below specify the behavior of the authorization endpoint. They ha
 | `response_type` | string | REQUIRED                                                                                 | `code` for Authorization Code flow                                                                                                                                                                             |
 | `client_id`     | string | REQUIRED                                                                                 | 40-character long string that identifies the client. Provided by IBM Video Streaming.                                                                                                                          |
 | `redirect_uri`  | string | REQUIRED                                                                                 | The URI where the browser will redirect after the authentication process. This URI must be registered at IBM Video Streaming.                                                                                  |
-| `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri, to to maintain state between the request and callback. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details. |
+| `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri to maintain state between the request and callback. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.     |
 | `scope`         | string | OPTIONAL                                                                                 | This value is offline for `offline` scope, `broadcaster` for broadcaster scope, or space separated URL encoded list of these strings                                                                           |
 
 <Title>IBM Video Streaming specific extra parameters</Title>
@@ -102,8 +102,6 @@ The following parameters must be set as HTTP POST parameters:
 | `client_id`    | string | REQUIRED   | 40-character long string, provided by IBM Video Streaming                                                      |
 | `code`         | string | REQUIRED   | The authorization code received from the authorization endpoint                                                |
 | `redirect_uri` | string | REQUIRED   | The redirection URI used by the authorization server to return the authorization response in the previous step |
-
-The token endpoint currently works for bearer tokens only.
 
 In addition to the parameters above, the client has to provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
 
