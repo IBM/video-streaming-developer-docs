@@ -16,13 +16,11 @@ The OAuth 2.0 protocol provides several flows (workflows) for authorizing a user
 2. After logging in, the browser is redirected to a special URL (defined by the client), passing an authorization code in the URL.
 3. The third-party server obtains the access token with another HTTP request in the background, using the authorization code.
 
-This method is more secure than the implicit flow if the third-party client has a client-server model. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.
+See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.
 
 ### Client Credentials flow
 
-There are several API resources which aren't connected to any user. Those are resources implemented for the API client (application). Those resources need the clients to identify themselves. For that purpose, the Client Credentials OAuth 2.0 flow provides your application a client access token.
-
-With normal user level tokens these resources dedicated to clients are inaccessible; however a client access token can access the application owner user's resources.
+Client credentials can be generated on the Video Streaming dashboard. The client obtains an access token using the `client_id` and `client_secret`. With this token the user's server-side application can access the resources of the account which is identified by this client_id/client_secret pair.
 
 ## Authorize the user
 
@@ -34,7 +32,7 @@ With normal user level tokens these resources dedicated to clients are inaccessi
 | Supported HTTP methods | GET, POST                                      |
 | Supported flows        | Authorization Code                             |
 
-The authorization endpoint is a secure web page that contains a login form. The client should show this page to the user in an embedded browser. When the user completes the login process, the browser is redirected to a special URL. The client can capture this redirect call, and obtain the authorization code or access token (depending on the flow type).
+The authorization endpoint is a secure web page that authenticates the user. The client should show this page to the user in an embedded browser. When the user completes the login process, the browser is redirected to a special URL. The client can capture this redirect call, and obtain an authorization code.
 
 ### Parameters
 
@@ -47,7 +45,7 @@ The parameters below specify the behavior of the authorization endpoint. They ha
 | `response_type` | string | REQUIRED                                                                                 | `code` for Authorization Code flow                                                                                                                                                                             |
 | `client_id`     | string | REQUIRED                                                                                 | 40-character long string that identifies the client. Provided by IBM Video Streaming.                                                                                                                          |
 | `redirect_uri`  | string | REQUIRED                                                                                 | The URI where the browser will redirect after the authentication process. This URI must be registered at IBM Video Streaming.                                                                                  |
-| `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri to maintain state between the request and callback. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details. |
+| `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri to maintain state between the request and callback. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.     |
 | `scope`         | string | OPTIONAL                                                                                 | This value is offline for `offline` scope, `broadcaster` for broadcaster scope, or space separated URL encoded list of these strings                                                                           |
 
 <Title>IBM Video Streaming specific extra parameters</Title>
@@ -67,7 +65,7 @@ If the `response_type` parameter is `code`, the following properties are returne
 
 | PROPERTY | DESCRIPTION                                                         |
 | -------- | ------------------------------------------------------------------- |
-| `code`   | An authorization code (40 character length, hexa encoded sha1 hash) |
+| `code`   | An authorization code (40-character long string)                    |
 | `state`  | If state was sent to the endpoint, we send it back                  |
 
 ### Error handling
@@ -101,7 +99,7 @@ The following parameters must be set as HTTP POST parameters:
 | PARAMETER      | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                    |
 | -------------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------- |
 | `grant_type`   | string | REQUIRED   | MUST be `authorization_code` in this case.                                                                     |
-| `client_id`    | string | REQUIRED   | 40 character sha1 hash, provided by IBM Video Streaming                                                        |
+| `client_id`    | string | REQUIRED   | 40-character long string, provided by IBM Video Streaming                                                      |
 | `code`         | string | REQUIRED   | The authorization code received from the authorization endpoint                                                |
 | `redirect_uri` | string | REQUIRED   | The redirection URI used by the authorization server to return the authorization response in the previous step |
 
@@ -122,7 +120,7 @@ JSON response on success (for bearer tokens):
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id_token`      | This property is only returned if your request included an openid scope. The value is a JSON Web Token (JWT) that contains digitally signed identity information about the user. |
-| `access_token`  | Access token (40 character length, hexa encoded sha1 hash)                                                                                                                       |
+| `access_token`  | Access token (40-character long string)                                                                                                                                         |
 | `refresh_token` | A token that you can use to obtain a new access token                                                                                                                            |
 | `token_type`    | Will be bearer                                                                                                                                                                   |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
@@ -180,7 +178,7 @@ The following parameters must be set as HTTP POST parameters:
 | PARAMETER     | TYPE   | IMPORTANCE | DESCRIPTION                                                                               |
 | ------------- | ------ | ---------- | ----------------------------------------------------------------------------------------- |
 | `grant_type`  | string | REQUIRED   | MUST be `client_credentials` in this case.                                                |
-| `client_id`   | string | REQUIRED   | 40 character sha1 hash, provided by IBM Video Streaming.                                  |
+| `client_id`   | string | REQUIRED   | 40-character long string, provided by IBM Video Streaming.                                |
 | `device_name` | string | OPTIONAL   | device name                                                                               |
 | `scope`       | string | OPTIONAL   | `broadcaster` for broadcaster scope, or space separated URL encoded list of these strings |
 
@@ -197,7 +195,7 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id_token`      | This property is only returned if your request included an openid scope. The value is a JSON Web Token (JWT) that contains digitally signed identity information about the user. |
-| `access_token`  | Access token (40 character length, hexa encoded sha1 hash)                                                                                                                       |
+| `access_token`  | Access token (40-character long string)                                                                                                                       |
 | `refresh_token` | A token that you can use to obtain a new access token                                                                                                                            |
 | `token_type`    | Will be bearer                                                                                                                                                                   |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
