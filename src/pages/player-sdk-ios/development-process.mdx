@@ -149,3 +149,6 @@ When the Player sends either callback `playerRequiresAgeConfirmation:ageRequired
 
 Implementing custom viewer authentication flow is possible using the [Viewer Authentication API](https://developers.video.ibm.com/channel-api/viewer-authentication-api.html). If the channel or video is set up with custom viewer authentication, the player sends the callback `playerRequiresHash:` where the application should present the custom authentication flow for the user. For more information on implementing the flow please refer to the [Viewer Authentication API documentation](https://developers.video.ibm.com/channel-api/viewer-authentication-api.html).
 Once the authentication flow is finished, `USUstreamPlayer` `continueWithHash:` should be called with the resulting `hash` object of the authentication flow. If the provided `hash` object is validated the player gains access to the restricted resource and starts playing it back.
+
+[Dashboard]: https://www.ustream.tv/dashboard
+["API/SDK access"]: https://www.ustream.tv/dashboard/integrations/api-access
