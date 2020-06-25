@@ -193,17 +193,3 @@
       path: /player-sdk-ios/ad-integration
     - title: Changelog
       path: /player-sdk-ios/changelog
-- title: Player SDK for tvOS
-  pages:
-    - title: Getting started
-      path: /player-sdk-tvos/getting-started
-    - title: Development Process
-      path: /player-sdk-tvos/development-process
-    - title: Pre-Buffering
-      path: /player-sdk-tvos/pre-buffering
-    - title: Customization
-      path: /player-sdk-tvos/customization
-    - title: Localization
-      path: /player-sdk-tvos/localization
-    - title: Changelog
-      path: /player-sdk-tvos/changelog
