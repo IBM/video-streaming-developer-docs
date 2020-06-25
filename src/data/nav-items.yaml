@@ -207,3 +207,17 @@
       path: /player-sdk-tvos/localization
     - title: Changelog
       path: /player-sdk-tvos/changelog
+
+- title: Getting started
+  pages:
+    - path: /organization-api-getting-started
+- title: Organization API
+  pages:
+    - title: Organization Settings
+      path: /organization-api/organization-settings
+    - title: SSO Settings
+      path: /organization-api/sso-settings
+    - title: Administrators
+      path: /organization-api/administrators
+    - title: Custom Roles
+      path: /organization-api/custom-roles
