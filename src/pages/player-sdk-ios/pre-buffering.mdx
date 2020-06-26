@@ -3,6 +3,25 @@ title: Pre-Buffering
 description: Pre-Buffering
 ---
 
-## Pre-Buffering
+## Introduction
+`USPrebufferingController` provides an API allowing the buffering of content ahead of time, to support near instantaneous playback starts.
+If you provide a content list to be prepared for playback before it is actually required to be started, you will likely get a player prepared to start the playback instantly once it is actually needed by the user of your app.
 
-Content needed
+## Usage
+1. Create a content list in priority order as soon as possible. For example if the application contains a list of videos then the priority order may be determined based on the distance of the video cell from the screen centre. The list must contain `USMediaDescriptor` objects.
+
+2. Enqueue the content list for preparation using the `enqueueForPlaybackPreparation:` method.
+
+3. Update the list whenever it is needed by calling `enqueueForPlaybackPreparation:` with a new list. For example when the user is scrolling up/down in the list.
+
+4. Request a `USUstreamPlayer` for a media using `playerForMedia:` when the user is initiating a playback, eg. when a video is selected.
+
+5. Present the requested player.
+
+## Notes
+- The content list can be updated freely anytime, it won't trigger re-buffering on an existing player.
+- The provided player is owned by the caller, it may be used as any other player created with `[[USUstreamPlayer alloc] init]` for example.
+- If the caller releases the player its resources will be reused for the other enqueued content.
+- If a content was not enqueued but a player is requested for it then the user will get a cold player which will start in buffering state, but it is a completely valid usage.
+- If it is appropriate then call `cancelPlaybackPreparations` to release system resources.
+- If `playerForMedia:` is called multiple times with the same `USMediaDescriptor` it will return the same player instance. You should create a different `USMediaDescriptor` object for each occurrences in order to get different players for them.
