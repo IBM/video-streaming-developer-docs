@@ -3,6 +3,57 @@ title: Customization
 description: Customization
 ---
 
-## Customization
+## Player UI
 
-Content needed
+`USUstreamPlayer` includes a full-featured user interface by default, including a control bar, loading and error views. You can change this behavior by setting the `playerControlStyle` property of the player. By setting it to `USPlayerControlStyleNone` you can instruct the player to display media only, without any decoration views.
+In case you don’t want to handle all the player states and error cases manually, you can also reconfigure the control bars by setting their content using the `USUstreamPlayer (USToolbar)` category.
+You can set any of the player toolbar’s contents using the `-[USToolbar setToolbarItems:animated:]` API. The standard toolbar items are accessible in the `USUstreamPlayer (USToolbar)` category Of course you can create your own items as well by subclassing `USToolbarItem`.
+
+## Background audio
+
+`USUstreamPlayer` can be configured for background playback, meaning that if the app goes to background the audio will continue to play.
+To enable the feature: change your application's "Background Mode" to _Audio, AirPlay, and Picture in Picture_ (select your project file, select "Capabilities" tab, open "Background Mode", and select "Audio, AirPlay, and Picture in Picture").
+Please note that this feature needs to be enabled per `USUstreamPlayer` instance, by setting the `continuePlaybackInBackground` property to `YES`. To configure the Control Center and Lock Screen audio control widget please refer to "Background Player" sample in our _Sample App_.
+
+## Localization
+
+The SDK by default provides all texts in English only.
+If you want to support other languages and/or redefine texts, add the keys listed below into the localization files of your application. If you don’t redefine these keys, then the SDK will fall back to the localizations included in the resource bundle of the SDK.
+
+| Keys                                  | English values                                                                       |
+| ------------------------------------- | ------------------------------------------------------------------------------------ |
+| USPlayer.content.status.offline       | This channel is off-air.
+| USPlayer.content.status.realizing     | Initializing...
+| USPlayer.content.status.unrealized    | Loading failed, please try again.
+| USPlayer.content.status.unrealized    | Loading failed, please try again.
+| USPlayer.content.lock.ageLock         | This content is age-restricted.
+| USPlayer.content.lock.birthdateLock   | This content is age-restricted. Please provide your birthdate.
+| USPlayer.content.lock.geoLimitLock    | Too many viewers in your area.
+| USPlayer.content.lock.geoLock         | This content is not available in your area.
+| USPlayer.content.lock.hashLock        | This content is not supported in the mobile apps. Please use a browser for watching.
+| USPlayer.content.lock.IPLock          | This content is not available in your network.
+| USPlayer.content.lock.passwordLock    | This content is password-protected.
+| USPlayer.content.lock.refererLock     | Viewer limit exceeded.
+| USPlayer.content.lock.unknownLock     | This content is not supported.
+| USPlayer.content.error.update         | Sorry, something went wrong. Please try again.
+| USPlayer.content.error.connect        | Connection error. Please try again.
+| USPlayer.content.error.unsuported     | Unsupported content.
+| USPlayer.content.error.deleted        | This video has been removed by the owner.
+| USPlayer.content.error.inexistent     | This content is inaccessible. Try again later.
+| USPlayer.content.error.unknown        | Sorry, something went wrong. Please try again.
+| USPlayer.content.error.authentication | Invalid password.
+| USPlayer.content.error.timeout        | Loading timeout, please try again.
+| USPlayer.player.external.title        | AirPlay
+| USPlayer.player.external.message      | This video is playing on "Apple TV".
+| USPlayer.player.audioOnly             | Playing audio only...
+| USPlayer.player.status.buffering      | Buffering...
+| USPlayer.control.viewerCount          | %d viewers
+| USPlayer.player.started.justNow       | Started just now
+| USPlayer.player.started.years         | Started years ago
+| USPlayer.player.started.months        | Started months ago
+| USPlayer.player.started.weeks         | Started weeks ago
+| USPlayer.player.started.days          | Started days ago
+| USPlayer.player.started.hours         | Started %dh %dm ago
+| USPlayer.player.started.minutes       | Started %dm ago
+| USPlayer.player.status.finished       | finished
+| USPlayer.content.error.age            | Age unconfirmed or too young user
