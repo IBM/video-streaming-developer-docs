@@ -3,4 +3,298 @@ title: SSO Settings
 description: SSO Settings
 ---
 
-## SSO Settings
+### SSO Settings
+
+This API calls allow to configure the Account's SSO login settings. Currently two types of SSO providers are supported: Google Apps and SAML based.
+
+### Get the current settings
+
+This API call allows to get the current settings of the Organization's SSO login.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/sso.json
+```
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/sso.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, key-value pairs are returned with an HTTP Status code of 200.
+
+| KEY               | TYPE    | DESCRIPTION                                                        |
+| ----------------- | ------- | ------------------------------------------------------------------ |
+| `allow_sso_login` | boolean | SSO login is enabled                                               |
+| `login_method`    | string  | Type of SSO login. Possible values: `samlsso`, `googlesso`, `none` |
+
+Example for success response:
+
+```json
+{
+  "allow_sso_login": true,
+  "login_method": "samlsso"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Turn on/off SSO login
+
+This API call allows to turn off/on the Organization's SSO login.
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/sso.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER         | TYPE    | IMPORTANCE | DESCRIPTION          |
+| ----------------- | ------- | ---------- | -------------------- |
+| `allow_sso_login` | boolean | REQUIRED   | SSO login is enabled |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organization/ZzzqXZ/sso.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+allow_sso_login=true
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't update the Organization with the provided parameters                        |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Get the current Google SSO settings
+
+This API call allows to get the current Google settings of the Organization's SSO login.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/sso/google.json
+```
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/sso/google.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, key-value pairs are returned with an HTTP Status code of 200.
+
+| KEY               | TYPE    | DESCRIPTION        |
+| ----------------- | ------- | ------------------ |
+| `hosted_domain`   | string  | Google Apps domain |
+
+Example for success response:
+
+```json
+{
+  "hosted_domain": "example.com"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 404 Not Found           | If Google SSO settings previously hadn't been set                                       |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+### Set Google SSO settings
+
+This API call allows to set the Organization's Google SSO login settings. **Setting the SSO domain doesn't automatically turn SSO login on.**
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/sso/google.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER         | TYPE    | IMPORTANCE | DESCRIPTION          |
+| ----------------- | ------- | ---------- | -------------------- |
+| `hosted_domain`   | string  | REQUIRED   | Google Apps domain   |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organization/ZzzqXZ/sso/google.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+hosted_domain=example.com
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't update the Organization with the provided parameters (eg.: invalid domain)  |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Get the current SAML SSO settings
+
+This API call allows to get the current SAML settings of the Organization's SSO login.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/sso/saml.json
+```
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/sso/saml.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, key-value pairs are returned with an HTTP Status code of 200.
+
+| KEY                | TYPE    | DESCRIPTION                                    |
+| ------------------ | ------- | ---------------------------------------------- |
+| `entity_id`        | string  | Entity ID                                      |
+| `certificate_data` | string  | Certificate                                    |
+| `login_url`        | string  | Login URL                                      |
+| `logout_mode`      | string  | Login mode. Possible values: `local`, `global` |
+| `logout_url`       | string  | Logout URL if Login mode is global             |
+
+Example for success response:
+
+```json
+{
+  "entity_id": "https://sso.example.info/entity",
+  "certificate_data": "MIIJnz...",
+  "login_url": "example.com/login",
+  "logout_mode": "global",
+  "logout_url": "example.com/logout"
+}
+```
+
+The `certificate_data` in the above call is truncated for clarity.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 404 Not Found           | If SAML SSO settings previously hadn't been set                                       |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+### Set Google SSO settings
+
+This API call allows to set the Organization's Google SSO login settings. **Setting the SSO domain doesn't automatically turn SSO login on.**
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/sso/saml.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER          | TYPE   | IMPORTANCE | DESCRIPTION                                    |
+| ------------------ | -------| ---------- | ---------------------------------------------- |
+| `entity_id`        | string | REQUIRED   | Entity ID                                      |
+| `certificate_data` | string | REQUIRED   | Certificate                                    |
+| `login_url`        | string | REQUIRED   | Login URL                                      |
+| `logout_mode`      | string | REQUIRED   | Login mode. Possible values: `local`, `global` |
+| `logout_url`       | string | OPTIONAL   | Logout URL. Required if Login mode is global   |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organization/ZzzqXZ/sso/saml.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+entity_id=https%3A%2F%2Fsso.example.info%2Fentity&certificate_data=MIIJnz...&login_url=example.com%2Flogin&logout_mode=global&logout_url=example.com%2Flogout
+```
+
+The token in the above call is only an example.
+
+The `certificate_data` in the above call is truncated for clarity.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't update the Organization with the provided parameters (eg.: invalid domain)  |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
