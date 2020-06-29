@@ -115,7 +115,7 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 
 The response of the token endpoint is a JSON object.
 
-JSON response on success (for bearer tokens):
+JSON response on success:
 
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -209,3 +209,75 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 | 400 Bad Request     | `invalid_request`        | One or more required parameters are missing                                                                                                 |
 | 501 Not Implemented | `unsupported_grant_type` | The client asks for an unsupported grant type, currently only `authorization_code`, `client_credentials` and `refresh_token` are supported. |
 | 503 Server Error    | `server_error`           | The server cannot handle the request at this moment for some reason. Try again later.                                                       |
+
+## Refreshing access tokens
+
+When access tokens expire or become invalid, applications can obtain a new access token using a refresh token without prompting users to enter their login credentials again. The refresh token is returned as a response of one of the previous token requests. Because refresh tokens are long-lived, developers should ensure that strict storage requirements are in place to keep them from being leaked.
+Refresh tokens expire in 30 days.
+
+#### Parameters
+
+The following parameters must be set as HTTP POST parameters:
+
+| PARAMETER | TYPE | IMPORTANCE | DESCRIPTION |
+| --------- | ---- | ---------- | ----------- |
+| `grant_type` | string | REQUIRED | MUST be `refresh_token`. |
+| `refresh_token` | string | REQUIRED | A token that you can use to obtain a new access token. Refresh tokens are valid for 30 days or until the user revokes access. |
+| `client_id` | string | REQUIRED | Client id provided by IBM Video Streaming. |
+
+In addition to the parameters above, the client has to provide its client secret (provided along with the client key) to authenticate itself if the client acts as a “web application”. Sending client secret can be omitted in case of “native application”.
+The authentication is done with HTTP Basic authorization method.
+
+Example HTTP header:
+
+```
+Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
+```
+#### Success response
+
+The response of the token endpoint is a JSON object.
+
+JSON response on success:
+
+| NAME            | DESCRIPTION                                                                                                                                                                      |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id_token`      | This property is only returned if your request included an openid scope. The value is a JSON Web Token (JWT) that contains digitally signed identity information about the user. |
+| `access_token`  | Access token (40-character long string)                                                                                                                                         |
+| `refresh_token` | A token that you can use to obtain a new access token                                                                                                                            |
+| `token_type`    | Will be bearer                                                                                                                                                                   |
+| `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
+
+#### Example
+
+Previous token endpoint response:
+
+```
+{
+  "access_token": "ab345cdef123ef1267890abcdef04567890abcd1",
+  "refresh_token": "cb345cdef123ef1267890abcdef04567890abcd1",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
+```
+
+Refresh token request:
+
+```
+POST /oauth2/token HTTP/1.1
+Host: video.ibm.com
+Authorization: Basic xxxxxxxxxxyyyyyyyyyywwwwwwwwwwzzzzzzzzzz
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token&client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD&refresh_token=cb345cdef123ef1267890abcdef04567890abcd1
+```
+
+Refresh token response:
+
+```
+{
+  "access_token": "db345cdef123ef1267890abcdef04567890abcd1",
+  "refresh_token": "eb345cdef123ef1267890abcdef04567890abcd1",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
+```
