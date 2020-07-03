@@ -33,18 +33,18 @@ The token in the above call is only an example.
 
 On success, a set of key-value pairs is returned under an `accounts` element with an HTTP Status code of 200.
 
-| KEY             | TYPE    | DESCRIPTION                          |
-| --------------- | ------- | ------------------------------------ |
-| `id`            | string  | ID                                   |
-| `title`         | string  | Display name                         |
-| `user_name`     | string  | Account name                         |
-| `name`          | string  | `product_name` with `portal_title`   |
-| `product_name`  | string  | Type of the Account                  |
-| `portal_title`  | string  | Portal title                         |
-| `is_enterprise` | boolean | @todo ez mi ez?                      |
-| `is_auth_api`   | boolean | @todo ez mi ez?                      |
-| `channel_count` | integer | Number of channels under the Account |
-| `video_count`   | integer | Number of videos under the Account   |
+| KEY             | TYPE    | DESCRIPTION                                         |
+| --------------- | ------- | --------------------------------------------------- |
+| `id`            | string  | ID                                                  |
+| `title`         | string  | Display name                                        |
+| `user_name`     | string  | Account name                                        |
+| `name`          | string  | `product_name` with `portal_title`                  |
+| `product_name`  | string  | Type of the Account                                 |
+| `portal_title`  | string  | Portal title                                        |
+| `is_enterprise` | boolean | True if the account is an EVS account               |
+| `is_auth_api`   | boolean | True if the account is an EVS account with Auth API |
+| `channel_count` | integer | Number of channels under the Account                |
+| `video_count`   | integer | Number of videos under the Account                  |
 
 Example for success response:
 
@@ -539,6 +539,7 @@ On success, a set of key-value pairs is returned with an HTTP Status code of 200
 
 | KEY             | TYPE   | DESCRIPTION                                              |
 | --------------- | ------ | -------------------------------------------------------- |
+| `id`            | string | Account ID                                               |
 | `access_level`  | string | Possible values: `account_admin`, `limited`, `no_access` |
 
 `limited_access` means that the Administrator has Channel level access at least one of the Channels under the Account.
@@ -547,6 +548,7 @@ Example for success response:
 
 ```json
 {
+  "id": "12345678",
   "access_level": "limited"
 }
 ```
@@ -618,7 +620,7 @@ Possible error responses:
 This call allows to get the Channels which the Administrator has specific access to. It also returns the access level. 
 
 ```
-GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channelAccess.json
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -634,7 +636,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 Example for the request:
 
 ```
-GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channelAccess.json HTTP/1.1
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channel-access.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
@@ -703,7 +705,7 @@ Possible error responses:
 This call allows to get an Account under the Organization with the access level of the Administrator.
 
 ```
-PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channelAccess.json
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -720,7 +722,7 @@ The Content-Type of the request should be **application/x-www-form-urlencoded**.
 Example for the request:
 
 ```
-PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channelAccess.json HTTP/1.1
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channel-access.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
@@ -751,7 +753,7 @@ Possible error responses:
 It is possible to set the access level to all Channels under an Account. With this call you can get the access level if it is previously set.
 
 ```
-GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/allChannelAccess.json
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/all-channel-access.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -759,7 +761,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 Example for the request:
 
 ```
-GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/allChannelAccess.json HTTP/1.1
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/all-channel-access.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
@@ -800,7 +802,7 @@ Possible error responses:
 ## Set all Channel access levels
 
 ```
-PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channelAccess.json
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/all-channel-access.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -820,7 +822,7 @@ The Content-Type of the request should be **application/x-www-form-urlencoded**.
 Example for the request:
 
 ```
-PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channelAccess.json HTTP/1.1
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/all-channel-access.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded

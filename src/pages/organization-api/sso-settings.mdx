@@ -227,9 +227,9 @@ Example for success response:
 {
   "entity_id": "https://sso.example.info/entity",
   "certificate_data": "MIIJnz...",
-  "login_url": "example.com/login",
+  "login_url": "https://example.com/login",
   "logout_mode": "global",
-  "logout_url": "example.com/logout"
+  "logout_url": "https://example.com/logout"
 }
 ```
 
@@ -247,7 +247,7 @@ Possible error responses:
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
 
-## Set Google SSO settings
+## Set SAML SSO settings
 
 This API call allows to set the Organization's Google SSO login settings. **Setting the SSO domain doesn't automatically turn SSO login on.**
 
@@ -259,13 +259,13 @@ PUT https://api.video.ibm.com/organizations/{organizationId}/sso/saml.json
 
 The parameters for the POST request:
 
-| PARAMETER          | TYPE   | IMPORTANCE | DESCRIPTION                                    |
-| ------------------ | -------| ---------- | ---------------------------------------------- |
-| `entity_id`        | string | REQUIRED   | Entity ID                                      |
-| `certificate_data` | string | REQUIRED   | Certificate                                    |
-| `login_url`        | string | REQUIRED   | Login URL                                      |
-| `logout_mode`      | string | REQUIRED   | Login mode. Possible values: `local`, `global` |
-| `logout_url`       | string | OPTIONAL   | Logout URL. Required if Login mode is global   |
+| PARAMETER          | TYPE   | IMPORTANCE | DESCRIPTION                                     |
+| ------------------ | -------| ---------- | ----------------------------------------------- |
+| `entity_id`        | string | REQUIRED   | Entity ID                                       |
+| `certificate_data` | string | REQUIRED   | Certificate                                     |
+| `login_url`        | string | REQUIRED   | Login URL                                       |
+| `logout_mode`      | string | REQUIRED   | Logout mode. Possible values: `local`, `global` |
+| `logout_url`       | string | OPTIONAL   | Logout URL. Required if `logout_mode` is global |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -277,7 +277,7 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
-entity_id=https%3A%2F%2Fsso.example.info%2Fentity&certificate_data=MIIJnz...&login_url=example.com%2Flogin&logout_mode=global&logout_url=example.com%2Flogout
+entity_id=https%3A%2F%2Fsso.example.info%2Fentity&certificate_data=MIIJnz...&login_url=https%3A%2F%2Fexample.com%2Flogin&logout_mode=global&logout_url=https%3A%2F%2Fexample.com%2Flogout
 ```
 
 The token in the above call is only an example.
