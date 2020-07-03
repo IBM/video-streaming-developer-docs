@@ -3,8 +3,6 @@ title: Administrators
 description: Administrators
 ---
 
-This API calls allow to get all the Organizations accessible to the user represented by the token.
-
 Common parameters and their type in URLs:
 
 | NAME             | TYPE    | DESCRIPTION                                                                                                                                                 |
@@ -14,6 +12,8 @@ Common parameters and their type in URLs:
 | `email`          | string  | As email addresses can contain characters with special meaning in URLs, **you have to base64 encode email addresses in API calls**                          |
 
 ## Get a list of Accounts under Organization
+
+This API call allow to get all the Organizations accessible to the user represented by the token.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/accounts.json
@@ -406,6 +406,7 @@ Possible error responses:
 
 | HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request         | If the Administrator is the last Organization Administrator                                                          |
 | 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
 | 403 Forbidden           | The provided access token has no access to the user                                                                  |
 | 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
@@ -714,8 +715,8 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 | KEY      | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                        |
 | -------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `set`    | array  | REQUIRED   | Key-value pairs of Channel IDs and access levels. Access level: `channel.admin` or the ID of one of the Organization's [Custom Role](custom-roles) |
-| `delete` | array  | REQUIRED   | List of Channel IDs which you want to revoke access from the Administrator                                                                         |
+| `set`    | array  | OPTIONAL   | Key-value pairs of Channel IDs and access levels. Access level: `channel.admin` or the ID of one of the Organization's [Custom Role](custom-roles) |
+| `delete` | array  | OPTIONAL   | List of Channel IDs which you want to revoke access from the Administrator                                                                         |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
