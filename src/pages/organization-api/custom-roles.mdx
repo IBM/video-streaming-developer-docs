@@ -3,4 +3,320 @@ title: Custom Roles
 description: Custom Roles
 ---
 
-## Custom Roles
+## Get a list of Custom Roles
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/custom-roles.json
+```
+
+### Query Parameters
+
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                   |
+| ---------- | ------ | ---------- | --------------------------------------------- |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/custom-roles.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned under a `custom_roles` element with an HTTP Status code of 200.
+
+| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`             | string | ID                                                                                                                                      |
+| `name`           | string | Name                                                                                                                                    |
+| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
+| `children_count` | number | Number of permissions associated to this Custom Role                                                                                    |
+| `user_count`     | number | Number of Administrators associated to this Custom Role                                                                                 |
+
+Additionally there is a `paging` element in the response with the following values: 
+
+| KEY          | TYPE   | DESCRIPTION                           |
+| ------------ | ------ | ------------------------------------- |
+| `previous`   | string | Link to the previous page (if exists) |
+| `next`       | string | Link to the next page (if exists)     |
+| `page_count` | number | Number of available pages             |
+| `item_count` | number | Total number of items                 |
+
+Example for success response:
+
+```json
+{
+  "custom_roles": [
+    {
+      "id": "42",
+      "name": "Video uploaders",
+      "permission": "7b79a268b5f2a7740c639dadae3eec7f",
+      "children_count": 3,
+      "user_count": 10
+    },
+    {
+      "id": "55",
+      "name": "Content managers",
+      "permission": "4d2c9cd158ad42210e9258ce11f74626",
+      "children_count": 2,
+      "user_count": 0
+    }
+  ],
+  "paging": {
+    "page_count": 1,
+    "item_count": 2
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Create a custom role
+
+```
+POST https://api.video.ibm.com/organizations/{organizationId}/custom-roles.json
+```
+
+### Parameters
+
+| KEY        | TYPE    | IMPORTANCE | DESCRIPTION                                 |
+| ---------- | ------- | ---------- | ------------------------------------------- |
+| `name`     | string  | REQUIRED   | Name                                        |
+| `children` | array   | REQUIRED   | Permissions associated with the Custom Role |
+
+### Permissions
+
+| NAME                     | DESCRIPTION                                                             |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `broadcast.start`        | Start broadcast                                                         |
+| `video.publish`          | Publish videos                                                          |
+| `video.manage_published` | Manage published videos                                                 |
+| `video.download`         | Download videos                                                         |
+| `video.delete`           | Deleted videos                                                          |
+| `channel.access_control` | Edit channel level access control (for Enterprise Video Streaming only) |
+| `channel.view_ivt`       | See individual viewer statistics                                        |
+	
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+POST /organizations/ZzzqXZ/custom-roles.json HTTP/1.1
+Host: api.video.ibm.com 
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+name=My%20first%20Custom%20Role&children[]=video.download&children[]=channel.view_ivt
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned with an HTTP Status code of 201.
+
+| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`             | string | ID                                                                                                                                      |
+| `name`           | string | Name                                                                                                                                    |
+| `resource`       | string | Resource that the Custom Role is associated with                                                                                        |
+| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
+| `children`       | array  | Permissions associated with the Custom Role                                                                                             |
+
+Example for success response:
+
+```json
+{
+  "id": "999",
+  "name": "My first Custom Role",
+  "resource": "organization:5542/",
+  "permission": "1442ad8919caec4e3fc86a3e8063f8eb",
+  "children": [
+    "video.download",
+    "channel.view_ivt"
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't create a new Custom Role (eg.: name is already exists)                      |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get a Custom Role
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{customRoleId}.json
+```
+
+### Query Parameters
+
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                   |
+| ---------- | ------ | ---------- | --------------------------------------------- |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/custom-roles/999.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned with an HTTP Status code of 200.
+
+| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`             | string | ID                                                                                                                                      |
+| `name`           | string | Name                                                                                                                                    |
+| `resource`       | string | Resource that the Custom Role is associated with                                                                                        |
+| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
+| `children`       | array  | Permissions associated with the Custom Role                                                                                             |
+
+Example for success response:
+
+```json
+{
+  "id": "999",
+  "name": "My first Custom Role",
+  "resource": "organization:5542/",
+  "permission": "1442ad8919caec4e3fc86a3e8063f8eb",
+  "children": [
+    "video.download",
+    "channel.view_ivt"
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 404 Not Found           | Custom Role doesn't exist under the Organization                                        |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Update a custom role
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{customRoleId}.json
+```
+
+### Parameters
+
+| KEY        | TYPE    | IMPORTANCE | DESCRIPTION                                 |
+| ---------- | ------- | ---------- | ------------------------------------------- |
+| `name`     | string  | REQUIRED   | Name                                        |
+| `children` | array   | REQUIRED   | Permissions associated with the Custom Role |
+	
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organizations/ZzzqXZ/custom-roles/999.json HTTP/1.1
+Host: api.video.ibm.com 
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+name=My%20first%20Custom%20Role&children[]=video.download&children[]=channel.view_ivt
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned with an HTTP Status code of 201.
+
+| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`             | string | ID                                                                                                                                      |
+| `name`           | string | Name                                                                                                                                    |
+| `resource`       | string | Resource that the Custom Role is associated with                                                                                        |
+| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
+| `children`       | array  | Permissions associated with the Custom Role                                                                                             |
+
+Example for success response:
+
+```json
+{
+  "id": "999",
+  "name": "My first Custom Role",
+  "resource": "organization:5542/",
+  "permission": "1442ad8919caec4e3fc86a3e8063f8eb",
+  "children": [
+    "video.download",
+    "channel.view_ivt"
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't create a new Custom Role (eg.: name is already exists)                      |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 404 Not Found           | Custom Role doesn't exist under the Organization                                        |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete a custom role
+
+```
+DELETE https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{customRoleId}.json
+```
+
+Example for the request:
+
+```
+DELETE /organizations/ZzzqXZ/custom-roles/999.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 404 Not Found           | Custom Role doesn't exist under the Organization                                        |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
