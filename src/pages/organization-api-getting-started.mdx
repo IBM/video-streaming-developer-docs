@@ -3,6 +3,34 @@ title: Organization API - Getting Started
 description: Getting Started
 ---
 
-Organization API allows the management of various aspects of an Organization like SSO settings, Administrator management, etc.
+## Overview
+
+Organization API allows the management of various aspects of an Organization.
 
 Every API calls need a token associated with a user with **Organization administrator** access level.
+
+There are four groups of calls under the API:
+- [Organization Settings](/organization-api/organization-settings): allows to list Organizations and change the Organization's name
+- [SSO Settings](/organization-api/sso-settings): allows to configure the Account's SSO login settings under the Organization. Currently two types of SSO providers are supported: Google Apps and SAML based
+- [Administrators](/organization-api/administrators): These calls allow to manage the Administrators and their Permissions
+- [Custom Roles](/organization-api/custom-roles): Other than the build in roles like Organization Administrator and Channel Administrator you can create Custom Roles and associate permissions to them
+
+## How Organizations, Accounts and Channels relate to each other
+
+On IBM Video Streaming a **Channel** is a container for videos. You can upload videos to a Channel or start a broadcast on it.
+
+An **Account** is a set of Channels, and it is associated with a Subscription which makes it easier to measure usages of IBM Video Streaming's resources.
+
+An **Organization** is basically a set of Accounts which makes it easier for a larger company or organization with multiple Accounts to manage users and their permissions.
+
+## Permissions
+
+On IBM Video Streaming there are a couple of predefined Roles.  
+
+| NAME                       | DESCRIPTION                                                                                                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Organization Administrator | Can manage settings and content of an Organization (SSO Settings, Administrators, Accounts, Channels and Videos). You can thin an Organization Administrator as a "Superuser" in the Organization |
+| Account Administrator      | Can manage every settings and content of an Account and the Channels and Videos under it                                                                                                          |
+| Channel Administrator      | Can manage every settings and content of a Channel and the Videos under it                                                                                                                        |
+
+Other than the predefined Roles you can create your own to fine tune the Permissions of Administrators in your Organization. Make sure you read the [Create a custom role](/organization-api/custom-roles#create-a-custom-role) page for further details.
