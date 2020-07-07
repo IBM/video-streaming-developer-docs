@@ -10,6 +10,9 @@
 - title: Native app support
   pages:
     - path: /api-basics-native-apps
+- title: Token revocation
+  pages:
+    - path: /api-basics-token-revocation
 
 - title: Basic channel management
   pages:
