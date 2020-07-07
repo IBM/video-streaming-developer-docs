@@ -1,0 +1,51 @@
+---
+title: Hardware
+description: Object definition
+---
+
+ECDN server's hardware configuration.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| cpuCores | [Int](../ecdn-api-scalars/Int) | YES | NO | Numer of CPU cores in server. Nullable in case of errors. | 
+| memory | [Byte](../ecdn-api-scalars/Byte) | YES | NO | Server's total memory in bytes. Nullable in case of errors. | 
+| cacheMemory | [Byte](../ecdn-api-scalars/Byte) | YES | NO | Server's total cache memory in bytes. Nullable in case of errors. | 
+| systemDiskSize | [Byte](../ecdn-api-scalars/Byte) | YES | NO | Server's system disk size in bytes. Nullable in case of errors. | 
+| cacheDiskStatus | [CacheDiskStatus](../ecdn-api-enums/CacheDiskStatus) | NO | NO | Status of cache disk. | 
+| cacheDiskSize | [Byte](../ecdn-api-scalars/Byte) | YES | NO | Server's cache disk size in bytes. Null if cache disk isn't attached to server. | 
+| hypervisor | [Hypervisor](../ecdn-api-enums/Hypervisor) | YES | NO | The hypervisor's type running this server. Null if unknown. (never checked in before or it's version is too old) | 
+
+```graphql
+type Object{
+
+	# Numer of CPU cores in server.
+	# Nullable in case of errors.
+	cpuCores: Int
+
+	# Server's total memory in bytes.
+	# Nullable in case of errors.
+	memory: Byte
+
+	# Server's total cache memory in bytes.
+	# Nullable in case of errors.
+	cacheMemory: Byte
+
+	# Server's system disk size in bytes.
+	# Nullable in case of errors.
+	systemDiskSize: Byte
+
+	# Status of cache disk.
+	cacheDiskStatus: CacheDiskStatus!
+
+	# Server's cache disk size in bytes. Null if cache disk isn't attached to server.
+	cacheDiskSize: Byte
+
+	# The hypervisor's type running this server. Null if unknown.
+	# (never checked in before or it's version is too old)
+	hypervisor: Hypervisor
+
+}
+```
+

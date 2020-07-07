@@ -1,0 +1,202 @@
+---
+title: Mutation
+description: Operation
+---
+
+The Mutation type represents all of the mutable entry points into the API.
+
+## Fields
+
+### locationCreate ([Location](./Location))
+Create new location.
+Authorization: must be at least ADMIN.
+Returns created location.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| config | [BatchLocationInput](../ecdn-api-objects/BatchLocationInput) | NO | NO | Batch input for location creation. |
+
+### locationConfigure ([Location](./Location))
+Batch configuration of a location.
+Authorization: must be at least ADMIN.
+Returns configured location.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| locationID | [ID](../ecdn-api-objects/ID) | NO | NO | ID of location to configure. |
+| config | [BatchLocationInput](../ecdn-api-objects/BatchLocationInput) | NO | NO | Batch input for location configuration. |
+
+### locationSetParents ([Void](./Void))
+Set a common parent for locations. Parent can either be a region or a location.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| locationIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of (children) locations (which we set a parent for). |
+| parentID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of parent location/region. |
+
+### locationDelete ([Void](./Void))
+Delete locations.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| locationIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of locations to delete. |
+
+### serverCreate ([Server](./Server))
+Create new server.
+Authorization: must be at least ADMIN.
+Returns created server.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| config | [BatchServerInput](../ecdn-api-objects/BatchServerInput) | NO | NO | Batch input for server creation. |
+
+### serverConfigure ([Server](./Server))
+Batch configuration of a server.
+Authorization: must be at least ADMIN.
+Returns configured server.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverID | [ID](../ecdn-api-objects/ID) | NO | NO | ID of server to configure. |
+| mode | [ConfigurationMode](../ecdn-api-objects/ConfigurationMode) | NO | NO | Selected mode to apply this configuration to an ECDN server. |
+| config | [BatchServerInput](../ecdn-api-objects/BatchServerInput) | NO | NO | Batch input for server configuration. |
+
+### serverEnableContentDelivery ([Void](./Void))
+Enable content delivery on servers.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to enable content delivery on. |
+
+### serverDisableContentDelivery ([Void](./Void))
+Disable content delivery on servers.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to disable content delivery on. |
+
+### serverEnableRemoteAssistance ([Void](./Void))
+Enable remote assistance on servers.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to enable remote assistance on. |
+
+### serverDisableRemoteAssistance ([Void](./Void))
+Disable remote assistance on servers.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to disable remote assistance on. |
+
+### serverDelete ([Void](./Void))
+Delete servers.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to delete. |
+
+### reportCreate ([Report](./Report))
+Create time-series report of ECDN video delivery.
+Interval of a query with minutely granularity cannot exceed 24 hours.
+Metrics older than 1 year are discarded.
+Returns created report.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| granularity | [Granularity](../ecdn-api-objects/Granularity) | NO | NO | Granularity of time intervals. |
+| breakdown | [ReportBreakdown](../ecdn-api-objects/ReportBreakdown) | YES | NO | Break down report's intervals by additional fields. |
+| from | [Time](../ecdn-api-objects/Time) | NO | NO | Start report from this point in time. |
+| to | [Time](../ecdn-api-objects/Time) | NO | NO | End report at this point in time. |
+| email | [EmailAddress](../ecdn-api-objects/EmailAddress) | NO | NO | Send created report to this email address. |
+| include | [ReportField](../ecdn-api-objects/ReportField) | NO | YES | Included fields in the report. |
+
+
+```graphql
+type mutation{
+
+	# Create new location.
+	# Authorization: must be at least ADMIN.
+	# Returns created location.
+	# config: Batch input for location creation.
+	locationCreate(config: BatchLocationInput!): Location!
+
+	# Batch configuration of a location.
+	# Authorization: must be at least ADMIN.
+	# Returns configured location.
+	# locationID: ID of location to configure.
+	# config: Batch input for location configuration.
+	locationConfigure(locationID: ID!, config: BatchLocationInput!): Location!
+
+	# Set a common parent for locations. Parent can either be a region or a location.
+	# Authorization: must be at least ADMIN.
+	# locationIDs: IDs of (children) locations (which we set a parent for).
+	# parentID: ID of parent location/region.
+	locationSetParents(locationIDs: [ID!], parentID: ID!): Void
+
+	# Delete locations.
+	# Authorization: must be at least ADMIN.
+	# locationIDs: IDs of locations to delete.
+	locationDelete(locationIDs: [ID!]): Void
+
+	# Create new server.
+	# Authorization: must be at least ADMIN.
+	# Returns created server.
+	# config: Batch input for server creation.
+	serverCreate(config: BatchServerInput!): Server!
+
+	# Batch configuration of a server.
+	# Authorization: must be at least ADMIN.
+	# Returns configured server.
+	# serverID: ID of server to configure.
+	# mode: Selected mode to apply this configuration to an ECDN server.
+	# config: Batch input for server configuration.
+	serverConfigure(serverID: ID!, mode: ConfigurationMode!, config: BatchServerInput!): Server!
+
+	# Enable content delivery on servers.
+	# Authorization: must be at least ADMIN.
+	# serverIDs: IDs of servers to enable content delivery on.
+	serverEnableContentDelivery(serverIDs: [ID!]): Void
+
+	# Disable content delivery on servers.
+	# Authorization: must be at least ADMIN.
+	# serverIDs: IDs of servers to disable content delivery on.
+	serverDisableContentDelivery(serverIDs: [ID!]): Void
+
+	# Enable remote assistance on servers.
+	# Authorization: must be at least ADMIN.
+	# serverIDs: IDs of servers to enable remote assistance on.
+	serverEnableRemoteAssistance(serverIDs: [ID!]): Void
+
+	# Disable remote assistance on servers.
+	# Authorization: must be at least ADMIN.
+	# serverIDs: IDs of servers to disable remote assistance on.
+	serverDisableRemoteAssistance(serverIDs: [ID!]): Void
+
+	# Delete servers.
+	# Authorization: must be at least ADMIN.
+	# serverIDs: IDs of servers to delete.
+	serverDelete(serverIDs: [ID!]): Void
+
+	# Create time-series report of ECDN video delivery.
+	# Interval of a query with minutely granularity cannot exceed 24 hours.
+	# Metrics older than 1 year are discarded.
+	# Returns created report.
+	# granularity: Granularity of time intervals.
+	# breakdown: Break down report's intervals by additional fields.
+	# from: Start report from this point in time.
+	# to: End report at this point in time.
+	# email: Send created report to this email address.
+	# include: Included fields in the report.
+	reportCreate(granularity: Granularity!, breakdown: ReportBreakdown, from: Time!, to: Time!, email: EmailAddress!, include: [ReportField!]): Report!
+
+}
+```
+

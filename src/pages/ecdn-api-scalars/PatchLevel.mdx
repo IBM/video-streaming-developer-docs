@@ -1,0 +1,16 @@
+---
+title: PatchLevel
+description: Scalar
+---
+
+### PatchLevel
+The PatchLevel scalar type is a security patch level represented as UTF-8 character sequences.
+Accepted format is: `concat(YEAR,MONTH,DAY,HOUR,MINUTE,SECOND)`.
+i.e: a patch level generated on `2019-07-22` at `10:48:31` is represented as: `20190722104831`.
+
+
+```graphql
+scalar PatchLevel
+```
+
+

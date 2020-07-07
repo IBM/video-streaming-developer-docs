@@ -1,0 +1,54 @@
+---
+title: BatchServerInput
+description: InputObject definition
+---
+
+Batch input for server creation/modification.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| hostname | [String](../ecdn-api-scalars/String) | NO | NO | Hostname of server. FQDN = hostname + domain suffix of customer. | 
+| location | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of location this server belongs to. | 
+| hypervisor | [Hypervisor](../ecdn-api-enums/Hypervisor) | NO | NO | Which hypervisor will this server run on. | 
+| interfaces | [InterfaceInput](../ecdn-api-input-objects/InterfaceInput) | NO | YES | Network interfaces of ECDN server. | 
+| dnsServers | [ServerAddress](../ecdn-api-scalars/ServerAddress) | NO | YES | DNS servers used for name resolutions. Google resolvers will be used if omitted. | 
+| ntpServers | [ServerAddress](../ecdn-api-scalars/ServerAddress) | NO | YES | Address of NTP servers used by ECDN server. Ubuntu NTP pools will be used if omitted. | 
+| logCollector | [TransportAddress](../ecdn-api-scalars/TransportAddress) | YES | NO | Log collector's address. Omit if log forwarding is disabled. | 
+| snmpCommunityString | [String](../ecdn-api-scalars/String) | YES | NO | Community string of SNMP v2c. Omit if SNMP polling is disabled. | 
+| remoteAssistanceEnabled | [Boolean](../ecdn-api-scalars/Boolean) | YES | NO | Is remote assistance enabled on server. Enabled by default. | 
+
+```graphql
+type InputObject{
+
+	# Hostname of server. FQDN = hostname + domain suffix of customer.
+	hostname: String!
+
+	# ID of location this server belongs to.
+	location: ID!
+
+	# Which hypervisor will this server run on.
+	hypervisor: Hypervisor!
+
+	# Network interfaces of ECDN server.
+	interfaces: [InterfaceInput!]
+
+	# DNS servers used for name resolutions. Google resolvers will be used if omitted.
+	dnsServers: [ServerAddress!]
+
+	# Address of NTP servers used by ECDN server. Ubuntu NTP pools will be used if omitted.
+	ntpServers: [ServerAddress!]
+
+	# Log collector's address. Omit if log forwarding is disabled.
+	logCollector: TransportAddress
+
+	# Community string of SNMP v2c. Omit if SNMP polling is disabled.
+	snmpCommunityString: String
+
+	# Is remote assistance enabled on server. Enabled by default.
+	remoteAssistanceEnabled: Boolean
+
+}
+```
+

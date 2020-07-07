@@ -1,0 +1,95 @@
+---
+title: Location
+description: Object definition
+---
+
+A customer's location.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of location. | 
+| name | [String](../ecdn-api-scalars/String) | NO | NO | Name of location. | 
+| numberOfServers | [Int](../ecdn-api-scalars/Int) | NO | NO | Number of servers in location. | 
+| servers | [Server](../ecdn-api-objects/Server) | NO | YES | Servers in location. | 
+| parent | [LocationsParent](../ecdn-api-unions/LocationsParent) | NO | NO | Parent location or region of location. | 
+| children | [Location](../ecdn-api-objects/Location) | NO | YES | (direct) Child locations of location. | 
+| childrenDepth | [Int](../ecdn-api-scalars/Int) | NO | NO | Depth of (deepest possible) child location chain (starting from this location). * A location without any children has children a depth of 0. * A location with a child that doesn't have any children has a depth of 1. * A location that has at least one child with children has a depth of 2. | 
+| childrenDepthLimit | [Int](../ecdn-api-scalars/Int) | NO | NO | The maximum children depth this location can have. A maximum of 3 locations can be chained together. Therefore if a location: * Is a top-level one, the maximum children depth is 2   (it can have child locations with children). * Has a top-level location as parent: the maximum children depth is 1   (can have children, but they cannot have additional children). * Has a parent location with a parent location: the maximum children depth is 0   (cannot have children, would exceed the overall -3- depth limit). | 
+| externalRanges | [IPv4Range](../ecdn-api-scalars/IPv4Range) | NO | YES | External IP ranges of location. | 
+| inheritExternalRanges | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether external ranges are inherited from parent location. | 
+| clientRestriction | [ClientRestriction](../ecdn-api-objects/ClientRestriction) | YES | NO | Restriction for client connections. Null if there aren't any restrictions. | 
+| clientConnectionsEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether clients can connect to servers in this location or not. | 
+| cdnFallbackEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether clients can fall back to external CDNs or not. | 
+| parentProxyEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether management traffic of servers in location are proxied through parent servers. Video traffic is proxied through parent servers in all cases. Management traffic can only be proxied through ECDN servers (i.e: not through midgress), therefore this can only be enabled in child locations. | 
+| created | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | What time was this location created and by whom. | 
+| modified | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | Last time this location was modified and by whom. | 
+
+```graphql
+type Object{
+
+	# ID of location.
+	id: ID!
+
+	# Name of location.
+	name: String!
+
+	# Number of servers in location.
+	numberOfServers: Int!
+
+	# Servers in location.
+	servers: [Server!]
+
+	# Parent location or region of location.
+	parent: LocationsParent!
+
+	# (direct) Child locations of location.
+	children: [Location!]
+
+	# Depth of (deepest possible) child location chain (starting from this location).
+	# * A location without any children has children a depth of 0.
+	# * A location with a child that doesn't have any children has a depth of 1.
+	# * A location that has at least one child with children has a depth of 2.
+	childrenDepth: Int!
+
+	# The maximum children depth this location can have. A maximum of 3 locations can be chained
+	# together. Therefore if a location:
+	# * Is a top-level one, the maximum children depth is 2
+	#   (it can have child locations with children).
+	# * Has a top-level location as parent: the maximum children depth is 1
+	#   (can have children, but they cannot have additional children).
+	# * Has a parent location with a parent location: the maximum children depth is 0
+	#   (cannot have children, would exceed the overall -3- depth limit).
+	childrenDepthLimit: Int!
+
+	# External IP ranges of location.
+	externalRanges: [IPv4Range!]
+
+	# Whether external ranges are inherited from parent location.
+	inheritExternalRanges: Boolean!
+
+	# Restriction for client connections. Null if there aren't any restrictions.
+	clientRestriction: ClientRestriction
+
+	# Whether clients can connect to servers in this location or not.
+	clientConnectionsEnabled: Boolean!
+
+	# Whether clients can fall back to external CDNs or not.
+	cdnFallbackEnabled: Boolean!
+
+	# Whether management traffic of servers in location are proxied through parent servers.
+	# Video traffic is proxied through parent servers in all cases.
+	# Management traffic can only be proxied through ECDN servers (i.e: not through midgress),
+	# therefore this can only be enabled in child locations.
+	parentProxyEnabled: Boolean!
+
+	# What time was this location created and by whom.
+	created: RecordedAction!
+
+	# Last time this location was modified and by whom.
+	modified: RecordedAction!
+
+}
+```
+

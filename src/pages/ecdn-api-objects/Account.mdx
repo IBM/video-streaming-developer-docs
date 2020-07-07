@@ -1,0 +1,22 @@
+---
+title: Account
+description: Object definition
+---
+
+(customer-wide) Account of user.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| domain | [FQDN](../ecdn-api-scalars/FQDN) | NO | NO | Domain suffix of account. | 
+
+```graphql
+type Object{
+
+	# Domain suffix of account.
+	domain: FQDN!
+
+}
+```
+

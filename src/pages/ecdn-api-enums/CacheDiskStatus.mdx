@@ -1,0 +1,32 @@
+---
+title: CacheDiskStatus
+description: Enum
+---
+
+Status of cache disk.
+
+### Values
+
+| NAME | DESCRIPTION |
+| - | - |
+| NOT_PRESENT | Cache disk isn't attached to the ECDN server. |
+| IN_USE | Attached cache disk is provisioned and used by the ECDN server for video caching. |
+| PROVISION_IN_PROGRESS | ECDN server is currently provisioning the attached cache disk. |
+| TOO_SMALL | Attached cache disk is too small for reliable video caching (less then 4 gigabytes). Server won't provision and use it. |
+	
+```graphql
+enum CacheDiskStatus{
+
+	# Cache disk isn't attached to the ECDN server.
+	NOT_PRESENT
+	# Attached cache disk is provisioned and used by the ECDN server for video caching.
+	IN_USE
+	# ECDN server is currently provisioning the attached cache disk.
+	PROVISION_IN_PROGRESS
+	# Attached cache disk is too small for reliable video caching (less then 4 gigabytes).
+	# Server won't provision and use it.
+	TOO_SMALL
+
+}
+```
+

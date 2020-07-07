@@ -1,0 +1,26 @@
+---
+title: Update
+description: Object definition
+---
+
+Represents update status of an ECDN server.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| ecdnVersion | [SemanticVersion](../ecdn-api-scalars/SemanticVersion) | YES | NO | ECDN software version on server. Null if server never checked in before. | 
+| patchLevel | [PatchLevel](../ecdn-api-scalars/PatchLevel) | YES | NO | Current security patch level of server. Null if the server never checked in before. | 
+
+```graphql
+type Object{
+
+	# ECDN software version on server. Null if server never checked in before.
+	ecdnVersion: SemanticVersion
+
+	# Current security patch level of server. Null if the server never checked in before.
+	patchLevel: PatchLevel
+
+}
+```
+

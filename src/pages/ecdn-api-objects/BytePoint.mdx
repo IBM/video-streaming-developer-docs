@@ -1,0 +1,26 @@
+---
+title: BytePoint
+description: Object definition
+---
+
+Measured amount of bytes at a given point in time.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| bytes | [Byte](../ecdn-api-scalars/Byte) | NO | NO | Measured amount of bytes. | 
+| at | [Time](../ecdn-api-scalars/Time) | NO | NO | At this point in time. | 
+
+```graphql
+type Object{
+
+	# Measured amount of bytes.
+	bytes: Byte!
+
+	# At this point in time.
+	at: Time!
+
+}
+```
+

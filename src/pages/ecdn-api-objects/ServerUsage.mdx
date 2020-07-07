@@ -1,0 +1,46 @@
+---
+title: ServerUsage
+description: Object definition
+---
+
+An ECDN server's time-series usages.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| cpu | [CPUUsage](../ecdn-api-objects/CPUUsage) | NO | NO | CPU usage of ECDN server. | 
+| network | [NetworkUsage](../ecdn-api-objects/NetworkUsage) | NO | YES | Network usage of ECDN server. | 
+| memory | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | Memory usage of ECDN server. Nullable in case of errors (coming from an external service). | 
+| cacheMemory | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | Cache memory usage of ECDN server. Nullable in case of errors (coming from an external service). | 
+| systemDisk | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | System disk usage of ECDN server. Nullable in case of errors (coming from an external service). | 
+| cacheDisk | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | Cache disk usage of ECDN server. Null if cache disk isn't attached to the ECDN server. | 
+
+```graphql
+type Object{
+
+	# CPU usage of ECDN server.
+	cpu: CPUUsage!
+
+	# Network usage of ECDN server.
+	network: [NetworkUsage!]
+
+	# Memory usage of ECDN server.
+	# Nullable in case of errors (coming from an external service).
+	memory: [BytePoint!]
+
+	# Cache memory usage of ECDN server.
+	# Nullable in case of errors (coming from an external service).
+	cacheMemory: [BytePoint!]
+
+	# System disk usage of ECDN server.
+	# Nullable in case of errors (coming from an external service).
+	systemDisk: [BytePoint!]
+
+	# Cache disk usage of ECDN server.
+	# Null if cache disk isn't attached to the ECDN server.
+	cacheDisk: [BytePoint!]
+
+}
+```
+

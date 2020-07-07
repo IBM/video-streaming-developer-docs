@@ -23,6 +23,10 @@ const links = [
     text: 'Analytics API',
   },
   {
+    href: '/ecdn-api-overview',
+    text: 'ECDN API',
+  },
+  {
     href: '/broadcaster-sdk',
     text: 'Broadcaster SDK',
   },

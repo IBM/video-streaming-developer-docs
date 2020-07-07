@@ -1,0 +1,26 @@
+---
+title: DataTransferPoint
+description: Object definition
+---
+
+Measured amount of data transfer rate at a given point in time.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| rate | [BytePerSec](../ecdn-api-scalars/BytePerSec) | NO | NO | Measured amount of data transfer rate. | 
+| at | [Time](../ecdn-api-scalars/Time) | NO | NO | At this point in time. | 
+
+```graphql
+type Object{
+
+	# Measured amount of data transfer rate.
+	rate: BytePerSec!
+
+	# At this point in time.
+	at: Time!
+
+}
+```
+

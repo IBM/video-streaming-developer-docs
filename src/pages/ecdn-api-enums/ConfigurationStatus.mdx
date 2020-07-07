@@ -1,0 +1,25 @@
+---
+title: ConfigurationStatus
+description: Enum
+---
+
+Configuration's status on ECDN server.
+
+### Values
+
+| NAME | DESCRIPTION |
+| - | - |
+| PENDING | Configuration wasn't applied to server yet. |
+| APPLIED | Configuration is successfully applied. |
+	
+```graphql
+enum ConfigurationStatus{
+
+	# Configuration wasn't applied to server yet.
+	PENDING
+	# Configuration is successfully applied.
+	APPLIED
+
+}
+```
+

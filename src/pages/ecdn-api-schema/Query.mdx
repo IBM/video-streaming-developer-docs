@@ -1,0 +1,70 @@
+---
+title: Query
+description: Operation
+---
+
+The Query type represents all of the queryable entry points into the API.
+
+## Fields
+
+### regions ([Region](./Region))
+Get all regions.
+
+
+
+### servers ([Server](./Server))
+Get all servers.
+
+
+
+### serverByID ([Server](./Server))
+Get server by ID.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-objects/ID) | NO | NO | ID of queried server. |
+
+### locations ([Location](./Location))
+Get all locations.
+
+
+
+### locationByID ([Location](./Location))
+Get location by ID.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-objects/ID) | NO | NO | ID of queried location. |
+
+### me ([User](./User))
+Get logged in user.
+
+
+
+
+```graphql
+type query{
+
+	# Get all regions.
+	regions: [Region!]
+
+	# Get all servers.
+	servers: [Server!]
+
+	# Get server by ID.
+	# id: ID of queried server.
+	serverByID(id: ID!): Server!
+
+	# Get all locations.
+	locations: [Location!]
+
+	# Get location by ID.
+	# id: ID of queried location.
+	locationByID(id: ID!): Location!
+
+	# Get logged in user.
+	me: User!
+
+}
+```
+

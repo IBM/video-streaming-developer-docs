@@ -1,0 +1,50 @@
+---
+title: BatchLocationInput
+description: InputObject definition
+---
+
+Batch input for location creation/modification.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| name | [String](../ecdn-api-scalars/String) | NO | NO | Name of location. Must not be empty, must be unique and maximum allow length is 60 characters. | 
+| parentID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of parent region/location. | 
+| clientRestriction | [ClientRestrictionInput](../ecdn-api-input-objects/ClientRestrictionInput) | YES | NO | Restriction for client connections. Omit if there aren't any restrictions. | 
+| clientConnectionsEnabled | [Boolean](../ecdn-api-scalars/Boolean) | YES | NO | Whether clients can connect to servers in this location or not. Defaults to true. | 
+| cdnFallbackEnabled | [Boolean](../ecdn-api-scalars/Boolean) | YES | NO | Whether clients can fall back to external CDNs or not. Defaults to true. | 
+| externalRanges | [IPv4Range](../ecdn-api-scalars/IPv4Range) | NO | YES | External IP ranges of location. Omit if ranges are inherited. Cannot be filled if inheritExternalRanges is set to true. | 
+| inheritExternalRanges | [Boolean](../ecdn-api-scalars/Boolean) | YES | NO | Whether external ranges are inherited from parent location. Defaults to false, must have a parent location if it's set to true. Cannot be true if externalRanges field is filled as well. | 
+
+```graphql
+type InputObject{
+
+	# Name of location.
+	# Must not be empty, must be unique and maximum allow length is 60 characters.
+	name: String!
+
+	# ID of parent region/location.
+	parentID: ID!
+
+	# Restriction for client connections. Omit if there aren't any restrictions.
+	clientRestriction: ClientRestrictionInput
+
+	# Whether clients can connect to servers in this location or not. Defaults to true.
+	clientConnectionsEnabled: Boolean
+
+	# Whether clients can fall back to external CDNs or not. Defaults to true.
+	cdnFallbackEnabled: Boolean
+
+	# External IP ranges of location. Omit if ranges are inherited.
+	# Cannot be filled if inheritExternalRanges is set to true.
+	externalRanges: [IPv4Range!]
+
+	# Whether external ranges are inherited from parent location.
+	# Defaults to false, must have a parent location if it's set to true.
+	# Cannot be true if externalRanges field is filled as well.
+	inheritExternalRanges: Boolean
+
+}
+```
+
