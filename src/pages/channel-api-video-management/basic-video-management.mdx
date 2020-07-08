@@ -42,7 +42,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 | `views`           | number | Number views on the video                                                                                                                                                                                                                                                                                             |
 | `thumbnail`       | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`)                                                                                                                        |
 | `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
-| `caption matches` | array  | This field is only present if the `q` parameter is used. The result set contains captions (as string value for a `caption` attribute) matching the search query along with their start and end time (values as numbers for `start_sec` and `end_sec` attributes). Only maximum of 100 matching captions are returned. |
+| `caption_matches` | array  | This field is only present if the `q` parameter is used. The result set contains captions (as string value for a `caption` attribute) matching the search query along with their start and end time (values as numbers for `start_sec` and `end_sec` attributes). Only maximum of 100 matching captions are returned. |
 
 Example for success response:
 
@@ -117,7 +117,7 @@ Possible error responses:
 
 | HTTP RESPONSE CODE      | ERROR VALUE   | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------- | --------------------------------------------------------------------------------------- |
-| 401 Unauthorized        | invalid_token | The provided access token is missing, revoked, expired or malformed                     |
+| 401 Unauthorized        | `invalid_token` | The provided access token is missing, revoked, expired or malformed                     |
 | 503 Service Unavailable |               | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## List the videos of a channel
@@ -137,8 +137,8 @@ The query parameters for the GET request:
 | `page`            | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                        |
 | `pagesize`        | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                                                                                                |
 | `q`               | string  | OPTIONAL   | Search for text in video related data. Only works for public videos, and if no filter parameter is set.                                                                              |
-| `sort`            | string  | OPTIONAL   | Set sorting order of the videos. Possible values: `"recent"` – orders based on the `created_at` field; `popular` – orders based on the `views` field. The default value is "recent". |
-| `filter[protect]` | set     | OPTIONAL   | Filter videos by protection levels. Values: `public`, `private` (default: `empty`). The values should be comma separated without whitespace included.                                |
+| `sort`            | string  | OPTIONAL   | Set sorting order of the videos. Possible values: `recent` – orders based on the `created_at` field; `popular` – orders based on the `views` field. The default value is `recent`. |
+| `filter[protect]` | set     | OPTIONAL   | Filter videos by protection levels. Values: `public`, `private` (default: `public`). The values should be comma separated without whitespace included.                                |
 
 ### Success response
 
@@ -218,7 +218,7 @@ Example for success response:
 
 The paging information can be found under the `paging` key. Example:
 
-```
+```json
 {
     "paging": {
         "previous": "https://api.video.ibm.com/CHANNEL_ID/videos.json?pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
@@ -251,7 +251,7 @@ The query parameters for the GET request:
 
 | PARAMETER    | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ------------ | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| detail_level | string | OPTIONAL   | Verbosity level. Possible values: `minimal` – The result set is limited to the id, title, owner, picture and locks fields. `owner` – Requires a valid access token, and it will also return more sensitive information about the channel (for example the DHLS link if this feature is available for you). If the channel is protected (see Security section), only minimal data can be retrieved without a valid access token. |
+| `detail_level` | string | OPTIONAL   | Verbosity level. Possible values: `minimal` – The result set is limited to the id, title, owner, picture and locks fields. `owner` – Requires a valid access token, and it will also return more sensitive information about the channel (for example the DHLS link if this feature is available for you). If the channel is protected (see Security section), only minimal data can be retrieved without a valid access token. |
 
 ### Success response
 

@@ -24,7 +24,7 @@ On success, a key-value structure is returned.
 
 | KEY      | TYPE   | DESCRIPTION                                                                    |
 | -------- | ------ | ------------------------------------------------------------------------------ |
-| `locked` | string | Returns “TRUE” if the embed lock is enabled on the channel, otherwise “FALSE”. |
+| `locked` | string | Returns `TRUE` if the embed lock is enabled on the channel, otherwise `FALSE`. |
 
 Example for success response:
 
@@ -57,7 +57,7 @@ The parameters for the PUT request:
 
 | PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                                                                              |
 | --------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------- |
-| `locked`  | string | REQUIRED   | Set embed lock on channel when parameter `locked == “TRUE”`. Remove embed lock when `locked == “FALSE”`. |
+| `locked`  | string | REQUIRED   | Set embed lock on channel when this value is `TRUE`. Removes embed lock when the value is `FALSE`. |
 
 ### Success response
 

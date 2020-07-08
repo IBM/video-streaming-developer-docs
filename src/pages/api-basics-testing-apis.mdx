@@ -7,8 +7,10 @@ description: Testing APIs
 
 <Title>Get an access token</Title>
 
+The simplest way to obtain an access token for testing purposes is to use the implicit OAuth 2.0 flow. This flow allows clients to get access tokens directly from the auth endpoint. However, **for production purposes it is not recommended** due to the inherent risks of returning access tokens in an HTTP redirect without any confirmation that it has been received by the client.
+
 ```
-https://api.video.ibm.com/oauth2/authorize
+https://authentication.video.ibm.com/authorize
 ?response_type=token
 &client_id=057ce944b015ec9fdf546dfbbe1b7af4b19e8158
 &redirect_uri=https://yourdomain.com/redirect
@@ -30,18 +32,7 @@ curl \
 ```
 
 ```
-HTTP/1.1 201 CREATED
-Server: nginx/1.2.6
-Date: Tue, 15 Jan 2013 13:08:06 GMT
-Content-Type: application/json; charset=UTF-8
-Content-Length: 123
-Connection: keep-alive
-Vary: Host
-X-Powered-By: PHP/5.3.20-1~dotdeb.0
-Cache-Control: no-store
-Accept-Ranges: bytes
-X-Varnish: 703443498
-Age: 0
-Via: 1.1 varnish
+HTTP/1.1 201 Created
+
 {"channel":{"id":"13091307","title":"Whatever Test 1234","url":"whatever-test-1234","tiny_url":"http://ustre.am/SVE7"}}
 ```

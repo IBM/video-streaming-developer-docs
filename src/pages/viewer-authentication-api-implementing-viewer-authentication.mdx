@@ -6,7 +6,7 @@ description: Implementing viewer authentication
 ## Channel level
 
 ```
-PUT	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash/advanced.FORMAT (format can be json or xml)
+PUT	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash/advanced.json
 ```
 
 <Title>Parameters</Title>
@@ -108,7 +108,7 @@ https://video.ibm.com/embed/hashlock/pass?hash=RESPONSE_IN_JSON_FORMAT
 ### Getting channel viewer authentication settings
 
 ```
-GET	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash.FORMAT (format can be json or xml)
+GET	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash.json
 ```
 
 #### Parameters
@@ -144,7 +144,7 @@ Specific error codes returned when the action failed:
 ### Removing channel viewer authentication
 
 ```
-DELETE	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash.FORMAT (format can be json or xml)
+DELETE	https://api.video.ibm.com/channels/CHANNEL_ID/locks/hash.json
 ```
 
 #### Parameters
