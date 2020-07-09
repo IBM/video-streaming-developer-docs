@@ -1,0 +1,773 @@
+---
+title: Administrators
+description: Administrators
+---
+
+Common parameters and their type in URLs:
+
+| NAME             | TYPE    | DESCRIPTION                                                                                                                                                 |
+| ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `organizationId` | string  | You can get your Organizations' ID with the [Get a list of accessible Organizations](organization-settings#get-a-list-of-accessible-organizations) API call |
+| `accountId`      | string  | You can get your Account's ID with the [Get a list of Accounts under Organization](#get-a-list-of-accounts-under-organization) API call                     |
+| `email`          | string  | As email addresses can contain characters with special meaning in URLs, **you have to base64 encode email addresses in API calls**                          |
+
+## Get a list of Accounts under Organization
+
+This API call allow to get all the Organizations accessible to the user represented by the token.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/accounts.json
+```
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/accounts.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned under an `accounts` element with an HTTP Status code of 200.
+
+| KEY             | TYPE    | DESCRIPTION                                         |
+| --------------- | ------- | --------------------------------------------------- |
+| `id`            | string  | ID                                                  |
+| `title`         | string  | Display name                                        |
+| `user_name`     | string  | Account name                                        |
+| `name`          | string  | `product_name` with `portal_title`                  |
+| `product_name`  | string  | Type of the Account                                 |
+| `portal_title`  | string  | Portal title                                        |
+| `is_enterprise` | boolean | True if the account is an EVS account               |
+| `is_auth_api`   | boolean | True if the account is an EVS account with Auth API |
+| `channel_count` | integer | Number of channels under the Account                |
+| `video_count`   | integer | Number of videos under the Account                  |
+
+Example for success response:
+
+```json
+{
+  "accounts": [
+    {
+      "id": "12345678",
+      "title": "Video Portal",
+      "user_name": "abcde8ddeb3",
+      "name": "Streaming Manager for Enterprise - Video Portal",
+      "product_name": "Enterprise Video Streaming",
+      "portal_title": "Video Portal",
+      "is_enterprise": true,
+      "is_auth_api": false,
+      "channel_count": 3,
+      "video_count": 99
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get a list of Channels under Account
+
+```
+GET https://api.video.ibm.com/users/{accountId}/channels.json
+```
+
+See the [Get list of the user's channels](/channel-api-basic-channel-management#get-list-of-the-user's-channels) endpoint.
+
+## Get a list of Organization Administrators
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators.json
+```
+
+### Query Parameters
+
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                                 |
+| ---------- | ------ | ---------- | ----------------------------------------------------------- |
+| `email`    | string | OPTIONAL   | Filter administrators by email. Minimum 3 characters        |
+| `order`    | string | OPTIONAL   | Order administrators. Allowed values: `email`, `email-desc` |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1                    |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50                       |
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned under a `administrators` element with an HTTP Status code of 200.
+
+| KEY            | TYPE    | DESCRIPTION                          |
+| -------------- | ------- | ------------------------------------ |
+| `email`        | string  | Administrator's email address        |
+| `access_level` | string  | Access level: `org_admin`, `limited` |
+
+Additionally there is a `paging` element in the response with the following values:
+
+| KEY          | TYPE   | DESCRIPTION                           |
+| ------------ | ------ | ------------------------------------- |
+| `previous`   | string | Link to the previous page (if exists) |
+| `next`       | string | Link to the next page (if exists)     |
+| `page_count` | number | Number of available pages             |
+| `item_count` | number | Total number of items                 |
+
+Example for success response:
+
+```json
+{
+  "administrators": [
+      {
+        "email": "jen@example.com",
+        "access_level": "org_admin"
+      },
+      {
+        "email": "bob@example.com",
+        "access_level": "limited"
+      }
+    ],
+    "paging": {
+      "page_count": 1,
+      "item_count": 2
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Add a new administrator
+
+```
+POST https://api.video.ibm.com/organizations/{organizationId}/administrators.json
+```
+
+### Parameters
+
+| KEY            | TYPE    | IMPORTANCE | DESCRIPTION                          |
+| -------------- | ------- | ---------- | ------------------------------------ |
+| `email`        | string  | REQUIRED   | Administrator's email address        |
+| `access_level` | string  | REQUIRED   | Access level: `org_admin`, `limited` |
+
+Users added with `limited` access can't access the Organization, you have to add Account/Channel level access right(s) to them. ([Update an administrator's Account level access](#update-an-administrator's-account-level-access), [Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+POST /organizations/ZzzqXZ/administrators.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+email=bill%40example.com&access_level=limited
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| 400 Bad Request         | We couldn't add the new Administrator to your Organization with the provided parameters (eg.: user already added)  |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                |
+| 403 Forbidden           | The provided access token has no access to the user                                                                |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                            |
+
+## Get an administrator
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned with an HTTP Status code of 200.
+
+| KEY            | TYPE    | DESCRIPTION                          |
+| -------------- | ------- | ------------------------------------ |
+| `email`        | string  | Administrator's email address        |
+| `access_level` | string  | Access level: `org_admin`, `limited` |
+
+Example for success response:
+
+```json
+{
+  "email": "jill@example.com",
+  "access_level": "org_admin"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | The provided access token has no access to the user                                     |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                      |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Update an administrator
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+### Parameters
+
+| KEY            | TYPE    | IMPORTANCE | DESCRIPTION                          |
+| -------------- | ------- | ---------- | ------------------------------------ |
+| `email`        | string  | REQUIRED   | Administrator's email address        |
+| `access_level` | string  | REQUIRED   | Access level: `org_admin`, `limited` |
+
+If you update a user's access level she/he will lose any previously set permission under the Organization.
+
+Users modified to `limited` access can't access the Organization, you have to add Account/Channel level access right(s) to them. ([Update an administrator's Account level access](#update-an-administrator's-account-level-access), [Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+email=jill%40example.com&access_level=limited
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't update the Administrator in your Organization with the provided parameters (eg.: invalid `access_level`) |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+
+## Delete an administrator
+
+```
+DELETE https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+Example for the request:
+
+```
+DELETE /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request         | If the Administrator is the last Organization Administrator                                                          |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+## Check if an administrator is the last Organization Administrator in the Organization
+
+There must always be at least one Organization Administrator in an Organization, this call allows to check a user.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/islastadmin.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/islastadmin.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned with an HTTP Status code of 200.
+
+| KEY             | TYPE    | DESCRIPTION                                                                          |
+| --------------- | ------- | ------------------------------------------------------------------------------------ |
+| `is_last_admin` | boolean | True if the Administrator is the last Organization Administrator in the Organization |
+
+Example for success response:
+
+```json
+{
+  "is_last_admin": true
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+## Get an administrator's Account level accesses
+
+This call allows to get every account under the Organization with the access level of the Administrator.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned under an `accounts` element with an HTTP Status code of 200.
+
+| KEY             | TYPE   | DESCRIPTION                                              |
+| --------------- | ------ | -------------------------------------------------------- |
+| `id`            | string | Account ID                                               |
+| `access_level`  | string | Possible values: `account_admin`, `limited`, `no_access` |
+
+`limited_access` means that the Administrator has Channel level access at least one of the Channels under the Account.
+
+Example for success response:
+
+```json
+{
+  "accounts": [
+    {
+      "id": "12345678",
+      "access_level": "no_access"
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+## Get an administrator's Account level accesses
+
+This call allows to get an Account under the Organization with the access level of the Administrator.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned with an HTTP Status code of 200.
+
+| KEY             | TYPE   | DESCRIPTION                                              |
+| --------------- | ------ | -------------------------------------------------------- |
+| `id`            | string | Account ID                                               |
+| `access_level`  | string | Possible values: `account_admin`, `limited`, `no_access` |
+
+`limited_access` means that the Administrator has Channel level access at least one of the Channels under the Account.
+
+Example for success response:
+
+```json
+{
+  "id": "12345678",
+  "access_level": "limited"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+## Update an administrator's Account level access
+
+This call allows to get an Account under the Organization with the access level of the Administrator.
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+### Parameters
+
+| KEY            | TYPE    | IMPORTANCE | DESCRIPTION                                       |
+| -------------- | ------- | ---------- | ------------------------------------------------- |
+| `access_level` | string  | REQUIRED   | Access level: `org_admin`, `limited`, `no_access` |
+
+If you update a user's access level she/he will lose any previously set permission under the Organization.
+
+Users modified to `limited` access can't access the Account, you have to add Channel level access right(s) to them. ([Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+access_level=limited
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                                       |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't update the Administrator's access level with the provided parameters (eg.: Administrator is an Organization Administrator) |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                                    |
+| 403 Forbidden           | The provided access token has no access to the user                                                                                    |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                                     |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                                                |
+
+## List of channels with access levels
+
+This call allows to get the Channels which the Administrator has specific access to. It also returns the access level.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+### Query Parameters
+
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                   |
+| ---------- | ------ | ---------- | --------------------------------------------- |
+| `channel`  | number | OPTIONAL   | Filter channels by name. Minimum 3 characters |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channel-access.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned under a `channels` element with an HTTP Status code of 200.
+
+| KEY            | TYPE   | DESCRIPTION    |
+| -------------- | ------ | -------------- |
+| `id`           | string | Channel ID     |
+| `title`        | string | Channel's name |
+| `access_level` | string | Access level   |
+
+The `access_level` value is one of the followings:
+- `channel.admin`
+- one of the Organization's [Custom Role](custom-roles)
+
+Additionally there is a `paging` element in the response with the following values:
+
+| KEY          | TYPE   | DESCRIPTION                           |
+| ------------ | ------ | ------------------------------------- |
+| `previous`   | string | Link to the previous page (if exists) |
+| `next`       | string | Link to the next page (if exists)     |
+| `page_count` | number | Number of available pages             |
+| `item_count` | number | Total number of items                 |
+
+Example for success response:
+
+```json
+{
+  "channels": [
+    {
+      "id": "123456789",
+      "title": "test channel 1",
+      "access_level": "channel.admin"
+    },
+    {
+      "id": "123456799",
+      "title": "test channel 2",
+      "access_level": "channel.admin"
+    }
+  ],
+  "paging": {
+    "page_count": 1,
+    "item_count": 2
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                                   |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+## Update an administrator's channel level accesses
+
+This call allows to get an Account under the Organization with the access level of the Administrator.
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+### Parameters
+
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                        |
+| -------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `set`    | array  | OPTIONAL   | Key-value pairs of Channel IDs and access levels. Access level: `channel.admin` or the ID of one of the Organization's [Custom Role](custom-roles) |
+| `delete` | array  | OPTIONAL   | List of Channel IDs which you want to revoke access from the Administrator                                                                         |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channel-access.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+set[12348765]=channel.admin&set[12348764]=channel.admin&delete[]=123454&delete[]=123456
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                           |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request         | We couldn't update the Administrator's access level with the provided parameters (eg.: invalid Channel ID) |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                        |
+| 403 Forbidden           | The provided access token has no access to the user                                                        |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                         |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                    |
+
+## Get all Channel access levels
+
+It is possible to set the access level to all Channels under an Account. With this call you can get the access level if it is previously set.
+
+```
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/all-channel-access.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+Example for the request:
+
+```
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/all-channel-access.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success, a set of key-value pairs is returned under a `channels` element with an HTTP Status code of 200.
+
+| KEY                  | TYPE   | DESCRIPTION    |
+| -------------------- | ------ | -------------- |
+| `all_channel_access` | string | Access level   |
+
+The `all_channel_access` value is one of the followings:
+- `channel.admin`
+- one of the Organization's [Custom Role](custom-roles)
+
+Example for success response:
+
+```json
+{
+  "all_channel_access": "channel.admin"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                                  |
+| 403 Forbidden           | The provided access token has no access to the user                                                                  |
+| 404 Not Found           | Administrator doesn't exist under the Organization or she/he does not have an all channel access level               |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                              |
+
+## Set all Channel access levels
+
+```
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/all-channel-access.json
+```
+
+Make sure the `email` parameter is base64 encoded in the URL.
+
+### Parameters
+
+| KEY                  | TYPE   | IMPORTANCE | DESCRIPTION  |
+| -------------------- | ------ | ---------- | ------------ |
+| `all_channel_access` | string | REQUIRED   | Access level |
+
+The `all_channel_access` value must be one of the followings:
+- `channel.admin`
+- one of the Organization's [Custom Role](custom-roles)
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example for the request:
+
+```
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/all-channel-access.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+all_channel_access=channel.admin
+```
+
+The token in the above call is only an example.
+
+### Success response
+
+On success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                                           |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                                        |
+| 403 Forbidden           | The provided access token has no access to the user                                                        |
+| 404 Not Found           | Administrator doesn't exist under the Organization                                                         |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request                    |
