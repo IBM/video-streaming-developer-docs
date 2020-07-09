@@ -1,0 +1,77 @@
+---
+title: Server
+description: Object definition
+---
+
+An ECDN server.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of ECDN server. | 
+| fqdn | [FQDN](../ecdn-api-scalars/FQDN) | NO | NO | Fully Qualified Domain Name of ECDN server. | 
+| location | [Location](../ecdn-api-objects/Location) | NO | NO | Location of server. | 
+| lastCheckIn | [Time](../ecdn-api-scalars/Time) | YES | NO | The last time this server last checked in to the API. Null if server never checked in before. | 
+| online | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether server is online or not (based on it's last check in date). | 
+| health | [ServerHealth](../ecdn-api-objects/ServerHealth) | YES | NO | Health indicators of server. Null (unknown) if server hasn't reported activity recently (turned off or cannot reach ECDN API). | 
+| currentConfiguration | [ServerConfiguration](../ecdn-api-objects/ServerConfiguration) | YES | NO | Current configuration of server. Null if server never checked in before. | 
+| desiredConfiguration | [ServerConfiguration](../ecdn-api-objects/ServerConfiguration) | NO | NO | Desired configuration of server. | 
+| update | [Update](../ecdn-api-objects/Update) | NO | NO | Update status of server. | 
+| hardware | [Hardware](../ecdn-api-objects/Hardware) | YES | NO | Hardware configuration of server. Null if server never checked in before. | 
+| videoDelivery | [VideoDelivery](../ecdn-api-objects/VideoDelivery) | NO | NO | Video delivery statistics of server. | 
+| usages | [ServerUsage](../ecdn-api-objects/ServerUsage) | NO | NO | Resource usages of server. | 
+| created | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | What time was this server created and by whom. | 
+| modified | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | Last time this server was modified and by whom. | 
+
+```graphql
+type Object{
+
+	# ID of ECDN server.
+	id: ID!
+
+	# Fully Qualified Domain Name of ECDN server.
+	fqdn: FQDN!
+
+	# Location of server.
+	location: Location!
+
+	# The last time this server last checked in to the API.
+	# Null if server never checked in before.
+	lastCheckIn: Time
+
+	# Whether server is online or not (based on it's last check in date).
+	online: Boolean!
+
+	# Health indicators of server.
+	# Null (unknown) if server hasn't reported activity recently
+	# (turned off or cannot reach ECDN API).
+	health: ServerHealth
+
+	# Current configuration of server. Null if server never checked in before.
+	currentConfiguration: ServerConfiguration
+
+	# Desired configuration of server.
+	desiredConfiguration: ServerConfiguration!
+
+	# Update status of server.
+	update: Update!
+
+	# Hardware configuration of server. Null if server never checked in before.
+	hardware: Hardware
+
+	# Video delivery statistics of server.
+	videoDelivery: VideoDelivery!
+
+	# Resource usages of server.
+	usages: ServerUsage!
+
+	# What time was this server created and by whom.
+	created: RecordedAction!
+
+	# Last time this server was modified and by whom.
+	modified: RecordedAction!
+
+}
+```
+

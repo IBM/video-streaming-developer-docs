@@ -1,0 +1,25 @@
+---
+title: NetworkConfigurationMode
+description: Enum
+---
+
+The NetworkConfigurationMode enum represents network configuration mode of ECDN server.
+
+### Values
+
+| NAME | DESCRIPTION |
+| - | - |
+| STATIC | STATIC represents a static IP address configuration. |
+| DYNAMIC | DYNAMIC represents address configuration via Dynamic Host Configuration Protocol (DHCP). |
+	
+```graphql
+enum NetworkConfigurationMode{
+
+	# STATIC represents a static IP address configuration.
+	STATIC
+	# DYNAMIC represents address configuration via Dynamic Host Configuration Protocol (DHCP).
+	DYNAMIC
+
+}
+```
+

@@ -26,6 +26,7 @@ const LeftNav = ({ location, homepage, is404 }) => {
     'viewer-authentication-api': 'Viewer Authentication API',
     'player-api': 'Player API',
     'analytics-api': 'Analytics API',
+    'ecdn-api': 'ECDN API',
     'organization-api': 'Organization API',
     'broadcaster-sdk': 'Broadcaster SDK',
     'player-sdk': 'Player SDK',

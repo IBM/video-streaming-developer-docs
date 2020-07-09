@@ -10,6 +10,9 @@
 - title: Native app support
   pages:
     - path: /api-basics-native-apps
+- title: Token revocation
+  pages:
+    - path: /api-basics-token-revocation
 
 - title: Basic channel management
   pages:
@@ -157,6 +160,142 @@
       path: /analytics-api-examples/unique-viewers
     - title: View segments
       path: /analytics-api-examples/view-segments
+
+- title: ECDN API Overview
+  pages:
+    - path: /ecdn-api-overview
+- title: Schema
+  pages:
+    - title: Mutation
+      path: /ecdn-api-schema/Mutation
+    - title: Query
+      path: /ecdn-api-schema/Query
+- title: Scalars
+  pages:
+    - title: Boolean
+      path: /ecdn-api-scalars/Boolean
+    - title: Byte
+      path: /ecdn-api-scalars/Byte
+    - title: BytePerSec
+      path: /ecdn-api-scalars/BytePerSec
+    - title: Count
+      path: /ecdn-api-scalars/Count
+    - title: EmailAddress
+      path: /ecdn-api-scalars/EmailAddress
+    - title: FQDN
+      path: /ecdn-api-scalars/FQDN
+    - title: Float
+      path: /ecdn-api-scalars/Float
+    - title: ID
+      path: /ecdn-api-scalars/ID
+    - title: IPv4
+      path: /ecdn-api-scalars/IPv4
+    - title: IPv4Mask
+      path: /ecdn-api-scalars/IPv4Mask
+    - title: IPv4Range
+      path: /ecdn-api-scalars/IPv4Range
+    - title: Int
+      path: /ecdn-api-scalars/Int
+    - title: PatchLevel
+      path: /ecdn-api-scalars/PatchLevel
+    - title: SemanticVersion
+      path: /ecdn-api-scalars/SemanticVersion
+    - title: ServerAddress
+      path: /ecdn-api-scalars/ServerAddress
+    - title: String
+      path: /ecdn-api-scalars/String
+    - title: Time
+      path: /ecdn-api-scalars/Time
+    - title: TransportAddress
+      path: /ecdn-api-scalars/TransportAddress
+    - title: Void
+      path: /ecdn-api-scalars/Void
+- title: Objects
+  pages:
+    - title: Account
+      path: /ecdn-api-objects/Account
+    - title: BytePoint
+      path: /ecdn-api-objects/BytePoint
+    - title: CPUUsage
+      path: /ecdn-api-objects/CPUUsage
+    - title: ClientRestriction
+      path: /ecdn-api-objects/ClientRestriction
+    - title: ContentDeliveryHealth
+      path: /ecdn-api-objects/ContentDeliveryHealth
+    - title: DataTransferPoint
+      path: /ecdn-api-objects/DataTransferPoint
+    - title: Hardware
+      path: /ecdn-api-objects/Hardware
+    - title: Interface
+      path: /ecdn-api-objects/Interface
+    - title: Location
+      path: /ecdn-api-objects/Location
+    - title: NetworkUsage
+      path: /ecdn-api-objects/NetworkUsage
+    - title: OperationsHealth
+      path: /ecdn-api-objects/OperationsHealth
+    - title: PercentagePoint
+      path: /ecdn-api-objects/PercentagePoint
+    - title: RecordedAction
+      path: /ecdn-api-objects/RecordedAction
+    - title: Region
+      path: /ecdn-api-objects/Region
+    - title: Report
+      path: /ecdn-api-objects/Report
+    - title: ScalarPoint
+      path: /ecdn-api-objects/ScalarPoint
+    - title: Server
+      path: /ecdn-api-objects/Server
+    - title: ServerConfiguration
+      path: /ecdn-api-objects/ServerConfiguration
+    - title: ServerHealth
+      path: /ecdn-api-objects/ServerHealth
+    - title: ServerUsage
+      path: /ecdn-api-objects/ServerUsage
+    - title: Update
+      path: /ecdn-api-objects/Update
+    - title: User
+      path: /ecdn-api-objects/User
+    - title: VideoDelivery
+      path: /ecdn-api-objects/VideoDelivery
+- title: Enums
+  pages:
+    - title: CacheDiskStatus
+      path: /ecdn-api-enums/CacheDiskStatus
+    - title: ConfigurationMode
+      path: /ecdn-api-enums/ConfigurationMode
+    - title: ConfigurationStatus
+      path: /ecdn-api-enums/ConfigurationStatus
+    - title: Filter
+      path: /ecdn-api-enums/Filter
+    - title: Granularity
+      path: /ecdn-api-enums/Granularity
+    - title: Health
+      path: /ecdn-api-enums/Health
+    - title: Hypervisor
+      path: /ecdn-api-enums/Hypervisor
+    - title: NetworkConfigurationMode
+      path: /ecdn-api-enums/NetworkConfigurationMode
+    - title: ReportBreakdown
+      path: /ecdn-api-enums/ReportBreakdown
+    - title: ReportField
+      path: /ecdn-api-enums/ReportField
+    - title: Role
+      path: /ecdn-api-enums/Role
+- title: Input Objects
+  pages:
+    - title: BatchLocationInput
+      path: /ecdn-api-input-objects/BatchLocationInput
+    - title: BatchServerInput
+      path: /ecdn-api-input-objects/BatchServerInput
+    - title: ClientRestrictionInput
+      path: /ecdn-api-input-objects/ClientRestrictionInput
+    - title: InterfaceInput
+      path: /ecdn-api-input-objects/InterfaceInput
+- title: Unions
+  pages:
+    - title: LocationsParent
+      path: /ecdn-api-unions/LocationsParent
 
 - title: Overview
   pages:

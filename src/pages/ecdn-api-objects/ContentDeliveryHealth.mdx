@@ -1,0 +1,39 @@
+---
+title: ContentDeliveryHealth
+description: Object definition
+---
+
+Health of ECDN server's content delivery.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| aggregated | [Health](../ecdn-api-enums/Health) | NO | NO | Aggregated health of services affecting content delivery. - GOOD if all services are in GOOD state. - WARNING if at least one is in WARNING and none of them are in POOR state. - POOR if at least one is in POOR state. | 
+| upstreams | [Health](../ecdn-api-enums/Health) | NO | NO | Upstream servers health. - GOOD if all upstreams are reachable. - WARNING if not all but at least one of them is reachable. - POOR if none of them are reachable. | 
+| caching | [Health](../ecdn-api-enums/Health) | NO | NO | Health of caching service running on ECDN server. - GOOD if it's up and running, certificate is valid. - WARNING if it's up and running, but certificate will expire soon. - POOR if it's not running, certificate is invalid or expired. | 
+
+```graphql
+type Object{
+
+	# Aggregated health of services affecting content delivery.
+	# - GOOD if all services are in GOOD state.
+	# - WARNING if at least one is in WARNING and none of them are in POOR state.
+	# - POOR if at least one is in POOR state.
+	aggregated: Health!
+
+	# Upstream servers health.
+	# - GOOD if all upstreams are reachable.
+	# - WARNING if not all but at least one of them is reachable.
+	# - POOR if none of them are reachable.
+	upstreams: Health!
+
+	# Health of caching service running on ECDN server.
+	# - GOOD if it's up and running, certificate is valid.
+	# - WARNING if it's up and running, but certificate will expire soon.
+	# - POOR if it's not running, certificate is invalid or expired.
+	caching: Health!
+
+}
+```
+

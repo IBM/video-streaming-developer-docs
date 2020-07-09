@@ -25,7 +25,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 
 | KEY      | TYPE   | DESCRIPTION                                                                   |
 | -------- | ------ | ----------------------------------------------------------------------------- |
-| `locked` | string | Returns `"TRUE"` if the page lock is enabled on the channel, otherwise `"FALSE"`. |
+| `locked` | string | Returns `TRUE` if the page lock is enabled on the channel, otherwise `FALSE`. |
 
 ### Error responses
 
@@ -53,7 +53,7 @@ The parameters for the PUT request:
 
 | PARAMETER | TYPE   | IMPORTANCE | DESCRIPTION                                                                              |
 | --------- | ------ | ---------- | ---------------------------------------------------------------------------------------- |
-| `locked`  | string | REQUIRED   | Sets page lock on channel when value is `"TRUE"`. Removes page lock when value is `"FALSE"`. |
+| `locked`  | string | REQUIRED   | Sets page lock on channel when value is `TRUE`. Removes page lock when value is `FALSE`. |
 
 ### Success response
 

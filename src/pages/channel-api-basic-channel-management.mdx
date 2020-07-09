@@ -31,27 +31,16 @@ On success, a set of key-value pairs is returned under a `channel` element.
 | `url`               | string  | Long web URL of the channel: `https://video.ibm.com/channel/{channel_id}`                                                                                                                                                                                                 |
 | `broadcast_urls`    | array   | Array of RTMP URLs (strings) where the client can broadcast. Client should fall-back to the second/third one if it provided and the previous element seems failing. Provided only in case of client explicitly asks for with a `broadcaster` detail_level query parameter. |
 | `status`            | string  | Possible values: `online` or `offline`. `online` means that the stream is viewable on the IBM Video Streaming website.                                                                                                                                                     |
-| `description`       | string  |                                                                                                                                                                                                                                                                            |
+| `description`       | string  | Channel description                                                                                                                                                                                                                                                                           |
 | `default`           | boolean | Key is returned with `true` value if this is the default channel for the user.                                                                                                                                                                                             |
 | `owner`             | object  | A set of key-value pairs containing information about the owner with the following attributes: `id`, `username`, `picture`                                                                                                                                                 |
-| `owner.id`          | string  | The user ID of the channel owner                                                                                                                                                                                                                                           |
-| `owner.username`    | string  | The username of the channel owner                                                                                                                                                                                                                                          |
-| `owner.picture`     | string  | The URL of the image                                                                                                                                                                                                                                                       |
+| `owner`.`id`          | string  | The user ID of the channel owner                                                                                                                                                                                                                                           |
+| `owner`.`username`    | string  | The username of the channel owner                                                                                                                                                                                                                                          |
+| `owner`.`picture`     | string  | The URL of the image                                                                                                                                                                                                                                                       |
 | `authority`         | object  | A set of key-value pairs containing information about the authority of the user to access the channel. Includes the following attributes: `reason`                                                                                                                         |
-| `authority.reason`  | string  | Possible values are: `own`, `shared`                                                                                                                                                                                                                                       |
-| `authority.picture` | object  | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs.                                                                                                                                                   |
+| `authority`.`reason`  | string  | Possible values are: `own`, `shared`                                                                                                                                                                                                                                       |
+| `picture`           | object  | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs.                                                                                                                                                   |
 | `live_thumbnail`    | string  | Listed when the channel is online                                                                                                                                                                                                                                          |
-
-The paging information can be found inside the paging element.
-
-| KEY    | TYPE   | DESCRIPTION |
-| ------ | ------ | ----------- |
-| prev   | object |             |
-| href   | string |             |
-| actual | object |             |
-| href   | string |             |
-| next   | object |             |
-| href   | string |             |
 
 Example for pagination data in success response:
 
@@ -70,6 +59,8 @@ Example for pagination data in success response:
   }
 }
 ```
+
+The `previous` and `next` elements are optional.
 
 ### Error responses
 
@@ -94,7 +85,7 @@ The parameters for the GET request:
 
 | PARAMETER    | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ------------ | ------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| detail_level | string | OPTIONAL   | Verbosity level. Possible values: minimal, owner. In case of the minimal verbosity level, the result set is limited to the id, title, owner, picture and locks fields. If the channel is protected (see Security section), only minimal data can be retrieved without a valid access token. The owner detail level always requires a valid access token, and it will also return more sensitive information about the channel (for example the DHLS link if this feature is available for you). |
+| `detail_level` | string | OPTIONAL   | Verbosity level. Possible values: `minimal`, `owner`. In case of the `minimal` verbosity level, the result set is limited to the id, title, owner, picture and locks fields. If the channel is protected (see Security section), only minimal data can be retrieved without a valid access token. The `owner` detail level always requires a valid access token, and it will also return more sensitive information about the channel (for example the DHLS link if this feature is available for you). |
 
 ### Success response
 
@@ -102,36 +93,33 @@ On success, a set of key-value pairs is returned under a channel element.
 
 | NAME               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                                        |
 | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                 | string |                                                                                                                                                                                                                                                                                                                                    |
-| title              | string |                                                                                                                                                                                                                                                                                                                                    |
-| picture            | object | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs.                                                                                                                                                                                                           |
-| description        | string | The description of the channel                                                                                                                                                                                                                                                                                                     |
-| tags               | array  | Array of strings containing the tags applied to the channel                                                                                                                                                                                                                                                                        |
-| url                | string | Long web URL of the channel: https://video.ibm.com/channel/{channel_id}                                                                                                                                                                                                                                                           |
-| status             | string | Possible values are live or offair                                                                                                                                                                                                                                                                                                 |
-| last_broadcast_at  | number | Time of last broadcast returned as a Unix timestamp                                                                                                                                                                                                                                                                                |
-| tinyurl            | string | Shortened web URL of the channel (https://ustre.am/{channel_id}) - suitable for sharing on Twitter / Facebook                                                                                                                                                                                                                      |
-| stats              | object | A set of key-value pairs containing information about the autorecord settings with the following attributes: follower, viewer_total, viewer, video                                                                                                                                                                                 |
-|                    |        |                                                                                                                                                                                                                                                                                                                                    |
-| stats.follower     | number | Number of followers of the channel returned as an integer                                                                                                                                                                                                                                                                          |
-| stats.viewer_total | number | Total viewer number returned as an integer                                                                                                                                                                                                                                                                                         |
-| stats.viewer       | number | Number of current viewers returned as an integer                                                                                                                                                                                                                                                                                   |
-| stats.video        | number | Number of videos on the channel returned as an integer                                                                                                                                                                                                                                                                             |
-| thumbnail.live     | number |                                                                                                                                                                                                                                                                                                                                    |
-| autorecord         | object | A set of key-value pairs containing information about the autorecord settings with the following attributes: type, days                                                                                                                                                                                                            |
-| autorecord.type    |        |                                                                                                                                                                                                                                                                                                                                    |
-| autorecord.days    |        |                                                                                                                                                                                                                                                                                                                                    |
-| stream             | object | A set of key-value pairs containing information about the stream settings with the following attributes: hls, dhls                                                                                                                                                                                                                 |
-| stream.hls         | ?      |                                                                                                                                                                                                                                                                                                                                    |
-| stream.dhls        |        |                                                                                                                                                                                                                                                                                                                                    |
-| owner              | object | A set of key-value pairs containing information about the owner with the following attributes: id, username, picture                                                                                                                                                                                                               |
-| owner.id           | string | The user id of the channel owner                                                                                                                                                                                                                                                                                                   |
-| owner.username     | string | The username of the channel owner                                                                                                                                                                                                                                                                                                  |
-| owner.picture      | string | The URL of the owner’s profile picture                                                                                                                                                                                                                                                                                             |
-| locks              | object | A set of key-value pairs containing information about locks applied to the channel. It can be empty when none of the locks are enabled, or contains one or more of the following attributes: embed, hash, password                                                                                                                 |
-| locks.embed        | array  |                                                                                                                                                                                                                                                                                                                                    |
-| locks.hash         | array  | 3rd party viewer authentication is enabled for the channel. The value of the type attribute can be either basic or advanced. In case of advanced authentication, the auth_method attribute can contain twostepauth or samlsso for IBM Video Streaming supported authentication schemes or custom for other authentication methods. |
-| locks.password     | array  | Empty array if channel is password protected                                                                                                                                                                                                                                                                                       |
+| `id`                 | string | Identifier of the channel                                                                                                                                                                                                                                                                                                          |
+| `title`              | string | Title of the channel                                                                                                                                                                                                                                                                                                                                   |
+| `picture`            | object | A set of key-value pairs, each parameter corresponding to an image size (defined in the key). Values are the image URLs.                                                                                                                                                                                                           |
+| `description`        | string | The description of the channel                                                                                                                                                                                                                                                                                                     |
+| `tags`               | array  | Array of strings containing the tags applied to the channel                                                                                                                                                                                                                                                                        |
+| `url`                | string | Long web URL of the channel: https://video.ibm.com/channel/{channel_id}                                                                                                                                                                                                                                                            |
+| `status`             | string | Possible values are live or offair                                                                                                                                                                                                                                                                                                 |
+| `last_broadcast_at`  | number | Time of last broadcast returned as a Unix timestamp                                                                                                                                                                                                                                                                                |
+| `tinyurl`            | string | Shortened web URL of the channel (https://ustre.am/{channel_id}) - suitable for sharing on Twitter / Facebook                                                                                                                                                                                                                      |
+| `stats`              | object | A set of key-value pairs containing information about the autorecord settings with the following attributes: follower, viewer_total, viewer, video                                                                                                                                                                                 |
+| `stats`.`viewer_total` | number | Total viewer number returned as an integer                                                                                                                                                                                                                                                                                         |
+| `stats`.`viewer`       | number | Number of current viewers returned as an integer                                                                                                                                                                                                                                                                                   |
+| `thumbnail`.`live`     | string |                                                                                                                                                                                                                                                                                                                                    |
+| `autorecord`         | object | A set of key-value pairs containing information about the autorecord settings with the following attributes: type, days                                                                                                                                                                                                            |
+| `autorecord`.`type`    |        |                                                                                                                                                                                                                                                                                                                                    |
+| `autorecord`.`days`    |        |                                                                                                                                                                                                                                                                                                                                    |
+| `stream`             | object | A set of key-value pairs containing information about the stream settings with the following attributes: hls, dhls                                                                                                                                                                                                                 |
+| `stream`.`hls`         | string | HLS url                                                                                                                                                                                                                                                                                                                                   |
+| `stream`.`dhls`        | string | DHLS url                                                                                                                                                                                                                                                                                                                                   |
+| `owner`              | object | A set of key-value pairs containing information about the owner with the following attributes: id, username, picture                                                                                                                                                                                                               |
+| `owner`.`id`           | string | The user id of the channel owner                                                                                                                                                                                                                                                                                                   |
+| `owner`.`username`     | string | The username of the channel owner                                                                                                                                                                                                                                                                                                  |
+| `owner`.`picture`      | string | The URL of the owner’s profile picture                                                                                                                                                                                                                                                                                             |
+| `locks`              | object | A set of key-value pairs containing information about locks applied to the channel. It can be empty when none of the locks are enabled, or contains one or more of the following attributes: embed, hash, password                                                                                                                 |
+| `locks`.`embed`        | array  |                                                                                                                                                                                                                                                                                                                                    |
+| `locks`.`hash`         | array  | 3rd party viewer authentication is enabled for the channel. The value of the type attribute can be either basic or advanced. In case of advanced authentication, the auth_method attribute can contain twostepauth or samlsso for IBM Video Streaming supported authentication schemes or custom for other authentication methods. |
+| `locks`.`password`     | array  | Empty array if channel is password protected                                                                                                                                                                                                                                                                                       |
 
 Example for success response:
 
@@ -190,9 +178,9 @@ The parameters for the POST request:
 
 | PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION                          |
 | ----------- | ------ | ---------- | ------------------------------------ |
-| title       | string | REQUIRED   | Channel title                        |
-| description | string | OPTIONAL   | Channel description                  |
-| tags        | string | OPTIONAL   | Comma separated list of channel tags |
+| `title`       | string | REQUIRED   | Channel title                        |
+| `description` | string | OPTIONAL   | Channel description                  |
+| `tags`        | string | OPTIONAL   | Comma separated list of channel tags |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -215,10 +203,10 @@ On success, a set of key-value pairs is returned under a channel element.
 
 | KEY      | TYPE   | DESCRIPTION                                                                            |
 | -------- | ------ | -------------------------------------------------------------------------------------- |
-| id       | string | The unique id of the channel                                                           |
-| title    | string | Channel title                                                                          |
-| url      | string | URL of the channel with string id: https://video.ibm.com/channel/{channel_id:string}  |
-| tiny_url | string | URL of the channel with numeric id: https:/video.ibm.com/channel/id/{channel_id:num} |
+| `id`       | string | The unique id of the channel                                                           |
+| `title`    | string | Channel title                                                                          |
+| `url`      | string | URL of the channel with string id: https://video.ibm.com/channel/{channel_id:string}  |
+| `tiny_url` | string | URL of the channel with numeric id: https:/video.ibm.com/channel/id/{channel_id:num} |
 
 ### Error responses
 
@@ -226,7 +214,7 @@ Possible error responses:
 
 | HTTP RESPONSE CODE      | ERROR VALUE            | ERROR CONDITIONS                                                                        |
 | ----------------------- | ---------------------- | --------------------------------------------------------------------------------------- |
-| 400 Bad Request         | input_validation_error | The channel title is not valid.                                                         |
+| 400 Bad Request         | `input_validation_error` | The channel title is not valid.                                                         |
 | 401 Unauthorized        |                        | The provided access token is missing, revoked, expired or malformed                     |
 | 409 Conflict            |                        | The channel title or the channel URL is already in use                                  |
 | 503 Service Unavailable |                        | There is a temporary error on the server which makes it impossible to serve the request |
@@ -245,9 +233,9 @@ The parameters for the PUT request:
 
 | PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION                          |
 | ----------- | ------ | ---------- | ------------------------------------ |
-| title       | string | REQUIRED   | Channel title                        |
-| description | string | OPTIONAL   | Channel description                  |
-| tags        | string | OPTIONAL   | Comma separated list of channel tags |
+| `title`       | string | REQUIRED   | Channel title                        |
+| `description` | string | OPTIONAL   | Channel description                  |
+| `tags`        | string | OPTIONAL   | Comma separated list of channel tags |
 
 ### Success response
 
@@ -259,10 +247,10 @@ Possible error responses:
 
 | HTTP RESPONSE CODE      | ERROR VALUE            | ERROR CONDITIONS                                                                        |
 | ----------------------- | ---------------------- | --------------------------------------------------------------------------------------- |
-| 400 Bad Request         | input_validation_error | Validation failed                                                                       |
+| 400 Bad Request         | `input_validation_error` | Validation failed                                                                       |
 | 401 Unauthorized        |                        | The provided access token is missing, revoked, expired or malformed                     |
-| 403 Forbidden           | lack_of_ownership      | The API user is not allowed to manage the given channel                                 |
-| 404 Not Found           | not_found              | Channel not found                                                                       |
+| 403 Forbidden           | `lack_of_ownership`      | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`              | Channel not found                                                                       |
 | 503 Service Unavailable |                        | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Delete a channel
@@ -288,6 +276,6 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE       | ERROR CONDITIONS                                                                        |
 | ----------------------- | ----------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        |                   | The provided access token is missing, revoked, expired or malformed                     |
-| 403 Forbidden           | lack_of_ownership | The API user is not allowed to manage the given channel                                 |
-| 404 Not Found           | not_found         | Channel not found                                                                       |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                   | There is a temporary error on the server which makes it impossible to serve the request |

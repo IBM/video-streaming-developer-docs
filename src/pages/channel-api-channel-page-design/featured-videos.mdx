@@ -25,27 +25,52 @@ The query parameters for the GET request:
 
 On success, a set of key-value pairs is returned under a videos element.
 
-| KEY                  | TYPE   | DESCRIPTION |
-| -------------------- | ------ | ----------- |
-| `id`                 | string |             |
-| `title`              | string |             |
-| `url`                | string |             |
-| `length`             | string |             |
-| `created_at`         | number |             |
-| `added_at`           | number |             |
-| `file_size`          | string |             |
-| `views`              | number |             |
-| `thumbnail`          | object |             |
-| `links`              | object |             |
-| `links.channel`      | object |             |
-| `links.channel.href` | string |             |
-| `links.channel.id`   | string |             |
+| KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`              | string | Unique ID of the video                                                                                                                                                                                                                                                                                                |
+| `title`           | string | Video title                                                                                                                                                                                                                                                                                                           |
+| `description`     | string | Video description                                                                                                                                                                                                                                                                                                     |
+| `url`             | string | Video URL                                                                                                                                                                                                                                                                                                             |
+| `length`          | string | Video length in seconds                                                                                                                                                                                                                                                                                               |
+| `created_at`      | number | The date and time when the video was created (Unix timestamp). By default, it has the same value as the `added_at` field, but it can be edited by channel admins to better reflect the real content creation date and time for the viewers.                                                                           |
+| `added_at`        | number | The date and time when the video was added (uploaded or recorded) to IBM Video Streaming (Unix timestamp)                                                                                                                                                                                                             |
+| `file_size`       | string | Video file size in bytes                                                                                                                                                                                                                                                                                              |
+| `views`           | number | Number views on the video                                                                                                                                                                                                                                                                                             |
+| `thumbnail`       | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`)                                                                                                                        |
+| `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
+| `links`           | object | Contains information about the channel of the video |
 
 Example for success response:
 
-```
-
-```
+```json
+{
+  "videos": [
+    {
+      "id": "111",
+      "title": "Title of video",
+      "description": "Description of video",
+      "url": "http://www.ustream.tv/recorded/111",
+      "length": "12345.123456",
+      "created_at": 1399388736,
+      "added_at": 1399388736,
+      "file_size": "120000",
+      "views": 0,
+      "thumbnail": {
+        "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+      },
+      "media_urls": {
+        "flv": "http://tcdn.ustream.tv/video/111"
+      },
+      "links": {
+        "channel": {
+          "href": "https://api.video.ibm.com/channels/1.json",
+          "id": "1"
+        }
+      }
+    },
+    { "...": "..." }
+  ]
+}
 
 The paging information can be found under the paging key.
 Example:
@@ -86,7 +111,7 @@ The parameters for the PUT request:
 
 | PARAMETER | TYPE    | IMPORTANCE | DESCRIPTION                                           |
 | --------- | ------- | ---------- | ----------------------------------------------------- |
-| video_ids | `array` | REQUIRED   | Video IDs to be added to the channel featured videos. |
+| `video_ids` | array | REQUIRED   | Video IDs to be added to the channel featured videos. |
 
 Example:
 

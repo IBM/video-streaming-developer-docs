@@ -3,6 +3,18 @@ title: Security Extension
 description: Security Extension
 ---
 
-## Security Extension
+We recently dropped support of deprecated versions of TLS, and only support TLS 1.2 SSL connection to our services. Older Android versions (below 5.0) do not support TLS 1.2 out of the box, if you are targeting these versions you need to include and configure an extra dependency ([Android Security Provider](https://developer.android.com/training/articles/security-gms-provider.html)):
 
-Content needed
+```gradle
+implementation "com.google.android.gms:play-services-base:$actualVersionOfPlayServices"
+```
+
+```java
+import com.google.android.gms.security.ProviderInstaller;
+
+//...
+
+if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+    ProviderInstaller.installIfNeededAsync(context, listener);
+}
+```

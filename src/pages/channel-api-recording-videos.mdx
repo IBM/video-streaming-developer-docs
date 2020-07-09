@@ -19,8 +19,9 @@ This request has no parameters.
 
 On success a response with HTTP status “200 OK” is returned with the following key-value pair.
 
-|KEY|TYPE|DESCRIPTION|
-|time|number|Time limit in seconds|
+| KEY | TYPE | DESCRIPTION |
+| --- | ---- | ----------- |
+| `time` | number | Time limit in seconds |
 
 ### Error responses
 
@@ -69,10 +70,11 @@ Example for success response:
 
 Possible error responses:
 
-|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
-|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
-|404 Not Found|`not_found`|Channel was not found|
-|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized | | The provided access token is missing, revoked, expired or malformed |
+| 404 Not Found | `not_found` | Channel was not found |
+| 503 Service Unavailable | | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Start/stop recording
 
@@ -107,8 +109,8 @@ On success a response with HTTP status "202 Accepted" is returned. If the channe
 
 | KEY | TYPE   | DESCRIPTION                                   |
 | --- | ------ | --------------------------------------------- |
-| id  | string | Unique ID of the video that is being recorded |
-| url | string | Video URL                                     |
+| `id`  | string | Unique ID of the video that is being recorded |
+| `url` | string | Video URL                                     |
 
 There's no direct feedback on the results of the operation.
 
@@ -130,7 +132,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
 | ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
-| 404 Not Found           | not_found   | Channel was not found                                                                   |
+| 404 Not Found           | `not_found` | Channel was not found                                                                   |
 | 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Control auto-recording

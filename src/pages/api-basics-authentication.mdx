@@ -36,7 +36,7 @@ The authorization endpoint is a secure web page that authenticates the user. The
 
 ### Parameters
 
-The parameters below specify the behavior of the authorization endpoint. They have to be set in GET or POST HTTP parameters.
+The parameters below specify the behavior of the authorization endpoint. These have to be set in GET or POST HTTP parameters.
 
 <Title>Supported OAuth 2.0 standard parameters</Title>
 
@@ -46,7 +46,7 @@ The parameters below specify the behavior of the authorization endpoint. They ha
 | `client_id`     | string | REQUIRED                                                                                 | 40-character long string that identifies the client. Provided by IBM Video Streaming.                                                                                                                          |
 | `redirect_uri`  | string | REQUIRED                                                                                 | The URI where the browser will redirect after the authentication process. This URI must be registered at IBM Video Streaming.                                                                                  |
 | `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri to maintain state between the request and callback. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.     |
-| `scope`         | string | OPTIONAL                                                                                 | This value is offline for `offline` scope, `broadcaster` for broadcaster scope, or space separated URL encoded list of these strings                                                                           |
+| `scope`         | string | OPTIONAL                                                                                 | Whitelist-separated list of the requested scopes.                                                                           |
 
 <Title>IBM Video Streaming specific extra parameters</Title>
 
@@ -251,7 +251,7 @@ JSON response on success:
 
 Previous token endpoint response:
 
-```
+```json
 {
   "access_token": "ab345cdef123ef1267890abcdef04567890abcd1",
   "refresh_token": "cb345cdef123ef1267890abcdef04567890abcd1",
@@ -273,7 +273,7 @@ grant_type=refresh_token&client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD&refr
 
 Refresh token response:
 
-```
+```json
 {
   "access_token": "db345cdef123ef1267890abcdef04567890abcd1",
   "refresh_token": "eb345cdef123ef1267890abcdef04567890abcd1",

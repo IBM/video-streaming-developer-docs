@@ -1,0 +1,17 @@
+---
+title: TransportAddress
+description: Scalar
+---
+
+### TransportAddress
+The TransportAddress scalar is a Layer 4 (Transport) address.
+It consists of a Layer 4 protocol (TCP/UDP), a server address
+(IP address/FQDN) and a port (1-65535) in form of: `proto://serveraddress:port`.
+i.e: `tcp://192.168.100.50:8080`, `udp://logcollector.example.intranet:10210`.
+
+
+```graphql
+scalar TransportAddress
+```
+
+

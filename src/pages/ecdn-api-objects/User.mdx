@@ -1,0 +1,34 @@
+---
+title: User
+description: Object definition
+---
+
+A user.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of user. | 
+| email | [EmailAddress](../ecdn-api-scalars/EmailAddress) | NO | NO | Email address of user. | 
+| role | [Role](../ecdn-api-enums/Role) | NO | NO | Role of user. | 
+| account | [Account](../ecdn-api-objects/Account) | NO | NO | Account of user. | 
+
+```graphql
+type Object{
+
+	# ID of user.
+	id: ID!
+
+	# Email address of user.
+	email: EmailAddress!
+
+	# Role of user.
+	role: Role!
+
+	# Account of user.
+	account: Account!
+
+}
+```
+

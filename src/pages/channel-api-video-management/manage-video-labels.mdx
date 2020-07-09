@@ -154,9 +154,10 @@ On success, a response with HTTP status "204 No Content" is returned.
 
 Possible error responses:
 
-|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
-|401 Unauthorized|`invalid_token`|The provided access token is missing, revoked, expired or malformed|
-|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized | `invalid_token` | The provided access token is missing, revoked, expired or malformed |
+| 503 Service Unavailable | | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Get the labels of a video
 
@@ -232,11 +233,12 @@ On success, a response with HTTP status "204 No Content" is returned.
 
 Possible error responses:
 
-|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
-|404 Bad Request|bad_request|Label IDs are not an an array|
-|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
-|404 Not Found|not_found|Video was not found|
-|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 404 Bad Request | `bad_request` | Label IDs are not an an array |
+| 401 Unauthorized | | The provided access token is missing, revoked, expired or malformed |
+| 404 Not Found | `not_found` | Video was not found |
+| 503 Service Unavailable | | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Remove labels from a video
 
@@ -267,14 +269,3 @@ Possible error responses:
 | 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
 | 404 Not Found           | `not_found` | Channel was not found                                                                   |
 | 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
-
-Possible error responses:
-
-| HTTP RESPONSE CODE      | ERROR VALUE              | ERROR CONDITIONS                                                                        |
-| ----------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
-| 400 Bad Request         | `input_validation_error` | Validation failed                                                                       |
-| 401 Unauthorized        | `invalid_token`          | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`        | The user does not have the benefit                                                      |
-| 403 Forbidden           | `lack_of_ownership`      | The API user is not allowed to manage the given channel                                 |
-| 404 Not Found           | `not_found`              | Channel was not found                                                                   |
-| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request |

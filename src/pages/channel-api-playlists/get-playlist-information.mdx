@@ -19,7 +19,7 @@ The parameters for the GET request:
 | ----------------------- | ------- | ---------- | ----------------------------------------------------------------------------- |
 | `page`                  | integer | OPTIONAL   | Requested page number (value is 1 by default)                                 |
 | `pagesize`              | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                         |
-| `filter[include_empty]` | integer | OPTIONAL   | If the value is true then empty playlists will be returned (false by default) |
+| `filter[include_empty]` | string  | OPTIONAL   | If the value is `true` then empty playlists will be returned (`false` by default) |
 
 ### Success response
 
@@ -29,9 +29,9 @@ On success, a set of key-value pairs is returned under a `playlists` element.
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`             | string | Unique ID of the playlist.                                                                                                                                                                 |
 | `title`          | string | Title of the playlist                                                                                                                                                                      |
-| `behavior`       | string | Possible values: `static, dynamic`                                                                                                                                                         |
+| `behavior`       | string | Possible values: `static`, `dynamic`                                                                                                                                                         |
 | `total_duration` | string | The sum of the duration of the videos added to the playlist in seconds.                                                                                                                    |
-| `thumbnail`      | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180, image_640x360, image_1920x1080`) |
+| `thumbnail`      | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`) |
 | `created_at`     | number | Time of creation returned as a Unix timestamp                                                                                                                                              |
 | `updated_at`     | number | Time of last update returned as a Unix timestamp                                                                                                                                           |
 | `channel_id`     | number | The unique ID of the channel                                                                                                                                                               |
@@ -106,9 +106,9 @@ On success, a set of key-value pairs is returned under a `playlists` element.
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`             | string | Unique ID of the playlist.                                                                                                                                                                 |
 | `title`          | string | Title of the playlist                                                                                                                                                                      |
-| `behavior`       | string | Possible values: `static` (...), `...` (...)                                                                                                                                               |
+| `behavior`       | string | Possible values: `static`, `dynamic`                                                                                                                                               |
 | `total_duration` | string | The sum of the duration of the videos added to the playlist in seconds                                                                                                                     |
-| `thumbnail`      | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180, image_640x360, image_1920x1080`) |
+| `thumbnail`      | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`) |
 | `created_at`     | number | Time of creation returned as a Unix timestamp                                                                                                                                              |
 | `updated_at`     | number | Time of last update returned as a Unix timestamp                                                                                                                                           |
 | `channel_id`     | number | The unique ID of the channel                                                                                                                                                               |

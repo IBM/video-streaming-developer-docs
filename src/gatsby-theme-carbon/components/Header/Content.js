@@ -23,6 +23,10 @@ export default [
         title: 'Analytics API',
       },
       {
+        path: '/ecdn-api-overview',
+        title: 'ECDN API',
+      },
+      {
         path: '/organization-api-getting-started',
         title: 'Organization API',
       },

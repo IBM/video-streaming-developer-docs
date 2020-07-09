@@ -1,0 +1,38 @@
+---
+title: Region
+description: Object definition
+---
+
+A geographical region.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of region. | 
+| name | [String](../ecdn-api-scalars/String) | NO | NO | Name of region. | 
+| primaryMidgress | [FQDN](../ecdn-api-scalars/FQDN) | NO | NO | Primary midgress of region. | 
+| backupMidgress | [FQDN](../ecdn-api-scalars/FQDN) | NO | NO | Backup midgress of region. | 
+| children | [Location](../ecdn-api-objects/Location) | NO | YES | (direct) Child locations in region. | 
+
+```graphql
+type Object{
+
+	# ID of region.
+	id: ID!
+
+	# Name of region.
+	name: String!
+
+	# Primary midgress of region.
+	primaryMidgress: FQDN!
+
+	# Backup midgress of region.
+	backupMidgress: FQDN!
+
+	# (direct) Child locations in region.
+	children: [Location!]
+
+}
+```
+

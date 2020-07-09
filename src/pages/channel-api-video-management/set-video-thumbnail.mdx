@@ -37,10 +37,11 @@ On success, a response with HTTP status "204 No Content" is returned.
 
 Possible error responses:
 
-|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
-|401 Unauthorized||The provided access token is missing, revoked, expired or malformed|
-|404 Not Found|`not_found`|Video was not found|
-|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized | | The provided access token is missing, revoked, expired or malformed |
+| 404 Not Found | `not_found` | Video was not found |
+| 503 Service Unavailable | | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Select a frame for video thumbnail
 
@@ -54,9 +55,9 @@ POST https://api.video.ibm.com/videos/{video_id}/thumbnail/frame.json
 
 The parameters for the POST request:
 
-|PARAMETER|TYPE|IMPORTANCE|DESCRIPTION|
-|-|-|-|-|
-|`position`|float|REQUIRED|The position of the selected frame in seconds|
+| PARAMETER | TYPE | IMPORTANCE | DESCRIPTION |
+| --------- | ---- | ---------- | ----------- |
+| `position` | float | REQUIRED | The position of the selected frame in seconds |
 
 ### Success response
 
@@ -66,11 +67,11 @@ On success, a response with HTTP status "204 No Content" is returned.
 
 Possible error responses:
 
-|HTTP RESPONSE CODE|ERROR VALUE|ERROR CONDITIONS|
-|-|-|-|
-|401 Unauthorized|`invalid_token`|The provided access token is missing, revoked, expired or malformed|
-|403 Forbidden|`lack_of_ownership`|The API user is not allowed to manage the given video|
-|404 Not Found|`not_found`|Video was not found|
-|503 Service Unavailable||There is a temporary error on the server which makes it impossible to serve the request|
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized | `invalid_token` | The provided access token is missing, revoked, expired or malformed |
+| 403 Forbidden | `lack_of_ownership` | The API user is not allowed to manage the given video |
+| 404 Not Found | `not_found` | Video was not found |
+| 503 Service Unavailable | | There is a temporary error on the server which makes it impossible to serve the request |
 
 

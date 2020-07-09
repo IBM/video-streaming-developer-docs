@@ -3,6 +3,131 @@ title: Using Plugins
 description: Using Plugins
 ---
 
-## Using Plugins
+IBM Player SDK version 1.1.0 introduced a plugin system which enables you to extend the media player with additional features.
+Plugins will be provided by IBM, and must be provided during player initialization in `UstreamPlayer.initWithContent(ContentDescriptor, MediaPlayerModule)`.
+These extensions may require different player views than `tv.ustream.player.android.PlayerView`. PlayerView requirements for a plugin will always be stated
+in this documentation, but can also be queried from the MediaPlayerModule instance itself using `MediaPlayerModule.getSupportedPlayerViewType()`.
+Make sure to always use the appropriate `PlayerView`.
 
-Content needed
+Creation of the plugin is the user's responsibility, use the constructor of the desired plugin, provide appropriate parameters and set listeners.
+When a plugin is passed to a UstreamPlayer instance it will be retained across configuration changes, however the listeners the user provided are not subject
+to the usual `UstreamPlayer.attach()` / `UstreamPlayer.detach()` working. The user needs to manually set and remove those listeners.
+The current `MediaPlayerModule` in use can be retrieved from the player instance using `UstreamPlayer.getMediaPlayerPlugin()` which returns
+a `MediaPlayerModule` that will be cast to the appropriate class that was set during `initWithContent`. The user must know which MediaPlayerModule was
+ set during init.
+
+Please note that while a `MediaPlayerPlugin` provided through `UstreamPlayer.initWithContent` is retained across configuration changes,
+the plugin itself might NOT support configuration changes at all due to plugin specific reasons. This will always be stated in the plugin's documentation
+under the **Plugin limitations** section.
+
+## Ads Plugin
+
+IBM Player SDK version 1.1.0 introduced **Ads Plugin** (called `AdsMediaPlayerModuleAndroid`) which can be used to provide ads for the audience using the developer's
+*Double Click for Publishers* account.
+
+Supported features:
+- Pre-roll video ads
+- Mid-roll video ads with multiple configurable scheduling via `AdScheduleRule`s
+- Customizable ad parameters via key/value pairs
+
+Ads plugin needs to be instantiated and passed to the `UstreamPlayer` instance via `initWithContent(ContentDescriptor, MediaPlayerModule)`.
+Upon plugin creation the user can provide the following configuration data: `String dfpTagUrl`, `AdScheduleRule scheduleRule`,
+where `dfpTagUrl` points to the user's *Double Click for Publishers* account and `adScheduleRule` is the class defining when to show ads.
+See javadoc for details.
+
+Additionally any time after creation the user can set:
+- an `AdStateListener` using `AdsMediaPlayerModuleAndroid.setAdStateListener(AdStateListener)` which notifies the user when an ad is being displayed.
+- `AdData` which is targeting metadata for *DFP*. Feel free to use your own meta and/or meta provided by `MetaDataListener.onMetaData(MetaData)`.
+
+### Example usage
+Add the Ads Plugin to your build use same local m2 repostory in project root folder and add these lines to your gradle file (Google IMA SDK is a dependency of the Ads Plugin):
+
+```gradle
+implementation 'tv.ustream.player:ibm-player-sdk-android-plugin-ads-external:1.4.0@aar'
+implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.11.3'
+implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+implementation 'androidx.browser:browser:1.0.0'
+```
+
+In `AndroidManifest.xml` set configChanges settings in the player activity as:
+
+```xml
+<activity
+        android:name="com.my.company.PlayerActivity"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        android:label="@string/app_name" />
+```
+
+Create a UstreamPlayer as usual, but provide an `AdsMediaPlayerModule` at init:
+```java
+ustreamPlayer = ustreamPlayerFactory.createUstreamPlayer(playerId);
+if (!ustreamPlayer.isInitialized()) {
+    final AdScheduleRule scheduleRule = new FixedIntervalRule(true, 60000); // Schedules a pre-roll and inserts mid-rolls after 60 seconds of playback time
+    ustreamPlayer.initWithContent(contentDescriptor, new AdsMediaPlayerModuleAndroid(/* AdsStateListener */this, DFP_TAG_URL, scheduleRule));
+}
+```
+
+In your application's layout file use `tv.ustream.player.android.plugin.ads.AdsPlayerView` (instead of regular `tv.ustream.player.android.PlayerView`).
+
+```xml
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <tv.ustream.player.android.plugin.ads.AdsPlayerView
+        android:id="@+id/playerview"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"/>
+
+</FrameLayout>
+```
+
+Retrieve the plugin after init:
+
+```java
+AdsMediaPlayerModuleAndroid mediaPlayerPlugin = ustreamPlayer.getMediaPlayerPlugin();
+```
+
+Set an `AdsStateListener` on the plugin:
+
+```java
+mediaPlayerPlugin.setAdStateListener(new AdStateListener() {
+    @Override
+    public void adStarted() {
+        // Customize UI elements during ad playback, e.g: hide seekbar
+        seekBar.setVisibility(View.INVISIBLE);
+        muteToggleButton.setVisibility(View.INVISIBLE);
+        fullScreenToggleButton.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void adFinished() {
+        // Restore UI elements after ad playback
+        seekBar.setVisibility(View.VISIBLE);
+        muteToggleButton.setVisibility(View.VISIBLE);
+        fullScreenToggleButton.setVisibility(View.VISIBLE);
+    }
+});
+```
+
+Set meta for *DFP* using an `AdData` object:
+
+```java
+List<String> adKeywords = Arrays.asList("testKeyword1", "testKeyword2");
+Map<String, String> adExtras = new HashMap<>();
+adExtras.put("adExtraKey1", "adExtraValue1");
+adExtras.put("adExtraKey2", "adExtraValue2");
+AdData adData = new AdData("TestTitle", adKeywords, adExtras);
+mediaPlayerPlugin.setAdData(adData);
+```
+
+Everything else works just like it did before, no other code modification is required.
+
+### Plugin limitations
+
+- Ads Plugin does not support configuration changes, use `android:configChanges="orientation|screenSize|keyboardHidden"` in your player activity.
+This limitations is imposed by Google IMA SDK on which we depend to show ads.
+- Ads Plugin uses it's own PlayerView: `tv.ustream.player.android.plugin.ads.AdsPlayerView`
+- Seeking while an ad is playing will seek the original content, as ad seeking is not possible

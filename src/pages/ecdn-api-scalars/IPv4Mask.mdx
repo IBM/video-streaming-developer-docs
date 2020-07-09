@@ -1,0 +1,17 @@
+---
+title: IPv4Mask
+description: Scalar
+---
+
+### IPv4Mask
+The IPv4Mask scalar type is an IPv4 netmask represented as UTF-8 character sequences.
+Accepted formats are:
+- Short notation (number of leading zeros in binary). i.e: `32`, `24`, `8`.
+- Long notation (octets separated by dots). i.e: `255.255.255.255`, `255.255.255.0`, `255.0.0.0`.
+
+
+```graphql
+scalar IPv4Mask
+```
+
+

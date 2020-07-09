@@ -71,7 +71,15 @@ ftp://1_1234_1234567890:ftppw@red44.ustream.tv/1_12345_12345678901234.mov
 test.mov
 ```
 
-`Supported file extensions`: mkv, mp4, mov, flv, avi, wmv, ogm, mpeg2.
+Or using the cURL command:
+
+```
+curl \
+  ftp://1_1234_1234567890:ftppw@sjc03-vod-upload02.services.video.ibm.com/1_12345_12345678901234 \
+  -v -T test.mov
+```
+
+Supported file extensions are: mp4, mov, flv.
 
 Don't forget to set your FTP client to binary file transfer mode, before uploading the video file.
 

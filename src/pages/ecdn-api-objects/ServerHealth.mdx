@@ -1,0 +1,26 @@
+---
+title: ServerHealth
+description: Object definition
+---
+
+An ECDN server's health status.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| contentDelivery | [ContentDeliveryHealth](../ecdn-api-objects/ContentDeliveryHealth) | NO | NO | Health of services affecting content delivery. | 
+| operations | [OperationsHealth](../ecdn-api-objects/OperationsHealth) | NO | NO | Health of operational services (ones that doesn't affect content delivery). | 
+
+```graphql
+type Object{
+
+	# Health of services affecting content delivery.
+	contentDelivery: ContentDeliveryHealth!
+
+	# Health of operational services (ones that doesn't affect content delivery).
+	operations: OperationsHealth!
+
+}
+```
+

@@ -1,0 +1,28 @@
+---
+title: CPUUsage
+description: Object definition
+---
+
+CPU usage of ECDN server.
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| system | [PercentagePoint](../ecdn-api-objects/PercentagePoint) | NO | YES | CPU usage of kernel. Nullable in case of errors (coming from an external service). | 
+| user | [PercentagePoint](../ecdn-api-objects/PercentagePoint) | NO | YES | CPU usage of user-space processes. Nullable in case of errors (coming from an external service). | 
+
+```graphql
+type Object{
+
+	# CPU usage of kernel.
+	# Nullable in case of errors (coming from an external service).
+	system: [PercentagePoint!]
+
+	# CPU usage of user-space processes.
+	# Nullable in case of errors (coming from an external service).
+	user: [PercentagePoint!]
+
+}
+```
+

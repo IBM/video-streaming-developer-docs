@@ -25,38 +25,64 @@ The parameters for the GET request:
 
 On success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `videos` element.
 
-| KEY           | TYPE    | DESCRIPTION                                                                                                           |
-| ------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
-| `key1`        | string  |                                                                                                                       |
-| `key2`        | number  |                                                                                                                       |
-| `key3`        | boolean |                                                                                                                       |
-| `key4`        | object  | A set of key-value pairs containing information about key4 settings with the following attributes: `child1`, `child2` |
-| `key4.child1` | string  |                                                                                                                       |
-| `key4.child2` | number  |                                                                                                                       |
-| `key5`        | array   |                                                                                                                       |
+| KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`              | string | Unique ID of the video                                                                                                                                                                                                                                                                                                |
+| `title`           | string | Video title                                                                                                                                                                                                                                                                                                           |
+| `description`     | string | Video description                                                                                                                                                                                                                                                                                                     |
+| `url`             | string | Video URL                                                                                                                                                                                                                                                                                                             |
+| `length`          | string | Video length in seconds                                                                                                                                                                                                                                                                                               |
+| `created_at`      | number | The date and time when the video was created (Unix timestamp). By default, it has the same value as the `added_at` field, but it can be edited by channel admins to better reflect the real content creation date and time for the viewers.                                                                           |
+| `added_at`        | number | The date and time when the video was added (uploaded or recorded) to IBM Video Streaming (Unix timestamp)                                                                                                                                                                                                             |
+| `file_size`       | string | Video file size in bytes                                                                                                                                                                                                                                                                                              |
+| `views`           | number | Number views on the video                                                                                                                                                                                                                                                                                             |
+| `thumbnail`       | object | A set of key-value pairs containing URLs of the thumbnail images. Attributes: `default` and various image sizes (e.g. `image_112x63`, … , `image_320x180`, `image_640x360`, `image_1920x1080`)                                                                                                                        |
+| `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
+| `links`           | object | Contains information about the channel of the video |
 
 Example for success response:
 
-```
-
+```json
+{
+  "videos": [
+    {
+      "id": "111",
+      "title": "Title of video",
+      "description": "Description of video",
+      "url": "http://www.ustream.tv/recorded/111",
+      "length": "12345.123456",
+      "created_at": 1399388736,
+      "added_at": 1399388736,
+      "file_size": "120000",
+      "views": 0,
+      "thumbnail": {
+        "default": "https://ustvstaticcdn1-a.akamaihd.net/111.jpg"
+      },
+      "media_urls": {
+        "flv": "http://tcdn.ustream.tv/video/111"
+      },
+      "links": {
+        "channel": {
+          "href": "https://api.video.ibm.com/channels/1.json",
+          "id": "1"
+        }
+      }
+    },
+    { "...": "..." }
+  ]
+}
 ```
 
 ### Error responses
-
-This request has no error responses.
-
-OR
 
 Possible error responses:
 
 | HTTP RESPONSE CODE      | ERROR VALUE              | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
-| 400 Bad Request         | `input_validation_error` | Validation failed                                                                       |
-| 401 Unauthorized        |                          | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`        | The user does not have the benefit                                                      |
-| 403 Forbidden           | `lack_of_ownership`      | The API user is not allowed to manage the given channel                                 |
-| 404 Not Found           | `not_found`              | Channel not found                                                                       |
-| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request |
+| 401 Unauthorized        | `invalid_token`          | If the playlist does not belong to a channel then the request must include a valid access token. |
+| 403 Permission denied   | `permission_denied`      | If the playlist does not belong to a channel then the authenticated user needs access to the playlist. |
+| 404 Not Found           | `not_found`              | The playlist does not exist or in case of a channel playlist the playlists on the channel page are not shown. |
+| 503 Service Unavailable |                          | There is a temporary error on the server which makes it impossible to serve the request                  |
 
 ## Add video to a playlist
 
