@@ -21,7 +21,7 @@ Health of ECDN server's operational services
 | snmp | [Health](../ecdn-api-enums/Health) | YES | NO | Health of SNMP polling service. Null if SNMP polling is disabled. - GOOD if SNMP service is up and running. - POOR if SNMP service isn't running. | 
 
 ```graphql
-type Object{
+type OperationsHealth {
 
 	# Aggregated health of operational services.
 	# (ones that doesn't affect content delivery).

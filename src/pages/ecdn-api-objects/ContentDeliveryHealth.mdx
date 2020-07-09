@@ -14,7 +14,7 @@ Health of ECDN server's content delivery.
 | caching | [Health](../ecdn-api-enums/Health) | NO | NO | Health of caching service running on ECDN server. - GOOD if it's up and running, certificate is valid. - WARNING if it's up and running, but certificate will expire soon. - POOR if it's not running, certificate is invalid or expired. | 
 
 ```graphql
-type Object{
+type ContentDeliveryHealth {
 
 	# Aggregated health of services affecting content delivery.
 	# - GOOD if all services are in GOOD state.

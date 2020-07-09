@@ -18,7 +18,7 @@ Batch input for location creation/modification.
 | inheritExternalRanges | [Boolean](../ecdn-api-scalars/Boolean) | YES | NO | Whether external ranges are inherited from parent location. Defaults to false, must have a parent location if it's set to true. Cannot be true if externalRanges field is filled as well. | 
 
 ```graphql
-type InputObject{
+type BatchLocationInput {
 
 	# Name of location.
 	# Must not be empty, must be unique and maximum allow length is 60 characters.

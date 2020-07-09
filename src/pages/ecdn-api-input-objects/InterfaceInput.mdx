@@ -16,7 +16,7 @@ Input for a network interface of an ECDN server.
 | gateway | [IPv4](../ecdn-api-scalars/IPv4) | YES | NO | Gateway of interface's local network. Omit if network configuration mode is DYNAMIC. Required if network configuration mode is STATIC. | 
 
 ```graphql
-type InputObject{
+type InterfaceInput {
 
 	# Name of network interface (ie. eth0, eth1, ens36, etc...).
 	# Currently it must be eth0 (multiple interfaces aren't supported yet).

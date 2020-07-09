@@ -15,7 +15,7 @@ An ECDN server's video delivery status.
 | numberOfBuffering | [ScalarPoint](../ecdn-api-objects/ScalarPoint) | NO | YES | Number of users experiencing buffering on this server. Nullable in case of errors (this metric is coming from an external service). | 
 
 ```graphql
-type Object{
+type VideoDelivery {
 
 	# Current number of users viewing a video through this server (buffering as well).
 	# Nullable in case of errors (this metric is coming from an external service).
