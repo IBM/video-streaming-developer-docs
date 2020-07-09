@@ -3,4 +3,115 @@ title: Fullscreen functionality
 description: Fullscreen functionality
 ---
 
-## Fullscreen functionality
+import EmbedPlayer from '../../components/EmbedPlayer';
+
+Third party player controls should implement the fullscreen functionality on the client side with the [HTML5 Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode).
+
+### Necessary steps
+
+- switch your embed container to fullscreen mode with HTML5 FullScreen API
+- handle the iframe size accordingly
+- IBM Video Streaming embed will adopt to the resized iframe size responsively
+
+### Example
+
+<EmbedPlayer
+  src="https://www.ustream.tv/embed/1524"
+  controls={['fullscreen']}
+/>
+
+### Javascript
+
+```js
+var fullScreenBtn = document.getElementById('fullScreenBtn');
+var container = document.getElementById('Container');
+
+document.addEventListener("fullscreenchange",changeHandler);
+document.addEventListener("webkitfullscreenchange",changeHandler);
+document.addEventListener("mozfullscreenchange",changeHandler);
+document.addEventListener("MSFullscreenChange", changeHandler, false);
+
+// trigger fullscreen change on our custom button click
+fullScreenBtn.addEventListener('click',onFullScreenBtnClick);
+
+// check if the current state is fullscreen or not
+function isFullScreen () {
+  return document.fullScreen ||
+    document.webkitIsFullScreen ||
+    document.mozfullScreen ||
+	document.msFullscreenElement;
+}
+
+// change everything on other change events too
+function changeHandler () {
+  container.className = isFullScreen() ? 'fullscreen' : '';
+}
+
+// fullscreen button event handler
+function onFullScreenBtnClick () {
+  // if we are in fullscreen, then exit
+  if (isFullScreen()) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozExitFullScreen) {
+      document.mozExitFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+    // if we are in non-fullscreen mode, open it
+  } else {
+    if (container.requestFullscreen) {
+      container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) {
+      container.webkitRequestFullscreen();
+    } else if (container.mozRequestFullScreen) {
+      container.mozRequestFullScreen();
+    } else if (container.msRequestFullscreen) {
+      container.msRequestFullscreen();
+    }
+  }
+}
+```
+
+### HTML
+
+```html
+<div id="Container">
+  <iframe
+    id="UstreamIframe"
+    width="100%" height="100%"
+    src="https://www.ustream.tv/embed/1524?controls=false"
+    frameborder="0"
+    allowfullscreen
+  >
+  </iframe>
+  <div id="fullScreenBtn"> custom fullscreen button </div>
+</div>
+```
+
+### CSS
+
+```css
+#Viewer {
+  position: relative;
+  width: 640px;
+  height: 390px;
+}
+
+#Viewer.fullscreen {
+  width: 100%;
+  height: 100%;
+}
+
+#FullScreen {
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px;
+  background: #38f;
+  color: #fff;
+}
+```

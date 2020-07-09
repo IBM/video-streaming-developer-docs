@@ -1,0 +1,69 @@
+.toolboxRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 -8px;
+
+  &:not(:last-of-type) {
+    padding-bottom: 16px;
+  }
+
+  & > div {
+    flex: 50%;
+    padding: 0 8px;
+  }
+}
+
+.labels {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.viewWrapper {
+  outline: none;
+
+  &.active > div {
+    outline: 2px solid #0f62fe;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.view {
+  position: relative;
+  width: 100%;
+  padding-bottom: calc(9 / 16 * 100%);
+  cursor: pointer;
+
+  & > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.volume :global {
+  .bx--form-item {
+    align-items: initial;
+
+    .bx--slider-container {
+      .bx--slider {
+        min-width: 8.5rem;
+      }
+
+      .bx--slider__range-label:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+}

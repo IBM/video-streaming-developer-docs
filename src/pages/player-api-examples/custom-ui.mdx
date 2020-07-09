@@ -3,4 +3,20 @@ title: Custom UI
 description: Custom UI
 ---
 
-## Custom UI
+### This example demonstrates how you can build a custom UI based on our API calls.
+
+There are some important technical informations about a custom UI implementation:
+
+- there is no progress event from the player, so you should query the progress periodically (using the `playing` event to disable unnecessary querying will increase performance)
+- `progress` and `duration` is in seconds, so every percentage related progress data (like a seekbar) should be calculated from this two data
+- if you would like to build a full custom UI on the player, use the `controls=false&showtitle=false` url params to hide the default IBM Video Streaming UI components
+- autoplay permission must be delegated on cross-origin iframes since Chrome 66 for video elements by policy. Therefore, the iframe tag must contain an `allow="autoplay"` feature policy attribute to allow play calls from a cross-orgin parent to the player iframe. For more information visit https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#iframe
+
+### Example
+
+import EmbedPlayer from '../../components/EmbedPlayer';
+
+<EmbedPlayer
+  src="https://www.ustream.tv/embed/recorded/81056340?volume=0"
+  controls={['custom']}
+/>

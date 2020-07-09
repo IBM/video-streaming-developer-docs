@@ -1,0 +1,15 @@
+.fields {
+  display: flex;
+}
+
+.dropdown {
+  min-width: 40%;
+
+  div:global(.bx--dropdown) {
+    border-right: 1px solid #161616;
+
+    &:global(.bx--dropdown--disabled) {
+      border-right-color: transparent !important;
+    }
+  }
+}

@@ -3,4 +3,165 @@ title: Multiview
 description: Multiview
 ---
 
-## Multiview
+import EmbedPlayer from '../../components/EmbedPlayer';
+
+### Multiview example
+
+In this example the content of the player is loaded and changed dynamically, providing an easy way for seamless switching between live or VOD contents.
+
+This feature of the Embed API can be used in various use cases, like switching between
+
+- multiple cameras
+- simultaneous sessions of a conference
+- multi-language streams
+- or to promote further channels.
+
+### Example
+
+<EmbedPlayer
+  src="https://www.ustream.tv/embed/6540154"
+  controls={['multi']}
+/>
+
+### HTML
+
+```html
+<div class="player-container">
+    <iframe
+      id="MultiviewPlayer"
+      src="//www.ustream.tv/embed/6540154"
+      frameborder="0"
+      allowfullscreen
+      webkitallowfullscreen
+      scrolling="no"
+    >
+    </iframe>
+</div>
+
+<div class="multiview-chooser">
+  <ul>
+    <li>
+      <a href="#" class="active" data-app="channel" data-id="12762028">
+        <img
+          src="http://static.ddmcdn.com/gif/apl-tvhighlights-pbpaplthumbnail.png"
+          alt="Animal Planet L!VE"
+        />
+      </a>
+    </li>
+    <li>
+      <a href="#" data-app="channel" data-id="13628077">
+        <img
+          src="http://static.ddmcdn.com/gif/pacific-reef-270x152.jpg"
+          alt="APL!VE Pacific Reef"
+        />
+      </a>
+    </li>
+    <li>
+      <a href="#" data-app="channel" data-id="14812707">
+        <img
+          src="http://static.ddmcdn.com/gif/apl_live_sharks_270x152.jpg"
+          alt="APL!VE Reef Sharks"
+        />
+      </a>
+    </li>
+    <li>
+      <a href="#" data-app="channel" data-id="14225913">
+        <img
+          src="http://static.ddmcdn.com/gif/apl-tanked-clownfish.png"
+          alt="APL!VE Tanked"
+        />
+      </a>
+    </li>
+  </ul>
+</div>
+```
+
+### JavaScript
+
+```js
+var _contents = document.querySelectorAll('.multiview-chooser a'),
+    _active = _contents[0],
+    embedApi = UstreamEmbed('MultiviewPlayer');
+
+Array.prototype.forEach.call(_contents, function (_a){
+    _a.onclick = function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        embedApi.callMethod(
+            'load',
+            this.getAttribute('data-app'),
+            this.getAttribute('data-id')
+        );
+
+        _active.classList.remove('active');
+        this.classList.add('active');
+        _active = this;
+
+        return false;
+    };
+});
+```
+
+### CSS
+
+```css
+.player-container {
+    padding-bottom: 56.25%;
+    position: relative;
+    width: 100%;
+}
+
+.player-container iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.multiview-chooser {
+    margin-top: 1rem;
+}
+
+.multiview-chooser ul {
+    margin: 0;
+}
+
+.multiview-chooser li {
+    width: 24%;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.multiview-chooser li:not(:first-of-type) {
+    margin-left: 1.33%;
+}
+
+.multiview-chooser li:before {
+    display: none;
+}
+
+.multiview-chooser a {
+    display: block;
+}
+
+.multiview-chooser a.active:after {
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    box-sizing: border-box;
+    border: 3px solid #38f;
+}
+
+.multiview-chooser img {
+    margin: 0;
+    padding: 0;
+}
+```

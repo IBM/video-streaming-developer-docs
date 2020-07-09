@@ -3,4 +3,34 @@ title: Responsive embed
 description: Responsive embed
 ---
 
-## Responsive embed
+### Follow these steps to create a responsive embed
+
+- Insert the player embed code into an HTML page
+- Set the iframe tag's `width` and `height` attributes to `100%` inside of the embed code
+- Change iframe tag's CSS position parameter to `absolute` and set the left and top css parameters to `0` if needed
+- Add a div container around the iframe tag with the following css parameters where `padding-bottom` parameter's value is calculated from the original proportions of the embedded content (eg. 9 / 16 = 0.5625)
+
+```html
+<div
+  id="Container"
+  style="padding-bottom:56.25%; position:relative; display:block; width: 100%"
+>
+  <iframe
+    id="UstreamIframe"
+    src="https://www.ustream.tv/embed/1524"
+    width="100%" height="100%"
+    style="position:absolute; top:0; left: 0"
+    allowfullscreen
+    webkitallowfullscreen
+    frameborder="0"
+  >
+  </iframe>
+</div>
+```
+
+### Example
+
+import EmbedPlayer from '../../components/EmbedPlayer';
+
+<EmbedPlayer src="https://www.ustream.tv/embed/1524"/>
+
