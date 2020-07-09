@@ -80,86 +80,10 @@ Possible error responses:
 ## Get a list of Channels under Account
 
 ```
-GET https://api.video.ibm.com/organizations/{organizationId}/accounts/{accountId}/channels.json
+GET https://api.video.ibm.com/users/{accountId}/channels.json
 ```
 
-### Query Parameters
-
-| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                              |
-| ---------- | ------ | ---------- | ---------------------------------------- |
-| `page`     | number | OPTIONAL   | Page number. The first page's index is 1 |
-| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50    |
-
-Example for the request:
-
-```
-GET /organizations/ZzzqXZ/accounts/12345678/channels.json HTTP/1.1
-Host: api.video.ibm.com
-Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
-```
-
-The token in the above call is only an example.
-
-### Success response
-
-On success, a set of key-value pairs is returned under a `channels` element with an HTTP Status code of 200.
-
-| KEY                 | TYPE    | DESCRIPTION                           |
-| ------------------- | ------- | ------------------------------------- |
-| `id`                | string  | ID                                    |
-| `title`             | string  | Title                                 |
-| `url`               | string  | Channel page URL                      |
-| `thumbnailUrl`      | string  | Channel thumbnail URL                 |
-| `lastBroadcastDate` | string  | Date of last broadcast on the channel |
-| `channelStatus`     | string  | Possible values: `OFFLINE`, `LIVE`    |
-| `managerNumber`     | number  | Number of managers on the channel     |
-| `isOwn`             | boolean | The user is the owner of this channel |
-| `ownerId`           | string  | Owners Account ID                     |
-
-Additionally there is a `paging` element in the response with the following values: 
-
-| KEY          | TYPE   | DESCRIPTION                           |
-| ------------ | ------ | ------------------------------------- |
-| `previous`   | string | Link to the previous page (if exists) |
-| `next`       | string | Link to the next page (if exists)     |
-| `page_count` | number | Number of available pages             |
-| `item_count` | number | Total number of items                 |
-
-Example for success response:
-
-```json
-{
-  "channels": [
-    {
-      "id": "12345432",
-      "title": "test channel 1",
-      "url": "https://secure.video.ibm.com/channel/12345432",
-      "thumbnailUrl": "https://ustvstaticcdn1-a.akamaihd.net/images/defaults/channel_66x66:4.png",
-      "lastBroadcastDate": null,
-      "channelStatus": "OFFLINE",
-      "managerNumber": 0,
-      "isOwn": true,
-      "ownerId": "12345678"
-    }
-  ],
-  "paging": {
-      "previous": "https://api.video.ibm.com/organizations/ZzzqXZ/accounts/12345678/channels.json?page=1&pagesize=1",
-      "next": "https://api.video.ibm.com/organizations/ZzzqXZ/accounts/12345678/channels.json?page=3&pagesize=1",
-      "page_count": 3,
-      "item_count": 3
-  }
-}
-```
-
-### Error responses
-
-Possible error responses:
-
-| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
-| ----------------------- | --------------------------------------------------------------------------------------- |
-| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
-| 403 Forbidden           | The provided access token has no access to the user                                     |
-| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+See the [Get list of the user's channels](/channel-api-basic-channel-management#get-list-of-the-user's-channels) endpoint.
 
 ## Get a list of Organization Administrators
 
@@ -180,7 +104,7 @@ Example for the request:
 
 ```
 GET /organizations/ZzzqXZ/administrators.json HTTP/1.1
-Host: api.video.ibm.com 
+Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
@@ -195,7 +119,7 @@ On success, a set of key-value pairs is returned under a `administrators` elemen
 | `email`        | string  | Administrator's email address        |
 | `access_level` | string  | Access level: `org_admin`, `limited` |
 
-Additionally there is a `paging` element in the response with the following values: 
+Additionally there is a `paging` element in the response with the following values:
 
 | KEY          | TYPE   | DESCRIPTION                           |
 | ------------ | ------ | ------------------------------------- |
@@ -256,7 +180,7 @@ Example for the request:
 
 ```
 POST /organizations/ZzzqXZ/administrators.json HTTP/1.1
-Host: api.video.ibm.com 
+Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
@@ -292,7 +216,7 @@ Example for the request:
 
 ```
 GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==.json HTTP/1.1
-Host: api.video.ibm.com 
+Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
@@ -342,7 +266,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 | `email`        | string  | REQUIRED   | Administrator's email address        |
 | `access_level` | string  | REQUIRED   | Access level: `org_admin`, `limited` |
 
-If you update a user's access level she/he will lose any previously set permission under the Organization. 
+If you update a user's access level she/he will lose any previously set permission under the Organization.
 
 Users modified to `limited` access can't access the Organization, you have to add Account/Channel level access right(s) to them. ([Update an administrator's Account level access](#update-an-administrator's-account-level-access), [Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
 
@@ -414,7 +338,7 @@ Possible error responses:
 
 ## Check if an administrator is the last Organization Administrator in the Organization
 
-There must always be at least one Organization Administrator in an Organization, this call allows to check a user. 
+There must always be at least one Organization Administrator in an Organization, this call allows to check a user.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/islastadmin.json
@@ -581,7 +505,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 | -------------- | ------- | ---------- | ------------------------------------------------- |
 | `access_level` | string  | REQUIRED   | Access level: `org_admin`, `limited`, `no_access` |
 
-If you update a user's access level she/he will lose any previously set permission under the Organization. 
+If you update a user's access level she/he will lose any previously set permission under the Organization.
 
 Users modified to `limited` access can't access the Account, you have to add Channel level access right(s) to them. ([Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
 
@@ -618,7 +542,7 @@ Possible error responses:
 
 ## List of channels with access levels
 
-This call allows to get the Channels which the Administrator has specific access to. It also returns the access level. 
+This call allows to get the Channels which the Administrator has specific access to. It also returns the access level.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
@@ -656,9 +580,9 @@ On success, a set of key-value pairs is returned under a `channels` element with
 
 The `access_level` value is one of the followings:
 - `channel.admin`
-- one of the Organization's [Custom Role](custom-roles) 
+- one of the Organization's [Custom Role](custom-roles)
 
-Additionally there is a `paging` element in the response with the following values: 
+Additionally there is a `paging` element in the response with the following values:
 
 | KEY          | TYPE   | DESCRIPTION                           |
 | ------------ | ------ | ------------------------------------- |
@@ -779,7 +703,7 @@ On success, a set of key-value pairs is returned under a `channels` element with
 
 The `all_channel_access` value is one of the followings:
 - `channel.admin`
-- one of the Organization's [Custom Role](custom-roles) 
+- one of the Organization's [Custom Role](custom-roles)
 
 Example for success response:
 
@@ -816,7 +740,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 The `all_channel_access` value must be one of the followings:
 - `channel.admin`
-- one of the Organization's [Custom Role](custom-roles) 
+- one of the Organization's [Custom Role](custom-roles)
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
