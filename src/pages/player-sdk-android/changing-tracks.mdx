@@ -3,6 +3,55 @@ title: Changing Tracks
 description: Changing Tracks
 ---
 
-## Changing Tracks
+Video streams can contain multiple tracks of different types (usually Video, Audio, Text). The player SDK lets you control which of these
+tracks are selected and presented to the user. See this document's `MediaTrackChangeListener` section or the corresponding javadoc for
+API reference.
 
-Content needed
+## Usage
+
+- Set a `MediaTrackChangeListener` on an initialized player, call `attach()` when appropriate.
+- When the player determines the available track groups
+it will report it through the listener's `void onMediaTracksChanged(MediaTrackGroupHolder mediaTrackGroups)` callback.
+- The `mediaTrackGroups` object holds the available media tracks for each track type. Use these to instruct the player's specific renderers to
+play a certain media track. A renderer can also be disabled.
+
+**Example**: Selecting a subtitle / closed captions track
+
+```java
+UstreamPlayerFactory ustreamPlayerFactory = new UstreamPlayerFactory(API_KEY, activity);
+ContentDescriptor contentDescriptor = new ContentDescriptor(ContentType.RECORDED, 123456L);
+UstreamPlayer player = ustreamPlayerFactory.createUstreamPlayer(contentDescriptor.toString());
+player.initWithContent(contentDescriptor);
+player.setMediaTracksChangeListener(mediaTrackChangeListener);
+player.attach();
+
+//... Inside the MediaTrackChangeListener
+public void onMediaTracksChanged(MediaTrackGroupHolder mediaTrackGroups) {
+    availableTextTracks = trackGroupHolder.textTracks;
+    // Update the subtitle selector with the available subtitles
+}
+
+//... When the user selects a subtitle track from the selector:
+void selectTrack(MediaTrack mediaTrack) {
+    ustreamPlayer.selectTrackForRenderer(mediaTracks, null);
+}
+```
+
+**Example**: Querying whether a `MediaFormat` is supported
+
+```java
+//... Inside the MediaTrackChangeListener
+public void onMediaTracksChanged(MediaTrackGroupHolder mediaTrackGroups) {
+    for (MediaTrack videoTrack : mediaTrackGroups.videoTracks) {
+        for (MediaFormat videoFormat : videoTrack.mediaFormats) {
+            if (mediaTrackGroups.formatSupportInfo.isSupported(videoFormat)) {
+                logSupportedFormat(videoTrack, videoFormat);
+            } else {
+                logUnsupportedFormat(videoTrack, videoFormat);
+            }
+        }
+    }
+}
+```
+
+For more detailed and general examples please consult the provided sample app.
