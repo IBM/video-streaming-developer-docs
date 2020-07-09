@@ -7,26 +7,26 @@ The Mutation type represents all of the mutable entry points into the API.
 
 ## Fields
 
-### locationCreate ([Location](./Location))
+### locationCreate ([Location](../ecdn-api-objects/Location))
 Create new location.
 Authorization: must be at least ADMIN.
 Returns created location.
 
 | ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| config | [BatchLocationInput](../ecdn-api-objects/BatchLocationInput) | NO | NO | Batch input for location creation. |
+| config | [BatchLocationInput](../ecdn-api-input-objects/BatchLocationInput) | NO | NO | Batch input for location creation. |
 
-### locationConfigure ([Location](./Location))
+### locationConfigure ([Location](../ecdn-api-objects/Location))
 Batch configuration of a location.
 Authorization: must be at least ADMIN.
 Returns configured location.
 
 | ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| locationID | [ID](../ecdn-api-objects/ID) | NO | NO | ID of location to configure. |
-| config | [BatchLocationInput](../ecdn-api-objects/BatchLocationInput) | NO | NO | Batch input for location configuration. |
+| locationID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of location to configure. |
+| config | [BatchLocationInput](../ecdn-api-input-objects/BatchLocationInput) | NO | NO | Batch input for location configuration. |
 
-### locationSetParents ([Void](./Void))
+### locationSetParents ([Void](../ecdn-api-scalars/Void))
 Set a common parent for locations. Parent can either be a region or a location.
 Authorization: must be at least ADMIN.
 
@@ -35,7 +35,7 @@ Authorization: must be at least ADMIN.
 | locationIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of (children) locations (which we set a parent for). |
 | parentID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of parent location/region. |
 
-### locationDelete ([Void](./Void))
+### locationDelete ([Void](../ecdn-api-scalars/Void))
 Delete locations.
 Authorization: must be at least ADMIN.
 
@@ -43,27 +43,27 @@ Authorization: must be at least ADMIN.
 | - | - | - | - | - |
 | locationIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of locations to delete. |
 
-### serverCreate ([Server](./Server))
+### serverCreate ([Server](../ecdn-api-objects/Server))
 Create new server.
 Authorization: must be at least ADMIN.
 Returns created server.
 
 | ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| config | [BatchServerInput](../ecdn-api-objects/BatchServerInput) | NO | NO | Batch input for server creation. |
+| config | [BatchServerInput](../ecdn-api-input-objects/BatchServerInput) | NO | NO | Batch input for server creation. |
 
-### serverConfigure ([Server](./Server))
+### serverConfigure ([Server](../ecdn-api-objects/Server))
 Batch configuration of a server.
 Authorization: must be at least ADMIN.
 Returns configured server.
 
 | ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverID | [ID](../ecdn-api-objects/ID) | NO | NO | ID of server to configure. |
-| mode | [ConfigurationMode](../ecdn-api-objects/ConfigurationMode) | NO | NO | Selected mode to apply this configuration to an ECDN server. |
-| config | [BatchServerInput](../ecdn-api-objects/BatchServerInput) | NO | NO | Batch input for server configuration. |
+| serverID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of server to configure. |
+| mode | [ConfigurationMode](../ecdn-api-enums/ConfigurationMode) | NO | NO | Selected mode to apply this configuration to an ECDN server. |
+| config | [BatchServerInput](../ecdn-api-input-objects/BatchServerInput) | NO | NO | Batch input for server configuration. |
 
-### serverEnableContentDelivery ([Void](./Void))
+### serverEnableContentDelivery ([Void](../ecdn-api-scalars/Void))
 Enable content delivery on servers.
 Authorization: must be at least ADMIN.
 
@@ -71,7 +71,7 @@ Authorization: must be at least ADMIN.
 | - | - | - | - | - |
 | serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to enable content delivery on. |
 
-### serverDisableContentDelivery ([Void](./Void))
+### serverDisableContentDelivery ([Void](../ecdn-api-scalars/Void))
 Disable content delivery on servers.
 Authorization: must be at least ADMIN.
 
@@ -79,7 +79,7 @@ Authorization: must be at least ADMIN.
 | - | - | - | - | - |
 | serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to disable content delivery on. |
 
-### serverEnableRemoteAssistance ([Void](./Void))
+### serverEnableRemoteAssistance ([Void](../ecdn-api-scalars/Void))
 Enable remote assistance on servers.
 Authorization: must be at least ADMIN.
 
@@ -87,7 +87,7 @@ Authorization: must be at least ADMIN.
 | - | - | - | - | - |
 | serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to enable remote assistance on. |
 
-### serverDisableRemoteAssistance ([Void](./Void))
+### serverDisableRemoteAssistance ([Void](../ecdn-api-scalars/Void))
 Disable remote assistance on servers.
 Authorization: must be at least ADMIN.
 
@@ -95,7 +95,7 @@ Authorization: must be at least ADMIN.
 | - | - | - | - | - |
 | serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to disable remote assistance on. |
 
-### serverDelete ([Void](./Void))
+### serverDelete ([Void](../ecdn-api-scalars/Void))
 Delete servers.
 Authorization: must be at least ADMIN.
 
@@ -103,7 +103,7 @@ Authorization: must be at least ADMIN.
 | - | - | - | - | - |
 | serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to delete. |
 
-### reportCreate ([Report](./Report))
+### reportCreate ([Report](../ecdn-api-objects/Report))
 Create time-series report of ECDN video delivery.
 Interval of a query with minutely granularity cannot exceed 24 hours.
 Metrics older than 1 year are discarded.
@@ -111,12 +111,12 @@ Returns created report.
 
 | ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| granularity | [Granularity](../ecdn-api-objects/Granularity) | NO | NO | Granularity of time intervals. |
-| breakdown | [ReportBreakdown](../ecdn-api-objects/ReportBreakdown) | YES | NO | Break down report's intervals by additional fields. |
-| from | [Time](../ecdn-api-objects/Time) | NO | NO | Start report from this point in time. |
-| to | [Time](../ecdn-api-objects/Time) | NO | NO | End report at this point in time. |
-| email | [EmailAddress](../ecdn-api-objects/EmailAddress) | NO | NO | Send created report to this email address. |
-| include | [ReportField](../ecdn-api-objects/ReportField) | NO | YES | Included fields in the report. |
+| granularity | [Granularity](../ecdn-api-enums/Granularity) | NO | NO | Granularity of time intervals. |
+| breakdown | [ReportBreakdown](../ecdn-api-enums/ReportBreakdown) | YES | NO | Break down report's intervals by additional fields. |
+| from | [Time](../ecdn-api-scalars/Time) | NO | NO | Start report from this point in time. |
+| to | [Time](../ecdn-api-scalars/Time) | NO | NO | End report at this point in time. |
+| email | [EmailAddress](../ecdn-api-scalars/EmailAddress) | NO | NO | Send created report to this email address. |
+| include | [ReportField](../ecdn-api-enums/ReportField) | NO | YES | Included fields in the report. |
 
 
 ```graphql
