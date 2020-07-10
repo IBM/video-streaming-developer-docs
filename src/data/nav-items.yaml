@@ -161,9 +161,9 @@
     - title: View segments
       path: /analytics-api-examples/view-segments
 
-- title: ECDN API Overview
+- title: Getting started
   pages:
-    - path: /ecdn-api-overview
+    - path: /ecdn-api-getting-started
 - title: Schema
   pages:
     - title: Mutation

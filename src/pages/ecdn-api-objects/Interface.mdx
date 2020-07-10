@@ -16,7 +16,7 @@ Network interface of an ECDN server.
 | gateway | [IPv4](../ecdn-api-scalars/IPv4) | YES | NO | Gateway of interface's local network. Null if network configuration mode is DYNAMIC and server never checked in before. | 
 
 ```graphql
-type Object{
+type Interface {
 
 	# Name of network interface (ie. eth0, eth1, ens36, etc...).
 	# Currently it's always eth0 (multiple interfaces aren't supported yet).
