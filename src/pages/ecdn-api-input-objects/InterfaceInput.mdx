@@ -5,16 +5,6 @@ description: InputObject definition
 
 Input for a network interface of an ECDN server.
 
-### Fields
-
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| name | [String](../ecdn-api-scalars/String) | NO | NO | Name of network interface (ie. eth0, eth1, ens36, etc...). Currently it must be eth0 (multiple interfaces aren't supported yet). | 
-| networkConfigurationMode | [NetworkConfigurationMode](../ecdn-api-enums/NetworkConfigurationMode) | NO | NO | Configuration mode of interface's network address. | 
-| localIP | [IPv4](../ecdn-api-scalars/IPv4) | YES | NO | Local IP of interface. Omit if network configuration mode is DYNAMIC. Required if network configuration mode is STATIC. | 
-| netmask | [IPv4Mask](../ecdn-api-scalars/IPv4Mask) | YES | NO | Netmask of interface's local network Omit if network configuration mode is DYNAMIC. Required if network configuration mode is STATIC. | 
-| gateway | [IPv4](../ecdn-api-scalars/IPv4) | YES | NO | Gateway of interface's local network. Omit if network configuration mode is DYNAMIC. Required if network configuration mode is STATIC. | 
-
 ```graphql
 type InterfaceInput {
 
@@ -42,4 +32,14 @@ type InterfaceInput {
 
 }
 ```
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| name | [String](../ecdn-api-scalars/String) | NO | NO | Name of network interface (ie. eth0, eth1, ens36, etc...).<br/>Currently it must be eth0 (multiple interfaces aren't supported yet). | 
+| networkConfigurationMode | [NetworkConfigurationMode](../ecdn-api-enums/NetworkConfigurationMode) | NO | NO | Configuration mode of interface's network address. | 
+| localIP | [IPv4](../ecdn-api-scalars/IPv4) | YES | NO | Local IP of interface.<br/>Omit if network configuration mode is DYNAMIC.<br/>Required if network configuration mode is STATIC. | 
+| netmask | [IPv4Mask](../ecdn-api-scalars/IPv4Mask) | YES | NO | Netmask of interface's local network<br/>Omit if network configuration mode is DYNAMIC.<br/>Required if network configuration mode is STATIC. | 
+| gateway | [IPv4](../ecdn-api-scalars/IPv4) | YES | NO | Gateway of interface's local network.<br/>Omit if network configuration mode is DYNAMIC.<br/>Required if network configuration mode is STATIC. | 
 

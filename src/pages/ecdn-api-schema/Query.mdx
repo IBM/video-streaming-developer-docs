@@ -5,66 +5,70 @@ description: Operation
 
 The Query type represents all of the queryable entry points into the API.
 
-## Fields
-
-### regions ([Region](../ecdn-api-objects/Region))
-Get all regions.
-
-
-
-### servers ([Server](../ecdn-api-objects/Server))
-Get all servers.
-
-
-
-### serverByID ([Server](../ecdn-api-objects/Server))
-Get server by ID.
-
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of queried server. |
-
-### locations ([Location](../ecdn-api-objects/Location))
-Get all locations.
-
-
-
-### locationByID ([Location](../ecdn-api-objects/Location))
-Get location by ID.
-
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of queried location. |
-
-### me ([User](../ecdn-api-objects/User))
-Get logged in user.
-
-
-
-
 ```graphql
 type Query {
 
 	# Get all regions.
-	regions: [Region!]
+	regions: [Region!]!
 
 	# Get all servers.
-	servers: [Server!]
+	servers: [Server!]!
 
 	# Get server by ID.
-	# id: ID of queried server.
-	serverByID(id: ID!): Server!
+	serverByID(
+		# ID of queried server.
+		id: ID!
+	): Server!
 
 	# Get all locations.
-	locations: [Location!]
+	locations: [Location!]!
 
 	# Get location by ID.
-	# id: ID of queried location.
-	locationByID(id: ID!): Location!
+	locationByID(
+		# ID of queried location.
+		id: ID!
+	): Location!
 
 	# Get logged in user.
 	me: User!
 
 }
 ```
+
+## Fields
+
+### regions: [[Region](../ecdn-api-objects/Region)!]!
+Get all regions.
+
+
+
+### servers: [[Server](../ecdn-api-objects/Server)!]!
+Get all servers.
+
+
+
+### serverByID: [Server](../ecdn-api-objects/Server)!
+Get server by ID.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of queried server. |
+
+### locations: [[Location](../ecdn-api-objects/Location)!]!
+Get all locations.
+
+
+
+### locationByID: [Location](../ecdn-api-objects/Location)!
+Get location by ID.
+
+| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of queried location. |
+
+### me: [User](../ecdn-api-objects/User)!
+Get logged in user.
+
+
+
 

@@ -5,13 +5,6 @@ description: Object definition
 
 Represents a user's action at a given point in time.
 
-### Fields
-
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| by | [EmailAddress](../ecdn-api-scalars/EmailAddress) | NO | NO | The user's email address who executed the action. | 
-| at | [Time](../ecdn-api-scalars/Time) | NO | NO | The time the action was executed. | 
-
 ```graphql
 type RecordedAction {
 
@@ -23,4 +16,11 @@ type RecordedAction {
 
 }
 ```
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| by | [EmailAddress](../ecdn-api-scalars/EmailAddress) | NO | NO | The user's email address who executed the action. | 
+| at | [Time](../ecdn-api-scalars/Time) | NO | NO | The time the action was executed. | 
 

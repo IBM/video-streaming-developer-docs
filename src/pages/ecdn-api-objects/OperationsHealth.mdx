@@ -6,20 +6,6 @@ description: Object definition
 Health of ECDN server's operational services
 (ones that doesn't affect content delivery).
 
-### Fields
-
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| aggregated | [Health](../ecdn-api-enums/Health) | NO | NO | Aggregated health of operational services. (ones that doesn't affect content delivery). - GOOD if all services are in GOOD state. - WARNING if at least one is in WARNING and none of them are in POOR state. - POOR if at least one is in POOR state. | 
-| updates | [Health](../ecdn-api-enums/Health) | NO | NO | Health of update service. - GOOD if update repositories are reachable. - POOR if update repositories are unreachable. If parent proxy feature is enabled: - GOOD same as before and all parents are reachable. - WARNING update repositories are but not all parents are reachable. - POOR same as before or no parents are reachable. | 
-| softwareVersion | [Health](../ecdn-api-enums/Health) | NO | NO | Health of ECDN software update. - GOOD if server has the latest ECDN version. - WARNING if server version isn't the latest but still supported. - POOR if server version isn't supported anymore. | 
-| apiConnection | [Health](../ecdn-api-enums/Health) | NO | NO | Health of API connection. - GOOD if ECDN API is reachable. - POOR if ECDN API is unreachable. If parent proxy feature is enabled: - GOOD same as before and all parents are reachable. - WARNING ECDN API is but not all parents are reachable. - POOR same as before or no parents are reachable. On POOR status content delivery will continue to function properly, but ECDN server won't be able to apply remote configurations or report status. | 
-| metrics | [Health](../ecdn-api-enums/Health) | NO | NO | Health of metric collector service. - GOOD if service is up and running. - POOR if service isn't running. | 
-| ntp | [Health](../ecdn-api-enums/Health) | NO | NO | Health of NTP service. - GOOD if ECDN server is in sync with NTP servers. - WARNING if ECDN server is in sync with at least one NTP server but not all of them. - POOR if:   - ECDN server isn't in sync with any NTP servers.   - NTP service isn't running.   - Time skew is higher than 1 minute. | 
-| logForward | [Health](../ecdn-api-enums/Health) | YES | NO | Health of log forwarding service. Null if log forwarding is disabled. - GOOD if ECDN server can forward logs. - POOR if ECDN server cannot forward logs. On POOR status log forwarder service might not be running. | 
-| remoteAssistance | [Health](../ecdn-api-enums/Health) | YES | NO | Health of remote assistance service. Null if remote assistance is disabled. - GOOD if remote assistance is working fine. - POOR if remote assistance is working fine. On POOR status remote assistance service might not be running or remote assistance server is unreachable. | 
-| snmp | [Health](../ecdn-api-enums/Health) | YES | NO | Health of SNMP polling service. Null if SNMP polling is disabled. - GOOD if SNMP service is up and running. - POOR if SNMP service isn't running. | 
-
 ```graphql
 type OperationsHealth {
 
@@ -90,4 +76,18 @@ type OperationsHealth {
 
 }
 ```
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| aggregated | [Health](../ecdn-api-enums/Health) | NO | NO | Aggregated health of operational services.<br/>(ones that doesn't affect content delivery).<br/>- GOOD if all services are in GOOD state.<br/>- WARNING if at least one is in WARNING and none of them are in POOR state.<br/>- POOR if at least one is in POOR state. | 
+| updates | [Health](../ecdn-api-enums/Health) | NO | NO | Health of update service.<br/>- GOOD if update repositories are reachable.<br/>- POOR if update repositories are unreachable.<br/>If parent proxy feature is enabled:<br/>- GOOD same as before and all parents are reachable.<br/>- WARNING update repositories are but not all parents are reachable.<br/>- POOR same as before or no parents are reachable. | 
+| softwareVersion | [Health](../ecdn-api-enums/Health) | NO | NO | Health of ECDN software update.<br/>- GOOD if server has the latest ECDN version.<br/>- WARNING if server version isn't the latest but still supported.<br/>- POOR if server version isn't supported anymore. | 
+| apiConnection | [Health](../ecdn-api-enums/Health) | NO | NO | Health of API connection.<br/>- GOOD if ECDN API is reachable.<br/>- POOR if ECDN API is unreachable.<br/>If parent proxy feature is enabled:<br/>- GOOD same as before and all parents are reachable.<br/>- WARNING ECDN API is but not all parents are reachable.<br/>- POOR same as before or no parents are reachable.<br/>On POOR status content delivery will continue to function properly, but ECDN<br/>server won't be able to apply remote configurations or report status. | 
+| metrics | [Health](../ecdn-api-enums/Health) | NO | NO | Health of metric collector service.<br/>- GOOD if service is up and running.<br/>- POOR if service isn't running. | 
+| ntp | [Health](../ecdn-api-enums/Health) | NO | NO | Health of NTP service.<br/>- GOOD if ECDN server is in sync with NTP servers.<br/>- WARNING if ECDN server is in sync with at least one NTP server but not all of them.<br/>- POOR if:<br/>  - ECDN server isn't in sync with any NTP servers.<br/>  - NTP service isn't running.<br/>  - Time skew is higher than 1 minute. | 
+| logForward | [Health](../ecdn-api-enums/Health) | YES | NO | Health of log forwarding service. Null if log forwarding is disabled.<br/>- GOOD if ECDN server can forward logs.<br/>- POOR if ECDN server cannot forward logs.<br/>On POOR status log forwarder service might not be running. | 
+| remoteAssistance | [Health](../ecdn-api-enums/Health) | YES | NO | Health of remote assistance service. Null if remote assistance is disabled.<br/>- GOOD if remote assistance is working fine.<br/>- POOR if remote assistance is working fine.<br/>On POOR status remote assistance service might not be running or remote<br/>assistance server is unreachable. | 
+| snmp | [Health](../ecdn-api-enums/Health) | YES | NO | Health of SNMP polling service. Null if SNMP polling is disabled.<br/>- GOOD if SNMP service is up and running.<br/>- POOR if SNMP service isn't running. | 
 

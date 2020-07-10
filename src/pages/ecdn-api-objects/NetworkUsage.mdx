@@ -5,14 +5,6 @@ description: Object definition
 
 Network usage of ECDN server.
 
-### Fields
-
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| interfaceName | [String](../ecdn-api-scalars/String) | NO | NO | Name of the interface these usages are measured on. | 
-| received | [DataTransferPoint](../ecdn-api-objects/DataTransferPoint) | NO | YES | Received data transfer rate. Nullable in case of errors (coming from an external service). | 
-| transmitted | [DataTransferPoint](../ecdn-api-objects/DataTransferPoint) | NO | YES | Transmitted data transfer rate. Nullable in case of errors (coming from an external service). | 
-
 ```graphql
 type NetworkUsage {
 
@@ -29,4 +21,12 @@ type NetworkUsage {
 
 }
 ```
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| interfaceName | [String](../ecdn-api-scalars/String) | NO | NO | Name of the interface these usages are measured on. | 
+| received | [DataTransferPoint](../ecdn-api-objects/DataTransferPoint) | NO | YES | Received data transfer rate.<br/>Nullable in case of errors (coming from an external service). | 
+| transmitted | [DataTransferPoint](../ecdn-api-objects/DataTransferPoint) | NO | YES | Transmitted data transfer rate.<br/>Nullable in case of errors (coming from an external service). | 
 

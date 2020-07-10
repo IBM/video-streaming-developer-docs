@@ -4,14 +4,6 @@ description: Enum
 ---
 
 Role represents user's rights to resources through the API.
-
-### Values
-
-| NAME | DESCRIPTION |
-| - | - |
-| READER | Readers can read all of the resources, but they cannot modify any. |
-| ADMIN | Admins can read all of the resources, and they can modify all except users and SSH keys. |
-| SUPERADMIN | Superadmins can read and modify all of the resources. |
 	
 ```graphql
 enum Role {
@@ -25,4 +17,12 @@ enum Role {
 
 }
 ```
+
+### Values
+
+| NAME | DESCRIPTION |
+| - | - |
+| READER | Readers can read all of the resources, but they cannot modify any. |
+| ADMIN | Admins can read all of the resources, and they can modify all except users and SSH keys. |
+| SUPERADMIN | Superadmins can read and modify all of the resources. |
 

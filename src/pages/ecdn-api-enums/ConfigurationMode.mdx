@@ -4,13 +4,6 @@ description: Enum
 ---
 
 Method of applying configuration to an ECDN server.
-
-### Values
-
-| NAME | DESCRIPTION |
-| - | - |
-| MANUAL | Manually configurate the ECDN server. A configuration CD must be mounted and the server must be restarted. |
-| REMOTE | Remotely configure the ECDN server. ECDN server will pick up the desired changes once it checks in to the API. |
 	
 ```graphql
 enum ConfigurationMode {
@@ -24,4 +17,11 @@ enum ConfigurationMode {
 
 }
 ```
+
+### Values
+
+| NAME | DESCRIPTION |
+| - | - |
+| MANUAL | Manually configurate the ECDN server.<br/>A configuration CD must be mounted and the server must be restarted. |
+| REMOTE | Remotely configure the ECDN server.<br/>ECDN server will pick up the desired changes once it checks in to the API. |
 

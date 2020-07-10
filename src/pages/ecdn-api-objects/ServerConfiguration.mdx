@@ -5,24 +5,6 @@ description: Object definition
 
 An ECDN server's software configuration.
 
-### Fields
-
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| status | [ConfigurationStatus](../ecdn-api-enums/ConfigurationStatus) | NO | NO | This configuration's status on ECDN server. | 
-| mode | [ConfigurationMode](../ecdn-api-enums/ConfigurationMode) | NO | NO | Selected mode to apply this configuration to an ECDN server. | 
-| contentDeliveryEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether content delivery is enabled or not. | 
-| interfaces | [Interface](../ecdn-api-objects/Interface) | NO | YES | Network interfaces of ECDN server. Currently it's always a single interface with name of eth0. | 
-| dnsServers | [ServerAddress](../ecdn-api-scalars/ServerAddress) | NO | YES | DNS servers used for name resolutions. | 
-| ntpServers | [ServerAddress](../ecdn-api-scalars/ServerAddress) | NO | YES | Address of NTP servers used by ECDN server. Null in case ECDN server reported invalid (malformed) NTP server addresses. | 
-| remoteAssistanceEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Is remote assistance enabled on server. | 
-| snmpEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Is SNMP polling enabled on server. | 
-| snmpCommunityString | [String](../ecdn-api-scalars/String) | YES | NO | Communitiy string of SNMP v2c. Null if SNMP polling is disabled. | 
-| logForwardEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Is log forwarding enabled on server. | 
-| logCollector | [TransportAddress](../ecdn-api-scalars/TransportAddress) | YES | NO | Log collector's address. Null if log forwarding is disabled. | 
-| cdURL | [String](../ecdn-api-scalars/String) | YES | NO | Config CD's url. Null if mode is remote configuration. Returned url expires in 24 hours. | 
-| imageURL | [String](../ecdn-api-scalars/String) | YES | NO | Image URL for the appropriate hypervisor. Null if server configuration was created through legacy ECDN API (or legacy portal). Returned url expires in 24 hours. | 
-
 ```graphql
 type ServerConfiguration {
 
@@ -37,10 +19,10 @@ type ServerConfiguration {
 
 	# Network interfaces of ECDN server.
 	# Currently it's always a single interface with name of eth0.
-	interfaces: [Interface!]
+	interfaces: [Interface!]!
 
 	# DNS servers used for name resolutions.
-	dnsServers: [ServerAddress!]
+	dnsServers: [ServerAddress!]!
 
 	# Address of NTP servers used by ECDN server.
 	# Null in case ECDN server reported invalid (malformed) NTP server addresses.
@@ -72,4 +54,22 @@ type ServerConfiguration {
 
 }
 ```
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| status | [ConfigurationStatus](../ecdn-api-enums/ConfigurationStatus) | NO | NO | This configuration's status on ECDN server. | 
+| mode | [ConfigurationMode](../ecdn-api-enums/ConfigurationMode) | NO | NO | Selected mode to apply this configuration to an ECDN server. | 
+| contentDeliveryEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether content delivery is enabled or not. | 
+| interfaces | [Interface](../ecdn-api-objects/Interface) | NO | YES | Network interfaces of ECDN server.<br/>Currently it's always a single interface with name of eth0. | 
+| dnsServers | [ServerAddress](../ecdn-api-scalars/ServerAddress) | NO | YES | DNS servers used for name resolutions. | 
+| ntpServers | [ServerAddress](../ecdn-api-scalars/ServerAddress) | NO | YES | Address of NTP servers used by ECDN server.<br/>Null in case ECDN server reported invalid (malformed) NTP server addresses. | 
+| remoteAssistanceEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Is remote assistance enabled on server. | 
+| snmpEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Is SNMP polling enabled on server. | 
+| snmpCommunityString | [String](../ecdn-api-scalars/String) | YES | NO | Communitiy string of SNMP v2c. Null if SNMP polling is disabled. | 
+| logForwardEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Is log forwarding enabled on server. | 
+| logCollector | [TransportAddress](../ecdn-api-scalars/TransportAddress) | YES | NO | Log collector's address. Null if log forwarding is disabled. | 
+| cdURL | [String](../ecdn-api-scalars/String) | YES | NO | Config CD's url. Null if mode is remote configuration.<br/>Returned url expires in 24 hours. | 
+| imageURL | [String](../ecdn-api-scalars/String) | YES | NO | Image URL for the appropriate hypervisor.<br/>Null if server configuration was created through legacy ECDN API (or legacy portal).<br/>Returned url expires in 24 hours. | 
 

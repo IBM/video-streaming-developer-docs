@@ -5,13 +5,6 @@ description: Object definition
 
 Restriction for client connections.
 
-### Fields
-
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| filter | [Filter](../ecdn-api-enums/Filter) | NO | NO | Filtering mechanism. | 
-| ranges | [IPv4Range](../ecdn-api-scalars/IPv4Range) | NO | YES | IP ranges to apply filter on. | 
-
 ```graphql
 type ClientRestriction {
 
@@ -19,8 +12,15 @@ type ClientRestriction {
 	filter: Filter!
 
 	# IP ranges to apply filter on.
-	ranges: [IPv4Range!]
+	ranges: [IPv4Range!]!
 
 }
 ```
+
+### Fields
+
+| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| filter | [Filter](../ecdn-api-enums/Filter) | NO | NO | Filtering mechanism. | 
+| ranges | [IPv4Range](../ecdn-api-scalars/IPv4Range) | NO | YES | IP ranges to apply filter on. | 
 
