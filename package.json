@@ -11,7 +11,7 @@
     "dev:clean": "gatsby clean && gatsby develop",
     "clean": "gatsby clean",
     "deploy": "gh-pages -d public",
-    "deploy_from_ci": "npm run build && gh-pages -m 'build: travis build and deploy' -d public -r https://$GH_TOKEN@github.ibm.com/ustream-web/developers.git",
+    "deploy_from_ci": "npm run build && gh-pages -m 'build: travis build and deploy' -d public -r https://$GH_TOKEN@github.com/IBM/video-streaming-developer-docs.git",
     "predeploy": "npm run build",
     "serve": "gatsby serve",
     "format": "prettier --write \"**/*.{css,scss,json,html,yaml}\"",
