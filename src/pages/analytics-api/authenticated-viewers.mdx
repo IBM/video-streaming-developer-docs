@@ -86,13 +86,13 @@ GET https://analytics-api.video.ibm.com/v1/authenticated-viewers/{dimension}
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `location`, `device`, `view-source` |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                           |
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                          |
+| -------------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `location`, `device`, `view-source`, `country`, `region` |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                                   |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                                     | 
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                        |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                |
 
 
 ### Success response
@@ -236,14 +236,14 @@ GET https://analytics-api.video.ibm.com/v1/authenticated-viewers/{content_type}/
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                |
-| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `location`, `device`, `view-source` |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                           |
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                          |
+| -------------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                                     |
+| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `location`, `device`, `view-source`, `country`, `region` |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                                   |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                                     |
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                        |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                |
 
 
 ### Success response
