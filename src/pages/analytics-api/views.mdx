@@ -37,8 +37,7 @@ The query parameters for the GET request:
 | `list_unfinished_segments` | boolean | OPTIONAL   | Flag for including unfinished segments in the result (value is true by default)               |
 | `inclusive_range`          | boolean | OPTIONAL   | This flag controls the behaviour of the date and time range filter (value is true by default) |
 | `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                 |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                         |
-
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                     |
 
 ### Success response
 
@@ -151,15 +150,15 @@ The query parameters for the GET request:
 
 | PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                   |
 | -------------------------- | ------- | ---------- | --------------------------------------------------------------------------------------------- |
-| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                |
-| `content_id`               | integer | OPTIONAL   | A list of comma separated IDs                                |
+| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                              |
+| `content_id`               | integer | OPTIONAL   | A list of comma separated IDs                                                                 |
 | `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                            |
 | `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                              |
 | `viewer_identifier`        | string  | OPTIONAL   | Filter for viewer identifiers containing this string                                          |
 | `list_unfinished_segments` | boolean | OPTIONAL   | Flag for including unfinished segments in the result (value is true by default)               |
 | `inclusive_range`          | boolean | OPTIONAL   | This flag controls the behaviour of the date and time range filter (value is true by default) |
 | `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                 |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                         |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                     |
 
 
 ### Success response
