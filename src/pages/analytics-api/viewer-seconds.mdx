@@ -182,8 +182,8 @@ matching the query parameters. Each object has the following attributes under th
 
 | KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
 | ----------------------------------- | ------- | -------------------------------------------------------|
-| `content_type`                      | string  | Type of the content, either `live` or `recorded`       |
-| `content_id`                        | integer | Live or recorded id                                    |
+| `content_type`                      | string  | Type of the content, for this endpoint `recorded` only |
+| `content_id`                        | integer | Video id                                               |
 | `time`                              | string  | Date and time for the datapoint in ISO8601 format      |
 | `value`                             | integer | Number of peak viewers                                 |
 
@@ -194,7 +194,7 @@ Example for success response:
     "data": [
         {
             "attributes": {
-                "content_type": "live",
+                "content_type": "recorded",
                 "content_id": 238589,
                 "time": "2020-07-16T00:00:00+01:00",
                 "value": 11
