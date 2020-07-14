@@ -156,20 +156,10 @@
     - path: /analytics-api-getting-started
 - title: Using the Analytics API
   pages:
-    - title: Viewers
-      path: /analytics-api/viewers
-    - title: Views
-      path: /analytics-api/views
-    - title: Total views
-      path: /analytics-api/total-views
-    - title: Unique devices
-      path: /analytics-api/unique-devices
-    - title: Authenticated viewers
-      path: /analytics-api/authenticated-viewers
-    - title: Peak viewer numbers
-      path: /analytics-api/peak-viewer-numbers
-    - title: Viewer seconds
-      path: /analytics-api/viewer-seconds
+    - title: Unique viewers
+      path: /analytics-api-examples/unique-viewers
+    - title: View segments
+      path: /analytics-api-examples/view-segments
 
 - title: Getting started
   pages:

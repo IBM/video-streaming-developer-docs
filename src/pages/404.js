@@ -7,7 +7,7 @@ const links = [
     text: 'API basics',
   },
   {
-    href: '/channel-api-basic-channel-management',
+    href: '/channel-api-topic',
     text: 'Channel API',
   },
   {

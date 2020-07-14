@@ -7,7 +7,7 @@ export default [
         title: 'API basics',
       },
       {
-        path: '/channel-api-basic-channel-management',
+        path: '/channel-api-topic',
         title: 'Channel API',
       },
       {
