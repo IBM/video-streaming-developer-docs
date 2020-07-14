@@ -259,3 +259,123 @@ Possible error responses:
 | 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Raw view export on all videos by channel id
+
+```
+GET https://analytics-api.video.ibm.com/views/recorded/channel
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                   |
+| -------------------------- | ------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `channel_id`               | integer | REQUIRED   | A list of comma separated IDs                                                                 |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                            |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                              |
+| `list_unfinished_segments` | boolean | OPTIONAL   | Flag for including unfinished segments in the result (value is true by default)               |
+| `inclusive_range`          | boolean | OPTIONAL   | This flag controls the behaviour of the date and time range filter (value is true by default) |
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                 |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                     |
+
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every `view`
+matching the query parameters. Each `view` has the following attributes under the `attributes` key:
+
+| KEY                      | TYPE    | DESCRIPTION                                                                                                             |
+| ------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `view_id`                | string  | Uniuque segment id                                                                                                      |
+| `content_type`           | object  | Watched content type                                                                                                    |
+| `content_id`             | integer |                                                                                                                         |
+| `started_at`             | string  | Start date and time in ISO8601 format                                                                                   |
+| `finished_at`            | string  | Finish date and time in ISO8601 format                                                                                  |
+| `from`                   | integer | Start position of the view for videos                                                                                   |
+| `to`                     | integer | End position of the view for videos                                                                                     |
+| `view_session_id`        | object  | Player session identifier. Every playing session has a different identifier.                                            |
+| `client_id`              | integer | Device identifier                                                                                                       |
+| `device_info`            | object  | Device information parsed from the viewer's user agent.                                                                 |
+| `country`                | string  | The country of the playback                                                                                             |
+| `city`                   | string  | The city of the playback                                                                                                |
+| `is_mobile_view`         | boolean | If the playback happened on a mobile device the value is true                                                           |
+| `view_type`              | string  | `onsite` or `offsite`                                                                                                   |
+| `viewer_identifier`      | string  | Viewer identifier string. It can be an e-mail or any string representing a viewer                                       |
+
+
+Example for success response:
+
+```json
+{
+    "data": [
+        {
+            "attributes": {
+                "city": "Budapest",
+                "client_id": "13602851710424434669",
+                "content_id": "112342345",
+                "content_type": "live",
+                "country": "HU",
+                "finished_at": "2020-07-16T19:20:42+01:00",
+                "from": 0,
+                "is_mobile_view": true,
+                "started_at": "2020-07-16T19:20:30+01:00",
+                "to": 0,
+                "view_id": "4bfc69b5-1320-4a44-a8d6-1fe1f397fb94",
+                "view_session_id": "7f66d911:8b7aa82c",
+                "view_type": "offsite",
+                "viewer_identifier": "some.viewer@example.com",
+                "device_info": {
+		            "browser": {
+		                "family": "Chrome",
+		                "major": "70",
+		                "minor": "0",
+		                "patch": "3538"
+		            },
+		            "device": {
+		                "brand": null,
+		                "family": "Other",
+		                "model": null
+		            },
+		            "os": {
+		                "family": "Mac OS X",
+		                "major": "10",
+		                "minor": "14",
+		                "patch": "1",
+		                "patch_minor": null
+		            }
+        		}
+            },
+            "type": "View"
+        }
+    ],
+    "pagination": {
+        "count": 10,
+        "first": {
+            "href": "/views/recorded/channel?_page=1&_limit=1"
+        },
+        "last": {
+            "href": "/views/recorded/channel?_page=10&_limit=1"
+        },
+        "next": {
+            "href": "/views/recorded/channel?_page=2&_limit=1"
+        },
+        "prev": null,
+        "self": {
+            "href": "/views/recorded/channel?_page=1&_limit=1"
+        }
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | Resource was not found                                                                  |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
