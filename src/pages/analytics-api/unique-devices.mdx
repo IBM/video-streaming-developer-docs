@@ -1,0 +1,301 @@
+---
+title: Unique devices
+description: Data points for unique devices
+---
+
+## Number of sum unique devices for a given time period through all content
+
+```
+GET https://analytics-api.video.ibm.com/v1/unique-devices/summary
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
+| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+matching the query parameters. Each object has the following attributes under the `attributes` key:
+
+| KEY                                 | TYPE    | DESCRIPTION                                        |
+| ----------------------------------- | ------- | -------------------------------------------------- |
+| `dimension_type`                    | string  | The requested dimension type                       |
+| `point`                             | array   | Data point                                         |
+| `value`                             | integer | Numeric value                                      |
+
+Example for success response:
+
+```json
+{
+    "data": [
+        {
+            "attributes": {
+                "dimension_type": "summary",
+                "point": "2020-07-16T00:00:00+01:00",
+                "value": 11
+            },
+            "type": "Series"
+        }
+    ],
+    "pagination": {
+        "count": 10,
+        "first": {
+            "href": "/unique-devices/summary?_page=1&_limit=1"
+        },
+        "last": {
+            "href": "/unique-devices/summary?_page=10&_limit=1"
+        },
+        "next": {
+            "href": "/unique-devices/summary?_page=2&_limit=1"
+        },
+        "prev": null,
+        "self": {
+            "href": "/unique-devices/summary?_page=1&_limit=1"
+        }
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | Resource was not found                                                                  |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Number of sum unique devices for a given time period through all types of content
+
+
+```
+GET https://analytics-api.video.ibm.com/v1/unique-devices/{dimension}
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                          |
+| -------------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `device`, `view-source`, `country`, `region`             |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                                   |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                                     |
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                        |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                            |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+matching the query parameters. Each object has the following attributes under the `attributes` key:
+
+| KEY                                 | TYPE    | DESCRIPTION                                        |
+| ----------------------------------- | ------- | -------------------------------------------------- |
+| `dimension_type`                    | string  | The requested dimension type                       |
+| `point`                             | array   | Data point                                         |
+| `value`                             | integer | Numeric value                                      |
+
+Example for success response:
+
+```json
+{
+    "data": [
+        {
+            "attributes": {
+                "dimension_type": "day",
+                "point": "2020-07-16T00:00:00+01:00",
+                "value": 11
+            },
+            "type": "Series"
+        }
+    ],
+    "pagination": {
+        "count": 10,
+        "first": {
+            "href": "/unique-devices/day?_page=1&_limit=1"
+        },
+        "last": {
+            "href": "/unique-devices/day?_page=10&_limit=1"
+        },
+        "next": {
+            "href": "/unique-devices/day?_page=2&_limit=1"
+        },
+        "prev": null,
+        "self": {
+            "href": "/unique-devices/day?_page=1&_limit=1"
+        }
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | Resource was not found                                                                  |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Number of sum unique devices for a given time period and content type
+
+
+```
+GET https://analytics-api.video.ibm.com/v1/unique-devices/{content_type}/summary
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
+| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
+| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+matching the query parameters. Each object has the following attributes under the `attributes` key:
+
+| KEY                                 | TYPE    | DESCRIPTION                                        |
+| ----------------------------------- | ------- | -------------------------------------------------- |
+| `dimension_type`                    | string  | The requested dimension type                       |
+| `point`                             | array   | Data point                                         |
+| `value`                             | integer | Numeric value                                      |
+
+Example for success response:
+
+```json
+{
+    "data": [
+        {
+            "attributes": {
+                "dimension_type": "summary",
+                "point": "2020-07-16T00:00:00+01:00",
+                "value": 11
+            },
+            "type": "Series"
+        }
+    ],
+    "pagination": {
+        "count": 10,
+        "first": {
+            "href": "/unique-devices/live/summary?_page=1&_limit=1"
+        },
+        "last": {
+            "href": "/unique-devices/live/summary?_page=10&_limit=1"
+        },
+        "next": {
+            "href": "/unique-devices/live/summary?_page=2&_limit=1"
+        },
+        "prev": null,
+        "self": {
+            "href": "/unique-devices/live/summary?_page=1&_limit=1"
+        }
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | Resource was not found                                                                  |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Number of unique devices for a given time period and content type bucketed by a defined dimension
+
+
+```
+GET https://analytics-api.video.ibm.com/v1/unique-devices/{content_type}/{dimension}
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                          |
+| -------------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                                     |
+| `content_id`               | string  | OPTIONAL   | A list of comma separated IDs                                                                        |
+| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `device`, `view-source`, `country`, `region`             |
+| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                                   |
+| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                                     |
+| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                        |
+| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                            |
+
+### Success response
+
+On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+matching the query parameters. Each object has the following attributes under the `attributes` key:
+
+| KEY                                 | TYPE    | DESCRIPTION                                        |
+| ----------------------------------- | ------- | -------------------------------------------------- |
+| `dimension_type`                    | string  | The requested dimension type                       |
+| `point`                             | array   | Data point                                         |
+| `value`                             | integer | Numeric value                                      |
+
+Example for success response:
+
+```json
+{
+    "data": [
+        {
+            "attributes": {
+                "dimension_type": "day",
+                "point": "2020-07-16T00:00:00+01:00",
+                "value": 11
+            },
+            "type": "Series"
+        }
+    ],
+    "pagination": {
+        "count": 10,
+        "first": {
+            "href": "/unique-devices/live/day?_page=1&_limit=1"
+        },
+        "last": {
+            "href": "/unique-devices/live/day?_page=10&_limit=1"
+        },
+        "next": {
+            "href": "/unique-devices/live/day?_page=2&_limit=1"
+        },
+        "prev": null,
+        "self": {
+            "href": "/unique-devices/live/day?_page=1&_limit=1"
+        }
+    }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | Resource was not found                                                                  |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
