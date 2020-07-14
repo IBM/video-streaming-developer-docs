@@ -3,4 +3,31 @@ title: Analytics API Getting Started
 description: Analytics API Getting Started
 ---
 
-## Getting Started
+## Authentication
+The API uses JWT token for authentication. The API accepts the token in the
+`Authorization` header, in the following format:
+`Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6Ik...0RMHrHDcEfxjoYZgeFONFh7HgQ`
+This header must be included with every request.
+
+## Obtaining the Access token
+You can get JWT token from the OAuth2 token endpoint by setting the `token_type` parameter to `jwt`. **This parameter must be set as HTTP POST parameter.**
+
+The OAuth2 flows are described here:
+[Basic Authentication](/api-basics-authentication)
+
+The recommended authentication flow is _Client credentials_.
+
+## Time format
+Every time field provided by the API is formatted by ISO8601 format (eg. `2018-07-16T19:20:30+01:00`).
+The API also accepts parameters in this format only.
+
+## Terminology
+ - *media*: Media is a common word for both live broadcasts and videos
+ - *content type*: The API has knowledge of two types of content: live
+   broadcast and videos
+ - *content id*: A numeric identifier of the media. For Live it means channel id,
+   for video it means video id
+ - *segment*: A part of the media watched by the user
+
+## Response times
+Depending on your query and the underlying data size the response might take a minute.
