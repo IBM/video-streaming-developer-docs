@@ -148,8 +148,8 @@ const BasicEmbed = ({ src, controls = [], dynamic = false, withMediaSwitcher = f
     }
 
     (async function () {
-      const { default: EmbedAPI } = await import('ustream-embedapi/dist/ustream-embedapi.min.js');
-      setViewer(new EmbedAPI(frame.current));
+      const { default: PlayerAPI } = await import('ibm-video-streaming-web-player-api');
+      setViewer(new PlayerAPI(frame.current));
     })();
   }, [frame, inserted]);
 

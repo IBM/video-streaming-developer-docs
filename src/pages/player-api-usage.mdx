@@ -24,13 +24,18 @@ After selecting an option with the IBM Cloud Video Player, the Embed Configurato
 
 The next step is to include a unique ID in this iframe element. We will use "PlayerIframe".
 
+Download the Player API from npm:
+```bash
+npm install ibm-video-streaming-web-player-api
+```
+
 Create an instance of the Embed API by providing the ID of the iframe. The iframe code should look like this:
 
 ```html
 <iframe id="PlayerIframe" src="https://video.ibm.com/embed/1524?html5ui" width="640" height="480" allowfullscreen webkitallowfullscreen></iframe>
 ```
 ```js
-var viewer = UstreamEmbed('PlayerIframe');
+let viewer = PlayerAPI('PlayerIframe');
 ```
 
 ## URL parameters
