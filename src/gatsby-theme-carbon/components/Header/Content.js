@@ -7,6 +7,10 @@ export default [
         title: 'API basics',
       },
       {
+        path: '/organization-api-getting-started',
+        title: 'Organization API',
+      },
+      {
         path: '/channel-api-basic-channel-management',
         title: 'Channel API',
       },
@@ -25,10 +29,6 @@ export default [
       {
         path: '/ecdn-api-getting-started',
         title: 'ECDN API',
-      },
-      {
-        path: '/organization-api-getting-started',
-        title: 'Organization API',
       },
     ],
   },
