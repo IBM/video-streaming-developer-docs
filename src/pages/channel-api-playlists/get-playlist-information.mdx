@@ -5,7 +5,7 @@ description: List the playlists on a channel
 
 ## List the playlists on a channel
 
-Returns data of playlists created on a specific channel.
+Returns data on a video playlists created on a specific channel.
 
 ```
 GET https://api.video.ibm.com/channels/{channel_id}/playlists.json
@@ -23,7 +23,7 @@ The parameters for the GET request:
 
 ### Success response
 
-On success, a set of key-value pairs is returned under a `playlists` element.
+Upon success, a set of key-value pairs is returned under a `playlists` element.
 
 | PARAMETER        | TYPE   | DESCRIPTION                                                                                                                                                                                |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -36,7 +36,7 @@ On success, a set of key-value pairs is returned under a `playlists` element.
 | `updated_at`     | number | Time of last update returned as a Unix timestamp                                                                                                                                           |
 | `channel_id`     | number | The unique ID of the channel                                                                                                                                                               |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -88,7 +88,7 @@ Possible error responses:
 
 ## Get playlist details
 
-Returns data of a specific playlist.
+Returns data of a specific video playlist.
 
 ```
 GET https://api.video.ibm.com/playlists/{playlist_id}.json
@@ -100,7 +100,7 @@ This request has no parameters.
 
 ### Success response
 
-On success, a set of key-value pairs is returned under a `playlists` element.
+Upon success, a set of key-value pairs is returned under a `playlists` element.
 
 | KEY              | TYPE   | DESCRIPTION                                                                                                                                                                                |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -113,7 +113,7 @@ On success, a set of key-value pairs is returned under a `playlists` element.
 | `updated_at`     | number | Time of last update returned as a Unix timestamp                                                                                                                                           |
 | `channel_id`     | number | The unique ID of the channel                                                                                                                                                               |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {

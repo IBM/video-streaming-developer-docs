@@ -10,7 +10,7 @@ The basic workflow of a third-party client (application or device) is the follow
 1. **Authorize the user:** Obtain and validate the user's credentials (username and password). The client must never store these credentials, only pass it to the server for authorization.
 2. **Obtain an access token:** The third-party client application can obtain an access token if the user's credentials were entered correctly.
 3. **Access the user's resources:** The client can use IBM Video Streaming’s REST API or the IBM Video Streaming Broadcasting Library to access the user's resources (data) or to broadcast to the user's channel. The client authorizes itself using the access token, with methods described by The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749).
-4. **Refresh the token, if necessary:** By default, access tokens have a limited lifetime (they expire in a day). If your application needs access to an IBM Video Streaming API beyond this lifetime, it can use the refresh token (that is obtained when requesting the access token for the first time) to obtain new access tokens.
+4. **Refresh the token, if necessary:** By default, access tokens expires within a day. If your application needs access to an IBM Video Streaming API beyond this period, it can use the refresh token (that is obtained when requesting the access token for the first time) to obtain new access tokens.
 
 ## Endpoints
 
@@ -22,16 +22,16 @@ IBM Video Streaming has the following endpoints:
 
 ## Access Token
 
-A token can be used to access the user's resources, once this token is received and until the token expires or the user revokes it on the token revocation endpoint.
+A token can be used to access the user's resources, up until the token expires or the user revokes it through the token revocation endpoint.
 
 ### Token scopes, expiration
 
-By default, access tokens have a limited lifetime (they expire in a day) and can access only a limited amount of resources. In the authorization process, the client can request extra permissions (scopes) from the user to overcome these limitations. These requests are shown to the user on the authorization endpoint.
+Access tokens expire in a day and can access only a limited amount of resources. In the authorization process, the client can request extra permissions (scopes) from the user to overcome these limitations. These requests are shown to the user on the authorization endpoint.
 
 IBM Video Streaming currently supports the following scope for access tokens:
 
 | SCOPE         | DESCRIPTION                                                                                                                                                                                                                                                                                      |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `broadcaster` | If this scope is enabled, the access token can be used for broadcasting with the IBM Video Streaming Broadcasting Library.                                                                                                                                                                       |
+| `broadcaster` | If this scope is enabled, the access token can be used for broadcasting to the IBM Video Streaming Broadcasting Library.                                                                                                                                                                       |
 | `openid`      | The basic (and required) scope for OpenId Connect. This scope indicates that an application intends to obtain the application user's identity. Beyond that, an application can ask for additional scopes by listing the requested scope names in the scope parameter, separated by spaces.       |
-| `email`       | Returns the email claim, which contains the user's email address, and email_verified, which is a boolean indicating whether the email address was verified by the authentication service.                                                                                                        |
+| `email`       | Returns the email claim, which contains the user's email address, and email_verified status, which is a boolean indicating whether the email address was verified by the authentication service.                                                                                                        |

@@ -5,24 +5,24 @@ description: Authentication
 
 ## Authorization flows
 
-The OAuth 2.0 protocol provides several flows (workflows) for authorizing a user and obtaining an access token. It depends on the type and architecture of the client which flow is the most suitable. The following flows are supported:
+The OAuth 2.0 protocol provides several workflows for authorizing a user and obtaining an access token. It depends on the type and architecture of the client which flow is the most suitable. The following workflows are supported:
 
 - **Authorization Code:** Suitable for third-party websites which contain a client and a server component.
-- **Client Credentials:** Best choice for users developing server-side applications to manage their content / settings.
+- **Client Credentials:** Best choice for users developing server-side applications to manage their content or settings.
 
 ### Authorization Code flow
 
-1. The user enters its credentials to a secure login webpage.
+1. The user enters credentials to a secure login webpage.
 2. After logging in, the browser is redirected to a special URL (defined by the client), passing an authorization code in the URL.
 3. The third-party server obtains the access token with another HTTP request in the background, using the authorization code.
 
-See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.
+See the OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.
 
 ### Client Credentials flow
 
 Client credentials can be generated on the Video Streaming dashboard. The client obtains an access token using the `client_id` and `client_secret`. With this token the user's server-side application can access the resources of the account which is identified by this client_id/client_secret pair.
 
-## Authorize the user
+## Authorizing the user
 
 <Title>Authorization endpoint</Title>
 
@@ -32,7 +32,7 @@ Client credentials can be generated on the Video Streaming dashboard. The client
 | Supported HTTP methods | GET, POST                                      |
 | Supported flows        | Authorization Code                             |
 
-The authorization endpoint is a secure web page that authenticates the user. The client should show this page to the user in an embedded browser. When the user completes the login process, the browser is redirected to a special URL. The client can capture this redirect call, and obtain an authorization code.
+The authorization endpoint is a secure web page that authenticates the user. The client should show this page to the user in an embedded browser. When the user completes the login process the browser is redirected to a special URL. The client can capture this redirect call and obtain an authorization code.
 
 ### Parameters
 
@@ -40,20 +40,20 @@ The parameters below specify the behavior of the authorization endpoint. These h
 
 <Title>Supported OAuth 2.0 standard parameters</Title>
 
-| PARAMETER       | TYPE   | IMPORTANCE                                                                               | DESCRIPTION                                                                                                                                                                                                    |
-| --------------- | ------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `response_type` | string | REQUIRED                                                                                 | `code` for Authorization Code flow                                                                                                                                                                             |
-| `client_id`     | string | REQUIRED                                                                                 | 40-character long string that identifies the client. Provided by IBM Video Streaming.                                                                                                                          |
-| `redirect_uri`  | string | REQUIRED                                                                                 | The URI where the browser will redirect after the authentication process. This URI must be registered at IBM Video Streaming.                                                                                  |
-| `state`         | string | OPTIONAL                                                                                 | This value is sent as a GET parameter to the redirect_uri to maintain state between the request and callback. See The OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details.     |
-| `scope`         | string | OPTIONAL                                                                                 | Whitelist-separated list of the requested scopes.                                                                           |
+| PARAMETER       | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                |
+| --------------- | ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `response_type` | string | REQUIRED   | `code` for Authorization Code flow                                                                                                                                                                         |
+| `client_id`     | string | REQUIRED   | 40-character long string that identifies the client. Provided by IBM Video Streaming.                                                                                                                      |
+| `redirect_uri`  | string | REQUIRED   | The URI where the browser will redirect after the authentication process. This URI must be registered at IBM Video Streaming.                                                                              |
+| `state`         | string | OPTIONAL   | This value is sent as a GET parameter to the redirect_uri to maintain state between the request and callback. See the OAuth 2.0 Authorization Framework (https://tools.ietf.org/html/rfc6749) for details. |
+| `scope`         | string | OPTIONAL   | Whitelist-separated list of the requested scopes.                                                                                                                                                          |
 
 <Title>IBM Video Streaming specific extra parameters</Title>
 
-| PARAMETER     | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                   |
-| ------------- | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `device_name` | string | OPTIONAL   | Full product name of the client device or application. It is used for easy identification of the OAuth 2.0 token. The user will be able to review which clients are connected to his/her account, and revoke these grants on the IBM Video Streaming website. |
-| `lang`        | string | OPTIONAL   | Show the authorization page in this locale (e.g. en_US); This parameter will also set the language of the newly registered users.                                                                                                                             |
+| PARAMETER     | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                                                                                                                                                  |
+| ------------- | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `device_name` | string | OPTIONAL   | Full product name of the client device or application. It is used for easy identification of the OAuth 2.0 token. The user will be able to review which clients are connected to his/her account, and revoke this access on the IBM Video Streaming website. |
+| `lang`        | string | OPTIONAL   | Show the authorization page in this locale (e.g. en_US); This parameter will also set the language of the newly registered users.                                                                                                                            |
 
 ### Response values
 
@@ -63,10 +63,10 @@ The response values below are appended to the redirect_uri as HTTP GET parameter
 
 If the `response_type` parameter is `code`, the following properties are returned:
 
-| PROPERTY | DESCRIPTION                                                         |
-| -------- | ------------------------------------------------------------------- |
-| `code`   | An authorization code (40-character long string)                    |
-| `state`  | If state was sent to the endpoint, we send it back                  |
+| PROPERTY | DESCRIPTION                                            |
+| -------- | ------------------------------------------------------ |
+| `code`   | An authorization code (40-character long string)       |
+| `state`  | If state was sent to the endpoint, this information is |
 
 ### Error handling
 
@@ -74,10 +74,10 @@ If the authentication was not successful, there is no HTTP redirection: the user
 
 If the user authenticates correctly, but interrupts the authorization flow, e.g. by pressing a Deny button on the authorization page, the browser is redirected to the redirect_uri with the following parameters:
 
-| NAME  | DESCRIPTION                                        |
-| ----- | -------------------------------------------------- |
-| error | `access_denied`                                    |
-| state | If state was sent to the endpoint, we send it back |
+| NAME  | DESCRIPTION                                                      |
+| ----- | ---------------------------------------------------------------- |
+| error | `access_denied`                                                  |
+| state | If state was sent to the endpoint, this information is sent back |
 
 ## Obtain an access token
 
@@ -90,7 +90,7 @@ If the user authenticates correctly, but interrupts the authorization flow, e.g.
 
 ### Authorization Code flow
 
-When the client receives the authorization code, the server-side component of the client calls the token endpoint to return the access token.
+When the client receives the authorization code the server-side component of the client calls the token endpoint to return the access token.
 
 #### Parameters
 
@@ -103,7 +103,7 @@ The following parameters must be set as HTTP POST parameters:
 | `code`         | string | REQUIRED   | The authorization code received from the authorization endpoint                                                |
 | `redirect_uri` | string | REQUIRED   | The redirection URI used by the authorization server to return the authorization response in the previous step |
 
-In addition to the parameters above, the client has to provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
+In addition to the parameters above, the client must provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
 
 Example HTTP header:
 
@@ -113,21 +113,21 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 
 #### Success response
 
-The response of the token endpoint is a JSON object.
+The response of the Token Endpoint is a JSON object.
 
-JSON response on success:
+JSON response upon success:
 
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id_token`      | This property is only returned if your request included an openid scope. The value is a JSON Web Token (JWT) that contains digitally signed identity information about the user. |
-| `access_token`  | Access token (40-character long string)                                                                                                                                         |
+| `access_token`  | Access token (40-character long string)                                                                                                                                          |
 | `refresh_token` | A token that you can use to obtain a new access token                                                                                                                            |
-| `token_type`    | Will be bearer                                                                                                                                                                   |
+| `token_type`    | Will be Bearer Token                                                                                                                                                             |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
 
 #### Example
 
-The following is an example with the authorization code flow.
+The following is an example of the authorization code flow.
 
 1 - The client opens a browser with the authorization endpoint:
 
@@ -182,7 +182,7 @@ The following parameters must be set as HTTP POST parameters:
 | `device_name` | string | OPTIONAL   | device name                                                                               |
 | `scope`       | string | OPTIONAL   | `broadcaster` for broadcaster scope, or space separated URL encoded list of these strings |
 
-In addition to the parameters above, the client has to provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
+In addition to the parameters above, the client must provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
 
 Example HTTP header:
 
@@ -195,7 +195,7 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id_token`      | This property is only returned if your request included an openid scope. The value is a JSON Web Token (JWT) that contains digitally signed identity information about the user. |
-| `access_token`  | Access token (40-character long string)                                                                                                                       |
+| `access_token`  | Access token (40-character long string)                                                                                                                                          |
 | `refresh_token` | A token that you can use to obtain a new access token                                                                                                                            |
 | `token_type`    | Will be bearer                                                                                                                                                                   |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
@@ -205,27 +205,26 @@ Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 | HTTP RESPONSE CODE  | ERROR VALUE              | ERROR CONDITIONS                                                                                                                            |
 | ------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | 400 Bad Request     | `invalid_client`         | The referred client is missing, the secret is wrong or the authorization requester client and token requester client does not match.        |
-| 400 Bad Request     | `invalid_grant`          | The supplied authorization_code does not exists or expired                                                                                  |
+| 400 Bad Request     | `invalid_grant`          | The supplied authorization_code does not exist or expired                                                                                  |
 | 400 Bad Request     | `invalid_request`        | One or more required parameters are missing                                                                                                 |
 | 501 Not Implemented | `unsupported_grant_type` | The client asks for an unsupported grant type, currently only `authorization_code`, `client_credentials` and `refresh_token` are supported. |
 | 503 Server Error    | `server_error`           | The server cannot handle the request at this moment for some reason. Try again later.                                                       |
 
 ## Refreshing access tokens
 
-When access tokens expire or become invalid, applications can obtain a new access token using a refresh token without prompting users to enter their login credentials again. The refresh token is returned as a response of one of the previous token requests. Because refresh tokens are long-lived, developers should ensure that strict storage requirements are in place to keep them from being leaked.
-Refresh tokens expire in 30 days.
+When access tokens expire or become invalid, applications can obtain a new access token using a refresh token without prompting users to enter their login credentials again. The refresh token is returned as a response of one of the previous token requests. Because refresh tokens are last for 30 days, developers should ensure that strict storage requirements are in place to keep them from being leaked.
 
 #### Parameters
 
 The following parameters must be set as HTTP POST parameters:
 
-| PARAMETER | TYPE | IMPORTANCE | DESCRIPTION |
-| --------- | ---- | ---------- | ----------- |
-| `grant_type` | string | REQUIRED | MUST be `refresh_token`. |
-| `refresh_token` | string | REQUIRED | A token that you can use to obtain a new access token. Refresh tokens are valid for 30 days or until the user revokes access. |
-| `client_id` | string | REQUIRED | Client id provided by IBM Video Streaming. |
+| PARAMETER       | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                   |
+| --------------- | ------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `grant_type`    | string | REQUIRED   | MUST be `refresh_token`.                                                                                                      |
+| `refresh_token` | string | REQUIRED   | A token that you can use to obtain a new access token. Refresh tokens are valid for 30 days or until the user revokes access. |
+| `client_id`     | string | REQUIRED   | Client id provided by IBM Video Streaming.                                                                                    |
 
-In addition to the parameters above, the client has to provide its client secret (provided along with the client key) to authenticate itself if the client acts as a “web application”. Sending client secret can be omitted in case of “native application”.
+In addition to the parameters above, the client must provide its client secret (provided along with the client key) to authenticate if the client acts as a “web application”. Sending client secret can be omitted in case of “native application”.
 The authentication is done with HTTP Basic authorization method.
 
 Example HTTP header:
@@ -233,18 +232,19 @@ Example HTTP header:
 ```
 Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01
 ```
+
 #### Success response
 
-The response of the token endpoint is a JSON object.
+The response of the Token Endpoint is a JSON object.
 
-JSON response on success:
+JSON response upon success are:
 
 | NAME            | DESCRIPTION                                                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id_token`      | This property is only returned if your request included an openid scope. The value is a JSON Web Token (JWT) that contains digitally signed identity information about the user. |
-| `access_token`  | Access token (40-character long string)                                                                                                                                         |
+| `access_token`  | Access token (40-character long string)                                                                                                                                          |
 | `refresh_token` | A token that you can use to obtain a new access token                                                                                                                            |
-| `token_type`    | Will be bearer                                                                                                                                                                   |
+| `token_type`    | Will be Bearer Token                                                                                                                                                             |
 | `expires_in`    | Token's current lifetime, in seconds.                                                                                                                                            |
 
 #### Example

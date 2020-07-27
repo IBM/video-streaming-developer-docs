@@ -61,7 +61,7 @@ HTTP response code returned when the action is successful:
 
 ## Implementing the authentication response
 
-If the authentication was successful your service has to pass an authentication response to the player. The authentication response must be a JSON encoded array which contains the following:
+If the authentication was successful, your service must pass an authentication response to the player. The authentication response must be a JSON encoded array which contains the following:
 
 - list of parameters that have been hashed
 - the MD5 hash of the string that has been created by concatenating the parameters and the shared secret key with pipe "|" characters
@@ -97,7 +97,7 @@ $json = json_encode($response);
   The order of the parameters should match their order in the array when creating the hash.
 </InlineNotification>
 
-To pass the response to the player your service has to redirect the page to the IBM Video Streaming return URL with passing the response in JSON format as a get parameter. You can test the API response at the [Hash Authentication Test](/viewer-authentication-api-hash-authentication-test) page.
+To pass the response to the player your service must redirect the page to the IBM Video Streaming return URL with passing the response in JSON format as a get parameter. You can test the API response at the [Hash Authentication Test](/viewer-authentication-api-hash-authentication-test) page.
 
 ```
 https://video.ibm.com/embed/hashlock/pass?hash=RESPONSE_IN_JSON_FORMAT
@@ -117,7 +117,7 @@ This request has no parameters.
 
 #### Response
 
-On success, key-value pairs are returned under a "hashlock" key.
+Upon success, key-value pairs are returned under a "hashlock" key.
 
 Example:
 
@@ -138,7 +138,7 @@ Specific error codes returned when the action failed:
 
 | ERROR VALUE         | HTTP RESPONSE CODE | DESCRIPTION                                             |
 | ------------------- | ------------------ | ------------------------------------------------------- |
-| `lack_of_ownership` | 403 Forbidden      | The api user is not allowed to manage the given channel |
+| `lack_of_ownership` | 403 Forbidden      | The API user is not allowed to manage the given channel |
 | `not_found`         | 404 Not found      | Channel not found                                       |
 
 ### Removing channel viewer authentication
@@ -153,7 +153,7 @@ This request has no parameters.
 
 #### Response
 
-On success the 200 OK HTTP response code is returned.
+Upon success the 200 OK HTTP response code is returned.
 
 Specific error codes returned when the action failed:
 
@@ -174,7 +174,7 @@ This request has no parameters.
 
 #### Response
 
-On success, key-value pairs are returned under a "hashlock" key.
+Upon success, key-value pairs are returned under a "hashlock" key.
 
 <Title>Example</Title>
 
@@ -208,7 +208,7 @@ This request has no parameters.
 
 #### Response
 
-On success the 204 No Content HTTP response code is returned.
+Upon success the 204 No Content HTTP response code is returned.
 
 Specific error codes returned when the action failed:
 

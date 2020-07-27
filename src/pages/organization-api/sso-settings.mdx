@@ -3,17 +3,17 @@ title: SSO Settings
 description: SSO Settings
 ---
 
-This API calls allow to configure the Account's SSO login settings. Currently two types of SSO providers are supported: Google Apps and SAML based.
+This API call is used to configure the Account's SSO login settings. Currently two types of SSO providers are supported: Google Apps and SAML based.
 
 ## Get the current settings
 
-This API call allows to get the current settings of the Organization's SSO login.
+This API call lists the current settings of the Organization's SSO login.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/sso.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organizations/ZzzqXZ/sso.json HTTP/1.1
@@ -25,14 +25,14 @@ The token in the above call is only an example.
 
 ### Success response
 
-On success, key-value pairs are returned with an HTTP Status code of 200.
+Upon success, key-value pairs are returned with an HTTP Status code of 200.
 
 | KEY               | TYPE    | DESCRIPTION                                                        |
 | ----------------- | ------- | ------------------------------------------------------------------ |
 | `allow_sso_login` | boolean | SSO login is enabled                                               |
 | `login_method`    | string  | Type of SSO login. Possible values: `samlsso`, `googlesso`, `none` |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -71,7 +71,7 @@ To change the login method you have to set the method's settings. ([Set Google S
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 PUT /organization/ZzzqXZ/sso.json HTTP/1.1
@@ -86,7 +86,7 @@ The token in the above call is only an example.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 
@@ -101,13 +101,13 @@ Possible error responses:
 
 ### Get the current Google SSO settings
 
-This API call allows to get the current Google settings of the Organization's SSO login.
+This API call lists the current Google settings of the Organization's SSO login.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/sso/google.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organizations/ZzzqXZ/sso/google.json HTTP/1.1
@@ -115,17 +115,17 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, key-value pairs are returned with an HTTP Status code of 200.
+Upon success, key-value pairs are returned with an HTTP Status code of 200.
 
 | KEY               | TYPE    | DESCRIPTION        |
 | ----------------- | ------- | ------------------ |
 | `hosted_domain`   | string  | Google Apps domain |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -147,7 +147,7 @@ Possible error responses:
 
 ## Set Google SSO settings
 
-This API call allows to set the Organization's Google SSO login settings. **Setting the SSO domain doesn't automatically turn SSO login on.**
+This API call is used to set the Organization's Google SSO login settings. **Note that setting the SSO domain doesn't automatically turn SSO login on.**
 
 ```
 PUT https://api.video.ibm.com/organizations/{organizationId}/sso/google.json
@@ -163,7 +163,7 @@ The parameters for the PUT request:
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 PUT /organization/ZzzqXZ/sso/google.json HTTP/1.1
@@ -174,11 +174,11 @@ Content-Type: application/x-www-form-urlencoded
 hosted_domain=example.com
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 
@@ -193,13 +193,13 @@ Possible error responses:
 
 ## Get the current SAML SSO settings
 
-This API call allows to get the current SAML settings of the Organization's SSO login.
+This API call lists the current SAML settings of the Organization's SSO login.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/sso/saml.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organizations/ZzzqXZ/sso/saml.json HTTP/1.1
@@ -207,11 +207,11 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, key-value pairs are returned with an HTTP Status code of 200.
+Upon success, key-value pairs are returned with an HTTP Status code of 200.
 
 | KEY                | TYPE    | DESCRIPTION                                    |
 | ------------------ | ------- | ---------------------------------------------- |
@@ -221,7 +221,7 @@ On success, key-value pairs are returned with an HTTP Status code of 200.
 | `logout_mode`      | string  | Login mode. Possible values: `local`, `global` |
 | `logout_url`       | string  | Logout URL if Login mode is global             |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -249,7 +249,7 @@ Possible error responses:
 
 ## Set SAML SSO settings
 
-This API call allows to set the Organization's Google SSO login settings. **Setting the SSO domain doesn't automatically turn SSO login on.**
+This API call is used to set the Organization's Google SSO login settings. **Setting the SSO domain doesn't automatically turn SSO login on.**
 
 ```
 PUT https://api.video.ibm.com/organizations/{organizationId}/sso/saml.json
@@ -269,7 +269,7 @@ The parameters for the PUT request:
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 PUT /organization/ZzzqXZ/sso/saml.json HTTP/1.1
@@ -280,13 +280,13 @@ Content-Type: application/x-www-form-urlencoded
 entity_id=https%3A%2F%2Fsso.example.info%2Fentity&certificate_data=MIIJnz...&login_url=https%3A%2F%2Fexample.com%2Flogin&logout_mode=global&logout_url=https%3A%2F%2Fexample.com%2Flogout
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 The `certificate_data` in the above call is truncated for clarity.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 

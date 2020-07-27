@@ -3,7 +3,7 @@ title: Manage video labels
 description: Channel API Video management Manage video labels
 ---
 
-A video can have multiple labels. With these API calls you can get information on labels of a video, or add and remove labels to/from a video.
+A video can have multiple labels. With these API calls you can get information on the labels of a video. You can also add and remove labels to or from a video.
 
 ## Get list of all labels
 
@@ -19,7 +19,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `labels` key (grouped by values of label IDs).
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `labels` key (grouped by values of label IDs).
 
 | KEY           | TYPE   | DESCRIPTION            |
 | ------------- | ------ | ---------------------- |
@@ -27,7 +27,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 | `label_name`  | string | Label name             |
 | `label_color` | string | Color of the label     |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -73,7 +73,7 @@ The parameters for the POST request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `label` element (grouped by value of label ID).
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `label` element (grouped by value of label ID).
 
 | KEY           | TYPE   | DESCRIPTION            |
 | ------------- | ------ | ---------------------- |
@@ -81,7 +81,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 | `label_name`  | string | Label name             |
 | `label_color` | string | Color of the label     |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -122,7 +122,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success, a response with HTTP status "204 No Content" is returned.
+Upon success, a response with HTTP status "204 No Content" is returned.
 
 ### Error responses
 
@@ -148,7 +148,7 @@ This request has no parameters.
 
 ### Success response
 
-On success, a response with HTTP status "204 No Content" is returned.
+Upon success, a response with HTTP status "204 No Content" is returned.
 
 ### Error responses
 
@@ -173,7 +173,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `labels` key.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `labels` key.
 
 | KEY           | TYPE   | DESCRIPTION            |
 | ------------- | ------ | ---------------------- |
@@ -181,7 +181,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 | `label_name`  | string | Label name             |
 | `label_color` | string | Color of the label     |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -227,7 +227,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success, a response with HTTP status "204 No Content" is returned.
+Upon success, a response with HTTP status "204 No Content" is returned.
 
 ### Error responses
 
@@ -258,7 +258,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success, a response with HTTP status "204 No Content" is returned.
+Upon success, a response with HTTP status "204 No Content" is returned.
 
 ### Error responses
 

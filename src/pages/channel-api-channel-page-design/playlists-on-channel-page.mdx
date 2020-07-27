@@ -5,7 +5,7 @@ description: Channel API Channel page design Playlists on channel page
 
 ## Get playlist settings
 
-Check whether playlists are enabled or disabled on the channel page.
+Check whether video playlists are enabled or disabled on the channel page.
 
 ```
 GET https://api.video.ibm.com/channels/{channel_id}/settings/playlists.json
@@ -17,14 +17,14 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value structures.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value structures.
 
 | KEY          | TYPE    | DESCRIPTION                                                                             |
 | ------------ | ------- | --------------------------------------------------------------------------------------- |
 | `success`    | boolean | Success status of the request                                                           |
 | `is_enabled` | boolean | Setting of playlists for the channel page, if value is `true`, playlists are displayed. |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -62,7 +62,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pair.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pair.
 
 | KEY       | TYPE    | DESCRIPTION                   |
 | --------- | ------- | ----------------------------- |

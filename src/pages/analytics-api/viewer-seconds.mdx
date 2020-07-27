@@ -3,7 +3,9 @@ title: Viewer seconds
 description: Viewer seconds
 ---
 
-## Live and Recorded viewer seconds of all content for a given time period
+## Live and recorded viewer consumption of all content for a given time period by seconds
+
+Gives the total amount of time that all viewers spent watching live or on demand content within a given time period in an interval of seconds.
 
 ```
 GET https://analytics-api.video.ibm.com/v1/viewer-seconds
@@ -13,58 +15,58 @@ GET https://analytics-api.video.ibm.com/v1/viewer-seconds
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `granularity`              | string  | OPTIONAL   | `hour`, `minute` `day`, `month`, the default value is `minute`                  |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `content_id`               | string  | OPTIONAL   | A list of comma separated IDs                                                   |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                                   |
+| ---------------- | ------- | ---------- | -------------------------------------------------------------- |
+| `granularity`    | string  | OPTIONAL   | `hour`, `minute` `day`, `month`, the default value is `minute` |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format             |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format               |
+| `content_id`     | string  | OPTIONAL   | A list of comma separated IDs                                  |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)                  |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)      |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `ViewerSecondSeries` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `ViewerSecondSeries` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                            |
-| ----------------------------------- | ------- | -------------------------------------------------------|
-| `content_type`                      | string  | Type of the content, either `live` or `recorded`       |
-| `content_id`                        | integer | Live or recorded id                                    |
-| `time`                              | string  | Date and time for the datapoint in ISO8601 format      |
-| `value`                             | integer | Number of peak viewers                                 |
+| KEY            | TYPE    | DESCRIPTION                                       |
+| -------------- | ------- | ------------------------------------------------- |
+| `content_type` | string  | Type of the content, either `live` or `recorded`  |
+| `content_id`   | integer | Live or recorded id                               |
+| `time`         | string  | Date and time for the datapoint in ISO8601 format |
+| `value`        | integer | Number of peak viewers                            |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "content_type": "live",
-                "content_id": 238589,
-                "time": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "ViewerSecondSeries"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/viewer-seconds?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/viewer-seconds?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/viewer-seconds?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/viewer-seconds?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "content_type": "live",
+        "content_id": 238589,
+        "time": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "ViewerSecondSeries"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/viewer-seconds?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/viewer-seconds?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/viewer-seconds?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/viewer-seconds?_page=1&_limit=1"
+    }
+  }
 }
 ```
 
@@ -79,7 +81,9 @@ Possible error responses:
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Live or Recorded viewer seconds of all or given content ids for a given time period
+## Live or recorded viewer consumption of all or given content IDs for a given time period in seconds
+
+Gives the total amount of time that all viewers spent watching all live and on demand content or limits this to just specific content by ID. The figure is limited toa given time period and is reported in an interval of seconds.
 
 ```
 GET https://analytics-api.video.ibm.com/v1/viewer-seconds/{content_type}
@@ -89,59 +93,59 @@ GET https://analytics-api.video.ibm.com/v1/viewer-seconds/{content_type}
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                |
-| `granularity`              | string  | OPTIONAL   | `hour`, `minute` `day`, `month`, the default value is `minute`                  |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `content_id`               | string  | OPTIONAL   | A list of comma separated IDs                                                   |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                                   |
+| ---------------- | ------- | ---------- | -------------------------------------------------------------- |
+| `content_type`   | string  | REQUIRED   | Type of the content, either `live` or `recorded`               |
+| `granularity`    | string  | OPTIONAL   | `hour`, `minute` `day`, `month`, the default value is `minute` |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format             |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format               |
+| `content_id`     | string  | OPTIONAL   | A list of comma separated IDs                                  |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)                  |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)      |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `ViewerSecondSeries` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `ViewerSecondSeries` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
-| ----------------------------------- | ------- | -------------------------------------------------------|
-| `content_type`                      | string  | Type of the content, either `live` or `recorded`       |
-| `content_id`                        | integer | Live or recorded id                                    |
-| `time`                              | string  | Date and time for the datapoint in ISO8601 format      |
-| `value`                             | integer | Number of peak viewers                                 |
+| KEY            | TYPE    | DESCRIPTION                                       |
+| -------------- | ------- | ------------------------------------------------- |
+| `content_type` | string  | Type of the content, either `live` or `recorded`  |
+| `content_id`   | integer | Live or recorded id                               |
+| `time`         | string  | Date and time for the datapoint in ISO8601 format |
+| `value`        | integer | Number of peak viewers                            |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "content_type": "live",
-                "content_id": 238589,
-                "time": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "ViewerSecondSeries"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/viewer-seconds/live?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/viewer-seconds/live?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/viewer-seconds/live?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/viewer-seconds/live?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "content_type": "live",
+        "content_id": 238589,
+        "time": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "ViewerSecondSeries"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/viewer-seconds/live?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/viewer-seconds/live?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/viewer-seconds/live?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/viewer-seconds/live?_page=1&_limit=1"
+    }
+  }
 }
 ```
 
@@ -156,7 +160,9 @@ Possible error responses:
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Recorded viewer seconds of all content on the defined channels for a given time period
+## Recorded viewer consumption of all content on the defined channels for a given time period in seconds
+
+Gives the total amount of time that all viewers spent watching on demand content on defined channels within a given time period in an interval of seconds.
 
 ```
 GET https://analytics-api.video.ibm.com/v1/viewer-seconds/recorded/channel
@@ -166,58 +172,58 @@ GET https://analytics-api.video.ibm.com/v1/viewer-seconds/recorded/channel
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `channel_id`               | integer | REQUIRED   | A list of comma separated IDs                                                   |
-| `granularity`              | string  | OPTIONAL   | `hour`, `minute` `day`, `month`, the default value is `minute`                  |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                                   |
+| ---------------- | ------- | ---------- | -------------------------------------------------------------- |
+| `channel_id`     | integer | REQUIRED   | A list of comma separated IDs                                  |
+| `granularity`    | string  | OPTIONAL   | `hour`, `minute` `day`, `month`, the default value is `minute` |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format             |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format               |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)                  |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)      |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `ViewerSecondSeries` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `ViewerSecondSeries` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
-| ----------------------------------- | ------- | -------------------------------------------------------|
-| `content_type`                      | string  | Type of the content, for this endpoint `recorded` only |
-| `content_id`                        | integer | Video id                                               |
-| `time`                              | string  | Date and time for the datapoint in ISO8601 format      |
-| `value`                             | integer | Number of peak viewers                                 |
+| KEY            | TYPE    | DESCRIPTION                                            |
+| -------------- | ------- | ------------------------------------------------------ |
+| `content_type` | string  | Type of the content, for this endpoint `recorded` only |
+| `content_id`   | integer | Video id                                               |
+| `time`         | string  | Date and time for the datapoint in ISO8601 format      |
+| `value`        | integer | Number of peak viewers                                 |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "content_type": "recorded",
-                "content_id": 238589,
-                "time": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "ViewerSecondSeries"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/viewer-seconds/live?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/viewer-seconds/live?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/viewer-seconds/live?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/viewer-seconds/live?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "content_type": "recorded",
+        "content_id": 238589,
+        "time": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "ViewerSecondSeries"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/viewer-seconds/live?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/viewer-seconds/live?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/viewer-seconds/live?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/viewer-seconds/live?_page=1&_limit=1"
+    }
+  }
 }
 ```
 

@@ -3,11 +3,11 @@ title: Using viewer authentication with other services
 description: Using viewer authentication with other services
 ---
 
-Besides the player there are some services (such as Chat, Q&A and Combined Embed) that may also require viewer authentication. In order to make the authentication work, additional steps need to be taken at the end of the authentication flow.
+Besides the player there are some services (such as Chat, Q&A and Combined Embed) that may also require viewer authentication. In order to make the authentication work across these services, additional steps need to be taken at the end of the authentication flow.
 
-These services provide an url, that has to be used instead of the default pass url. This url is sent in the hashConsumer query parameter by the service to the application.
+These services provide a URL, that must be used instead of the default pass url. This URL is sent in the hashConsumer query parameter by the service to the application.
 
-Example url in the hashConsumer in case of Chat:
+Example url in the hashConsumer for chat:
 
 ```
 https://video.ibm.com/chat/authorize/12345678?resource=%2Fchat%2F12345678

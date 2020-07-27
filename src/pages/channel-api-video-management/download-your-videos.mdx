@@ -19,7 +19,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `downloadable` key.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `downloadable` key.
 
 | KEY            | TYPE   | DESCRIPTION                                                                                                                                                                                                                                   |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +27,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 | `download_url` | string | The video download URL. (Value is `null` if the downloadable version is not available.)                                                                                                                                                       |
 | `expires_at`   | number | Date and time when the downloadable version will expire (Unix timestamp)                                                                                                                                                                      |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -49,7 +49,7 @@ Possible error responses:
 | 404 Not Found           | `not_found`   | Video was not found                                                                     |
 | 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Request a downloadable version of a video
+## Requesting a downloadable version of a video
 
 The downloadable version of a video is not always available, and you have to request us to generate a temporary video file for download. The workflow is the following:
 
@@ -57,7 +57,7 @@ The downloadable version of a video is not always available, and you have to req
 2. Poll the same API resource for status updates.
 3. Use the value of the `download_url` property as soon as it is available.
 
-You have 24 hours to download the video file right after it's available. Please refer the property `expires_at` for the proper timing.
+You have 24 hours to download the video file  after it becomes available. Please refer to the property `expires_at` for the proper timing.
 
 ```
 POST https://api.video.ibm.com/videos/{video_id}/downloadable/{video_format}.json

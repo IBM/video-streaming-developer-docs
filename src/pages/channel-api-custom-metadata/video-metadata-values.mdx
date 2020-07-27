@@ -17,13 +17,13 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pair.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pair.
 
 | KEY        | TYPE  | DESCRIPTION                                                |
 | ---------- | ----- | ---------------------------------------------------------- |
 | `metadata` | array | Array of data for fields containing `field_id` and `value` |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -70,7 +70,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success, a response with HTTP status "204 No Content" is returned.
+Upon success, a response with HTTP status "204 No Content" is returned.
 
 ### Error responses
 
@@ -85,7 +85,7 @@ Possible error responses:
 
 ## Remove video metadata value
 
-Remove value of a custom field for a selected video.
+Remove a value from a custom field for a selected video.
 
 ```
 DELETE https://api.video.ibm.com/videos/{video_id}/custom-metadata/{field_id}.json
@@ -97,7 +97,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 

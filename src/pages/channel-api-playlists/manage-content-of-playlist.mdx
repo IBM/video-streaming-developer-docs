@@ -5,7 +5,7 @@ description: List the playlists on a channel
 
 ## List the videos of a playlist
 
-Returns data of videos in a specific playlist.
+Returns data on the videos inside a specific playlist.
 
 ```
 GET https://api.video.ibm.com/playlists/{playlist_id}/videos.json
@@ -23,7 +23,7 @@ The parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `videos` element.
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `videos` element.
 
 | KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                           |
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -40,7 +40,7 @@ On success a response with HTTP status “200 OK” is returned with the followi
 | `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
 | `links`           | object | Contains information about the channel of the video |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -98,7 +98,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned.
+Upon success a response with HTTP status “200 OK” is returned.
 The response will contain the following collection limit headers:
 
 | HEADER                   | TYPE    | DESCRIPTION                                                  |
@@ -120,7 +120,7 @@ Possible error responses:
 
 ## Get details of a video in a playlist
 
-Returns data of video in a specific playlist.
+Returns data on the videos in a specific playlist.
 
 ```
 GET https://api.video.ibm.com/playlists/{playlist_id}/videos/{video_id}.json
@@ -132,7 +132,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `video` element.
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `video` element.
 
 | KEY                    | TYPE   | DESCRIPTION                                                                                                                                                                                                                              |
 | ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -152,7 +152,7 @@ On success a response with HTTP status “200 OK” is returned with the followi
 | `chapters`             | array  |                                                                                                                                                                                                                                          |
 | `length`               | string | Video length in seconds                                                                                                                                                                                                                  |
 
-Example for success response:
+Example of a success response:
 
 ```
 
@@ -187,7 +187,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned.
+Upon success a response with HTTP status “200 OK” is returned.
 
 ### Error responses
 
@@ -203,7 +203,7 @@ Possible error responses:
 
 ## Remove a video from a playlist
 
-Removes video from the playlist, not deleting it from the channel.
+Removes video from an already created playlist. Note that this does not delete the video from the channel or account.
 
 ```
 DELETE https://api.video.ibm.com/playlists/{playlist_id}/videos/{video_id}/position.json
@@ -215,7 +215,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned.
+Upon success a response with HTTP status “200 OK” is returned.
 
 The response will contain the following collection limit headers:
 

@@ -3,7 +3,7 @@ title: Advanced Access Control Lists
 description: Advanced Access Control Lists
 ---
 
-This API allows to manage Advanced Access Control Lists. Currently only 2 lists are allowed per user. If there is at least one list for the given user it allows to set Advanced Access Rules on the Dashboard for videos/channels.
+This API allows you to manage Advanced Access Control Lists. Currently only 2 lists are allowed per user. If there is at least one list for the given user it allows to set Advanced Access Rules on the Dashboard for videos/channels.
 
 ### Get Lists
 
@@ -13,7 +13,7 @@ This call allows to get the currently uploaded lists for a user.
 GET https://api.video.ibm.com/users/{userId}/access-control/lists.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /users/123456/access-control/lists.json HTTP/1.1
@@ -21,11 +21,11 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned under a `lists` element with an HTTP Status code of 200.
+Upon success, a set of key-value pairs is returned under a `lists` element with an HTTP Status code of 200.
 
 | KEY     | TYPE   | DESCRIPTION                                            |
 | ------- | ------ | ------------------------------------------------------ |
@@ -33,7 +33,7 @@ On success, a set of key-value pairs is returned under a `lists` element with an
 | `name`  | string | The name of the list (it must be unique under a user)  |
 | `items` | array  | List of group names                                    |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -80,7 +80,7 @@ The parameters for the POST request:
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 POST users/123456/access-control/lists.json HTTP/1.1
@@ -91,13 +91,13 @@ Content-Type: application/x-www-form-urlencoded
 name=test+1&items[]=sales&items[]=marketing
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, there is a `Location` header in the response where you can access the newly created list. Success HTTP Status code is 201.
+Upon success, there is a `Location` header in the response where you can access the newly created list. Success HTTP Status code is 201.
 
-Example for the response:
+Example of the response:
 
 ```
 HTTP/1.1 201 Created
@@ -125,7 +125,7 @@ This call allows to get a list.
 GET https://api.video.ibm.com/users/{userId}/access-control/lists/{id}.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /users/123456/access-control/lists/54321.json HTTP/1.1
@@ -133,11 +133,11 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned under a `list` element with an HTTP Status code of 200.
+Upon success, a set of key-value pairs is returned under a `list` element with an HTTP Status code of 200.
 
 | KEY     | TYPE   | DESCRIPTION                                            |
 | ------- | ------ | ------------------------------------------------------ |
@@ -145,7 +145,7 @@ On success, a set of key-value pairs is returned under a `list` element with an 
 | `name`  | string | The name of the list (it must be unique under a user)  |
 | `items` | array  | List of group names                                    |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -193,7 +193,7 @@ The parameters for the POST request:
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 PUT /users/123456/access-control/lists/54321.json HTTP/1.1
@@ -204,11 +204,11 @@ Content-Type: application/x-www-form-urlencoded
 name=test+1&items[]=sales&items[]=marketing
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 
@@ -229,7 +229,7 @@ This call allows to delete a list.
 DELETE https://api.video.ibm.com/users/{userId}/access-control/lists/{id}.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 DELETE /users/123456/access-control/lists/54321.json HTTP/1.1
@@ -237,11 +237,11 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 

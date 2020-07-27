@@ -5,10 +5,10 @@ description: Channel API Video management Upload videos
 
 Videos can be uploaded by FTP. To upload a file you must do the following steps:
 
-1. Initiate an upload process by an API call. In the response you can find the details of the FTP connect.
+1. Initiate an upload process by an API call. In the response you can find the details needed to connect through FTP.
 2. Upload the video.
-3. When the upload is finished, send a "file in place" signal, which tells to our server that it can start to process the file.
-4. Call the API to check the status of the processing.
+3. When the upload is finished, send a "file in place" signal, which tells the IBM server that it can start to process the file.
+4. Call the API to check the status of processing the video.
 
 ## Initialize an upload
 
@@ -30,9 +30,9 @@ The parameters for the POST request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the key-value pairs containing the details of the FTP access.
+Upon success a response with HTTP status "200 OK" is returned with the key-value pairs containing the details of the FTP access.
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -61,9 +61,9 @@ Possible error responses:
 
 ## Upload the video file
 
-Use the credentials you have received in the response when you initialized the upload to upload your video file to our servers. Once you log in to the FTP server, you should put your file to the root, under a name that matches with the `path` value of the response, followed by the extension.
+Use the credentials you received in the response when you initialized the process to upload your video file to IBM servers. Once you log in to the FTP server, you should put your file to the root, under a name that matches with the `path` value of the response, followed by the extension.
 
-The `url` part of the response makes it easier to transfer files, with a single FTP command. For example if you have a file called `test.mov`, you can use the following FTP command to upload it:
+The `url` part of the response makes it easier to transfer files, with a single FTP command. For example, if you have a file called `test.mov`, you can use the following FTP command to upload it:
 
 ```
 ftp -u
@@ -101,7 +101,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success, a response with HTTP status "202 Accepted" is returned.
+Upon success, a response with HTTP status "202 Accepted" is returned.
 
 ### Error responses
 
@@ -127,7 +127,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with a key-value pair.
+Upon success a response with HTTP status "200 OK" is returned with a key-value pair.
 
 | KEY      | TYPE   | DESCRIPTION                                                                                                              |
 | -------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |

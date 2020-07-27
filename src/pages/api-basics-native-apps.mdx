@@ -5,17 +5,17 @@ description: Native app support
 
 ## Overview
 
-Native and mobile apps can not store secrets in a secure way, therefore it’s not recommended to use the standard
+Native and mobile apps cannot store secrets in a secure way. Consequently, it’s not recommended to use the standard
 authorization code flow, since it requires a client secret when exchanging the authorization code for an access token
-on the token endpoint. By selecting the “Native application” option on the Video Streaming dashboard, PKCE
-(https://tools.ietf.org/html/rfc7636) protocol can be forced to secure the auth flow. PKCE is a technique for public
+on the token endpoint. By selecting the “Native application” option on the IBM Video Streaming dashboard, PKCE
+(https://tools.ietf.org/html/rfc7636) protocol can be forced to secure the authorization flow. PKCE is a technique for public
 clients to mitigate the threat of having the authorization code intercepted. Clients need to create a secret, then use
 that secret again when exchanging the authorization code for an access token. This way if the code is intercepted,
-the evil application won’t be able to use it because the token request relies on the initial secret.
+by a malicious application it won’t be able to use it because the token request relies on the initial secret.
 
 ### Generate a code verifier and code challenge
 
-Apps have to generate a unique code verifier for every authorization request. This value has to be transformed to a
+Apps must generate a unique code verifier for every authorization request. This value must be transformed to a
 `code_challenge`, which is sent to the authorization server to obtain the authorization code.
 A `code_verifier` is a high-entropy cryptographic random string using the unreserved characters
 `[A-Z]` / `[a-z]` / `[0-9]` / `-` / `.` / `_` / `~`, with a minimum length of 43 characters and a maximum length of 128 characters.
@@ -23,9 +23,9 @@ The code verifier should have enough entropy to make it impractical to guess the
 
 <Title>Supported methods for generating a code challenge</Title>
 
-| METHOD  | DESCRIPTION |
-| ------- | - |
-| `plain` | The code challenge is the same value as the code verifier generated above. `code_challenge` = `code_verifier` |
+| METHOD  | DESCRIPTION                                                                                                                                                         |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `plain` | The code challenge is the same value as the code verifier generated above. `code_challenge` = `code_verifier`                                                       |
 | `S256`  | The code challenge is the Base64URL (without padding) encoded SHA256 hash of the code verifier. `code_challenge` = `BASE64URL-ENCODE(SHA256(ASCII(code_verifier)))` |
 
 ### Send a request to the auth server
@@ -33,21 +33,21 @@ The code verifier should have enough entropy to make it impractical to guess the
 To obtain user authorization, send a request to the authorization server at https://authentication.video.ibm.com/authorize. This endpoint handles active session lookup, authenticates the user, and obtains user consent.
 The authorization server supports the following additional query string parameters for installed applications:
 
-| PARAMETER               | IMPORTANCE | DESCRIPTION                                           |
-| ----------------------- | ---------- | ----------------------------------------------------- |
+| PARAMETER               | IMPORTANCE | DESCRIPTION                                                                                                          |
+| ----------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
 | `code_challenge`        | REQUIRED   | Specifies an encoded `code_verifier` that will be used as a server-side challenge during authorization code exchange |
-| `code_challenge_method` | OPTIONAL   | Defaults to `plain`. Must be used with `code_challenge`. Supported values: `plain`, `S256` |
+| `code_challenge_method` | OPTIONAL   | Defaults to `plain`. Must be used with `code_challenge`. Supported values: `plain`, `S256`                           |
 
 ### Exchange authorization code for refresh and access tokens
 
 To exchange an authorization code for an access token, call the token endpoint (https://video.ibm.com/oauth2/token) and set the following parameters:
 
-| PARAMETER       | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                    |
-| --------------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------- |
-| `grant_type`    | string | REQUIRED   | MUST be `authorization_code` in this case.                                                                     |
-| `client_id`     | string | REQUIRED   | 40-character long string, provided by IBM Video Streaming                                                      |
-| `code`          | string | REQUIRED   | The authorization code received from the authorization endpoint                                                |
-| `code_verifier` | string | REQUIRED   | Code verifier that has been created |
+| PARAMETER       | TYPE   | IMPORTANCE | DESCRIPTION                                                                            |
+| --------------- | ------ | ---------- | -------------------------------------------------------------------------------------- |
+| `grant_type`    | string | REQUIRED   | MUST be `authorization_code` in this case.                                             |
+| `client_id`     | string | REQUIRED   | 40-character long string, provided by IBM Video Streaming                              |
+| `code`          | string | REQUIRED   | The authorization code received from the authorization endpoint                        |
+| `code_verifier` | string | REQUIRED   | Code verifier that has been created                                                    |
 | `redirect_uri`  | string | REQUIRED   | The redirect URI used by the authorization server to return the authorization response |
 
 #### Example
@@ -83,7 +83,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=authorization_code&client_id=AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD&code=19d8dbb3ebac55f110c3b526e38bcfdfbf46d659&redirect_uri=http://example.com/get_access_token&code_verifier=asdf
 ```
 
-4 - The response of token endpoint contains the access token:
+4 - The response of the Token Endpoint contains the access token:
 
 ```
 HTTP/1.1 200 OK

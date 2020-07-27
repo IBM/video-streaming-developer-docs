@@ -5,13 +5,13 @@ description: Organization Settings
 
 ## Get a list of accessible Organizations
 
-This API calls allow to get all the Organizations accessible to the user represented by the token.
+This API call lists all the Organizations accessible to the user represented by the token.
 
 ```
 GET https://api.video.ibm.com/organizations.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organizations.json HTTP/1.1
@@ -23,14 +23,14 @@ The token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned under an `organizations` element with an HTTP Status code of 200.
+Upon success, a set of key-value pairs is returned under an `organizations` element with an HTTP Status code of 200.
 
 | KEY     | TYPE   | DESCRIPTION                                            |
 | ------- | ------ | ------------------------------------------------------ |
 | `id`    | string | The unique id of the Organization                      |
 | `name`  | string | The name of the Organization                           |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -55,13 +55,13 @@ Possible error responses:
 
 ## Get an Organization
 
-This API call allows to get an Organization.
+This API call returns the name of an Organization.
 
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organization/ZzzqXZ.json HTTP/1.1
@@ -73,13 +73,13 @@ The token in the above call is only an example.
 
 ### Success response
 
-On success, the Organization name is returned with an HTTP Status code of 200.
+Upon success, the Organization name is returned with an HTTP Status code of 200.
 
 | KEY     | TYPE   | DESCRIPTION                                            |
 | ------- | ------ | ------------------------------------------------------ |
 | `name`  | string | The name of the Organization                           |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -99,7 +99,7 @@ Possible error responses:
 
 ### Update an Organization
 
-This API call allows to get an Organization.
+This API call let's you update an Organization.
 
 ```
 PUT https://api.video.ibm.com/organizations/{organizationId}.json
@@ -115,7 +115,7 @@ The parameters for the POST request:
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 PUT /organization/ZzzqXZ.json HTTP/1.1
@@ -130,7 +130,7 @@ The token in the above call is only an example.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 

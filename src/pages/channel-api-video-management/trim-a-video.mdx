@@ -19,14 +19,14 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `trim` key.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `trim` key.
 
 | KEY     | TYPE   | DESCRIPTION                        |
 | ------- | ------ | ---------------------------------- |
 | `start` | number | Video is trimmed from this second  |
 | `end`   | number | Video is trimmed until this second |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -49,7 +49,7 @@ Possible error responses:
 
 ## Set trim
 
-Set video playback start and end point in seconds. Trimming does not affect the original video file.
+Set video playback start and end point in seconds. Trimming does not affect the original video file and these changes can be reverted as needed.
 
 `Unsaved auto-recorded videos will become saved when trimming them.`
 
@@ -70,7 +70,7 @@ Minimum trim length is 10 seconds.
 
 ### Success response
 
-On success, a response with HTTP status "204 No Content" is returned.
+Upon success, a response with HTTP status "204 No Content" is returned.
 
 ### Error responses
 
@@ -98,7 +98,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 

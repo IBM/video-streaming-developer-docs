@@ -5,7 +5,7 @@ description: Token revocation
 
 ## Overview
 
-In some cases a user may want to revoke access given to an application. Programmatic revocation is important in instances where a user logs out, changes identity, unsubscribes, or uninstalls the application.
+In some cases, a user may want to revoke access given to an application. Programmatic revocation is important in instances where a user logs out, changes identity, unsubscribes, or uninstalls the application.
 
 <Title>Token revocation endpoint</Title>
 
@@ -21,9 +21,9 @@ In some cases a user may want to revoke access given to an application. Programm
 | `token`     | string | REQUIRED   | The token that the client wants to get revoked. Can be access token or refresh token. |                                                                                                                                                                         |
 | `client_id` | string | REQUIRED   | 40-character long string that identifies the client the token belongs to.             |
 
-In addition to the parameters above, the client has to provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
+In addition to the parameters above, the client must provide its client secret (provided along with the client key) to authenticate itself. The authentication is done with HTTP Basic authorization method.
 
-Example HTTP header:
+Sample HTTP header:
 
 ```
 Authorization: Basic bc345abc45d6789abcdef0123aef0126789def01

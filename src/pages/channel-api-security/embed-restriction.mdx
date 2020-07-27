@@ -20,13 +20,13 @@ This request has no parameters.
 
 ### Success response
 
-On success, a key-value structure is returned.
+Upon success, a key-value structure is returned.
 
 | KEY      | TYPE   | DESCRIPTION                                                                    |
 | -------- | ------ | ------------------------------------------------------------------------------ |
 | `locked` | string | Returns `TRUE` if the embed lock is enabled on the channel, otherwise `FALSE`. |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -45,7 +45,7 @@ Possible error responses:
 
 ## Modify embed lock
 
-Enable or disable embed lock on a channel. When embed lock is enabled (locked == TRUE), embedding the content of this channel is allowed only on [whitelisted URLs](#get-embed-lock-url-whitelist).
+Enable or disable embed restrictions on a channel. When embed lock is enabled (locked == TRUE), embedding the content of this channel is allowed only on [whitelisted URLs](#get-embed-lock-url-whitelist).
 
 ```
 PUT https://api.video.ibm.com/channels/{channel_id}/locks/embed.json
@@ -61,7 +61,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status “204 No Content” is returned.
+Upon success a response with HTTP status “204 No Content” is returned.
 
 ### Error responses
 
@@ -89,7 +89,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with the following key-value structures.
+Upon success a response with HTTP status “200 OK” is returned with the following key-value structures.
 
 | KEY            | TYPE  | DESCRIPTION                                                                                                    |
 | -------------- | ----- | -------------------------------------------------------------------------------------------------------------- |
@@ -106,9 +106,9 @@ Possible error responses:
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Add URL to embed lock URL whitelist
+## Add URL to the embed lock URL whitelist
 
-Add a specific URL to the whitelist that contains all URLs where embedding of channel content is allowed when embed lock is enabled.
+Add a specific URL to the whitelist that controls where embedding of channel content is allowed when embed lock is enabled.
 
 ```
 POST
@@ -127,7 +127,7 @@ You can add one URL per API call.
 
 ### Success response
 
-On success a response with HTTP status “201 Created” is returned.
+Upon success a response with HTTP status “201 Created” is returned.
 
 ### Error responses
 
@@ -155,7 +155,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned.
+Upon success a response with HTTP status “200 OK” is returned.
 
 ### Error responses
 

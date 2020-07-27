@@ -5,18 +5,20 @@ description: Custom Roles
 
 ## Get a list of Custom Roles
 
+This API call is used to get a list of custom roles inside an Organization.
+
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/custom-roles.json
 ```
 
 ### Query Parameters
 
-| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                   |
-| ---------- | ------ | ---------- | --------------------------------------------- |
-| `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
-| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                              |
+| ---------- | ------ | ---------- | ---------------------------------------- |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1 |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50    |
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organizations/ZzzqXZ/custom-roles.json HTTP/1.1
@@ -24,21 +26,21 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned under a `custom_roles` element with an HTTP Status code of 200.
+Upon success, a set of key-value pairs is returned under a `custom_roles` element with an HTTP Status code of 200.
 
 | KEY              | TYPE   | DESCRIPTION                                                                                                                             |
 | ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`             | string | ID                                                                                                                                      |
 | `name`           | string | Name                                                                                                                                    |
-| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
+| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to administrators on a Channel |
 | `children_count` | number | Number of permissions associated to this Custom Role                                                                                    |
-| `user_count`     | number | Number of Administrators associated to this Custom Role                                                                                 |
+| `user_count`     | number | Number of administrators associated to this Custom Role                                                                                 |
 
-Additionally there is a `paging` element in the response with the following values: 
+Additionally there is a `paging` element in the response with the following values:
 
 | KEY          | TYPE   | DESCRIPTION                           |
 | ------------ | ------ | ------------------------------------- |
@@ -47,7 +49,7 @@ Additionally there is a `paging` element in the response with the following valu
 | `page_count` | number | Number of available pages             |
 | `item_count` | number | Total number of items                 |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -86,16 +88,18 @@ Possible error responses:
 
 ## Create a custom role
 
+This API call is used to create a custom role inside an Organization.
+
 ```
 POST https://api.video.ibm.com/organizations/{organizationId}/custom-roles.json
 ```
 
 ### Parameters
 
-| KEY        | TYPE    | IMPORTANCE | DESCRIPTION                                 |
-| ---------- | ------- | ---------- | ------------------------------------------- |
-| `name`     | string  | REQUIRED   | Name                                        |
-| `children` | array   | REQUIRED   | Permissions associated with the Custom Role |
+| KEY        | TYPE   | IMPORTANCE | DESCRIPTION                                 |
+| ---------- | ------ | ---------- | ------------------------------------------- |
+| `name`     | string | REQUIRED   | Name                                        |
+| `children` | array  | REQUIRED   | Permissions associated with the Custom Role |
 
 ### Permissions
 
@@ -108,35 +112,35 @@ POST https://api.video.ibm.com/organizations/{organizationId}/custom-roles.json
 | `video.delete`           | Deleted videos                                                          |
 | `channel.access_control` | Edit channel level access control (for Enterprise Video Streaming only) |
 | `channel.view_ivt`       | See individual viewer statistics                                        |
-	
+
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 POST /organizations/ZzzqXZ/custom-roles.json HTTP/1.1
-Host: api.video.ibm.com 
+Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
 name=My%20first%20Custom%20Role&children[]=video.download&children[]=channel.view_ivt
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned with an HTTP Status code of 201.
+Upon success, a set of key-value pairs is returned with an HTTP Status code of 201.
 
-| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
-| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`             | string | ID                                                                                                                                      |
-| `name`           | string | Name                                                                                                                                    |
-| `resource`       | string | Resource that the Custom Role is associated with                                                                                        |
-| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
-| `children`       | array  | Permissions associated with the Custom Role                                                                                             |
+| KEY          | TYPE   | DESCRIPTION                                                                                                                             |
+| ------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`         | string | ID                                                                                                                                      |
+| `name`       | string | Name                                                                                                                                    |
+| `resource`   | string | Resource that the Custom Role is associated with                                                                                        |
+| `permission` | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to administrators on a Channel |
+| `children`   | array  | Permissions associated with the Custom Role                                                                                             |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -144,10 +148,7 @@ Example for success response:
   "name": "My first Custom Role",
   "resource": "organization:5542/",
   "permission": "1442ad8919caec4e3fc86a3e8063f8eb",
-  "children": [
-    "video.download",
-    "channel.view_ivt"
-  ]
+  "children": ["video.download", "channel.view_ivt"]
 }
 ```
 
@@ -164,18 +165,20 @@ Possible error responses:
 
 ## Get a Custom Role
 
+This API call is used to get information about a Custom Role inside an Organization.
+
 ```
 GET https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{customRoleId}.json
 ```
 
 ### Query Parameters
 
-| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                   |
-| ---------- | ------ | ---------- | --------------------------------------------- |
-| `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
-| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                              |
+| ---------- | ------ | ---------- | ---------------------------------------- |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1 |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50    |
 
-Example for the request:
+Example of the request:
 
 ```
 GET /organizations/ZzzqXZ/custom-roles/999.json HTTP/1.1
@@ -183,21 +186,21 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned with an HTTP Status code of 200.
+Upon success, a set of key-value pairs is returned with an HTTP Status code of 200.
 
-| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
-| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`             | string | ID                                                                                                                                      |
-| `name`           | string | Name                                                                                                                                    |
-| `resource`       | string | Resource that the Custom Role is associated with                                                                                        |
-| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
-| `children`       | array  | Permissions associated with the Custom Role                                                                                             |
+| KEY          | TYPE   | DESCRIPTION                                                                                                                             |
+| ------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`         | string | ID                                                                                                                                      |
+| `name`       | string | Name                                                                                                                                    |
+| `resource`   | string | Resource that the Custom Role is associated with                                                                                        |
+| `permission` | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to administrators on a Channel |
+| `children`   | array  | Permissions associated with the Custom Role                                                                                             |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -205,10 +208,7 @@ Example for success response:
   "name": "My first Custom Role",
   "resource": "organization:5542/",
   "permission": "1442ad8919caec4e3fc86a3e8063f8eb",
-  "children": [
-    "video.download",
-    "channel.view_ivt"
-  ]
+  "children": ["video.download", "channel.view_ivt"]
 }
 ```
 
@@ -223,7 +223,9 @@ Possible error responses:
 | 404 Not Found           | Custom Role doesn't exist under the Organization                                        |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Update a custom role
+## Update a Custom Role
+
+This API call is used to update the permissions of a custom role inside an Organization.
 
 ```
 PUT https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{customRoleId}.json
@@ -231,39 +233,39 @@ PUT https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{custo
 
 ### Parameters
 
-| KEY        | TYPE    | IMPORTANCE | DESCRIPTION                                 |
-| ---------- | ------- | ---------- | ------------------------------------------- |
-| `name`     | string  | REQUIRED   | Name                                        |
-| `children` | array   | REQUIRED   | Permissions associated with the Custom Role |
-	
+| KEY        | TYPE   | IMPORTANCE | DESCRIPTION                                 |
+| ---------- | ------ | ---------- | ------------------------------------------- |
+| `name`     | string | REQUIRED   | Name                                        |
+| `children` | array  | REQUIRED   | Permissions associated with the Custom Role |
+
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
-Example for the request:
+Example of the request:
 
 ```
 PUT /organizations/ZzzqXZ/custom-roles/999.json HTTP/1.1
-Host: api.video.ibm.com 
+Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
 name=My%20first%20Custom%20Role&children[]=video.download&children[]=channel.view_ivt
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success, a set of key-value pairs is returned with an HTTP Status code of 201.
+Upon success, a set of key-value pairs is returned with an HTTP Status code of 201.
 
-| KEY              | TYPE   | DESCRIPTION                                                                                                                             |
-| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`             | string | ID                                                                                                                                      |
-| `name`           | string | Name                                                                                                                                    |
-| `resource`       | string | Resource that the Custom Role is associated with                                                                                        |
-| `permission`     | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to Administrators on a Channel |
-| `children`       | array  | Permissions associated with the Custom Role                                                                                             |
+| KEY          | TYPE   | DESCRIPTION                                                                                                                             |
+| ------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`         | string | ID                                                                                                                                      |
+| `name`       | string | Name                                                                                                                                    |
+| `resource`   | string | Resource that the Custom Role is associated with                                                                                        |
+| `permission` | string | ID of the Permission associated to this Custom Role. You have to use this ID when assigning Custom Roles to administrators on a Channel |
+| `children`   | array  | Permissions associated with the Custom Role                                                                                             |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -271,10 +273,7 @@ Example for success response:
   "name": "My first Custom Role",
   "resource": "organization:5542/",
   "permission": "1442ad8919caec4e3fc86a3e8063f8eb",
-  "children": [
-    "video.download",
-    "channel.view_ivt"
-  ]
+  "children": ["video.download", "channel.view_ivt"]
 }
 ```
 
@@ -290,13 +289,15 @@ Possible error responses:
 | 404 Not Found           | Custom Role doesn't exist under the Organization                                        |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Delete a custom role
+## Delete a Custom Role
+
+This API call is used to delete a Custom Role from inside an Organization.
 
 ```
 DELETE https://api.video.ibm.com/organizations/{organizationId}/custom-roles/{customRoleId}.json
 ```
 
-Example for the request:
+Example of the request:
 
 ```
 DELETE /organizations/ZzzqXZ/custom-roles/999.json HTTP/1.1
@@ -304,11 +305,11 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
 
-The token in the above call is only an example.
+Note that the token in the above call is only an example.
 
 ### Success response
 
-On success the response body is empty with an HTTP Status code of 204.
+Upon success the response body is empty with an HTTP Status code of 204.
 
 ### Error responses
 

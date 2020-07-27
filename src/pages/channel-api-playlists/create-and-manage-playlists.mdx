@@ -5,7 +5,7 @@ description: Create and manage playlists
 
 ## Create a playlist
 
-Create a new playlist on a channel.
+Create a new video playlist on a channel.
 
 ```
 POST https://api.video.ibm.com/channels/{channel_id}/playlists.json
@@ -33,7 +33,7 @@ title=API+Testing+Playlist&is_enabled=1
 
 ### Success response
 
-On success, a response with HTTP status “201 Created” is returned.
+Upon success, a response with HTTP status “201 Created” is returned.
 The response will contain the following headers:
 
 | HEADER     | TYPE   | DESCRIPTION                 |
@@ -56,7 +56,7 @@ There is a temporary error on the server which makes it impossible to serve the 
 
 ## Modify a playlist
 
-Change the title of an existing playlist.
+Change the title of an existing video playlist.
 
 ```
 PUT https://api.video.ibm.com/playlists/{playlist_id}.json
@@ -72,7 +72,7 @@ The parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned.
+Upon success a response with HTTP status “200 OK” is returned.
 
 ### Error responses
 
@@ -88,7 +88,7 @@ Possible error responses:
 
 ## Delete a playlist
 
-Delete an existing playlist.
+Delete an existing video playlist.
 
 ```
 PUT https://api.video.ibm.com/playlists/{playlist_id}.json
@@ -100,7 +100,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned.
+Upon success a response with HTTP status “200 OK” is returned.
 
 ### Error responses
 

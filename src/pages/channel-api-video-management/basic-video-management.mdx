@@ -5,7 +5,7 @@ description: Channel API Video management Basic video management
 
 ## List the videos of the user
 
-Returns data of videos of the current user.
+Returns data on the videos of the current user.
 
 ```
 GET https://api.video.ibm.com/users/self/videos.json
@@ -25,7 +25,7 @@ The query parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
 
 `The media_urls field is being deprecated. For video download URLs please see the Downloading videos section.`
 
@@ -44,7 +44,7 @@ On success a response with HTTP status "200 OK" is returned with the following k
 | `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
 | `caption_matches` | array  | This field is only present if the `q` parameter is used. The result set contains captions (as string value for a `caption` attribute) matching the search query along with their start and end time (values as numbers for `start_sec` and `end_sec` attributes). Only maximum of 100 matching captions are returned. |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -142,7 +142,7 @@ The query parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
 The `media_urls` field is being deprecated. For video download URLs please see the Downloading videos section.
 
 | KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                     |
@@ -160,7 +160,7 @@ The `media_urls` field is being deprecated. For video download URLs please see t
 | `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                               |
 | `caption matches` | array  | This field is only present if the `q` parameter is used. The result set contains captions (as string value for a caption attribute) matching the search query along with their start and end time (values as numbers for `start_sec` and `end_sec` attributes). Only maximum of 100 matching captions are returned. |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -255,8 +255,8 @@ The query parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
-The `media_urls` field is being deprecated. For video download URLs please see the Downloading videos section.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `videos` element.
+Note that the `media_urls` field is being deprecated. For video download URLs please see the Downloading videos section.
 
 | KEY                  | TYPE   | DESCRIPTION                                                                                                                                                                                                                               |
 | -------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -316,7 +316,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 
@@ -344,7 +344,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 

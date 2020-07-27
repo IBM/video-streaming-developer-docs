@@ -5,8 +5,8 @@ description: List of the unique viewers for all contents
 
 ## List of the unique viewers for all contents
 
-You can get every individual viewer appeared on all of your channels by
-calling this endpoint. If you look for a specific viewer you can use the
+You can get a list of every individual viewer for all of your channels by
+calling this endpoint. You look for a specific viewer by using the
 `viewer_identifier` parameter for matching an identifier or part of an
 identifier.
 
@@ -29,7 +29,7 @@ The query parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every `viewer`
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every `viewer`
 matching the query parameters. Each `viewer` has the following attributes under the `attributes` key:
 
 | KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
@@ -59,7 +59,7 @@ The `segments` array contains the following key-value structure:
 | `view_type`              | string  | `onsite` or `offsite`                                                                                                                        |
 
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -122,8 +122,8 @@ Possible error responses:
 
 ## List of the unique viewers for a specific content type
 
-You can get every individual viewer appeared for a specific content type by
-calling this endpoint. If you look for a specific viewer you can use the
+You can get a list of every individual viewer for just a specific content type, such as live or on demand content, by
+calling this endpoint. You can also look for a specific viewer by using the
 `viewer_identifier` parameter for matching an identifier or part of an
 identifier.
 
@@ -148,7 +148,7 @@ The query parameters for the GET request:
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every `viewer`
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every `viewer`
 matching the query parameters. Each `viewer` viewer has the following attributes under the `attributes` key:
 
 | KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
@@ -177,7 +177,7 @@ The `segments` array contains the following key-value structure:
 | `is_mobile_view`         | boolean | If the playback happened on a mobile device the value is true                                                                                                                        |
 | `view_type`              | string  | `onsite` or `offsite`                                                                                                                        |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {

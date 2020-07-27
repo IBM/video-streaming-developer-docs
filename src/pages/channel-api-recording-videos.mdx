@@ -17,7 +17,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with the following key-value pair.
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pair.
 
 | KEY | TYPE | DESCRIPTION |
 | --- | ---- | ----------- |
@@ -36,7 +36,7 @@ Possible error responses:
 
 ## Get recording status
 
-Returns information on recording status during broadcast on a channel.
+Returns information on recording status during live broadcasts done on a channel.
 
 ```
 GET https://api.video.ibm.com/channels/{channel_id}/recorder.json
@@ -48,14 +48,14 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned. If the channel has a live broadcast, it also returns the following key-value pairs under a `video` element.
+Upon success a response with HTTP status “200 OK” is returned. If the channel has a live broadcast running, it also returns the following key-value pairs under a `video` element.
 
 | KEY   | TYPE   | DESCRIPTION                                   |
 | ----- | ------ | --------------------------------------------- |
 | `id`  | string | Unique ID of the video that is being recorded |
 | `url` | string | Video URL                                     |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -92,7 +92,7 @@ The parameters for the POST request:
 | --------- | ------ | ---------- | ----------------------------------- |
 | `command` | string | REQUIRED   | Supported values: `start` or `stop` |
 
-Example for the request:
+Example of the request:
 
 ```
 POST /channels/42/recorder.json HTTP/1.1
@@ -105,7 +105,7 @@ command=stop
 
 ### Success response
 
-On success a response with HTTP status "202 Accepted" is returned. If the channel has a live broadcast, it also returns the following key-value pairs under a video element.
+Upon success a response with HTTP status "202 Accepted" is returned. If the channel has a live broadcast running, it also returns the following key-value pairs under a video element.
 
 | KEY | TYPE   | DESCRIPTION                                   |
 | --- | ------ | --------------------------------------------- |
@@ -114,7 +114,7 @@ On success a response with HTTP status "202 Accepted" is returned. If the channe
 
 There's no direct feedback on the results of the operation.
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -137,7 +137,7 @@ Possible error responses:
 
 ## Control auto-recording
 
-Videos can be automatically created when broadcasting. The behavior can be controlled by this resource.
+A video on demand recording can be automatically created when live broadcasting that is made available to viewers after the live stream. The behavior can be controlled by this resource.
 
 ```
 PUT https://api.video.ibm.com/channels/{channel_id}/settings/autorecord.json
@@ -153,7 +153,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 

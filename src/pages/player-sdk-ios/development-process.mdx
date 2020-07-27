@@ -5,7 +5,7 @@ description: Development Process
 
 ## Step 1: Create credentials for your mobile app
 
-Log-in to your account, navigate to the [Dashboard] and select ["API/SDK access"]
+Log in to your account, navigate to the [Dashboard] and select ["API/SDK access"]
 under the "Integrations & Apps" menu.
 
 Click on "Create new credentials" and provide a name for your application in the "Application name" field. Your credentials will be listed under the "API/SDK access" page based on this name.
@@ -48,7 +48,7 @@ Before you can start using the Player SDK for playing content from your own chan
 
 The application identifier is typically structured as `com.company.project`.
 
-Before you can create and use an instance of the player you have to configure the lib with your IBM Player SDK key:
+Before you can create and use an instance of the player you must configure the lib with your IBM Player SDK key:
 
 ##### Objective-C
 ```objc
@@ -112,7 +112,7 @@ Content owners can control access to their media using various "locks" that impl
 
 ### Generic callbacks
 
-`USUstreamPlayer` reports its state changes using the `USPlayerDelegate` protocol. Some callbacks may also require user interaction in case the servers notify the Player about content restrictions. For example when "lock" conditions are not met.
+`USUstreamPlayer` reports its state changes using the `USPlayerDelegate` protocol. Some callbacks may also require user interaction in case the servers notify the Player about content restrictions. For example, when "lock" conditions are not met.
 
 In order to receive these callbacks, you need to define a handler conforming to protocol `USPlayerDelegate` and set it as a delegate of your player instance.
 

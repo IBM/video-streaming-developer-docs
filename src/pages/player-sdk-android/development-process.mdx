@@ -5,16 +5,16 @@ description: Development Process
 
 ## Step 1: Create credentials for your mobile app
 
-The SDK requires the use of a **IBM Video Streaming Player SDK key**, which is validated whenever the SDK communicates with IBM Video Streaming 
+The SDK requires the use of an **IBM Video Streaming Player SDK key**, which is validated whenever the SDK communicates with IBM's Video Streaming
 streaming servers. The sample application contains a sample SDK key which you can use for testing. The sample SDK key 
 can only be used to play content on the test channel(s) also used in the sample app.
 
 Before you can download and start using the _IBM Video Streaming Player SDK for Android_ for playing content from your own channel(s), you will need 
-to register the **Key Hash** of every app in which you will integrate the _IBM Video Streaming Player SDK for Android_ at IBM Video Streaming. 
+to register the **Key Hash** of every app in which you will integrate the _IBM Video Streaming Player SDK for Android_.
 Every registered application will have its own _IBM Video Streaming Player SDK key_. Although there is a provided SDK key for the sample 
 app's sample content, you still need to register your **Key Hash** at IBM Video Streaming. This will ensure that you can build the sample 
 project using your own certificates.
-Every time you create an instance of the `UstreamPlayerFactory` you have to use your **IBM Video Streaming Player SDK key**.
+Every time you create an instance of the `UstreamPlayerFactory` you must use your **IBM Video Streaming Player SDK key**.
 
 ### Generate your Key Hash
 
@@ -25,7 +25,7 @@ Each certificate generates a different **Key Hash**.
 *   The **release key** (or App Signing key) is used to sign your app when you release it to the Google Play Store (release build).
 *   (Optional) The third type has been recently introduced with **Google Play App Signing**.
 Using this feature when you upload your release build to the Play Store Google will sign it again with your true release key.
-Therefore you will have to generate key hashes for all three of your keys (Debug key, Upload key, App Signing key - managed by Google).
+Therefore, you will must generate key hashes for all three of your keys (Debug key, Upload key, App Signing key - managed by Google).
 For more information visit: [Google Play App Signing](https://support.google.com/googleplay/android-developer/answer/7384423)
 
 
@@ -34,7 +34,7 @@ There are two ways to generate your **Key Hash**:
 
     Execute this in a debug build **and** a in a release build too:
     
-    Since version 1.3.0 you can use `tv.ustream.player.android.SignatureUtil.keyHashFromContext(Context)`
+    Starting with 1.3.0 you can use `tv.ustream.player.android.SignatureUtil.keyHashFromContext(Context)`
     to generate or check your current Key Hash from your application. This method basically executes 
     the following lines without printing to the output:
 
@@ -59,7 +59,7 @@ There are two ways to generate your **Key Hash**:
         ```
         The output of the last command is your **Key Hash**. 
         
-        Remember to generate the identifier for your release certificate's public key **and** every other debug certificates 
+        Remember to generate the identifier for your release certificate's public key **and** every other debug certificate
         that your developers will use.
 
 ### Enter credentials
@@ -72,7 +72,7 @@ under the "Integrations & Apps" menu.
 
 * Select Android in the "Platform" drop-down. Enter your **Key Hash** and **Google Play Package Name** in the respective fields.
 
-* After you completed all fields, hit "Save" to generate your IBM Video Streaming Player SDK for Android credentials. Make sure that 
+* After you have completed all fields, hit "Save" to generate your IBM Video Streaming Player SDK for Android credentials. Make sure that
 the "Key Hash" and "Google Play Package Name" are introduced correctly.
 If you accidentally saved wrong values, you can edit or delete your credentials,
 but beware as this will break any existing applications relying on those credentials.
@@ -159,9 +159,9 @@ explained further in its _Javadoc_.
 
 ## Step 7: Play live or recorded content
 
-After the `ustreamPlayer` is created, initialize it with a content. This will most likely be in your 
+After the `ustreamPlayer` is created, initialize it with a live or previously recorded video content. This will most likely be in your
 Activity's `onCreate()` (Fragment's `onCreateView()`). A player instance can be initialized more than once with different 
-content, but `connect()` or `play()` has to be called in order to reconnect to the servers. The `connect()` method is 
+content, but `connect()` or `play()` must be called in order to reconnect to the servers. The `connect()` method is
 optional (a `play()` or `pause()` call will also handle it implicitly) though the player will respond to `play()` calls 
 more quickly because it is already connected to IBM Video Streaming's servers.
 
@@ -197,13 +197,13 @@ IBM Video Streaming Player SDK version 1.3.0 introduced changes in the user faci
 ### Setting your listeners
 
 To receive state changes and other events from the player you need to set listeners. There are mandatory and optional ones, 
-but all of these listeners have to be set prior to calling `ustreamPlayer.attach()` on your player instance. This should 
-happen in the `onResume()` or `onStart()` callback of your Activity or Fragment. Calling `attach()` is an important step, this is where 
+but all listeners must be set prior to calling `ustreamPlayer.attach()` on your player instance. This should
+happen in the `onResume()` or `onStart()` callback of your activity or fragment. Calling `attach()` is an important step, this is where
 your listeners and the player view is bound to the Player SDK. Forgetting to call this will cause the player to not render 
-video on your view, and you will not receive any callback on your listeners.
-Also since version 0.9.0 this is the place to set your `PlayerView` to the IBM Video Streaming player.
+video upon viewing, and you will not receive any callback on your listeners.
+Also, since version 0.9.0 this is the place to set your `PlayerView` to the IBM Video Streaming player.
 The reason behind this is, now you can optionally pre-buffer your player by calling `ustreamPlayer.pause()` without the need to add a `PlayerView`.
-PlayerView can be later set, when it is appropriate. For example a news feed like application's `PlayerView`s will be in a `RecyclerView`.
+PlayerView can be set later, when it is appropriate. For example, a news feed like application's `PlayerView`s will be in a `RecyclerView`.
 
 ```java
 @Override
@@ -236,7 +236,7 @@ See the next section and the sample application for more details.
 
 ### Changing content
 
-Changing content on an already initialized player (Please note `detach()` and `attach()` have to be called to properly 
+Changing content on an already initialized player (Please note `detach()` and `attach()` must be called to properly 
 reinitialize views):
 
 ```java
@@ -252,7 +252,7 @@ private void changeContent(ContentDescriptor nextContent) {
 
 ### State flow of the Player SDK
 
-This diagram represents the state flow of the Player SDK, the nodes are the states reported by the player, the named edges 
+This diagram represents the state flow of the Player SDK, the nodes are the states reported by the player, while the named edges
 are events that can be sent to the player. There is a decision in the flow that happens automatically based on the content 
 selected (live or recorded).
 
@@ -262,7 +262,7 @@ selected (live or recorded).
 ### Catching callbacks
 
 There are eight different listeners that you can add to the Player SDK instance to receive callbacks. Some of these 
-listeners are mandatory, others are optional, but each listener represents a group of functionality of the Player SDK.
+listeners are mandatory, others are optional, but each listener represents a group of functionalities of of the Player SDK.
 
 The eight listeners are:
 
@@ -333,8 +333,8 @@ public interface PlayerListener {
 
 #### ErrorListener
 
-This is also a mandatory listener; the Player SDK reports all playback errors here. When an error occurs the SDK will call 
-the corresponding callback, then it will return to the Stopped state, notifying the application using 
+This is also a mandatory listener; the Player SDK reports all playback errors here. When an error occurs, the SDK will call
+the corresponding callback, then it will return to the stopped state, notifying the application using
 `PlayerListener.onStopped()`.
 
 ```java
@@ -493,7 +493,7 @@ public interface ViewerCountListener {
 
 #### LogoClickListener
 
-The displayed logo has been clicked, you should open the URL in the callback's parameter. This is an optional listener.
+The displayed logo has been clicked; you should open the URL in the callback's parameter. This is an optional listener.
 
 ```java
 package tv.ustream.player.api;
@@ -517,7 +517,7 @@ public interface LogoClickListener {
 
 #### MetaDataListener
 
-`MetaDataListener` provides updates of the content's meta data, the callback is called when the meta becomes available. 
+`MetaDataListener` provides updates of the content's meta data, the callback is called when the metadata becomes available.
 This is an optional listener.
 
 ```java
@@ -608,7 +608,7 @@ new Player SDK Factory instance to provide the correct key. The key needs to be 
 
 *   `onRestricted()` – There are security restrictions set for the channel, that does not enable the Player SDK to play 
 this content, or your channel has reached its maximum concurrent viewer number. The latter can be resolved by retrying 
-later, to resolve the former the channel's settings have to be modified.
+later, to resolve the former the channel's settings must be modified.
 
 These callbacks are found in `tv.ustream.player.api.ErrorListener`.
 

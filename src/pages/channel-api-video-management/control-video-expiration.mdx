@@ -3,7 +3,7 @@ title: Control video expiration
 description: Channel API Video management Control video expiration
 ---
 
-A video gets deleted when expires. These videos can be saved by setting the time of the expiration.
+You can set an expiration date for video content. A video gets deleted when expires. These videos can be saved by setting the time of the expiration.
 
 ## Get video expiration
 
@@ -19,7 +19,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under an `expiration` key.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under an `expiration` key.
 
 | KEY          | TYPE   | DESCRIPTION                                                                                                                                                   |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -40,7 +40,7 @@ Possible error responses:
 
 ## Set video expiration
 
-You can set the video to never expire.
+If you don’t want certain video assets to be deleted you can set the video to never expire.
 
 ```
 GET https://api.video.ibm.com/videos/{video_id}/expiration.json
@@ -56,7 +56,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 

@@ -4,9 +4,9 @@ description: Using Plugins
 ---
 
 IBM Player SDK version 1.1.0 introduced a plugin system which enables you to extend the media player with additional features.
-Plugins will be provided by IBM, and must be provided during player initialization in `UstreamPlayer.initWithContent(ContentDescriptor, MediaPlayerModule)`.
+Plugins will be provided by IBM and must be provided during player initialization in `UstreamPlayer.initWithContent(ContentDescriptor, MediaPlayerModule)`.
 These extensions may require different player views than `tv.ustream.player.android.PlayerView`. PlayerView requirements for a plugin will always be stated
-in this documentation, but can also be queried from the MediaPlayerModule instance itself using `MediaPlayerModule.getSupportedPlayerViewType()`.
+in this documentation but can also be queried from the MediaPlayerModule instance itself using `MediaPlayerModule.getSupportedPlayerViewType()`.
 Make sure to always use the appropriate `PlayerView`.
 
 Creation of the plugin is the user's responsibility, use the constructor of the desired plugin, provide appropriate parameters and set listeners.
@@ -35,12 +35,12 @@ Upon plugin creation the user can provide the following configuration data: `Str
 where `dfpTagUrl` points to the user's *Double Click for Publishers* account and `adScheduleRule` is the class defining when to show ads.
 See javadoc for details.
 
-Additionally any time after creation the user can set:
+Additionally, any time after creation the user can set:
 - an `AdStateListener` using `AdsMediaPlayerModuleAndroid.setAdStateListener(AdStateListener)` which notifies the user when an ad is being displayed.
 - `AdData` which is targeting metadata for *DFP*. Feel free to use your own meta and/or meta provided by `MetaDataListener.onMetaData(MetaData)`.
 
 ### Example usage
-Add the Ads Plugin to your build use same local m2 repostory in project root folder and add these lines to your gradle file (Google IMA SDK is a dependency of the Ads Plugin):
+Add the Ads Plugin to your build use same local m2 repository in project root folder and add these lines to your gradle file (Google IMA SDK is a dependency of the Ads Plugin):
 
 ```gradle
 implementation 'tv.ustream.player:ibm-player-sdk-android-plugin-ads-external:1.4.0@aar'

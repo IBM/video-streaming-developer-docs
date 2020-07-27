@@ -23,7 +23,7 @@ The query parameters for the GET request:
 
 ### Success response
 
-On success, a set of key-value pairs is returned under a videos element.
+Upon success, a set of key-value pairs is returned under a videos element.
 
 | KEY               | TYPE   | DESCRIPTION                                                                                                                                                                                                                                                                                                           |
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -40,7 +40,7 @@ On success, a set of key-value pairs is returned under a videos element.
 | `media_urls`      | object | (This field is being deprecated.)                                                                                                                                                                                                                                                                                     |
 | `links`           | object | Contains information about the channel of the video |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -99,7 +99,7 @@ Possible error responses:
 
 ## Update featured videos
 
-This should start with a resource description…
+You can adjust what videos are designated as featured on a channel.
 
 ```
 PUT https://api.video.ibm.com/channels/{channel_id}/featured-videos.json

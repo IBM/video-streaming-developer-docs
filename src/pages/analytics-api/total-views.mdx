@@ -3,7 +3,9 @@ title: Total views
 description: Data points for total views
 ---
 
-## Sum total view number for a given time period through all types of content
+## Total views for a given time period for all types of content
+
+Provides a total view count for both live and on demand content for a given time period.
 
 ```
 GET https://analytics-api.video.ibm.com/v1/total-views/summary
@@ -13,54 +15,54 @@ GET https://analytics-api.video.ibm.com/v1/total-views/summary
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                              |
+| ---------------- | ------- | ---------- | --------------------------------------------------------- |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format        |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format          |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)             |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000) |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
-| ----------------------------------- | ------- | -------------------------------------------------- |
-| `dimension_type`                    | string  | The requested dimension type                       |
-| `point`                             | array   | Data point                                         |
-| `value`                             | integer | Numeric value                                      |
+| KEY              | TYPE    | DESCRIPTION                  |
+| ---------------- | ------- | ---------------------------- |
+| `dimension_type` | string  | The requested dimension type |
+| `point`          | array   | Data point                   |
+| `value`          | integer | Numeric value                |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "dimension_type": "summary",
-                "point": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "Series"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/total-views/summary?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/total-views/summary?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/total-views/summary?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/total-views/summary?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "dimension_type": "summary",
+        "point": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "Series"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/total-views/summary?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/total-views/summary?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/total-views/summary?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/total-views/summary?_page=1&_limit=1"
+    }
+  }
 }
 ```
 
@@ -70,14 +72,14 @@ Possible error responses:
 
 | HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
 | ----------------------- | --------------------------------------------------------------------------------------- |
-| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 400 Bad Request         | Validation of the parameters has failed; the response contains a detailed explanation   |
 | 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
+## Total views for a given time period for all content within a defined dimension
 
-## Total view number for a given time period through all content bucketed by a defined dimension
-
+Provides a total view count for both live and on demand content for a defined dimension. Dimensions can be based on geographic regions, devices used to watch or reported by time intervals like month or day.
 
 ```
 GET https://analytics-api.video.ibm.com/v1/total-views/{dimension}
@@ -87,55 +89,55 @@ GET https://analytics-api.video.ibm.com/v1/total-views/{dimension}
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                          |
-| -------------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
-| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `device`, `view-source`, `country`, `region`             |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                                   |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                                     |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                        |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                            |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                                                             |
+| ---------------- | ------- | ---------- | ---------------------------------------------------------------------------------------- |
+| `dimension`      | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `device`, `view-source`, `country`, `region` |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                       |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format                                         |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)                                            |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                                                                                             |
-| ----------------------------------- | ------- | -------------------------------------------------- |
-| `dimension_type`                    | string  | The requested dimension type                       |
-| `point`                             | array   | Data point                                         |
-| `value`                             | integer | Numeric value                                      |
+| KEY              | TYPE    | DESCRIPTION                  |
+| ---------------- | ------- | ---------------------------- |
+| `dimension_type` | string  | The requested dimension type |
+| `point`          | array   | Data point                   |
+| `value`          | integer | Numeric value                |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "dimension_type": "day",
-                "point": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "Series"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/total-views/day?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/total-views/day?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/total-views/day?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/total-views/day?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "dimension_type": "day",
+        "point": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "Series"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/total-views/day?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/total-views/day?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/total-views/day?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/total-views/day?_page=1&_limit=1"
+    }
+  }
 }
 ```
 
@@ -150,7 +152,7 @@ Possible error responses:
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Sum Total view number for a given time period and content type
+## Total views for a given time period and content type
 
 ```
 GET https://analytics-api.video.ibm.com/v1/total-views/{content_type}/summary
@@ -160,55 +162,55 @@ GET https://analytics-api.video.ibm.com/v1/total-views/{content_type}/summary
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                     |
-| -------------------------- | ------- | ---------- | ------------------------------------------------------------------------------- |
-| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                              |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                   |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                       |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                              |
+| ---------------- | ------- | ---------- | --------------------------------------------------------- |
+| `content_type`   | string  | REQUIRED   | Type of the content, either `live` or `recorded`          |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format        |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format          |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)             |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000) |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                        |
-| ----------------------------------- | ------- | -------------------------------------------------- |
-| `dimension_type`                    | string  | The requested dimension type                       |
-| `point`                             | array   | Data point                                         |
-| `value`                             | integer | Numeric value                                      |
+| KEY              | TYPE    | DESCRIPTION                  |
+| ---------------- | ------- | ---------------------------- |
+| `dimension_type` | string  | The requested dimension type |
+| `point`          | array   | Data point                   |
+| `value`          | integer | Numeric value                |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "dimension_type": "summary",
-                "point": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "Series"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/total-views/live/summary?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/total-views/live/summary?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/total-views/live/summary?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/total-views/live/summary?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "dimension_type": "summary",
+        "point": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "Series"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/total-views/live/summary?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/total-views/live/summary?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/total-views/live/summary?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/total-views/live/summary?_page=1&_limit=1"
+    }
+  }
 }
 ```
 
@@ -223,8 +225,7 @@ Possible error responses:
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Total view number for a given time period and content type bucketed by a defined dimension
-
+## Total views for a given time period and content type bucketed by a defined dimension
 
 ```
 GET https://analytics-api.video.ibm.com/v1/total-views/{content_type}/{dimension}
@@ -234,57 +235,57 @@ GET https://analytics-api.video.ibm.com/v1/total-views/{content_type}/{dimension
 
 The query parameters for the GET request:
 
-| PARAMETER                  | TYPE    | IMPORTANCE | DESCRIPTION                                                                                          |
-| -------------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
-| `content_type`             | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                                     |
-| `content_id`               | string  | OPTIONAL   | A list of comma separated IDs                                                                        |
-| `dimension`                | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `device`, `view-source`, `country`, `region`             |
-| `date_time_from`           | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                                   |
-| `date_time_to`             | string  | REQUIRED   | End date and time for a period in ISO8601 format                                                     |
-| `_page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                        |
-| `_limit`                   | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                            |
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                                                             |
+| ---------------- | ------- | ---------- | ---------------------------------------------------------------------------------------- |
+| `content_type`   | string  | REQUIRED   | Type of the content, either `live` or `recorded`                                         |
+| `content_id`     | string  | OPTIONAL   | A list of comma separated IDs                                                            |
+| `dimension`      | string  | REQUIRED   | Possible values are `month`, `day`, `hour`, `device`, `view-source`, `country`, `region` |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format                                       |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format                                         |
+| `_page`          | integer | OPTIONAL   | Requested page number (value is 1 by default)                                            |
+| `_limit`         | integer | OPTIONAL   | Requested page size (value is 10 by default, max. 10 000)                                |
 
 ### Success response
 
-On success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
+Upon success a response with HTTP status “200 OK” is returned with an array under a `data` key. The elements of the array contain every data point wrapped in a `series` object
 matching the query parameters. Each object has the following attributes under the `attributes` key:
 
-| KEY                                 | TYPE    | DESCRIPTION                                        |
-| ----------------------------------- | ------- | -------------------------------------------------- |
-| `dimension_type`                    | string  | The requested dimension type                       |
-| `point`                             | array   | Data point                                         |
-| `value`                             | integer | Numeric value                                      |
+| KEY              | TYPE    | DESCRIPTION                  |
+| ---------------- | ------- | ---------------------------- |
+| `dimension_type` | string  | The requested dimension type |
+| `point`          | array   | Data point                   |
+| `value`          | integer | Numeric value                |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
-    "data": [
-        {
-            "attributes": {
-                "dimension_type": "day",
-                "point": "2020-07-16T00:00:00+01:00",
-                "value": 11
-            },
-            "type": "Series"
-        }
-    ],
-    "pagination": {
-        "count": 10,
-        "first": {
-            "href": "/total-views/live/day?_page=1&_limit=1"
-        },
-        "last": {
-            "href": "/total-views/live/day?_page=10&_limit=1"
-        },
-        "next": {
-            "href": "/total-views/live/day?_page=2&_limit=1"
-        },
-        "prev": null,
-        "self": {
-            "href": "/total-views/live/day?_page=1&_limit=1"
-        }
+  "data": [
+    {
+      "attributes": {
+        "dimension_type": "day",
+        "point": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "Series"
     }
+  ],
+  "pagination": {
+    "count": 10,
+    "first": {
+      "href": "/total-views/live/day?_page=1&_limit=1"
+    },
+    "last": {
+      "href": "/total-views/live/day?_page=10&_limit=1"
+    },
+    "next": {
+      "href": "/total-views/live/day?_page=2&_limit=1"
+    },
+    "prev": null,
+    "self": {
+      "href": "/total-views/live/day?_page=1&_limit=1"
+    }
+  }
 }
 ```
 

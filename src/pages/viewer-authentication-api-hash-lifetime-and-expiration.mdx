@@ -3,11 +3,11 @@ title: Hash lifetime and expiration
 description: Hash lifetime and expiration
 ---
 
-Once is successfully validated by IBM Video Streaming, the player will store the hash in the end user’s browser. This lets the viewer watch the video when returning to the page without having authenticate again.
+Once a hash is successfully validated by IBM Video Streaming, the player will store the hash in the end user’s browser. This lets the viewer resume watching the video when returning to the page without having authenticate again.
 
-You can specify an expiration date for the hash. When the viewer returns to the page after the expiration date, she has to authenticate again.
+You can specify an expiration date for the hash. When the viewer returns to the page after the expiration date, they must authenticate again.
 
-Expiration date has to be
+Expiration date must be
 
 - Specified in UNIX timestamp format
 - Part of the hash by concatenating it to the rest of the parameters
@@ -38,8 +38,8 @@ $json = json_encode($response);
 
 When validating the authentication response the IBM Video Streaming infrastructure checks
 
-- If the expiration is a past date
+- If the expiration date is past
 - If the expiration was hashed properly
 
-This way we can make sure that the expiration date comes from you and it has not been tampered on the client side.
+This way we can make sure that the expiration date comes from you and it has not been tampered with on the client side.
 

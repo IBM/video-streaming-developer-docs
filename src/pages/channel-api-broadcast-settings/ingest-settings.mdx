@@ -1,9 +1,9 @@
 ---
 title: Ingest settings
-description: If you wish to use a non-IBM Video Streaming provided broadcaster application or appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc.), you will need a stream key or channel key to authenticate with IBM Video Streaming proving that broadcasting to that particular channel is allowed. Also you should get the ingest point where your device or application should connect.
+description: If you wish to use a non-IBM encoder for broadcasting (like Flash Live Media Encoder, Wirecast, Tricaster, etc.), you will need a stream key or channel key to authenticate with IBM Video Streaming. This will prove that broadcasting to that particular channel is allowed. Also, you need to get the ingest point where your device or application should connect.
 ---
 
-If you wish to use a non-IBM Video Streaming provided broadcaster application or appliance (like Flash Live Media Encoder, Wirecast, Tricaster, etc.), you will need a stream key or channel key to authenticate with IBM Video Streaming proving that broadcasting to that particular channel is allowed. Also you should get the ingest point where your device or application should connect.
+If you wish to use a non-IBM encoder for broadcasting (like Flash Live Media Encoder, Wirecast, Tricaster, etc.), you will need a stream key or channel key to authenticate with IBM Video Streaming. This will prove that broadcasting to that particular channel is allowed. Also, you need to get the ingest point where your device or application should connect.
 
 ## Get ingest settings
 
@@ -17,14 +17,14 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned with the following key-value pairs under an ingest element.
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under an ingest element.
 
-| KEY             | TYPE   | DESCRIPTION                                                                                                                                                                                                                          |
-| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `rtmp_url`      | string | Ingest URL of the channel                                                                                                                                                                                                            |
-| `rtmps_url`     | string | Secure ingest URL of the channel                                                                                                                                                                                                     |
-| `channel_key`   | string | Permanent authentication key for broadcasting on the specified channel                                                                                                                                                               |
-| `streaming_key` | string | Temporary authentication key for broadcasting on the specified channel which will expire after 10 minutes. If you request settings again within 10 minutes the original key will extend, after 10 minutes new key will be generated. |
+| KEY             | TYPE   | DESCRIPTION                                                                                                                                                                                                                     |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `rtmp_url`      | string | Ingest URL of the channel                                                                                                                                                                                                       |
+| `rtmps_url`     | string | Secure ingest URL of the channel                                                                                                                                                                                                |
+| `channel_key`   | string | Permanent authentication key for broadcasting on the specified channel                                                                                                                                                          |
+| `streaming_key` | string | Temporary authentication key for broadcasting on the specified channel. This expires after 10 minutes. If you request again before it expires the expiration period of the original key will extend by an additional 10 minutes. |
 
 ### Error responses
 

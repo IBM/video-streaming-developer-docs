@@ -27,13 +27,13 @@ This request has no parameters.
 
 ### Success response
 
-On success, a set of key-value pair is returned under a `branding` element.
+Upon success, a set of key-value pair is returned under a `branding` element.
 
 | KEY    | TYPE   | DESCRIPTION                                                                                                                                                                                                 |
 | ------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type` | string | The type of branding set on the channel. Possible values: `co` (co-branding), `full` (full-branding) or `no` (no branding). The `disabled` value is returned if player branding is not set for the channel. |
 
-Example for success response:
+Example of a success response:
 
 ```json
 {
@@ -72,7 +72,7 @@ The parameters for the PUT request:
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 
@@ -101,7 +101,7 @@ This request has no parameters.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 
@@ -117,11 +117,11 @@ PUT https://api.video.ibm.com/channels/{channel_id}/branding/logo/0.json
 
 ### Request
 
-The logo must be passed in the HTTP body. Supported image types are image/jpeg, image/png, image/gif, recommended size is maximum 288 x 96 pixels. Maximum file size is 10 MB.
+The logo must be passed in the HTTP body. Supported image types are image/jpeg, image/png, image/gif. Maximum dimension for the images are 288 x 96 pixels. Maximum file size is 10 MB.
 
 ### Success response
 
-On success a response with HTTP status "200 OK" is returned.
+Upon success a response with HTTP status "200 OK" is returned.
 
 ### Error responses
 
