@@ -11,65 +11,65 @@ The Query type represents all the queryable entry points to the API.
 <GQLLine><GQLKeyword>type</GQLKeyword> Query <GQLOpen /></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Get all regions.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>regions</GQLName>(): [<GQLLink href="../../ecdn-api-objects/Region">Region</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>regions</GQLName>(): [<GQLLink href="/ecdn-api-objects/Region">Region</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Get all servers.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>servers</GQLName>(): [<GQLLink href="../../ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>servers</GQLName>(): [<GQLLink href="/ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Get server by ID.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLName>serverByID</GQLName>(</GQLLine>
 		<GQLLine> </GQLLine>
 				<GQLLine><GQLTab /><GQLTab /><GQLComment># ID of queried server.</GQLComment></GQLLine>
-			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>id</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>id</GQLAttribute>: <GQLLink href="/ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 		<GQLLine> </GQLLine>
-		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="/ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Get all locations.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>locations</GQLName>(): [<GQLLink href="../../ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>locations</GQLName>(): [<GQLLink href="/ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Get location by ID.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLName>locationByID</GQLName>(</GQLLine>
 		<GQLLine> </GQLLine>
 				<GQLLine><GQLTab /><GQLTab /><GQLComment># ID of queried location.</GQLComment></GQLLine>
-			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>id</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>id</GQLAttribute>: <GQLLink href="/ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 		<GQLLine> </GQLLine>
-		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="/ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Get logged in user.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>me</GQLName>(): <GQLLink href="../../ecdn-api-objects/User">User</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>me</GQLName>(): <GQLLink href="/ecdn-api-objects/User">User</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 <GQLLine><GQLClose /></GQLLine>
 </GQLCodeSnippet>
 
 ## Fields
 
-### regions: [[Region](../ecdn-api-objects/Region)!]!
+### regions: [[Region](/ecdn-api-objects/Region)!]!
 Get all regions.
 
 
-### servers: [[Server](../ecdn-api-objects/Server)!]!
+### servers: [[Server](/ecdn-api-objects/Server)!]!
 Get all servers.
 
 
-### serverByID: [Server](../ecdn-api-objects/Server)!
+### serverByID: [Server](/ecdn-api-objects/Server)!
 Get server by ID.
 
 | ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| id | [ID](../ecdn-api-scalars/ID) | YES | NO | ID of queried server.|
+| id | [ID](/ecdn-api-scalars/ID) | YES | NO | ID of queried server.|
 
-### locations: [[Location](../ecdn-api-objects/Location)!]!
+### locations: [[Location](/ecdn-api-objects/Location)!]!
 Get all locations.
 
 
-### locationByID: [Location](../ecdn-api-objects/Location)!
+### locationByID: [Location](/ecdn-api-objects/Location)!
 Get location by ID.
 
 | ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| id | [ID](../ecdn-api-scalars/ID) | YES | NO | ID of queried location.|
+| id | [ID](/ecdn-api-scalars/ID) | YES | NO | ID of queried location.|
 
-### me: [User](../ecdn-api-objects/User)!
+### me: [User](/ecdn-api-objects/User)!
 Get logged in user.
 
 
