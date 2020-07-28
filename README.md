@@ -1,10 +1,8 @@
 # Developer Tools
 
-:construction:A documentation site for IBM Video Streaming APIs, SDKs and use cases - [Preview URL](https://pages.github.ibm.com/ustream-web/developers/) :construction:
+:construction:A documentation site for IBM Video Streaming APIs, SDKs and use cases - [Preview URL](https://ibm.github.io/video-streaming-developer-docs//) :construction:
 
 ## About
-
-This site is the redesigned one of the old developer tools site: https://developers.video.ibm.com/
 
 With this repository Video Streaming developers can easily update their API and SDK documentations.
 The site content is in `mdx` format.
@@ -21,8 +19,8 @@ For local development you can find instructions below.
 
 Check out this article template file for available mdx components:
 
-- [Example Article page](https://pages.github.ibm.com/ustream-web/developers/channel-api-topic)
-- [Source mdx file for Example Article page](https://github.ibm.com/ustream-web/developers/blob/master/src/pages/channel-api-topic.mdx)
+- [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
+- [Source mdx file for Example Article page](https://github.com/IBM/video-streaming-developer-docs/blob/master/src/pages/channel-api-topic.mdx)
 
 ## Local development
 
@@ -47,19 +45,19 @@ in order to create a new page, you have to
    Pages can be in the root in the pages directory. For example `/player-api-usage`,
    or it can be in a separate directory, `/player-api-examples/basic-embed`. Use directory is page if grouped in a main menu, use file if it stands alone.
    Examples of page contents can be found here:
-   - [Example Article page](https://pages.github.ibm.com/ustream-web/developers/channel-api-topic)
-   - [Source mdx file for Example Article page](https://github.ibm.com/ustream-web/developers/blob/master/src/pages/channel-api-topic.mdx)
+   - [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
+   - [Source mdx file for Example Article page](https://github.com/IBM/video-streaming-developer-docs/blob/master/src/pages/channel-api-topic.mdx)
 
 ## Deployment
 
 The build and deployment process is automated with Travis CI and triggered by pushing to the master branch.
 
-You can check the deployment logs here: https://travis.ibm.com/ustream-web/developers
+You can check the deployment logs here: https://travis-ci.org/github/IBM/video-streaming-developer-docs
 
 For a change, please create a branch, and make a pull request to master.
 On every merge to master, deployment will start automatically, triggered by Travis.
 After 5-10 minutes, the changes will takes effect on the developer site live environment
-https://pages.github.ibm.com/ustream-web/developers
+https://ibm.github.io/video-streaming-developer-docs
 
 ### Additional details about build and deployment
 
