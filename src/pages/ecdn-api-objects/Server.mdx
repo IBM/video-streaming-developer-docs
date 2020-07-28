@@ -1,77 +1,122 @@
 ---
 title: Server
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 An ECDN server.
 
-```graphql
-type Server {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> Server <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># ID of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>id</GQLName>(): <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Fully Qualified Domain Name of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>fqdn</GQLName>(): <GQLLink href="../../ecdn-api-scalars/FQDN">FQDN</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Location of server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>location</GQLName>(): <GQLLink href="../../ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># The last time this server last checked in to the API.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Null if server never checked in before.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>lastCheckIn</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Time">Time</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Whether server is online or not (based on it's last check in date).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>online</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Boolean">Boolean</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Health indicators of server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Null (unknown) if server hasn't reported activity recently</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># (turned off or cannot reach ECDN API).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>health</GQLName>(): <GQLLink href="../../ecdn-api-objects/ServerHealth">ServerHealth</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Current configuration of server. Null if server never checked in before.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>currentConfiguration</GQLName>(): <GQLLink href="../../ecdn-api-objects/ServerConfiguration">ServerConfiguration</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Desired configuration of server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>desiredConfiguration</GQLName>(): <GQLLink href="../../ecdn-api-objects/ServerConfiguration">ServerConfiguration</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Update status of server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>update</GQLName>(): <GQLLink href="../../ecdn-api-objects/Update">Update</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Hardware configuration of server. Null if server never checked in before.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>hardware</GQLName>(): <GQLLink href="../../ecdn-api-objects/Hardware">Hardware</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Video delivery statistics of server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>videoDelivery</GQLName>(): <GQLLink href="../../ecdn-api-objects/VideoDelivery">VideoDelivery</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Resource usages of server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>usages</GQLName>(): <GQLLink href="../../ecdn-api-objects/ServerUsage">ServerUsage</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># What time was this server created and by whom.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>created</GQLName>(): <GQLLink href="../../ecdn-api-objects/RecordedAction">RecordedAction</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Last time this server was modified and by whom.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>modified</GQLName>(): <GQLLink href="../../ecdn-api-objects/RecordedAction">RecordedAction</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# ID of ECDN server.
-	id: ID!
 
-	# Fully Qualified Domain Name of ECDN server.
-	fqdn: FQDN!
+## Fields
 
-	# Location of server.
-	location: Location!
+### id: [ID](../ecdn-api-scalars/ID)!
+ID of ECDN server.
 
-	# The last time this server last checked in to the API.
-	# Null if server never checked in before.
-	lastCheckIn: Time
 
-	# Whether server is online or not (based on it's last check in date).
-	online: Boolean!
+### fqdn: [FQDN](../ecdn-api-scalars/FQDN)!
+Fully Qualified Domain Name of ECDN server.
 
-	# Health indicators of server.
-	# Null (unknown) if server hasn't reported activity recently
-	# (turned off or cannot reach ECDN API).
-	health: ServerHealth
 
-	# Current configuration of server. Null if server never checked in before.
-	currentConfiguration: ServerConfiguration
+### location: [Location](../ecdn-api-objects/Location)!
+Location of server.
 
-	# Desired configuration of server.
-	desiredConfiguration: ServerConfiguration!
 
-	# Update status of server.
-	update: Update!
+### lastCheckIn: [Time](../ecdn-api-scalars/Time)
+The last time this server last checked in to the API.
+Null if server never checked in before.
 
-	# Hardware configuration of server. Null if server never checked in before.
-	hardware: Hardware
 
-	# Video delivery statistics of server.
-	videoDelivery: VideoDelivery!
+### online: [Boolean](../ecdn-api-scalars/Boolean)!
+Whether server is online or not (based on it's last check in date).
 
-	# Resource usages of server.
-	usages: ServerUsage!
 
-	# What time was this server created and by whom.
-	created: RecordedAction!
+### health: [ServerHealth](../ecdn-api-objects/ServerHealth)
+Health indicators of server.
+Null (unknown) if server hasn't reported activity recently
+(turned off or cannot reach ECDN API).
 
-	# Last time this server was modified and by whom.
-	modified: RecordedAction!
 
-}
-```
+### currentConfiguration: [ServerConfiguration](../ecdn-api-objects/ServerConfiguration)
+Current configuration of server. Null if server never checked in before.
 
-### Fields
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of ECDN server. | 
-| fqdn | [FQDN](../ecdn-api-scalars/FQDN) | NO | NO | Fully Qualified Domain Name of ECDN server. | 
-| location | [Location](../ecdn-api-objects/Location) | NO | NO | Location of server. | 
-| lastCheckIn | [Time](../ecdn-api-scalars/Time) | YES | NO | The last time this server last checked in to the API.<br/>Null if server never checked in before. | 
-| online | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether server is online or not (based on it's last check in date). | 
-| health | [ServerHealth](../ecdn-api-objects/ServerHealth) | YES | NO | Health indicators of server.<br/>Null (unknown) if server hasn't reported activity recently<br/>(turned off or cannot reach ECDN API). | 
-| currentConfiguration | [ServerConfiguration](../ecdn-api-objects/ServerConfiguration) | YES | NO | Current configuration of server. Null if server never checked in before. | 
-| desiredConfiguration | [ServerConfiguration](../ecdn-api-objects/ServerConfiguration) | NO | NO | Desired configuration of server. | 
-| update | [Update](../ecdn-api-objects/Update) | NO | NO | Update status of server. | 
-| hardware | [Hardware](../ecdn-api-objects/Hardware) | YES | NO | Hardware configuration of server. Null if server never checked in before. | 
-| videoDelivery | [VideoDelivery](../ecdn-api-objects/VideoDelivery) | NO | NO | Video delivery statistics of server. | 
-| usages | [ServerUsage](../ecdn-api-objects/ServerUsage) | NO | NO | Resource usages of server. | 
-| created | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | What time was this server created and by whom. | 
-| modified | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | Last time this server was modified and by whom. | 
+### desiredConfiguration: [ServerConfiguration](../ecdn-api-objects/ServerConfiguration)!
+Desired configuration of server.
+
+
+### update: [Update](../ecdn-api-objects/Update)!
+Update status of server.
+
+
+### hardware: [Hardware](../ecdn-api-objects/Hardware)
+Hardware configuration of server. Null if server never checked in before.
+
+
+### videoDelivery: [VideoDelivery](../ecdn-api-objects/VideoDelivery)!
+Video delivery statistics of server.
+
+
+### usages: [ServerUsage](../ecdn-api-objects/ServerUsage)!
+Resource usages of server.
+
+
+### created: [RecordedAction](../ecdn-api-objects/RecordedAction)!
+What time was this server created and by whom.
+
+
+### modified: [RecordedAction](../ecdn-api-objects/RecordedAction)!
+Last time this server was modified and by whom.
+
 

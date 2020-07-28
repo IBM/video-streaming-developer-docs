@@ -1,22 +1,25 @@
 ---
 title: Account
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 (customer-wide) Account of user.
 
-```graphql
-type Account {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> Account <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Domain suffix of account.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>domain</GQLName>(): <GQLLink href="../../ecdn-api-scalars/FQDN">FQDN</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# Domain suffix of account.
-	domain: FQDN!
 
-}
-```
+## Fields
 
-### Fields
+### domain: [FQDN](../ecdn-api-scalars/FQDN)!
+Domain suffix of account.
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| domain | [FQDN](../ecdn-api-scalars/FQDN) | NO | NO | Domain suffix of account. | 
 

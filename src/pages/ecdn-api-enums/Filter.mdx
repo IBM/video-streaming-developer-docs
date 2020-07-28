@@ -1,25 +1,27 @@
 ---
 title: Filter
-description: Enum
+description: enum description (Auto generated file, please do not modify)
 ---
 
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
 IP range filter mechanism.
-	
-```graphql
-enum Filter {
 
-	# Blacklists specified IP ranges.
-	BLACKLIST
-	# Whitelists specified IP ranges.
-	WHITELIST
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>enum</GQLKeyword> Filter <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Blacklists specified IP ranges.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>BLACKLIST</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Whitelists specified IP ranges.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>WHITELIST</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-}
-```
-
-### Values
+## Values
 
 | NAME | DESCRIPTION |
 | - | - |
-| BLACKLIST | Blacklists specified IP ranges. |
-| WHITELIST | Whitelists specified IP ranges. |
-
+| BLACKLIST | Blacklists specified IP ranges.|
+| WHITELIST | Whitelists specified IP ranges.|

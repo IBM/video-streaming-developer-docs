@@ -1,46 +1,68 @@
 ---
 title: ServerUsage
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 An ECDN server's time-series usages.
 
-```graphql
-type ServerUsage {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> ServerUsage <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># CPU usage of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>cpu</GQLName>(): <GQLLink href="../../ecdn-api-objects/CPUUsage">CPUUsage</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Network usage of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>network</GQLName>(): [<GQLLink href="../../ecdn-api-objects/NetworkUsage">NetworkUsage</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Memory usage of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>memory</GQLName>(): [<GQLLink href="../../ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Cache memory usage of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>cacheMemory</GQLName>(): [<GQLLink href="../../ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># System disk usage of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>systemDisk</GQLName>(): [<GQLLink href="../../ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Cache disk usage of ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Null if cache disk isn't attached to the ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>cacheDisk</GQLName>(): [<GQLLink href="../../ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# CPU usage of ECDN server.
-	cpu: CPUUsage!
 
-	# Network usage of ECDN server.
-	network: [NetworkUsage!]!
+## Fields
 
-	# Memory usage of ECDN server.
-	# Nullable in case of errors (coming from an external service).
-	memory: [BytePoint!]
+### cpu: [CPUUsage](../ecdn-api-objects/CPUUsage)!
+CPU usage of ECDN server.
 
-	# Cache memory usage of ECDN server.
-	# Nullable in case of errors (coming from an external service).
-	cacheMemory: [BytePoint!]
 
-	# System disk usage of ECDN server.
-	# Nullable in case of errors (coming from an external service).
-	systemDisk: [BytePoint!]
+### network: [[NetworkUsage](../ecdn-api-objects/NetworkUsage)!]!
+Network usage of ECDN server.
 
-	# Cache disk usage of ECDN server.
-	# Null if cache disk isn't attached to the ECDN server.
-	cacheDisk: [BytePoint!]
 
-}
-```
+### memory: [[BytePoint](../ecdn-api-objects/BytePoint)!]
+Memory usage of ECDN server.
+Nullable in case of errors (coming from an external service).
 
-### Fields
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| cpu | [CPUUsage](../ecdn-api-objects/CPUUsage) | NO | NO | CPU usage of ECDN server. | 
-| network | [NetworkUsage](../ecdn-api-objects/NetworkUsage) | NO | YES | Network usage of ECDN server. | 
-| memory | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | Memory usage of ECDN server.<br/>Nullable in case of errors (coming from an external service). | 
-| cacheMemory | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | Cache memory usage of ECDN server.<br/>Nullable in case of errors (coming from an external service). | 
-| systemDisk | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | System disk usage of ECDN server.<br/>Nullable in case of errors (coming from an external service). | 
-| cacheDisk | [BytePoint](../ecdn-api-objects/BytePoint) | NO | YES | Cache disk usage of ECDN server.<br/>Null if cache disk isn't attached to the ECDN server. | 
+### cacheMemory: [[BytePoint](../ecdn-api-objects/BytePoint)!]
+Cache memory usage of ECDN server.
+Nullable in case of errors (coming from an external service).
+
+
+### systemDisk: [[BytePoint](../ecdn-api-objects/BytePoint)!]
+System disk usage of ECDN server.
+Nullable in case of errors (coming from an external service).
+
+
+### cacheDisk: [[BytePoint](../ecdn-api-objects/BytePoint)!]
+Cache disk usage of ECDN server.
+Null if cache disk isn't attached to the ECDN server.
+
 

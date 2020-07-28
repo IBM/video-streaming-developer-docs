@@ -1,25 +1,27 @@
 ---
 title: ConfigurationStatus
-description: Enum
+description: enum description (Auto generated file, please do not modify)
 ---
 
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
 Configuration's status on ECDN server.
-	
-```graphql
-enum ConfigurationStatus {
 
-	# Configuration wasn't applied to server yet.
-	PENDING
-	# Configuration is successfully applied.
-	APPLIED
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>enum</GQLKeyword> ConfigurationStatus <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Configuration wasn't applied to server yet.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>PENDING</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Configuration is successfully applied.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>APPLIED</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-}
-```
-
-### Values
+## Values
 
 | NAME | DESCRIPTION |
 | - | - |
-| PENDING | Configuration wasn't applied to server yet. |
-| APPLIED | Configuration is successfully applied. |
-
+| PENDING | Configuration wasn't applied to server yet.|
+| APPLIED | Configuration is successfully applied.|

@@ -1,217 +1,269 @@
 ---
 title: Mutation
-description: Operation
+description: operation description (Auto generated file, please do not modify)
 ---
 
-The Mutation type represents all of the mutable entry points into the API.
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
-```graphql
-type Mutation {
+The Mutation type represents all the mutable entry points to the API.
 
-	# Create new location.
-	# Authorization: must be at least ADMIN.
-	# Returns created location.
-	locationCreate(
-		# Batch input for location creation.
-		config: BatchLocationInput!
-	): Location!
-
-	# Batch configuration of a location.
-	# Authorization: must be at least ADMIN.
-	# Returns configured location.
-	locationConfigure(
-		# ID of location to configure.
-		locationID: ID!,
-		# Batch input for location configuration.
-		config: BatchLocationInput!
-	): Location!
-
-	# Set a common parent for locations. Parent can either be a region or a location.
-	# Authorization: must be at least ADMIN.
-	locationSetParents(
-		# IDs of (children) locations (which we set a parent for).
-		locationIDs: [ID!]!,
-		# ID of parent location/region.
-		parentID: ID!
-	): Void
-
-	# Delete locations.
-	# Authorization: must be at least ADMIN.
-	locationDelete(
-		# IDs of locations to delete.
-		locationIDs: [ID!]!
-	): Void
-
-	# Create new server.
-	# Authorization: must be at least ADMIN.
-	# Returns created server.
-	serverCreate(
-		# Batch input for server creation.
-		config: BatchServerInput!
-	): Server!
-
-	# Batch configuration of a server.
-	# Authorization: must be at least ADMIN.
-	# Returns configured server.
-	serverConfigure(
-		# ID of server to configure.
-		serverID: ID!,
-		# Selected mode to apply this configuration to an ECDN server.
-		mode: ConfigurationMode!,
-		# Batch input for server configuration.
-		config: BatchServerInput!
-	): Server!
-
-	# Enable content delivery on servers.
-	# Authorization: must be at least ADMIN.
-	serverEnableContentDelivery(
-		# IDs of servers to enable content delivery on.
-		serverIDs: [ID!]!
-	): Void
-
-	# Disable content delivery on servers.
-	# Authorization: must be at least ADMIN.
-	serverDisableContentDelivery(
-		# IDs of servers to disable content delivery on.
-		serverIDs: [ID!]!
-	): Void
-
-	# Enable remote assistance on servers.
-	# Authorization: must be at least ADMIN.
-	serverEnableRemoteAssistance(
-		# IDs of servers to enable remote assistance on.
-		serverIDs: [ID!]!
-	): Void
-
-	# Disable remote assistance on servers.
-	# Authorization: must be at least ADMIN.
-	serverDisableRemoteAssistance(
-		# IDs of servers to disable remote assistance on.
-		serverIDs: [ID!]!
-	): Void
-
-	# Delete servers.
-	# Authorization: must be at least ADMIN.
-	serverDelete(
-		# IDs of servers to delete.
-		serverIDs: [ID!]!
-	): Void
-
-	# Create time-series report of ECDN video delivery.
-	# Interval of a query with minutely granularity cannot exceed 24 hours.
-	# Metrics older than 1 year are discarded.
-	# Returns created report.
-	reportCreate(
-		# Granularity of time intervals.
-		granularity: Granularity!,
-		# Break down report's intervals by additional fields.
-		breakdown: ReportBreakdown,
-		# Start report from this point in time.
-		from: Time!,
-		# End report at this point in time.
-		to: Time!,
-		# Send created report to this email address.
-		email: EmailAddress!,
-		# Included fields in the report.
-		include: [ReportField!]!
-	): Report!
-
-}
-```
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> Mutation <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Create new location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Returns created location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>locationCreate</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Batch input for location creation.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>config</GQLAttribute>: <GQLLink href="../../ecdn-api-input-objects/BatchLocationInput">BatchLocationInput</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Batch configuration of a location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Returns configured location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>locationConfigure</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># ID of location to configure.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>locationID</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Batch input for location configuration.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>config</GQLAttribute>: <GQLLink href="../../ecdn-api-input-objects/BatchLocationInput">BatchLocationInput</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Set a common parent for locations. Parent can either be a region or a location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>locationSetParents</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of (children) locations (which we set a parent for).</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>locationIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># ID of parent location/region.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>parentID</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Delete locations.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>locationDelete</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of locations to delete.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>locationIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Create new server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Returns created server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverCreate</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Batch input for server creation.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>config</GQLAttribute>: <GQLLink href="../../ecdn-api-input-objects/BatchServerInput">BatchServerInput</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Batch configuration of a server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Returns configured server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverConfigure</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># ID of server to configure.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverID</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Selected mode to apply this configuration to an ECDN server.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>mode</GQLAttribute>: <GQLLink href="../../ecdn-api-enums/ConfigurationMode">ConfigurationMode</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Batch input for server configuration.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>config</GQLAttribute>: <GQLLink href="../../ecdn-api-input-objects/BatchServerInput">BatchServerInput</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Enable content delivery on servers.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverEnableContentDelivery</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of servers to enable content delivery on.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Disable content delivery on servers.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverDisableContentDelivery</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of servers to disable content delivery on.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Enable remote assistance on servers.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverEnableRemoteAssistance</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of servers to enable remote assistance on.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Disable remote assistance on servers.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverDisableRemoteAssistance</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of servers to disable remote assistance on.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Delete servers.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverDelete</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># IDs of servers to delete.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverIDs</GQLAttribute>: [<GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Create time-series report of ECDN video delivery.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Interval of a query with minutely granularity cannot exceed 24 hours.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Metrics older than 1 year are discarded.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Returns created report.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>reportCreate</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Granularity of time intervals.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>granularity</GQLAttribute>: <GQLLink href="../../ecdn-api-enums/Granularity">Granularity</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Break down report's intervals by additional fields.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>breakdown</GQLAttribute>: <GQLLink href="../../ecdn-api-enums/ReportBreakdown">ReportBreakdown</GQLLink></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Start report from this point in time.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>from</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/Time">Time</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># End report at this point in time.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>to</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/Time">Time</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Send created report to this email address.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>email</GQLAttribute>: <GQLLink href="../../ecdn-api-scalars/EmailAddress">EmailAddress</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Included fields in the report.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>include</GQLAttribute>: [<GQLLink href="../../ecdn-api-enums/ReportField">ReportField</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="../../ecdn-api-objects/Report">Report</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
 ## Fields
 
 ### locationCreate: [Location](../ecdn-api-objects/Location)!
-Create new location.<br/>Authorization: must be at least ADMIN.<br/>Returns created location.
+Create new location.
+Authorization: must be at least ADMIN.
+Returns created location.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| config | [BatchLocationInput](../ecdn-api-input-objects/BatchLocationInput) | NO | NO | Batch input for location creation. |
+| config | [BatchLocationInput](../ecdn-api-input-objects/BatchLocationInput) | YES | NO | Batch input for location creation.|
 
 ### locationConfigure: [Location](../ecdn-api-objects/Location)!
-Batch configuration of a location.<br/>Authorization: must be at least ADMIN.<br/>Returns configured location.
+Batch configuration of a location.
+Authorization: must be at least ADMIN.
+Returns configured location.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| locationID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of location to configure. |
-| config | [BatchLocationInput](../ecdn-api-input-objects/BatchLocationInput) | NO | NO | Batch input for location configuration. |
+| locationID | [ID](../ecdn-api-scalars/ID) | YES | NO | ID of location to configure.|
+| config | [BatchLocationInput](../ecdn-api-input-objects/BatchLocationInput) | YES | NO | Batch input for location configuration.|
 
 ### locationSetParents: [Void](../ecdn-api-scalars/Void)
-Set a common parent for locations. Parent can either be a region or a location.<br/>Authorization: must be at least ADMIN.
+Set a common parent for locations. Parent can either be a region or a location.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| locationIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of (children) locations (which we set a parent for). |
-| parentID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of parent location/region. |
+| locationIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of (children) locations (which we set a parent for).|
+| parentID | [ID](../ecdn-api-scalars/ID) | YES | NO | ID of parent location/region.|
 
 ### locationDelete: [Void](../ecdn-api-scalars/Void)
-Delete locations.<br/>Authorization: must be at least ADMIN.
+Delete locations.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| locationIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of locations to delete. |
+| locationIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of locations to delete.|
 
 ### serverCreate: [Server](../ecdn-api-objects/Server)!
-Create new server.<br/>Authorization: must be at least ADMIN.<br/>Returns created server.
+Create new server.
+Authorization: must be at least ADMIN.
+Returns created server.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| config | [BatchServerInput](../ecdn-api-input-objects/BatchServerInput) | NO | NO | Batch input for server creation. |
+| config | [BatchServerInput](../ecdn-api-input-objects/BatchServerInput) | YES | NO | Batch input for server creation.|
 
 ### serverConfigure: [Server](../ecdn-api-objects/Server)!
-Batch configuration of a server.<br/>Authorization: must be at least ADMIN.<br/>Returns configured server.
+Batch configuration of a server.
+Authorization: must be at least ADMIN.
+Returns configured server.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverID | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of server to configure. |
-| mode | [ConfigurationMode](../ecdn-api-enums/ConfigurationMode) | NO | NO | Selected mode to apply this configuration to an ECDN server. |
-| config | [BatchServerInput](../ecdn-api-input-objects/BatchServerInput) | NO | NO | Batch input for server configuration. |
+| serverID | [ID](../ecdn-api-scalars/ID) | YES | NO | ID of server to configure.|
+| mode | [ConfigurationMode](../ecdn-api-enums/ConfigurationMode) | YES | NO | Selected mode to apply this configuration to an ECDN server.|
+| config | [BatchServerInput](../ecdn-api-input-objects/BatchServerInput) | YES | NO | Batch input for server configuration.|
 
 ### serverEnableContentDelivery: [Void](../ecdn-api-scalars/Void)
-Enable content delivery on servers.<br/>Authorization: must be at least ADMIN.
+Enable content delivery on servers.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to enable content delivery on. |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of servers to enable content delivery on.|
 
 ### serverDisableContentDelivery: [Void](../ecdn-api-scalars/Void)
-Disable content delivery on servers.<br/>Authorization: must be at least ADMIN.
+Disable content delivery on servers.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to disable content delivery on. |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of servers to disable content delivery on.|
 
 ### serverEnableRemoteAssistance: [Void](../ecdn-api-scalars/Void)
-Enable remote assistance on servers.<br/>Authorization: must be at least ADMIN.
+Enable remote assistance on servers.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to enable remote assistance on. |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of servers to enable remote assistance on.|
 
 ### serverDisableRemoteAssistance: [Void](../ecdn-api-scalars/Void)
-Disable remote assistance on servers.<br/>Authorization: must be at least ADMIN.
+Disable remote assistance on servers.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to disable remote assistance on. |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of servers to disable remote assistance on.|
 
 ### serverDelete: [Void](../ecdn-api-scalars/Void)
-Delete servers.<br/>Authorization: must be at least ADMIN.
+Delete servers.
+Authorization: must be at least ADMIN.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| serverIDs | [ID](../ecdn-api-scalars/ID) | NO | YES | IDs of servers to delete. |
+| serverIDs | [ID](../ecdn-api-scalars/ID) | YES | YES | IDs of servers to delete.|
 
 ### reportCreate: [Report](../ecdn-api-objects/Report)!
-Create time-series report of ECDN video delivery.<br/>Interval of a query with minutely granularity cannot exceed 24 hours.<br/>Metrics older than 1 year are discarded.<br/>Returns created report.
+Create time-series report of ECDN video delivery.
+Interval of a query with minutely granularity cannot exceed 24 hours.
+Metrics older than 1 year are discarded.
+Returns created report.
 
-| ARGUMENT  | TYPE    | NULLABLE | LIST | DESCRIPTION |
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
 | - | - | - | - | - |
-| granularity | [Granularity](../ecdn-api-enums/Granularity) | NO | NO | Granularity of time intervals. |
-| breakdown | [ReportBreakdown](../ecdn-api-enums/ReportBreakdown) | YES | NO | Break down report's intervals by additional fields. |
-| from | [Time](../ecdn-api-scalars/Time) | NO | NO | Start report from this point in time. |
-| to | [Time](../ecdn-api-scalars/Time) | NO | NO | End report at this point in time. |
-| email | [EmailAddress](../ecdn-api-scalars/EmailAddress) | NO | NO | Send created report to this email address. |
-| include | [ReportField](../ecdn-api-enums/ReportField) | NO | YES | Included fields in the report. |
-
+| granularity | [Granularity](../ecdn-api-enums/Granularity) | YES | NO | Granularity of time intervals.|
+| breakdown | [ReportBreakdown](../ecdn-api-enums/ReportBreakdown) | NO | NO | Break down report's intervals by additional fields.|
+| from | [Time](../ecdn-api-scalars/Time) | YES | NO | Start report from this point in time.|
+| to | [Time](../ecdn-api-scalars/Time) | YES | NO | End report at this point in time.|
+| email | [EmailAddress](../ecdn-api-scalars/EmailAddress) | YES | NO | Send created report to this email address.|
+| include | [ReportField](../ecdn-api-enums/ReportField) | YES | YES | Included fields in the report.|
 

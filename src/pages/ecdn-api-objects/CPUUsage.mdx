@@ -1,28 +1,36 @@
 ---
 title: CPUUsage
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 CPU usage of ECDN server.
 
-```graphql
-type CPUUsage {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> CPUUsage <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># CPU usage of kernel.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>system</GQLName>(): [<GQLLink href="../../ecdn-api-objects/PercentagePoint">PercentagePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># CPU usage of user-space processes.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>user</GQLName>(): [<GQLLink href="../../ecdn-api-objects/PercentagePoint">PercentagePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# CPU usage of kernel.
-	# Nullable in case of errors (coming from an external service).
-	system: [PercentagePoint!]
 
-	# CPU usage of user-space processes.
-	# Nullable in case of errors (coming from an external service).
-	user: [PercentagePoint!]
+## Fields
 
-}
-```
+### system: [[PercentagePoint](../ecdn-api-objects/PercentagePoint)!]
+CPU usage of kernel.
+Nullable in case of errors (coming from an external service).
 
-### Fields
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| system | [PercentagePoint](../ecdn-api-objects/PercentagePoint) | NO | YES | CPU usage of kernel.<br/>Nullable in case of errors (coming from an external service). | 
-| user | [PercentagePoint](../ecdn-api-objects/PercentagePoint) | NO | YES | CPU usage of user-space processes.<br/>Nullable in case of errors (coming from an external service). | 
+### user: [[PercentagePoint](../ecdn-api-objects/PercentagePoint)!]
+CPU usage of user-space processes.
+Nullable in case of errors (coming from an external service).
+
 

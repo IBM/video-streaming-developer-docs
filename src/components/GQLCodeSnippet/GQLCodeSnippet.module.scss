@@ -1,0 +1,45 @@
+.gqlCodeSnippet {
+  display: block;
+  background-color: #161616;
+  color: rgb(255, 255, 255);
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+.dark {
+  .line {
+    width: 100%;
+  }
+
+  .tab {
+    padding-left: 2rem;
+  }
+
+  .keyword {
+    color: rgb(187, 142, 255);
+  }
+
+  .attribute {
+    color: rgb(146, 238, 238);
+  }
+
+  .operator {
+    color: rgb(110, 166, 255);
+  }
+
+  .comment {
+    color: rgb(190, 190, 190);
+  }
+
+  .link,
+  link:active {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+    color: inherit;
+  }
+}

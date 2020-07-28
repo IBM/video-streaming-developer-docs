@@ -1,95 +1,156 @@
 ---
 title: Location
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 A customer's location.
 
-```graphql
-type Location {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> Location <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># ID of location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>id</GQLName>(): <GQLLink href="../../ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Name of location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>name</GQLName>(): <GQLLink href="../../ecdn-api-scalars/String">String</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Number of servers in location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>numberOfServers</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Int">Int</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Servers in location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>servers</GQLName>(): [<GQLLink href="../../ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Parent location or region of location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>parent</GQLName>(): <GQLLink href="../../ecdn-api-unions/LocationsParent">LocationsParent</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># (direct) Child locations of location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>children</GQLName>(): [<GQLLink href="../../ecdn-api-objects/Location">Location</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Depth of (deepest possible) child location chain (starting from this location).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># * A location without any children has children a depth of 0.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># * A location with a child that doesn't have any children has a depth of 1.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># * A location that has at least one child with children has a depth of 2.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>childrenDepth</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Int">Int</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># The maximum children depth this location can have. A maximum of 3 locations can be chained</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># together. Therefore if a location:</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># * Is a top-level one, the maximum children depth is 2</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment>#   (it can have child locations with children).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># * Has a top-level location as parent: the maximum children depth is 1</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment>#   (can have children, but they cannot have additional children).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># * Has a parent location with a parent location: the maximum children depth is 0</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment>#   (cannot have children, would exceed the overall -3- depth limit).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>childrenDepthLimit</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Int">Int</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># External IP ranges of location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>externalRanges</GQLName>(): [<GQLLink href="../../ecdn-api-scalars/IPv4Range">IPv4Range</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Whether external ranges are inherited from parent location.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>inheritExternalRanges</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Boolean">Boolean</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Restriction for client connections. Null if there aren't any restrictions.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>clientRestriction</GQLName>(): <GQLLink href="../../ecdn-api-objects/ClientRestriction">ClientRestriction</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Whether clients can connect to servers in this location or not.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>clientConnectionsEnabled</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Boolean">Boolean</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Whether clients can fall back to external CDNs or not.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>cdnFallbackEnabled</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Boolean">Boolean</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Whether management traffic of servers in location are proxied through parent servers.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Video traffic is proxied through parent servers in all cases.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Management traffic can only be proxied through ECDN servers (i.e: not through midgress),</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># therefore this can only be enabled in child locations.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>parentProxyEnabled</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Boolean">Boolean</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># What time was this location created and by whom.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>created</GQLName>(): <GQLLink href="../../ecdn-api-objects/RecordedAction">RecordedAction</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Last time this location was modified and by whom.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>modified</GQLName>(): <GQLLink href="../../ecdn-api-objects/RecordedAction">RecordedAction</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# ID of location.
-	id: ID!
 
-	# Name of location.
-	name: String!
+## Fields
 
-	# Number of servers in location.
-	numberOfServers: Int!
+### id: [ID](../ecdn-api-scalars/ID)!
+ID of location.
 
-	# Servers in location.
-	servers: [Server!]!
 
-	# Parent location or region of location.
-	parent: LocationsParent!
+### name: [String](../ecdn-api-scalars/String)!
+Name of location.
 
-	# (direct) Child locations of location.
-	children: [Location!]!
 
-	# Depth of (deepest possible) child location chain (starting from this location).
-	# * A location without any children has children a depth of 0.
-	# * A location with a child that doesn't have any children has a depth of 1.
-	# * A location that has at least one child with children has a depth of 2.
-	childrenDepth: Int!
+### numberOfServers: [Int](../ecdn-api-scalars/Int)!
+Number of servers in location.
 
-	# The maximum children depth this location can have. A maximum of 3 locations can be chained
-	# together. Therefore if a location:
-	# * Is a top-level one, the maximum children depth is 2
-	#   (it can have child locations with children).
-	# * Has a top-level location as parent: the maximum children depth is 1
-	#   (can have children, but they cannot have additional children).
-	# * Has a parent location with a parent location: the maximum children depth is 0
-	#   (cannot have children, would exceed the overall -3- depth limit).
-	childrenDepthLimit: Int!
 
-	# External IP ranges of location.
-	externalRanges: [IPv4Range!]!
+### servers: [[Server](../ecdn-api-objects/Server)!]!
+Servers in location.
 
-	# Whether external ranges are inherited from parent location.
-	inheritExternalRanges: Boolean!
 
-	# Restriction for client connections. Null if there aren't any restrictions.
-	clientRestriction: ClientRestriction
+### parent: [LocationsParent](../ecdn-api-unions/LocationsParent)!
+Parent location or region of location.
 
-	# Whether clients can connect to servers in this location or not.
-	clientConnectionsEnabled: Boolean!
 
-	# Whether clients can fall back to external CDNs or not.
-	cdnFallbackEnabled: Boolean!
+### children: [[Location](../ecdn-api-objects/Location)!]!
+(direct) Child locations of location.
 
-	# Whether management traffic of servers in location are proxied through parent servers.
-	# Video traffic is proxied through parent servers in all cases.
-	# Management traffic can only be proxied through ECDN servers (i.e: not through midgress),
-	# therefore this can only be enabled in child locations.
-	parentProxyEnabled: Boolean!
 
-	# What time was this location created and by whom.
-	created: RecordedAction!
+### childrenDepth: [Int](../ecdn-api-scalars/Int)!
+Depth of (deepest possible) child location chain (starting from this location).
+* A location without any children has children a depth of 0.
+* A location with a child that doesn't have any children has a depth of 1.
+* A location that has at least one child with children has a depth of 2.
 
-	# Last time this location was modified and by whom.
-	modified: RecordedAction!
 
-}
-```
+### childrenDepthLimit: [Int](../ecdn-api-scalars/Int)!
+The maximum children depth this location can have. A maximum of 3 locations can be chained
+together. Therefore if a location:
+* Is a top-level one, the maximum children depth is 2
+  (it can have child locations with children).
+* Has a top-level location as parent: the maximum children depth is 1
+  (can have children, but they cannot have additional children).
+* Has a parent location with a parent location: the maximum children depth is 0
+  (cannot have children, would exceed the overall -3- depth limit).
 
-### Fields
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| id | [ID](../ecdn-api-scalars/ID) | NO | NO | ID of location. | 
-| name | [String](../ecdn-api-scalars/String) | NO | NO | Name of location. | 
-| numberOfServers | [Int](../ecdn-api-scalars/Int) | NO | NO | Number of servers in location. | 
-| servers | [Server](../ecdn-api-objects/Server) | NO | YES | Servers in location. | 
-| parent | [LocationsParent](../ecdn-api-unions/LocationsParent) | NO | NO | Parent location or region of location. | 
-| children | [Location](../ecdn-api-objects/Location) | NO | YES | (direct) Child locations of location. | 
-| childrenDepth | [Int](../ecdn-api-scalars/Int) | NO | NO | Depth of (deepest possible) child location chain (starting from this location).<br/>* A location without any children has children a depth of 0.<br/>* A location with a child that doesn't have any children has a depth of 1.<br/>* A location that has at least one child with children has a depth of 2. | 
-| childrenDepthLimit | [Int](../ecdn-api-scalars/Int) | NO | NO | The maximum children depth this location can have. A maximum of 3 locations can be chained<br/>together. Therefore if a location:<br/>* Is a top-level one, the maximum children depth is 2<br/>  (it can have child locations with children).<br/>* Has a top-level location as parent: the maximum children depth is 1<br/>  (can have children, but they cannot have additional children).<br/>* Has a parent location with a parent location: the maximum children depth is 0<br/>  (cannot have children, would exceed the overall -3- depth limit). | 
-| externalRanges | [IPv4Range](../ecdn-api-scalars/IPv4Range) | NO | YES | External IP ranges of location. | 
-| inheritExternalRanges | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether external ranges are inherited from parent location. | 
-| clientRestriction | [ClientRestriction](../ecdn-api-objects/ClientRestriction) | YES | NO | Restriction for client connections. Null if there aren't any restrictions. | 
-| clientConnectionsEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether clients can connect to servers in this location or not. | 
-| cdnFallbackEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether clients can fall back to external CDNs or not. | 
-| parentProxyEnabled | [Boolean](../ecdn-api-scalars/Boolean) | NO | NO | Whether management traffic of servers in location are proxied through parent servers.<br/>Video traffic is proxied through parent servers in all cases.<br/>Management traffic can only be proxied through ECDN servers (i.e: not through midgress),<br/>therefore this can only be enabled in child locations. | 
-| created | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | What time was this location created and by whom. | 
-| modified | [RecordedAction](../ecdn-api-objects/RecordedAction) | NO | NO | Last time this location was modified and by whom. | 
+### externalRanges: [[IPv4Range](../ecdn-api-scalars/IPv4Range)!]!
+External IP ranges of location.
+
+
+### inheritExternalRanges: [Boolean](../ecdn-api-scalars/Boolean)!
+Whether external ranges are inherited from parent location.
+
+
+### clientRestriction: [ClientRestriction](../ecdn-api-objects/ClientRestriction)
+Restriction for client connections. Null if there aren't any restrictions.
+
+
+### clientConnectionsEnabled: [Boolean](../ecdn-api-scalars/Boolean)!
+Whether clients can connect to servers in this location or not.
+
+
+### cdnFallbackEnabled: [Boolean](../ecdn-api-scalars/Boolean)!
+Whether clients can fall back to external CDNs or not.
+
+
+### parentProxyEnabled: [Boolean](../ecdn-api-scalars/Boolean)!
+Whether management traffic of servers in location are proxied through parent servers.
+Video traffic is proxied through parent servers in all cases.
+Management traffic can only be proxied through ECDN servers (i.e: not through midgress),
+therefore this can only be enabled in child locations.
+
+
+### created: [RecordedAction](../ecdn-api-objects/RecordedAction)!
+What time was this location created and by whom.
+
+
+### modified: [RecordedAction](../ecdn-api-objects/RecordedAction)!
+Last time this location was modified and by whom.
+
 

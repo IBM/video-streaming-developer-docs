@@ -1,17 +1,16 @@
 ---
 title: Time
-description: Scalar
+description: Scalar description (Auto generated file, please do not modify)
 ---
 
-### Time
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
 The Time scalar type is an instant in time which can be represented in multiple ways.
 Accepted formats are:
 - Timestamp string which conforms RFC3339 (subseconds are added if present).
   i.e: `2006-01-02T15:04:05Z07:00`, `2020-02-17T16:15:34.823032+01:00`.
 - Unix timestamp as an integer or floating point number (seconds since January 1, 1970 UTC). i.e: `1569673381`.
 
-```graphql
-scalar Time
-```
-
-
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>scalar</GQLKeyword> Time</GQLLine>
+</GQLCodeSnippet>

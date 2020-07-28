@@ -1,27 +1,29 @@
 ---
 title: ConfigurationMode
-description: Enum
+description: enum description (Auto generated file, please do not modify)
 ---
 
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
 Method of applying configuration to an ECDN server.
-	
-```graphql
-enum ConfigurationMode {
 
-	# Manually configurate the ECDN server.
-	# A configuration CD must be mounted and the server must be restarted.
-	MANUAL
-	# Remotely configure the ECDN server.
-	# ECDN server will pick up the desired changes once it checks in to the API.
-	REMOTE
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>enum</GQLKeyword> ConfigurationMode <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Manually configurate the ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># A configuration CD must be mounted and the server must be restarted.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>MANUAL</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Remotely configure the ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># ECDN server will pick up the desired changes once it checks in to the API.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>REMOTE</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-}
-```
-
-### Values
+## Values
 
 | NAME | DESCRIPTION |
 | - | - |
-| MANUAL | Manually configurate the ECDN server.<br/>A configuration CD must be mounted and the server must be restarted. |
-| REMOTE | Remotely configure the ECDN server.<br/>ECDN server will pick up the desired changes once it checks in to the API. |
-
+| MANUAL | Manually configurate the ECDN server.<br/>A configuration CD must be mounted and the server must be restarted.|
+| REMOTE | Remotely configure the ECDN server.<br/>ECDN server will pick up the desired changes once it checks in to the API.|

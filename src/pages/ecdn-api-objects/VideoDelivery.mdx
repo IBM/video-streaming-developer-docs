@@ -1,38 +1,54 @@
 ---
 title: VideoDelivery
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 An ECDN server's video delivery status.
 
-```graphql
-type VideoDelivery {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> VideoDelivery <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Current number of users viewing a video through this server (buffering as well).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (this metric is coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>currentNumberOfViewers</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Int">Int</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Current number of users experiencing buffering on this server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (this metric is coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>currentNumberOfBuffering</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Int">Int</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Number of users viewing a video through this server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (this metric is coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>numberOfViewers</GQLName>(): [<GQLLink href="../../ecdn-api-objects/ScalarPoint">ScalarPoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Number of users experiencing buffering on this server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (this metric is coming from an external service).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>numberOfBuffering</GQLName>(): [<GQLLink href="../../ecdn-api-objects/ScalarPoint">ScalarPoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# Current number of users viewing a video through this server (buffering as well).
-	# Nullable in case of errors (this metric is coming from an external service).
-	currentNumberOfViewers: Int
 
-	# Current number of users experiencing buffering on this server.
-	# Nullable in case of errors (this metric is coming from an external service).
-	currentNumberOfBuffering: Int
+## Fields
 
-	# Number of users viewing a video through this server.
-	# Nullable in case of errors (this metric is coming from an external service).
-	numberOfViewers: [ScalarPoint!]
+### currentNumberOfViewers: [Int](../ecdn-api-scalars/Int)
+Current number of users viewing a video through this server (buffering as well).
+Nullable in case of errors (this metric is coming from an external service).
 
-	# Number of users experiencing buffering on this server.
-	# Nullable in case of errors (this metric is coming from an external service).
-	numberOfBuffering: [ScalarPoint!]
 
-}
-```
+### currentNumberOfBuffering: [Int](../ecdn-api-scalars/Int)
+Current number of users experiencing buffering on this server.
+Nullable in case of errors (this metric is coming from an external service).
 
-### Fields
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| currentNumberOfViewers | [Int](../ecdn-api-scalars/Int) | YES | NO | Current number of users viewing a video through this server (buffering as well).<br/>Nullable in case of errors (this metric is coming from an external service). | 
-| currentNumberOfBuffering | [Int](../ecdn-api-scalars/Int) | YES | NO | Current number of users experiencing buffering on this server.<br/>Nullable in case of errors (this metric is coming from an external service). | 
-| numberOfViewers | [ScalarPoint](../ecdn-api-objects/ScalarPoint) | NO | YES | Number of users viewing a video through this server.<br/>Nullable in case of errors (this metric is coming from an external service). | 
-| numberOfBuffering | [ScalarPoint](../ecdn-api-objects/ScalarPoint) | NO | YES | Number of users experiencing buffering on this server.<br/>Nullable in case of errors (this metric is coming from an external service). | 
+### numberOfViewers: [[ScalarPoint](../ecdn-api-objects/ScalarPoint)!]
+Number of users viewing a video through this server.
+Nullable in case of errors (this metric is coming from an external service).
+
+
+### numberOfBuffering: [[ScalarPoint](../ecdn-api-objects/ScalarPoint)!]
+Number of users experiencing buffering on this server.
+Nullable in case of errors (this metric is coming from an external service).
+
 

@@ -1,39 +1,57 @@
 ---
 title: ContentDeliveryHealth
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 Health of ECDN server's content delivery.
 
-```graphql
-type ContentDeliveryHealth {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> ContentDeliveryHealth <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Aggregated health of services affecting content delivery.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - GOOD if all services are in GOOD state.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - WARNING if at least one is in WARNING and none of them are in POOR state.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - POOR if at least one is in POOR state.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>aggregated</GQLName>(): <GQLLink href="../../ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Upstream servers health.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - GOOD if all upstreams are reachable.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - WARNING if not all but at least one of them is reachable.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - POOR if none of them are reachable.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>upstreams</GQLName>(): <GQLLink href="../../ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Health of caching service running on ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - GOOD if it's up and running, certificate is valid.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - WARNING if it's up and running, but certificate will expire soon.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># - POOR if it's not running, certificate is invalid or expired.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>caching</GQLName>(): <GQLLink href="../../ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# Aggregated health of services affecting content delivery.
-	# - GOOD if all services are in GOOD state.
-	# - WARNING if at least one is in WARNING and none of them are in POOR state.
-	# - POOR if at least one is in POOR state.
-	aggregated: Health!
 
-	# Upstream servers health.
-	# - GOOD if all upstreams are reachable.
-	# - WARNING if not all but at least one of them is reachable.
-	# - POOR if none of them are reachable.
-	upstreams: Health!
+## Fields
 
-	# Health of caching service running on ECDN server.
-	# - GOOD if it's up and running, certificate is valid.
-	# - WARNING if it's up and running, but certificate will expire soon.
-	# - POOR if it's not running, certificate is invalid or expired.
-	caching: Health!
+### aggregated: [Health](../ecdn-api-enums/Health)!
+Aggregated health of services affecting content delivery.
+- GOOD if all services are in GOOD state.
+- WARNING if at least one is in WARNING and none of them are in POOR state.
+- POOR if at least one is in POOR state.
 
-}
-```
 
-### Fields
+### upstreams: [Health](../ecdn-api-enums/Health)!
+Upstream servers health.
+- GOOD if all upstreams are reachable.
+- WARNING if not all but at least one of them is reachable.
+- POOR if none of them are reachable.
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| aggregated | [Health](../ecdn-api-enums/Health) | NO | NO | Aggregated health of services affecting content delivery.<br/>- GOOD if all services are in GOOD state.<br/>- WARNING if at least one is in WARNING and none of them are in POOR state.<br/>- POOR if at least one is in POOR state. | 
-| upstreams | [Health](../ecdn-api-enums/Health) | NO | NO | Upstream servers health.<br/>- GOOD if all upstreams are reachable.<br/>- WARNING if not all but at least one of them is reachable.<br/>- POOR if none of them are reachable. | 
-| caching | [Health](../ecdn-api-enums/Health) | NO | NO | Health of caching service running on ECDN server.<br/>- GOOD if it's up and running, certificate is valid.<br/>- WARNING if it's up and running, but certificate will expire soon.<br/>- POOR if it's not running, certificate is invalid or expired. | 
+
+### caching: [Health](../ecdn-api-enums/Health)!
+Health of caching service running on ECDN server.
+- GOOD if it's up and running, certificate is valid.
+- WARNING if it's up and running, but certificate will expire soon.
+- POOR if it's not running, certificate is invalid or expired.
+
 

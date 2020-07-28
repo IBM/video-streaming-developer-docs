@@ -1,32 +1,36 @@
 ---
 title: CacheDiskStatus
-description: Enum
+description: enum description (Auto generated file, please do not modify)
 ---
 
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
 Status of cache disk.
-	
-```graphql
-enum CacheDiskStatus {
 
-	# Cache disk isn't attached to the ECDN server.
-	NOT_PRESENT
-	# Attached cache disk is provisioned and used by the ECDN server for video caching.
-	IN_USE
-	# ECDN server is currently provisioning the attached cache disk.
-	PROVISION_IN_PROGRESS
-	# Attached cache disk is too small for reliable video caching (less then 4 gigabytes).
-	# Server won't provision and use it.
-	TOO_SMALL
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>enum</GQLKeyword> CacheDiskStatus <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Cache disk isn't attached to the ECDN server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>NOT_PRESENT</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Attached cache disk is provisioned and used by the ECDN server for video caching.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>IN_USE</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># ECDN server is currently provisioning the attached cache disk.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>PROVISION_IN_PROGRESS</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Attached cache disk is too small for reliable video caching (less than 4 gigabytes).</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Server won't provision and use it.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>TOO_SMALL</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-}
-```
-
-### Values
+## Values
 
 | NAME | DESCRIPTION |
 | - | - |
-| NOT_PRESENT | Cache disk isn't attached to the ECDN server. |
-| IN_USE | Attached cache disk is provisioned and used by the ECDN server for video caching. |
-| PROVISION_IN_PROGRESS | ECDN server is currently provisioning the attached cache disk. |
-| TOO_SMALL | Attached cache disk is too small for reliable video caching (less then 4 gigabytes).<br/>Server won't provision and use it. |
-
+| NOT_PRESENT | Cache disk isn't attached to the ECDN server.|
+| IN_USE | Attached cache disk is provisioned and used by the ECDN server for video caching.|
+| PROVISION_IN_PROGRESS | ECDN server is currently provisioning the attached cache disk.|
+| TOO_SMALL | Attached cache disk is too small for reliable video caching (less than 4 gigabytes).<br/>Server won't provision and use it.|

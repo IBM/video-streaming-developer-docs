@@ -1,26 +1,26 @@
 ---
 title: Getting started
-description: Getting started
+description: Getting started (Auto generated file, please do not modify)
 ---
 
 ## Introduction
 
-ECDN API lets you monitor/manage your ECDN locations, servers and other resources.
+The IBM ECDN (Enterprise Content Delivery Network) API lets you monitor and manage your ECDN locations, servers and other resources.
 
 ## Try it out
 
 [API Browser](https://ecdn.video.ibm.com/graphiql) is the easiest way to try ECDN's GraphQL API.
 You can log in via your ECDN credentials.
-Generated documentation can be found by opening `Docs` in the upper-right corner (also available on this site).
+Generated documentation can be found by opening `Docs` in the upper-right corner, which are also available on this site.
 
 ## GraphQL
 
-We suggest reading relevant sections of the [official GraphQL documentation](https://graphql.org/learn/)
-to get a basic understanding of it's usage. This documentation doesn't cover that, it focuses on ECDN specific usage.
+We suggest reading the [official GraphQL documentation](https://graphql.org/learn/)
+to get a basic understanding of its usage. This documentation focuses on ECDN specific usage.
 
 ### All/specific resources
 
-We will use `servers` and `locations` throughout this document, which will return all servers and locations.
+We will use `servers` and `locations` throughout this document, which covers all servers and/or all locations when used.
 If you want to query them one-by-one use `serverByID` and `locationByID` instead. i.e:
 
 ```graphql
@@ -32,7 +32,7 @@ If you want to query them one-by-one use `serverByID` and `locationByID` instead
 }
 ```
 
-will return id and name of all locations, where
+will return ID and name of all locations, where
 
 ```graphql
 {
@@ -43,7 +43,7 @@ will return id and name of all locations, where
 }
 ```
 
-will return id and name of location with id of `"bG9jYXRpb246MzA1"` only (if it exists).
+will return ID and name of location with ID of `"bG9jYXRpb246MzA1"` only (if it exists).
 
 ### Example queries
 
@@ -61,7 +61,7 @@ will return id and name of location with id of `"bG9jYXRpb246MzA1"` only (if it 
 	```
 
 - Servers ID, FQDN, CPU, memory, system disk size (in bytes), cache disk size (in bytes), IP address,
-	location name, ecdn version with patch level and last check in date.
+	location name, ECDN version with patch level and last check in date.
 
 	```graphql
 	{
@@ -157,7 +157,7 @@ will return id and name of location with id of `"bG9jYXRpb246MzA1"` only (if it 
 
 3. Refresh tokens. Currently your access token expires in 5 minutes.
 	 The actual expiration time can be extracted from [JWT](https://jwt.io)'s `exp` field.
-	 Therefore you must use your refresh token to request a new access token before/if it expires.
+	 Therefore, you must use your refresh token to request a new access token before/if it expires.
 
 	```sh
 	curl 'https://api.ecdn.video.ibm.com/v1/token/refresh' \

@@ -1,28 +1,31 @@
 ---
 title: Role
-description: Enum
+description: enum description (Auto generated file, please do not modify)
 ---
 
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
 Role represents user's rights to resources through the API.
-	
-```graphql
-enum Role {
 
-	# Readers can read all of the resources, but they cannot modify any.
-	READER
-	# Admins can read all of the resources, and they can modify all except users and SSH keys.
-	ADMIN
-	# Superadmins can read and modify all of the resources.
-	SUPERADMIN
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>enum</GQLKeyword> Role <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Readers can read all of the resources, but they cannot modify any.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>READER</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Admins can read all of the resources, and they can modify all except users and SSH keys.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>ADMIN</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Superadmins can read and modify all of the resources.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>SUPERADMIN</GQLName></GQLLine>
+	<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-}
-```
-
-### Values
+## Values
 
 | NAME | DESCRIPTION |
 | - | - |
-| READER | Readers can read all of the resources, but they cannot modify any. |
-| ADMIN | Admins can read all of the resources, and they can modify all except users and SSH keys. |
-| SUPERADMIN | Superadmins can read and modify all of the resources. |
-
+| READER | Readers can read all of the resources, but they cannot modify any.|
+| ADMIN | Admins can read all of the resources, and they can modify all except users and SSH keys.|
+| SUPERADMIN | Superadmins can read and modify all of the resources.|

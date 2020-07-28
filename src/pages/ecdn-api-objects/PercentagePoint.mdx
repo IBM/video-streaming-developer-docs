@@ -1,26 +1,32 @@
 ---
 title: PercentagePoint
-description: Object definition
+description: object type description (Auto generated file, please do not modify)
 ---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
 
 Measured amount of percentage at a given point in time.
 
-```graphql
-type PercentagePoint {
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> PercentagePoint <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Measured amount of percentage.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>percent</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Float">Float</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># At this point in time.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>at</GQLName>(): <GQLLink href="../../ecdn-api-scalars/Time">Time</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
 
-	# Measured amount of percentage.
-	percent: Float!
 
-	# At this point in time.
-	at: Time!
+## Fields
 
-}
-```
+### percent: [Float](../ecdn-api-scalars/Float)!
+Measured amount of percentage.
 
-### Fields
 
-| NAME | TYPE | NULLABLE | LIST | DESCRIPTION |
-| - | - | - | - | - |
-| percent | [Float](../ecdn-api-scalars/Float) | NO | NO | Measured amount of percentage. | 
-| at | [Time](../ecdn-api-scalars/Time) | NO | NO | At this point in time. | 
+### at: [Time](../ecdn-api-scalars/Time)!
+At this point in time.
+
 
