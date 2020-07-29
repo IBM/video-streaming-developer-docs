@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { row, container, highlight } from 'gatsby-theme-carbon/src/components/Code/Code.module.scss';
 import { gqlCodeSnippet, dark, link, keyword, attribute, operator, comment, line } from './GQLCodeSnippet.module.scss';
 
@@ -50,8 +51,8 @@ export function GQLOperator({ children }) {
 
 export function GQLLink({ children, href }) {
   return (
-    <a href={href} className={link}>
+    <Link to={href} className={link}>
       {children}
-    </a>
+    </Link>
   );
 }

@@ -12,25 +12,25 @@ Input for a network interface of an ECDN server.
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Name of network interface (ie. eth0, eth1, ens36, etc...).</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Currently it must be eth0 (multiple interfaces aren't supported yet).</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>name</GQLName>(): <GQLLink href="../../ecdn-api-scalars/String">String</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>name</GQLName>(): <GQLLink href="/ecdn-api-scalars/String">String</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Configuration mode of interface's network address.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>networkConfigurationMode</GQLName>(): <GQLLink href="../../ecdn-api-enums/NetworkConfigurationMode">NetworkConfigurationMode</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>networkConfigurationMode</GQLName>(): <GQLLink href="/ecdn-api-enums/NetworkConfigurationMode">NetworkConfigurationMode</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Local IP of interface.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Omit if network configuration mode is DYNAMIC.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Required if network configuration mode is STATIC.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>localIP</GQLName>(): <GQLLink href="../../ecdn-api-scalars/IPv4">IPv4</GQLLink></GQLLine>
+	<GQLLine><GQLTab /><GQLName>localIP</GQLName>(): <GQLLink href="/ecdn-api-scalars/IPv4">IPv4</GQLLink></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Netmask of interface's local network</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Omit if network configuration mode is DYNAMIC.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Required if network configuration mode is STATIC.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>netmask</GQLName>(): <GQLLink href="../../ecdn-api-scalars/IPv4Mask">IPv4Mask</GQLLink></GQLLine>
+	<GQLLine><GQLTab /><GQLName>netmask</GQLName>(): <GQLLink href="/ecdn-api-scalars/IPv4Mask">IPv4Mask</GQLLink></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Gateway of interface's local network.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Omit if network configuration mode is DYNAMIC.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Required if network configuration mode is STATIC.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>gateway</GQLName>(): <GQLLink href="../../ecdn-api-scalars/IPv4">IPv4</GQLLink></GQLLine>
+	<GQLLine><GQLTab /><GQLName>gateway</GQLName>(): <GQLLink href="/ecdn-api-scalars/IPv4">IPv4</GQLLink></GQLLine>
 <GQLLine> </GQLLine>
 <GQLLine><GQLClose /></GQLLine>
 </GQLCodeSnippet>
@@ -38,28 +38,28 @@ Input for a network interface of an ECDN server.
 
 ## Fields
 
-### name: [String](../ecdn-api-scalars/String)!
+### name: [String](/ecdn-api-scalars/String)!
 Name of network interface (ie. eth0, eth1, ens36, etc...).
 Currently it must be eth0 (multiple interfaces aren't supported yet).
 
 
-### networkConfigurationMode: [NetworkConfigurationMode](../ecdn-api-enums/NetworkConfigurationMode)!
+### networkConfigurationMode: [NetworkConfigurationMode](/ecdn-api-enums/NetworkConfigurationMode)!
 Configuration mode of interface's network address.
 
 
-### localIP: [IPv4](../ecdn-api-scalars/IPv4)
+### localIP: [IPv4](/ecdn-api-scalars/IPv4)
 Local IP of interface.
 Omit if network configuration mode is DYNAMIC.
 Required if network configuration mode is STATIC.
 
 
-### netmask: [IPv4Mask](../ecdn-api-scalars/IPv4Mask)
+### netmask: [IPv4Mask](/ecdn-api-scalars/IPv4Mask)
 Netmask of interface's local network
 Omit if network configuration mode is DYNAMIC.
 Required if network configuration mode is STATIC.
 
 
-### gateway: [IPv4](../ecdn-api-scalars/IPv4)
+### gateway: [IPv4](/ecdn-api-scalars/IPv4)
 Gateway of interface's local network.
 Omit if network configuration mode is DYNAMIC.
 Required if network configuration mode is STATIC.
