@@ -3,31 +3,31 @@ export default [
     title: 'APIs',
     pages: [
       {
-        path: '/api-basics-overview',
+        path: '/api-basics',
         title: 'API basics',
       },
       {
-        path: '/organization-api-getting-started',
+        path: '/organization-api',
         title: 'Organization API',
       },
       {
-        path: '/channel-api-basic-channel-management',
+        path: '/channel-api',
         title: 'Channel API',
       },
       {
-        path: '/viewer-authentication-api-getting-started',
+        path: '/viewer-authentication-api',
         title: 'Viewer Authentication API',
       },
       {
-        path: '/player-api-getting-started',
+        path: '/player-api',
         title: 'Player API',
       },
       {
-        path: '/analytics-api-getting-started',
+        path: '/analytics-api',
         title: 'Analytics API',
       },
       {
-        path: '/ecdn-api-getting-started',
+        path: '/ecdn-api',
         title: 'ECDN API',
       },
     ],

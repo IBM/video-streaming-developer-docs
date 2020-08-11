@@ -1,6 +1,6 @@
 - title: Overview
   pages:
-    - path: /api-basics-overview
+    - path: /api-basics
 - title: Authentication
   pages:
     - path: /api-basics-authentication
@@ -16,7 +16,7 @@
 
 - title: Basic channel management
   pages:
-    - path: /channel-api-basic-channel-management
+    - path: /channel-api
 - title: Broadcast settings
   pages:
     - title: Broadcasting devices
@@ -114,7 +114,7 @@
 
 - title: Getting started
   pages:
-    - path: /viewer-authentication-api-getting-started
+    - path: /viewer-authentication-api
 - title: Implementing viewer authentication
   pages:
     - path: /viewer-authentication-api-implementing-viewer-authentication
@@ -130,7 +130,7 @@
 
 - title: Getting started
   pages:
-    - path: /player-api-getting-started
+    - path: /player-api
 - title: Usage
   pages:
     - path: /player-api-usage
@@ -153,7 +153,7 @@
 
 - title: Getting started
   pages:
-    - path: /analytics-api-getting-started
+    - path: /analytics-api
 - title: Using the Analytics API
   pages:
     - title: Viewers
@@ -173,7 +173,7 @@
 
 - title: Getting started
   pages:
-    - path: /ecdn-api-getting-started
+    - path: /ecdn-api
 - title: Schema
   pages:
     - title: Mutation
@@ -313,39 +313,39 @@
 - title: Player SDK for Android
   pages:
     - title: Getting started
-      path: /player-sdk-android/getting-started
+      path: /player-sdk/android
     - title: Development Process
-      path: /player-sdk-android/development-process
+      path: /player-sdk/android-development-process
     - title: Changing Tracks
-      path: /player-sdk-android/changing-tracks
+      path: /player-sdk/android-changing-tracks
     - title: Pre-Buffering
-      path: /player-sdk-android/pre-buffering
+      path: /player-sdk/android-pre-buffering
     - title: Customization
-      path: /player-sdk-android/customization
+      path: /player-sdk/android-customization
     - title: Using Plugins in the SDK
-      path: /player-sdk-android/using-plugins
+      path: /player-sdk/android-using-plugins
     - title: Security Extension
-      path: /player-sdk-android/security-extension
+      path: /player-sdk/android-security-extension
     - title: Changelog
-      path: /player-sdk-android/changelog
+      path: /player-sdk/android-changelog
 - title: Player SDK for iOS
   pages:
     - title: Getting started
-      path: /player-sdk-ios/getting-started
+      path: /player-sdk/ios
     - title: Development Process
-      path: /player-sdk-ios/development-process
+      path: /player-sdk/ios-development-process
     - title: Pre-Buffering
-      path: /player-sdk-ios/pre-buffering
+      path: /player-sdk/ios-pre-buffering
     - title: Customization
-      path: /player-sdk-ios/customization
+      path: /player-sdk/ios-customization
     - title: Ad Integration
-      path: /player-sdk-ios/ad-integration
+      path: /player-sdk/ios-ad-integration
     - title: Changelog
-      path: /player-sdk-ios/changelog
+      path: /player-sdk/ios-changelog
 
 - title: Getting started
   pages:
-    - path: /organization-api-getting-started
+    - path: /organization-api
 - title: Organization API
   pages:
     - title: Organization Settings
