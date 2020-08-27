@@ -356,3 +356,19 @@
       path: /organization-api/administrators
     - title: Custom Roles
       path: /organization-api/custom-roles
+
+- title: Overview
+  pages:
+    - path: /broadcaster-sdk
+- title: Broadcaster SDK for Android
+  pages:
+    - title: Getting started
+      path: /broadcaster-sdk-android/getting-started
+    - title: Development Process
+      path: /broadcaster-sdk-android/development-process
+    - title: Diagnosing a problem
+      path: /broadcaster-sdk-android/diagnosing-a-problem
+    - title: Auxiliary features
+      path: /broadcaster-sdk-android/aux-features
+    - title: Changelog
+      path: /broadcaster-sdk-android/changelog
