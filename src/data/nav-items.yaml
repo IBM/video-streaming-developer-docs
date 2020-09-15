@@ -372,10 +372,6 @@
       path: /broadcaster-sdk-android/aux-features
     - title: Changelog
       path: /broadcaster-sdk-android/changelog
-
-- title: Overview
-  pages:
-    - path: /broadcaster-sdk
 - title: Broadcaster SDK for iOS
   pages:
     - title: Getting started
