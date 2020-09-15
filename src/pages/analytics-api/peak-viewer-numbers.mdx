@@ -236,3 +236,63 @@ Possible error responses:
 | 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Recorded peak viewership summary on content for a given time period
+
+Gives the highest number of peak concurrent viewers and the time of occurence for the content in the given time period.
+
+```
+GET https://analytics-api.video.ibm.com/v1/peak-viewer-numbers/{content_type}/summary
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER        | TYPE    | IMPORTANCE |  DESCRIPTION                                                   |
+| ---------------- | ------- | ---------- | -------------------------------------------------------------- |
+| `content_id`     | integer | REQUIRED   | Single content id                                              |
+| `date_time_from` | string  | REQUIRED   | Start date and time for a period in ISO8601 format             |
+| `date_time_to`   | string  | REQUIRED   | End date and time for a period in ISO8601 format               |
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with a zero or one length array under a `data` key. The element of the array contains a data point wrapped in a `PeakSeries` object
+matching the query parameters. It has the following attributes under the `attributes` key:
+
+| KEY            | TYPE    | DESCRIPTION                                            |
+| -------------- | ------- | ------------------------------------------------------ |
+| `content_type` | string  | Type of the content, for this endpoint `recorded` only |
+| `content_id`   | integer | Video ID                                               |
+| `time`         | string  | Date and time for the datapoint in ISO8601 format      |
+| `value`        | integer | Number of peak viewers                                 |
+
+Example of a success response:
+
+```json
+{
+  "data": [
+    {
+      "attributes": {
+        "content_type": "recorded",
+        "content_id": 238589,
+        "time": "2020-07-16T00:00:00+01:00",
+        "value": 11
+      },
+      "type": "PeakSeries"
+    }
+  ],
+  "pagination": {}
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | Validation of the parameters has failed, the response contains a detailed explanation   |
+| 401 Unauthorized        | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | Resource was not found                                                                  |
+| 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
