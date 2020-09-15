@@ -372,3 +372,19 @@
       path: /broadcaster-sdk-android/aux-features
     - title: Changelog
       path: /broadcaster-sdk-android/changelog
+
+- title: Overview
+  pages:
+    - path: /broadcaster-sdk
+- title: Broadcaster SDK for iOS
+  pages:
+    - title: Getting started
+      path: /broadcaster-sdk-ios/getting-started
+    - title: Development Process
+      path: /broadcaster-sdk-ios/development-process
+    - title: Customization
+      path: /broadcaster-sdk-ios/customization
+    - title: Diagnosing a problem
+      path: /broadcaster-sdk-ios/diagnosing-a-problem
+    - title: Authentication
+      path: /broadcaster-sdk-ios/authentication
