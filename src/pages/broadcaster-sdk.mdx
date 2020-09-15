@@ -3,4 +3,14 @@ title: Broadcaster SDK
 description: Broadcaster SDK
 ---
 
-## Broadcaster SDK
+import CustomCard from '../components/CustomCard/CustomCard.js';
+import { withPrefix } from 'gatsby-link';
+
+<Row className="resource-card-group">
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Broadcaster SDK Android" href={withPrefix('/broadcaster-sdk-android/getting-started')}></CustomCard>
+  </Column>
+  <Column colMd={4} colLg={4} noGutterSm>
+    <CustomCard title="Broadcaster SDK iOS" href={withPrefix('/broadcaster-sdk-ios/getting-started')}></CustomCard>
+  </Column>
+</Row>
