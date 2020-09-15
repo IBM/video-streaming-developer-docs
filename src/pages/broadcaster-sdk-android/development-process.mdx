@@ -1,0 +1,191 @@
+---
+title: Development Process
+description: Development Process
+---
+import { Link } from 'gatsby';
+
+## Step 1: Download SDK package
+Before you download the SDK package, go to the [API/SDK acccess](https://video.ibm.com/dashboard/integrations/api-access) page of the Dashboard and create a Channel API access for your application. When creating the credentials make sure to select "Native application" at the end.
+
+When you've created your API access you can download the SDK package from the "Broadcaster SDK" section of this same page. Use the "Download Android Broadcaster SDK" button.
+
+## Step 2: Explore the SDK package
+The downloaded zip archive contains the sample application, and inside the `m2repository` folder the packaged SDK and its IBM specific dependencies.
+
+## Step 3: Create (or open) your project
+Open the project that you would like to integrate the SDK in.
+The SDK uses the followng permissions:
+- `android.permission.INTERNET`
+- `android.permission.CAMERA`
+- `android.permission.RECORD_AUDIO`
+
+The latter two, of course should be requested dynamically when needed, just like the sample app does.
+
+The SDK also requires the Android device — on which the resulting application is installed — to have at least one camera.
+
+You don't need to update the `AndroidManifest.xml` of your application with these persmissons, as they will be automatically added during the manifest merge process.
+
+## Step 4: Add the SDK to the project
+Import from local repo: copy the `m2repository` folder to your project. In your project's `build.gradle` put the Video Streaming SDK dependency:
+
+```gradle
+repositories {
+    maven {
+        name 'IBMLocal'
+        url new File("${rootProject.rootDir.path}/m2repository").toURI()
+    }
+}
+
+dependencies {
+    implementation 'com.ibm.cloudvideo.android.broadcaster:sdk:0.7.+'
+}
+```
+
+You can find this in the sample application as well, just copy those settings.
+
+## Step 5: Create Broadcaster
+Setting up a broadcaster session in your app can be done in a few easy steps. The main component you instantiate is an `AndroidBroadcaster` object. This class is responsible for the whole broadcast session — that is making connection with the broadcaster server, gathering the audio and video data through the AudioRecord and Camera2 APIs of Android, and present a preview of the captured frames using a TextureView.
+
+The AndroidBroadcaster class has multiple configuration options upon creation, many of them has sane defaults already set up.
+The constructor parameters _in order of importance, not actual order_ are:
+- `channelId`: this is a mandatory and crucial value. This is the IBM (Enterprise) Video Streaming channel's id that will be used to broadcast to
+- `accessToken`: this is a mandatory and crucial value. This is the access token that is used to access the IBM Channel API. For more information see: [Step 7](#step-7:-authenticating-to-the-broadcast-server "Authentication")
+- `context`: is the context of the current activity. Used for various operations, for example getting available cameras
+- `textureView`: is the view on which the preview will be rendered
+- `lifecycleListener`: is a listener part of the SDK, that can be used to receive state updates from the broadcaster instance. Has a default value, that ignores all state changes. It is highly recommended to listen — at least — to broadcaster lifecycle events
+- `resolution`: the target resolution that will be used for both the preview and the outgoing video stream. The default value is 1280x720, but not all devices (actually camera + encoder pairs) support 720p resolution (or any other specific resolution for that matter). Therefore it is _your responsibility_ to query which resolutions are supported by the device, and set one that is supported and sufficient for your needs. It is recommended to use 16:9 aspect ratio. The sample app has a basic implementation of this
+- `cameraIdList`: is an Array of Strings containing all the camera ids (provided by Camera2 API) that you wish to make available for the SDK
+- `initialCameraIdx`: is the index of the camera from `cameraIdList` to be selected from start. By default the first camera is selected
+- `errorListener`: is a listener part of the SDK, that can be used to receive error events from the broadcaster instance. Has a default value, that ignores all events. It is recommended to listen to error events
+- `callbackLooper`: the Android Looper that will be used to execute callbacks on. By default it is the Looper from which the broadcaster has been instantiated
+- `targetBitrate`: is a the desired output bitrate (in bit/s) after encoding the video. Default value is 3 Mbit/s. Please note: the resulting actual output bitrate value may vary depending on the underlying encoder of the device and the captured input content
+- `targetFps`: a Double value representing the desired output frames / second of the video stream. Default value is 25.0 fps
+- `camera2Listener`: is an optional listener which can be used to get notified about camera related events. Has a default value, that ignores all events. In a tipical use-case you don't need to use this listener
+
+For example:
+
+_Kotlin_
+```kotlin
+androidBroadcaster = AndroidBroadcaster(
+                this@BroadcastActivity,
+                textureView,
+                cameraManager.cameraIdList,
+                BroadcasterLifeCycleListener(),
+                targetResolution,
+                errorListener = BroadcasterErrorListener(),
+                camera2Listener = cameraListener,
+                channelId = broadcastConfiguration.channel!!.id.toString(),
+                accessToken = tokenContainer.accessToken)
+```
+
+## Step 6: Broadcaster user interface
+The IBM Video Streaming SDK doesn't provide any user interface besides the captured preview. To help get started with building your own UI, you can find a basic UI implementation in the sample app.
+
+## Step 7: Authenticating to the broadcast server
+To be able to start the actual broadcast session, you need a **Channel ID** to broadcast to and an **Access Token** which authenticates your broadcast. Both can be obtained using IBM Video Streaming Channel API. For further details, please refer the [Channel API Documentation]. Once you obtained the Channel ID and the Access Token you can use them to start the actual broadcast.
+
+The SDK as a convenience provides an implementation of the IBM Video Streaming Authentication Flow, see <Link to='/broadcaster-sdk-android/aux-features#authentication'>Athentication</Link> in the Auxiliary Features section. Example usage can also be found in the provided sample application.
+
+## Step 8: Starting the broadcaster
+
+By now you have configured your broadcaster and it is ready to show you the preview of captured frames, and receive audio and video data to be encoded and sent to IBM's servers.
+
+### Capturing and showing preview
+The broadcaster client has multiple states (see: [Step 9](#state-change-callbacks "State change callbacks in Step 9") section for more information), but it is in the **Uninitialized** state initially. To be able to see the preview (before the actual broadcast) the instance needs to be "prepared":
+
+_Kotlin_
+```kotlin
+androidBroadcaster.prepareComponents()
+```
+
+This call will prepare all the required sub-components of the SDK instance (e.g: start the capture devices), then it will render the captured frames onto the preview surface. This signal makes the SDK transition through the following states:
+ >Uninitialized -> Preparing -> Ready
+
+
+_Please note_: It is your responsibility to check and ask for the appropriate permissions before calling `prepareComponents()` on the SDK instance.
+
+The API is symmetric, to tear down the instance (and stop the preview along with any potentially running broadcast) you can call:
+
+_Kotlin_
+```kotlin
+androidBroadcaster.releaseComponents()
+```
+
+This will transition the SDK instance through the following states:
+>Ready -> Releasing -> Uninitialized
+
+(In the case when the broadcaster is not in the **Ready** state when calling this method (e.g: it is **Executing**), the broadcaster will forcefully transition to the Ready state then begin orderly shutdown from there.)
+
+### Starting the live stream
+
+When the SDK instance is in the **Ready** state it is possible to start the actual broadcast (a.k.a live stream). At this time captured frames are encoded and sent to IBM's servers, and your viewers can join in on your session. The instance can be started using:
+
+_Kotlin_
+```kotlin
+androidBroadcaster.startBroadcast()
+```
+
+This call will start all the required components, like the encoders, and joins IBM servers so it can send data. This signal makes the SDK transition through the following states:
+> Ready -> Starting -> Executing
+
+The API is symmetric, to stop the ongoing broadcast (and return to only showing the preview) you can call:
+
+_Kotlin_
+```kotlin
+androidBroadcaster.stopBroadcast()
+```
+
+This will transition the SDK instance through the following states:
+>Executing -> Stopping -> Ready
+
+### Cleaning up resources
+
+When the SDK instance is known to be not required anymore, you should tear it down comepletely by calling:
+
+_Kotlin_
+```kotlin
+androidBroadcaster.destroy()
+```
+
+This method is actually the "other-end" of the constructor call. This method should be used when the broadcaster is **Uninitialized**, but the method will try and wait a bit for components to finish if used otherwise.
+
+## Step 9: Handle broadcaster callbacks
+The SDK has multiple listeners (some of them mandatory, some optional) that communicate different kinds of states and events.
+
+_Please note_: The threading model of the callbacks is that you always receive the callbacks from the same thread (`Looper` actually) on which the `AndroidBroadcaster` instance has been created. Unless upon creating the `AndroidBroadcaster` you supply another `Looper` for the callbacks via the `callbackLooper` parameter.
+
+### State change callbacks
+To receive state change callbacks register a `Broadcaster.LifeCycleListener` when creating the `AndroidBroadcaster` instance. This way you will be notified whenever there is a change in the broadcaster's state.
+
+The list of possible state are:
+- **Uninitialized** via `onUninitialized()`: The state of the instance when it's been just created, or components had been released by `releaseComponents()`. In this state the broadcaster is at rest; no data is being captured, no processing being done, resources are not held. (Except an idle worker thread that can be disposed of by calling `destroy()`.)
+- **Preparing** via `onPreparing()`: The state of the instance when it's received a `prepareComponents()` call, components are being prepared. This is a transient state, the SDK will transition to another state soon, the target state is _Ready_
+- **Ready** via `onReady()`: The state of the instance when components had been prepared, and the preview is showing. In this state certain resources are actively used (i.e: Camera), but no encoding or data sending happens.
+- **Starting** via `onStarting()`: The state of the instance when it's received a `startBroadcast()` call while previously being in the _Ready_ state. This is a transient state, the SDK will transition to another state soon, the target state is _Executing_
+- **Executing** via `onExecuting()`: The state of the instance when the broadcast is running. In this state all required resources are actively used (i.e: Camera, AudioRecorder, Encoders, Network), audio / video data is being encoded on-the-fly and sent to IBM's servers.
+- **Stopping** via `onStopping()`: The state of the instance when it's received a `stopBroadcast()` while being in the _Executing_ state. This is a transient state, the SDK will transition to another state soon. The target state is _Ready_, where the preview will show again. Please note that in this state the buffers are being emptied: already recorded data is being encoded and transmitted — which can take a few seconds, depending on network speed
+- **Releasing** via `onReleasing()`: The state of the instance when it's received a `releaseComponents()` call while being in or anywhere "after" the _Ready_ state. This is a transient state, the SDK will transition to another state soon. The target state is _Uninitialized_, where resources are released
+
+### Error event listener
+To receive the error events that are possibly occurring inside the broadcaster, you need to register an `AndroidBroadcasterErrorListener` when creating the `AndroidBroadcaster` instance.
+
+The list of possible error events are:
+- `AudioRecorderInitializationError`: Received when the AudioRecorder could not be initialized, the accompanying message contains the reason
+- `AudioRecorderFailure`: Received when the AudioRecorder encounters an error during recording for some reason
+- `CameraError`: Received when the Camera2 API encounters an error or an unexpected behaviour is reported from the API, the accompanying `Camera2Error` object contains the reason reported by Android's Camera2 API
+- `CodecError`: Received when one of the active codecs had thrown an exception while encoding the incoming frames (audio or video). The accompanying `codecName` String represents which Codec is involved, the `message` parameter contains the reason
+- `EncoderError`: Received when either the encoder could not be configured with the requested details or when the encoder's internal state machine had thrown an error
+- `ConnectionError`: Received when a network related error is encountered in the underlying RTMP layer
+- `BroadcastOverride`: Received when the current broadcast session has been terminated because another broadcaster client took over your channel
+- `RTMPRejectError`: Received when the RTMP connection has been rejected by IBM's servers, the accompanying String contains the reason
+- `IngestSettingsLoaderError`: Received when the mandatory configuration could not be retrieved from IBM's servers for any reason
+
+**Please note**: Upon receiving any of the above errors the broadcaster will transition to the _Uninitialized_ state.
+
+### Camera event listener
+To receive events regarding the used camera, you need to register a `Camera2Listener` when creating the `AndroidBroadcaster` instance. However this listener is considered as providing camera related optional meta information. In a normal use-case you will not care about these events, and it is perfectly fine to leave it as default.
+
+- `onCameraOpened(cameraId)`: Received when the selected camera is opened, both while watching preview and broadcasting. The parameter is the String id of the camera, provided by the Android framework.
+- `onCameraClosed(cameraId)`: Received when the selected camera is closed. The parameter is the String id of the camera, provided by the Android framework.
+
+[Channel API Documentation]: https://ibm.github.io/video-streaming-developer-docs/channel-api-basic-channel-management "IBM Video Streaming Channel API"
