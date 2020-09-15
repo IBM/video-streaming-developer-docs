@@ -4,9 +4,21 @@ import imgMulti1 from '../../../images/example-multiview-1.png';
 import * as styles from './index.module.scss';
 
 const views = [
-  { url: imgMulti1, type: 'channel', id: 6540154 },
-  { url: imgMulti1, type: 'channel', id: 17074538 },
-  { url: imgMulti1, type: 'channel', id: 10414700 },
+  {
+    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_6540154,640x360,b:2020091508.jpg',
+    type: 'channel',
+    id: 6540154,
+  },
+  {
+    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_17074538,640x360,b:2020091508.jpg',
+    type: 'channel',
+    id: 17074538,
+  },
+  {
+    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_10414700,640x360,b:2020090903.jpg',
+    type: 'channel',
+    id: 10414700,
+  },
 ];
 
 export const MultiControls = ({ onMediaChange, ready }) => {
