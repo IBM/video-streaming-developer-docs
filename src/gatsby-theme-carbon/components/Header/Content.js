@@ -36,6 +36,10 @@ export default [
     title: 'SDKs',
     pages: [
       {
+        path: '/broadcaster-sdk',
+        title: 'Broadcaster SDK',
+      },
+      {
         path: '/player-sdk',
         title: 'Player SDK',
       },
