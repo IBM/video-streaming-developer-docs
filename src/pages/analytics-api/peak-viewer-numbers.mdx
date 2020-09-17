@@ -237,7 +237,7 @@ Possible error responses:
 | 404 Not Found           | Resource was not found                                                                  |
 | 503 Service Unavailable | There is a temporary error on the server which makes it impossible to serve the request |
 
-## Recorded peak viewership summary on content for a given time period
+## Live or recorded peak viewership summary on content for a given time period
 
 Gives the highest number of peak concurrent viewers and the time of occurence for the content in the given time period.
 
@@ -263,8 +263,8 @@ matching the query parameters. It has the following attributes under the `attrib
 | KEY            | TYPE    | DESCRIPTION                                            |
 | -------------- | ------- | ------------------------------------------------------ |
 | `content_type` | string  | Type of the content, for this endpoint `recorded` only |
-| `content_id`   | integer | Video ID                                               |
-| `time`         | string  | Date and time for the datapoint in ISO8601 format      |
+| `media_id`     | integer | Video ID                                               |
+| `timestamp`    | string  | Date and time for the datapoint in ISO8601 format      |
 | `value`        | integer | Number of peak viewers                                 |
 
 Example of a success response:
@@ -279,7 +279,7 @@ Example of a success response:
         "time": "2020-07-16T00:00:00+01:00",
         "value": 11
       },
-      "type": "PeakSeries"
+      "type": "PeakSummary"
     }
   ],
   "pagination": {}
