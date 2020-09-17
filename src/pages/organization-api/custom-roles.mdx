@@ -103,15 +103,16 @@ POST https://api.video.ibm.com/organizations/{organizationId}/custom-roles.json
 
 ### Permissions
 
-| NAME                     | DESCRIPTION                                                             |
-| ------------------------ | ----------------------------------------------------------------------- |
-| `broadcast.start`        | Start broadcast                                                         |
-| `video.publish`          | Publish videos                                                          |
-| `video.manage_published` | Manage published videos                                                 |
-| `video.download`         | Download videos                                                         |
-| `video.delete`           | Deleted videos                                                          |
-| `channel.access_control` | Edit channel level access control (for Enterprise Video Streaming only) |
-| `channel.view_ivt`       | See individual viewer statistics                                        |
+| NAME                     | DESCRIPTION                                                         |
+| ------------------------ | ------------------------------------------------------------------- |
+| `broadcast.start`        | Start broadcast                                                     |
+| `video.publish`          | Publish videos                                                      |
+| `video.unpublish`        | Unpublish videos                                                    |
+| `video.manage_published` | Manage published videos                                             |
+| `video.download`         | Download videos                                                     |
+| `video.delete`           | Deleted videos                                                      |
+| `channel.access_control` | Edit channel level Access Control (Enterprise Video Streaming only) |
+| `channel.view_ivt`       | See and download individual viewer statistics                       |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
