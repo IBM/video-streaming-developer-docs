@@ -1,0 +1,137 @@
+---
+title: Development Process
+description: Development Process
+---
+
+## Step 1: Download SDK package
+
+Request an SDK package from your Customer Success representative.
+
+
+## Step 2: Explore the SDK package
+
+The provided zip archive contains the binary framework and a sample application.
+
+
+## Step 3: Create (or open) your project
+
+Open the project that you would like to integrate the SDK in.
+
+
+## Step 4: Add the SDK to the project
+
+### Add the framework
+
+Drag `IBMWatsonMediaBroadcasterSDK.xcframework` into the Embedded Binaries section of your target.
+
+## Step 5: Setting up a Broadcaster
+
+Setting up a broadcaster session in your app can be done in a few easy steps. The main component you instantiate is a `IBMWatsonMediaBroadcaster`. This class is responsible for the whole broadcast session - that is making connection with the broadcaster server, gathering the audio and video data through an object implementing the `IBMWatsonMediaFrameSource` protocol, present a preview of the captured frames using a class implementing `IBMWatsonMediaPreviewPresenter`. For optimal performance a broadcaster configuration object has to be passed when you initialize the broadcaster. `IBMWatsonMediaBroadcasterConfig` has presets for different video resolutions.
+
+For example:
+
+#### Objective-C
+```objc
+@import IBMWatsonMediaBroadcasterSDK
+
+self.frameSource = [IBMWatsonMediaCaptureSessionFrameSource new];
+self.broadcastPreview = [[IBMWatsonMediaBroadcasterPreview alloc] initWithFrame:self.view.bounds];
+self.broadcasterConfig = [IBMWatsonMediaBroadcasterConfig configWithPreset:IBMWatsonMediaVideoPreset720];
+self.broadcaster = [[IBMWatsonMediaBroadcaster alloc] initWithFrameSource:self.frameSource config:self.broadcasterConfig];
+self.broadcaster.presenter = self.broadcastPreview;
+[self.broadcaster addListener:self];
+```
+
+#### Swift
+```swift
+import IBMWatsonMediaBroadcasterSDK
+
+frameSource = IBMWatsonMedia.CaptureSessionFrameSource()
+broadcastPreview = IBMWatsonMedia.BroadcasterPreview(frame: view.bounds)
+broadcasterConfig = IBMWatsonMedia.BroadcasterConfig(preset: .preset720)
+broadcaster = IBMWatsonMedia.Broadcaster(frameSource: frameSource, config: broadcasterConfig)
+broadcaster.presenter = broadcastPreview
+broadcaster.add(self)
+```
+
+For using the default camera and microphone you have to provide the following keys in your application's info.plist file:
+
+- `NSCameraUsageDescription` - Short string describing how your app uses the camera.
+- `NSMicrophoneUsageDescription` - Short string describing how your app uses the microphone.
+
+## Step 6: Broadcaster user interface
+
+The IBM Video Streaming SDK doesn't provide any user interface besides the captured preview. To help get started with building your own UI, you can find basic UI implementations in the sample apps.
+
+## Step 7: Setup a frame source
+
+By now you have configured your broadcaster and it is ready to receive audio and video frames from its frame source. The IBM Video Streaming SDK offers several `IBMWatsonMediaFrameSource` implementations:
+
+ - `IBMWatsonMediaCaptureSessionFrameSource` can use the cameras and microphones of your device and capture audio and video frames to be broadcasted.
+
+ - `IBMWatsonMediaAssetFrameSource` can be used to broadcast prerecorded media or inject a video into a live broadcast.
+
+ - `IBMWatsonMediaScreenCaptureFrameSource` makes possible to broadcast the content of a screen.
+
+ - `IBMWatsonMediaCompositeFrameSource` allos to combine several farme sources for effects like picture in picture.
+
+For more detailed information see the reference documentation.
+
+In order to access a capture device (camera or microphone) you may need to get permissions from the end user.
+`IBMWatsonMediaCaptureSessionFrameSource` has a built-in feature to detect if the host app has adequate access privileges to use the on-device microphones and cameras:
+
+#### Objective-C
+```objc
+[frameSource requestPermissionIfNeeded:^(BOOL authorized) {
+	if (authorized) {
+		[self.broadcaster startCaptureWithCompletion:^(NSError * _Nullable error) {
+        	//setup capture device related UI, etc.
+ 		}];
+	} else {
+		[self showAccessDeniedAlert];
+	}
+}];
+```
+
+#### Swift
+```swift
+frameSource.requestPermissionIfNeeded { isAuthorized in
+    if isAuthorized {
+		self.broadcaster.startCapture { error in
+			//setup capture device related UI, etc.
+		}
+    } else {
+		self.showAccessDeniedAlert()
+    }
+}
+```
+
+## Step 8: Getting access to the broadcast server
+
+To start the actual broadcast session, you need a Channel ID to broadcast to, and an access token which authenticates your broadcast. Both can be obtained using IBM Video Streaming Channel API. For further details, please refer the [Channel API Documentation](https://developers.video.ibm.com/channel-api/getting-started.html), and see a working example using the API in our sample app. Once you obtained the Channel ID and the access token you can use them to start the actual broadcast:
+
+#### Objective-C
+```objc
+[self.broadcaster startBroadcastWithChannelID:<#channelID#> accessToken:<#accessToken#>];
+```
+
+#### Swift
+```swift
+broadcaster.startBroadcast(withChannelID: <#channelID#>, accessToken: <#accessToken#>)
+```
+
+## Step 9: Handle broadcaster callbacks
+
+`IBMWatsonMediaBroadcaster` uses `IBMWatsonMediaBroadcasterDelegate` protocol to inform its delegate about certain events, state changes and statistical data about the broadcast session.
+
+### State change callbacks
+
+Use `broadcasterDidStart:` and `broadcasterDidStop:` to update your user interface when broadcast session starts and ends. Also you can monitor the actual state of your ongoing broadcast session listening to `broadcaster:didChangeState:`. This callback tells you if the connection is established, the broadcast is running or there is still data to be flushed before the broadcast is stopped completely.
+
+If broadcaster fails for some reason, `broadcaster:didFailWithError:` is called. You can use its `error` parameter to inspect the actual reason of failure.
+
+### Transmition related callbacks
+
+Because video broadcast is sensitive to network condition changes, there are some callbacks which can be used to get information about the general quality of your broadcast session. You can monitor when the video encoder changes its preferred output bitrate with `broadcaster:didChangeVideoBitrate:oldBitrate:` delegate method.
+
+Also there is a callback which is called every second reporting statistics about the current session: `broadcaster:outputFrameRate:outputBandwidth:actualVideoBitrate:preferredVideoBitrate:bufferLoad:bufferLimit:` delegate method.

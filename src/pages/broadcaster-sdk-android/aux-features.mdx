@@ -1,0 +1,34 @@
+---
+title: Auxiliary features
+description: Auxiliary features
+---
+
+## Authentication
+IBM Video Streaming SDK provides a secure way to authenticate users with IBM ID or legacy Ustream account and getting access for IBM Channel API features for example listing or broadcasting. `OAuthAuthenticator` wraps up [IBM Video Streaming Channel APIs Authentication flow] and implements a basic authentication service that presents the IBM Video Streaming authentication site in an embedded `CustomTab` on Android.
+
+To use the authenticator obtain the necessary configuration parameters from you Channel API credentials using the Dashboard's [API/SDK access] page.
+
+Current authentication flow:
+
+1. Set up the authentication client by creating a new `OAuthAuthenticator` instance. You will need to supply the following parameters: 
+    - `savedInstanceState` of your Activity or Fragment, so the client can persist its state
+    - `clientConfiguration` that contains the `redirectUrl` which will be used by the backend service to call back to your application once login is finished and your `clientId` that identifies the current API using application
+    - `errorHandler` which will notify you about possible errors occurring during authentication
+2. Check whether you need to start the authentication process based on the Activity's current `Intent` parameter using `authenticator.shouldStartAuthentication(intent)`
+3. Start the authentication process (if needed) using: `authenticator.startAuthentication(applicationContext)`. It is important to supply _Application Context_ so your Activity can be destroyed and recreated during a configuration change
+4. When your activity is changing configuration or going into the background let the Authenticator save its state by calling `authenticator.onSaveInstanceState(outState)` in your Activity's / Fragment's `onSaveInstanceState(outState: Bundle?)` method
+5. In your `AndroidManifest.xml` listen to the `redirectUrl` (a.k.a callback url) using an intent filter. This way when the login is complete the browser can open the application and the authentication can be completed. See the sample app for details
+6. When the Activity receives the new `Intent` after a successful authentication, you can request an Access Token from it by calling `authenticator.parseIntentForAccessToken(intent, tokenAvailableLambda)`. The result lambda can be called from a worker thread, so please make sure to post the result to the Main Thread
+7. When the above described `tokenAvailableLambda` is called it will return you a `TokenContainer` object that will be used to access the IBM Channel API services. The `TokenContainer` holds the following:
+    - `accessToken`: the token with which the Channel API can be used
+    - `expiresAt`: an expiration date in Unix Epoch timestamp
+    - `refreshToken`: that can be used to refresh the Access Token when it has passed its expiration date
+    - `idToken`: contains information related to authenticity checking of tokens
+    - `subject`: either the email address of the logged in user or the user name (in case of a legacy Ustream account)
+    - `userType`: this is a legacy feature. Describes the type of the logged in account. Distinguishes between SSO (value: `external`) and legacy user logins (value: `simple`)
+
+For more details see the sample app or visit [IBM Video Streaming Channel API] page for more information about Channel API usage.
+
+[API/SDK access]: https://video.ibm.com/dashboard/integrations/api-access
+[IBM Video Streaming Channel APIs Authentication flow]: https://ibm.github.io/video-streaming-developer-docs/api-basics-authentication
+[IBM Video Streaming Channel API]: https://ibm.github.io/video-streaming-developer-docs/channel-api-basic-channel-management
