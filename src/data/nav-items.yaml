@@ -105,6 +105,9 @@
 - title: Events
   pages:
     - path: /channel-api-events
+- title: QnA
+  pages:
+    - path: /channel-api-qna
 - title: PHP Sample Code
   pages:
     - path: /channel-api-php-sample-code
