@@ -1,0 +1,82 @@
+---
+title: QnA
+description: QnA
+---
+
+## Get a list of QnA questions on a channel
+
+Returns the QnA questions on a channel
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/qna/questions.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                             |
+| ---------- | ------- | ---------- | ------------------------------------------------------- |
+| `from`     | integer | OPTIONAL   | List start timestamp                                    |
+| `to`       | integer | OPTIONAL   | List end timestamp                                      |
+| `page`     | integer | OPTIONAL   | Requested page number (value is 1 by default)           |
+| `pagesize` | integer | OPTIONAL   | Requested page size (value is 100 by default, max. 100) |
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under an `questions` key.
+
+| KEY                   | TYPE      | DESCRIPTION                                                       |
+| --------------------- | --------- | ----------------------------------------------------------------- |
+| `user_display_name`   | string    | Questioner's display name                                         |
+| `question`            | string    | Question                                                          |
+| `answer`              | string    | Answer (if the question has been answered)                        |
+| `user_email`          | string    | Questioner's email                                                |
+| `created_at`          | integer   | The date and time when the question was asked (Unix timestamp)    |
+| `is_edited`           | boolean   | True if the question has been edited                              |
+| `is_archived`         | boolean   | True if the question has been archived                            |
+| `is_moderated`        | boolean   | True if the question has been moderated                           |
+| `votes`               | integer   | Number of votes the question got                                  |
+
+Example of a success response:
+
+```json
+{
+  "questions": [
+    {
+      "user_display_name": "john",
+      "question": "How is the weather where you are?",
+      "answer": "It's beautiful",
+      "user_email": "john@example.com",
+      "created_at": 1599852837,
+      "is_edited": false,
+      "is_archived": true,
+      "is_moderated": true,
+      "votes": 0
+    },
+    ...
+  ]
+}
+```
+
+The paging information can be found under the `paging` key. Example:
+
+```json
+{
+  "paging": {
+    "next": "https://git.api.video.ibm.com.lh/channels/CHANNEL_ID/qna/questions.json?page=2",
+    "page_count": 3,
+    "item_count": 272
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
