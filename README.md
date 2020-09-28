@@ -1,6 +1,6 @@
 # Developer Tools
 
-:construction:A documentation site for IBM Video Streaming APIs, SDKs and use cases - [Preview URL](https://ibm.github.io/video-streaming-developer-docs//) :construction:
+:construction: A documentation site for IBM Video Streaming APIs, SDKs and use cases - [Preview URL](https://ibm.github.io/video-streaming-developer-docs//) :construction:
 
 ## About
 
@@ -67,7 +67,12 @@ The github pages url serves the content of the gh-pages branch.
 
 ### Tips
 
-To add MDX support for your editor:
+### WIP
+
+To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title. 
+In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title. 
+
+#### To add MDX support for your editor:
 
 - PHPStorm IDE: https://youtrack.jetbrains.com/issue/WEB-32599#focus=streamItem-27-3699900.0-0
 - VS Code: https://github.com/silvenon/vscode-mdx
