@@ -1,0 +1,179 @@
+---
+title: Poll
+description: Poll
+---
+
+## Get a list of Polls on a Channel
+
+Returns the Polls on a channel
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/polls.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                           |
+| ---------- | ------- | ---------- | ----------------------------------------------------- |
+| `page`     | integer | OPTIONAL   | Requested page number (value is 1 by default)         |
+| `pagesize` | integer | OPTIONAL   | Requested page size (value is 20 by default, max. 20) |
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under an `polls` key.
+
+| KEY           | TYPE      | DESCRIPTION                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| `poll_id`     | integer   | Poll ID                                                      |
+| `question`    | string    | Question                                                     |
+| `votes`       | integer   | Vote count                                                   |
+| `created_at`  | integer   | The date and time when the Poll was created (Unix timestamp) |
+
+Example of a success response:
+
+```json
+{
+  "polls": [
+    {
+      "poll_id": "john",
+      "question": "What is your favourite color?",
+      "votes": 3,
+      "created_at": 1599852837
+    },
+    ...
+  ]
+}
+```
+
+The paging information can be found under the `paging` key. Example:
+
+```json
+{
+  "paging": {
+    "previous": "https://git.api.video.ibm.com.lh/channels/CHANNEL_ID/polls.json?page=1",
+    "next": "https://git.api.video.ibm.com.lh/channels/CHANNEL_ID/polls.json?page=3",
+    "page_count": 3,
+    "item_count": 272
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get a list of available answers for a Poll on a Channel
+
+Returns the available answers for a Poll
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/polls/{pollId}/answers.json
+```
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under an `answers` key.
+
+| KEY           | TYPE      | DESCRIPTION                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| `answer_id`   | integer   | Answer ID                                                      |
+| `answer`      | string    | Answer                                                     |
+
+Example of a success response:
+
+```json
+{
+  "answers": [
+    {
+      "answer_id": 34563,
+      "answer": "Blue"
+    },
+    ...
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 404 Unauthorized        | `not_found`         | Poll not found                                                                          |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get a list of Votes for a Poll on a Channel
+
+Returns the Viewers' Votes for a Poll
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/polls/{pollId}/votes.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                                             |
+| ---------- | ------- | ---------- | ------------------------------------------------------- |
+| `page`     | integer | OPTIONAL   | Requested page number (value is 1 by default)           |
+| `pagesize` | integer | OPTIONAL   | Requested page size (value is 100 by default, max. 100) |
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under an `votes` key.
+
+| KEY           | TYPE      | DESCRIPTION                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| `user_id`     | string    | User ID                                                      |
+| `answer_id`   | integer   | Answer ID                                                    |
+| `answered_at` | integer   | The date and time when the Vote was created (Unix timestamp) |
+
+Example of a success response:
+
+```json
+{
+  "polls": [
+    {
+      "user_id": "john@example.com",
+      "answer_id": 34563,
+      "answered_at": 1599852837
+    },
+    ...
+  ]
+}
+```
+
+The paging information can be found under the `paging` key. Example:
+
+```json
+{
+  "paging": {
+    "previous": "https://git.api.video.ibm.com.lh/channels/CHANNEL_ID/polls/POLL_ID/votes.json?page=1",
+    "next": "https://git.api.video.ibm.com.lh/channels/CHANNEL_ID/polls/POLL_ID/votes.json?page=3",
+    "page_count": 3,
+    "item_count": 272
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 404 Unauthorized        | `not_found`         | Poll not found                                                                          |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
