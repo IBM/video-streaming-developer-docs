@@ -105,6 +105,9 @@
 - title: Events
   pages:
     - path: /channel-api-events
+- title: Poll
+  pages:
+    - path: /channel-api-poll
 - title: QnA
   pages:
     - path: /channel-api-qna
