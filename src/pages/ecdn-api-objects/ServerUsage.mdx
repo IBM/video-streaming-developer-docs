@@ -11,26 +11,26 @@ An ECDN server's time-series usages.
 <GQLLine><GQLKeyword>type</GQLKeyword> ServerUsage <GQLOpen /></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># CPU usage of ECDN server.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>cpu</GQLName>(): <GQLLink href="/ecdn-api-objects/CPUUsage">CPUUsage</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>cpu</GQLName>: <GQLLink href="/ecdn-api-objects/CPUUsage">CPUUsage</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Network usage of ECDN server.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>network</GQLName>(): [<GQLLink href="/ecdn-api-objects/NetworkUsage">NetworkUsage</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>network</GQLName>: [<GQLLink href="/ecdn-api-objects/NetworkUsage">NetworkUsage</GQLLink><GQLOperator>!</GQLOperator>]<GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Memory usage of ECDN server.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>memory</GQLName>(): [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+	<GQLLine><GQLTab /><GQLName>memory</GQLName>: [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Cache memory usage of ECDN server.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>cacheMemory</GQLName>(): [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+	<GQLLine><GQLTab /><GQLName>cacheMemory</GQLName>: [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># System disk usage of ECDN server.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Nullable in case of errors (coming from an external service).</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>systemDisk</GQLName>(): [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+	<GQLLine><GQLTab /><GQLName>systemDisk</GQLName>: [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Cache disk usage of ECDN server.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Null if cache disk isn't attached to the ECDN server.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>cacheDisk</GQLName>(): [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
+	<GQLLine><GQLTab /><GQLName>cacheDisk</GQLName>: [<GQLLink href="/ecdn-api-objects/BytePoint">BytePoint</GQLLink><GQLOperator>!</GQLOperator>]</GQLLine>
 <GQLLine> </GQLLine>
 <GQLLine><GQLClose /></GQLLine>
 </GQLCodeSnippet>

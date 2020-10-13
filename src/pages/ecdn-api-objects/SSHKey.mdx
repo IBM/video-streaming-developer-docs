@@ -1,0 +1,46 @@
+---
+title: SSHKey
+description: object type description (Auto generated file, please do not modify)
+---
+
+import GQLCodeSnippet, { GQLOpen, GQLClose, GQLLine, GQLTab, GQLName, GQLKeyword, GQLAttribute, GQLOperator, GQLComment, GQLLink } from "../../components/GQLCodeSnippet/GQLCodeSnippet";
+
+SSH key for ECDN server.
+
+<GQLCodeSnippet>
+<GQLLine><GQLKeyword>type</GQLKeyword> SSHKey <GQLOpen /></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># ID of SSH key.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>id</GQLName>: <GQLLink href="/ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Description of SSH key.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>description</GQLName>: <GQLLink href="/ecdn-api-scalars/String">String</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># MD5 fingerprint of public key.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>fingerprint</GQLName>: <GQLLink href="/ecdn-api-scalars/String">String</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># What time was this SSH key added at and by whom.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>added</GQLName>: <GQLLink href="/ecdn-api-objects/RecordedAction">RecordedAction</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
+<GQLLine><GQLClose /></GQLLine>
+</GQLCodeSnippet>
+
+
+## Fields
+
+### id: [ID](/ecdn-api-scalars/ID)!
+ID of SSH key.
+
+
+### description: [String](/ecdn-api-scalars/String)!
+Description of SSH key.
+
+
+### fingerprint: [String](/ecdn-api-scalars/String)!
+MD5 fingerprint of public key.
+
+
+### added: [RecordedAction](/ecdn-api-objects/RecordedAction)!
+What time was this SSH key added at and by whom.
+
+

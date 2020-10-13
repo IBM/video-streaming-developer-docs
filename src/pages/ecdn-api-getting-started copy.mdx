@@ -1,0 +1,178 @@
+---
+title: Getting started
+description: Getting started (Auto generated file, please do not modify)
+---
+
+## Introduction
+
+The IBM ECDN (Enterprise Content Delivery Network) API lets you monitor and manage your ECDN locations, servers and other resources.
+
+## Try it out
+
+[API Browser](https://ecdn.video.ibm.com/graphiql) is the easiest way to try ECDN's GraphQL API.
+You can log in via your ECDN credentials.
+Generated documentation can be found by opening `Docs` in the upper-right corner, which are also available on this site.
+
+## GraphQL
+
+We suggest reading the [official GraphQL documentation](https://graphql.org/learn/)
+to get a basic understanding of its usage. This documentation focuses on ECDN specific usage.
+
+### All/specific resources
+
+We will use `servers` and `locations` throughout this document, which covers all servers and/or all locations when used.
+If you want to query them one-by-one use `serverByID` and `locationByID` instead. i.e:
+
+```graphql
+{
+	locations {
+		id
+		name
+	}
+}
+```
+
+will return ID and name of all locations, where
+
+```graphql
+{
+	locationByID(id:"bG9jYXRpb246MzA1") {
+		id
+		name
+	}
+}
+```
+
+will return ID and name of location with ID of `"bG9jYXRpb246MzA1"` only (if it exists).
+
+### Example queries
+
+- Locations ID, name, external ranges and number of servers.
+
+	```graphql
+	{
+		locations {
+			id
+			name
+			numberOfServers
+			externalRanges
+		}
+	}
+	```
+
+- Servers ID, FQDN, CPU, memory, system disk size (in bytes), cache disk size (in bytes), IP address,
+	location name, ECDN version with patch level and last check in date.
+
+	```graphql
+	{
+		servers {
+			id
+			fqdn
+			lastCheckIn
+			location {
+				name
+			}
+			update {
+				ecdnVersion
+				patchLevel
+			}
+			hardware {
+				cpuCores
+				memory
+				systemDiskSize
+				cacheDiskSize
+			}
+			desiredConfiguration {
+				interfaces{
+					localIP
+				}
+			}
+		}
+	}
+	```
+
+- Servers ID, FQDN, detailed health and status of video delivery.
+
+	```graphql
+	{
+		servers {
+			id
+			fqdn
+			health {
+				contentDelivery {
+					aggregated
+					upstreams
+					caching
+				}
+				operations {
+					aggregated
+					updates
+					softwareVersion
+					apiConnection
+					metrics
+					ntp
+					logForward
+					remoteAssistance
+					snmp
+				}
+			}
+			videoDelivery {
+				currentNumberOfViewers
+				currentNumberOfBuffering
+			}
+		}
+	}
+	```
+
+## Basic workflow
+
+1. Fetch tokens.
+
+	```sh
+	curl 'https://api.ecdn.video.ibm.com/v1/login' \
+		-d '{"email":"...","password":"..."}'
+	```
+
+	Returns:
+
+	```json
+	{
+		# JWT token, see https://jwt.io.
+		"accessToken": "YOUR_ACCESS_TOKEN",
+		# This can only be used once.
+		"refreshToken": "YOUR_REFRESH_TOKEN",
+		# Currently, refresh token expires in one day.
+		"refreshAgeSeconds": 86400
+	}
+	```
+
+2. Use API with access token. Note that all if you had a query `{servers{id}}` at API Browser,
+	 you must send it as `'{"query":"{servers{id}}"}'` if you use the API directly.
+
+	```sh
+	curl -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+		https://api.ecdn.video.ibm.com/v1/graphql \
+		-d '{"query":"{servers{id}}"}'
+	```
+
+3. Refresh tokens. Currently your access token expires in 5 minutes.
+	 The actual expiration time can be extracted from [JWT](https://jwt.io)'s `exp` field.
+	 Therefore, you must use your refresh token to request a new access token before/if it expires.
+
+	```sh
+	curl 'https://api.ecdn.video.ibm.com/v1/token/refresh' \
+		-d '{"refreshToken":"YOUR_REFRESH_TOKEN"}'
+	```
+
+	Returns:
+	
+	```json
+	{
+		# JWT token, see https://jwt.io.
+		"accessToken": "YOUR_NEW_ACCESS_TOKEN",
+		# This can only be used once.
+		"refreshToken": "YOUR_NEW_REFRESH_TOKEN",
+		# Currently, refresh token expires in one day.
+		"refreshAgeSeconds": 86400
+	}
+	```
