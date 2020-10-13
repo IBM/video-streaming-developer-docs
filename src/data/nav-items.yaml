@@ -214,6 +214,8 @@
       path: /ecdn-api-scalars/Int
     - title: PatchLevel
       path: /ecdn-api-scalars/PatchLevel
+    - title: PublicKey
+      path: /ecdn-api-scalars/PublicKey
     - title: SemanticVersion
       path: /ecdn-api-scalars/SemanticVersion
     - title: ServerAddress
@@ -258,6 +260,8 @@
       path: /ecdn-api-objects/Region
     - title: Report
       path: /ecdn-api-objects/Report
+    - title: SSHKey
+      path: /ecdn-api-objects/SSHKey
     - title: ScalarPoint
       path: /ecdn-api-objects/ScalarPoint
     - title: Server

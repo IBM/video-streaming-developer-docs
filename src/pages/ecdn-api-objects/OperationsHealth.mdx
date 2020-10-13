@@ -16,7 +16,7 @@ Health of ECDN server's operational services
 	<GQLLine><GQLTab /><GQLComment># - GOOD if all services are in GOOD state.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - WARNING if at least one is in WARNING and none of them are in POOR state.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR if at least one is in POOR state.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>aggregated</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>aggregated</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of update service.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if update repositories are reachable.</GQLComment></GQLLine>
@@ -25,13 +25,13 @@ Health of ECDN server's operational services
 	<GQLLine><GQLTab /><GQLComment># - GOOD same as before and all parents are reachable.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - WARNING update repositories are but not all parents are reachable.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR same as before or no parents are reachable.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>updates</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>updates</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of ECDN software update.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if server has the latest ECDN version.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - WARNING if server version isn't the latest but still supported.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR if server version isn't supported anymore.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>softwareVersion</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>softwareVersion</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of API connection.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if ECDN API is reachable.</GQLComment></GQLLine>
@@ -42,12 +42,12 @@ Health of ECDN server's operational services
 	<GQLLine><GQLTab /><GQLComment># - POOR same as before or no parents are reachable.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># On POOR status content delivery will continue to function properly, but ECDN</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># server won't be able to apply remote configurations or report status.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>apiConnection</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>apiConnection</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of metric collector service.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if service is up and running.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR if service isn't running.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>metrics</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>metrics</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of NTP service.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if ECDN server is in sync with NTP servers.</GQLComment></GQLLine>
@@ -56,25 +56,25 @@ Health of ECDN server's operational services
 	<GQLLine><GQLTab /><GQLComment>#   - ECDN server isn't in sync with any NTP servers.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment>#   - NTP service isn't running.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment>#   - Time skew is higher than 1 minute.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>ntp</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+	<GQLLine><GQLTab /><GQLName>ntp</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of log forwarding service. Null if log forwarding is disabled.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if ECDN server can forward logs.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR if ECDN server cannot forward logs.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># On POOR status log forwarder service might not be running.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>logForward</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink></GQLLine>
+	<GQLLine><GQLTab /><GQLName>logForward</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of remote assistance service. Null if remote assistance is disabled.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if remote assistance is working fine.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR if remote assistance is working fine.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># On POOR status remote assistance service might not be running or remote</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># assistance server is unreachable.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>remoteAssistance</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink></GQLLine>
+	<GQLLine><GQLTab /><GQLName>remoteAssistance</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink></GQLLine>
 <GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Health of SNMP polling service. Null if SNMP polling is disabled.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - GOOD if SNMP service is up and running.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># - POOR if SNMP service isn't running.</GQLComment></GQLLine>
-	<GQLLine><GQLTab /><GQLName>snmp</GQLName>(): <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink></GQLLine>
+	<GQLLine><GQLTab /><GQLName>snmp</GQLName>: <GQLLink href="/ecdn-api-enums/Health">Health</GQLLink></GQLLine>
 <GQLLine> </GQLLine>
 <GQLLine><GQLClose /></GQLLine>
 </GQLCodeSnippet>

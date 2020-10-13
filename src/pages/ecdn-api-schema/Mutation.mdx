@@ -80,6 +80,15 @@ The Mutation type represents all the mutable entry points to the API.
 		<GQLLine> </GQLLine>
 		<GQLLine><GQLTab />): <GQLLink href="/ecdn-api-objects/Server">Server</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Cancels PENDING desired MANUAL configuration of a server.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>serverConfigurationCancel</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># ID of server to cancel PENDING MANUAL configuration on.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>serverID</GQLAttribute>: <GQLLink href="/ecdn-api-scalars/ID">ID</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="/ecdn-api-scalars/Void">Void</GQLLink></GQLLine>
+<GQLLine> </GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Enable content delivery on servers.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
 	<GQLLine><GQLTab /><GQLName>serverEnableContentDelivery</GQLName>(</GQLLine>
@@ -151,6 +160,23 @@ The Mutation type represents all the mutable entry points to the API.
 		<GQLLine> </GQLLine>
 		<GQLLine><GQLTab />): <GQLLink href="/ecdn-api-objects/Report">Report</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
 <GQLLine> </GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Add SSH key.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Authorization: must be at least ADMIN.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLComment># Returns added SSH key.</GQLComment></GQLLine>
+	<GQLLine><GQLTab /><GQLName>sshKeyAdd</GQLName>(</GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Description of SSH key.</GQLComment></GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Must not be empty, must be unique and maximum allowed length is 60 characters.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>description</GQLAttribute>: <GQLLink href="/ecdn-api-scalars/String">String</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># Public part of SSH key. It can either be:</GQLComment></GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># * RSA: must be at least 2048 bits long.</GQLComment></GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># * ECDSA: 256, 384, or 521 bits long.</GQLComment></GQLLine>
+				<GQLLine><GQLTab /><GQLTab /><GQLComment># * Ed25519.</GQLComment></GQLLine>
+			<GQLLine><GQLTab /><GQLTab /><GQLAttribute>publicKey</GQLAttribute>: <GQLLink href="/ecdn-api-scalars/PublicKey">PublicKey</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+		<GQLLine> </GQLLine>
+		<GQLLine><GQLTab />): <GQLLink href="/ecdn-api-objects/SSHKey">SSHKey</GQLLink><GQLOperator>!</GQLOperator></GQLLine>
+<GQLLine> </GQLLine>
 <GQLLine><GQLClose /></GQLLine>
 </GQLCodeSnippet>
 
@@ -212,6 +238,14 @@ Returns configured server.
 | mode | [ConfigurationMode](/ecdn-api-enums/ConfigurationMode) | YES | NO | Selected mode to apply this configuration to an ECDN server.|
 | config | [BatchServerInput](/ecdn-api-input-objects/BatchServerInput) | YES | NO | Batch input for server configuration.|
 
+### serverConfigurationCancel: [Void](/ecdn-api-scalars/Void)
+Cancels PENDING desired MANUAL configuration of a server.
+Authorization: must be at least ADMIN.
+
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| serverID | [ID](/ecdn-api-scalars/ID) | YES | NO | ID of server to cancel PENDING MANUAL configuration on.|
+
 ### serverEnableContentDelivery: [Void](/ecdn-api-scalars/Void)
 Enable content delivery on servers.
 Authorization: must be at least ADMIN.
@@ -266,4 +300,14 @@ Returns created report.
 | to | [Time](/ecdn-api-scalars/Time) | YES | NO | End report at this point in time.|
 | email | [EmailAddress](/ecdn-api-scalars/EmailAddress) | YES | NO | Send created report to this email address.|
 | include | [ReportField](/ecdn-api-enums/ReportField) | YES | YES | Included fields in the report.|
+
+### sshKeyAdd: [SSHKey](/ecdn-api-objects/SSHKey)!
+Add SSH key.
+Authorization: must be at least ADMIN.
+Returns added SSH key.
+
+| ARGUMENT  | TYPE | NULLABLE | LIST | DESCRIPTION |
+| - | - | - | - | - |
+| description | [String](/ecdn-api-scalars/String) | YES | NO | Description of SSH key.<br/>Must not be empty, must be unique and maximum allowed length is 60 characters.|
+| publicKey | [PublicKey](/ecdn-api-scalars/PublicKey) | YES | NO | Public part of SSH key. It can either be:<br/>* RSA: must be at least 2048 bits long.<br/>* ECDSA: 256, 384, or 521 bits long.<br/>* Ed25519.|
 
