@@ -556,7 +556,7 @@ Possible error responses:
 This call is used to get the Channels which the administrator has specific access to. It also returns the access level.
 
 ```
-GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channelAccess.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -565,14 +565,14 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 | PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                                   |
 | ---------- | ------ | ---------- | --------------------------------------------- |
-| `channel`  | number | OPTIONAL   | Filter channels by name. Minimum 3 characters |
+| `channel`  | number | OPTIONAL   | Filter channels by name. Minimum 2 characters |
 | `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
 | `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
 
 Example of the request:
 
 ```
-GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channel-access.json HTTP/1.1
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channelAccess.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
@@ -642,7 +642,7 @@ Possible error responses:
 This call is used to update an administrator’s Channel access levels inside an account under the Organization.
 
 ```
-PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channel-access.json
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/channelAccess.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -659,7 +659,7 @@ The Content-Type of the request should be **application/x-www-form-urlencoded**.
 Example of the request:
 
 ```
-PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channel-access.json HTTP/1.1
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/channelAccess.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
@@ -690,7 +690,7 @@ Possible error responses:
 This API call lists the previously set access levels to all Channels under an account.
 
 ```
-GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/all-channel-access.json
+GET https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/allChannelAccess.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -698,7 +698,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 Example of the request:
 
 ```
-GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/all-channel-access.json HTTP/1.1
+GET /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/allChannelAccess.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 ```
@@ -742,7 +742,7 @@ Possible error responses:
 This API call is used to set access levels to all Channels under an account.
 
 ```
-PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/all-channel-access.json
+PUT https://api.video.ibm.com/organizations/{organizationId}/administrators/{email}/accounts/{accountId}/allChannelAccess.json
 ```
 
 Make sure the `email` parameter is base64 encoded in the URL.
@@ -763,7 +763,7 @@ The Content-Type of the request should be **application/x-www-form-urlencoded**.
 Example of the request:
 
 ```
-PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/all-channel-access.json HTTP/1.1
+PUT /organizations/ZzzqXZ/administrators/amlsbEBleGFtcGxlLmNvbQ==/accounts/12345678/allChannelAccess.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
