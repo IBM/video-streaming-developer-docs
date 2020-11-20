@@ -1,6 +1,6 @@
 # Developer Tools
 
-:construction: A documentation site for IBM Video Streaming APIs, SDKs and use cases - [Preview URL](https://ibm.github.io/video-streaming-developer-docs//) :construction:
+:construction: A documentation site for IBM Video Streaming APIs, SDKs and use cases - [URL](https://ibm.github.io/video-streaming-developer-docs//) :construction:
 
 ## About
 
