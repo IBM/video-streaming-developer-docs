@@ -208,7 +208,15 @@ const BasicEmbed = ({ src, controls = [], dynamic = false, withMediaSwitcher = f
         <Column colLg={8}>
           <div id="Container" ref={container}>
             <div className={styles.responsive}>
-              <iframe title="Embed" ref={frame} src={src} className={styles.iframe} allowFullScreen frameBorder="0" />
+              <iframe
+                title="Embed"
+                ref={frame}
+                src={src}
+                className={styles.iframe}
+                allowFullScreen
+                frameBorder="0"
+                referrerpolicy="no-referrer-when-downgrade"
+              />
               <div className={loadingClasses}>
                 <Loading active={!ready} />
               </div>

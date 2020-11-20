@@ -32,7 +32,7 @@ npm install ibm-video-streaming-web-player-api
 Create an instance of the Embed API by providing the ID of the iframe. The iframe code should look like this:
 
 ```html
-<iframe id="PlayerIframe" src="https://video.ibm.com/embed/1524?html5ui" width="640" height="480" allowfullscreen webkitallowfullscreen></iframe>
+<iframe id="PlayerIframe" src="https://video.ibm.com/embed/1524?html5ui" width="640" height="480" allowfullscreen webkitallowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
 ```
 ```js
 let viewer = PlayerAPI('PlayerIframe');
