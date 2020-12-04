@@ -21,9 +21,9 @@ Then the codeowners will review your Pull Request and if the PR is accepted and 
 
 ## How To
 
-The site content and page structure can be found here: `developers/src/pages/`
+The site content and page structure can be found here: `src/pages/`
 
-For example, you want to update the [Channel API/Security/Embed Restriction](https://pages.github.ibm.com/ustream-web/developers/channel-api-security/embed-restriction) page. Just navigate to `developers/src/pages/channel-api-security/` folder and update the `embed-restriction.mdx` file.
+For example, you want to update the [Channel API/Security/Embed Restriction](https://developers.video.ibm.com/channel-api-security/embed-restriction/) page. Just navigate to `src/pages/channel-api-security/` folder and update the `embed-restriction.mdx` file.
 
 You can use Github UI to edit this file or you can checkout the repo and edit locally.
 For local development you can find instructions below.
@@ -68,7 +68,7 @@ You can check the deployment logs here: https://travis-ci.org/github/IBM/video-s
 For a change, please create a branch, and make a pull request to master.
 On every merge to master, deployment will start automatically, triggered by Travis.
 After 5-10 minutes, the changes will takes effect on the developer site live environment
-https://ibm.github.io/video-streaming-developer-docs
+https://developers.video.ibm.com/
 
 ### Additional details about build and deployment
 
@@ -78,7 +78,7 @@ The github pages url serves the content of the gh-pages branch.
 
 ### Tips
 
-### WIP
+#### WIP
 
 To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title. 
 In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title. 
