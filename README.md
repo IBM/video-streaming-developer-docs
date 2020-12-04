@@ -8,6 +8,17 @@ With this repository Video Streaming developers can easily update their API and 
 The site content is in `mdx` format.
 MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
 
+## How to contribute
+To collaborate with this repository in GitHub you need to follow these steps:
+- Fork the repository into your own GitHub
+- Clone the repository to your local machine
+- Create a new branch for your changes
+- Make some changes and commit them with useful messages
+- Push the changes to your repository
+- Create a Pull Request from your repository back to the original one
+
+Then the codeowners will review your Pull Request and if the PR is accepted and merged into master Travis CI will deploy the new version of the site.
+
 ## How To
 
 The site content and page structure can be found here: `developers/src/pages/`
