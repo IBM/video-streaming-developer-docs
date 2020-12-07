@@ -1,0 +1,217 @@
+---
+title: Live CTA
+description: Live CTA
+---
+
+## Get a list of CTAs for a user
+
+Returns all CTAs for a user
+
+```
+GET https://api.video.ibm.com/users/{userId}/ctas.json
+```
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `ctas` key.
+
+| KEY                   | TYPE      | DESCRIPTION                                                       |
+| --------------------- | --------- | ----------------------------------------------------------------- |
+| `id`   | integer    | CTA ID                                         |
+| `title`            | string    | Title of CTA                                                          |
+| `text`              | string    | Text for CTA                        |
+| `button_text`          | string    | Text on CTA button                                                |
+| `button_url`          | string   | Target of the CTA    |
+| `created_at`           | integer   | Timestamp of CTA creation                              |
+| `is_active`         | boolean   | True if the the CTA is active                            |
+| `channel_id`        | id   | ID of channel where the CTA is active                           |
+| `activated_at`               | integer   | Timestamp of CTA activation                                  |
+
+Example of a success response:
+
+```json
+{
+    "ctas": [
+        {
+            "id": 12345,
+            "title": "hey",
+            "text": "support our foundation!",
+            "button_text": "Donate",
+            "button_url": "https://paypal.com/donate?to=ourfoundation&amount=5",
+            "created_at": 1606982795,
+            "is_active": true,
+            "channel_id": 3344,
+            "activated_at": 1564148933
+        },
+        {
+            "id": 22333,
+            "title": "New product for sale",
+            "text": "Buy our great product now",
+            "button_text": "Buy now",
+            "button_url": "https://myshop.com/buy/345",
+            "created_at": 1606982795,
+            "is_active": false,
+            "channel_id": null,
+            "activated_at": null
+        }
+    ]
+}
+```
+
+
+## Get information about a CTA
+
+Returns all CTAs for a user
+
+```
+GET https://api.video.ibm.com/users/{userId}/ctas/{ctaId}.json
+```
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under a `cta` key.
+
+| KEY                   | TYPE      | DESCRIPTION                                                       |
+| --------------------- | --------- | ----------------------------------------------------------------- |
+| `id`   | integer    | CTA ID                                         |
+| `title`            | string    | Title of CTA                                                          |
+| `text`              | string    | Text for CTA                        |
+| `button_text`          | string    | Text on CTA button                                                |
+| `button_url`          | string   | Target of the CTA    |
+| `created_at`           | integer   | Timestamp of CTA creation                              |
+| `is_active`         | boolean   | True if the the CTA is active                            |
+| `channel_id`        | id   | ID of channel where the CTA is active                           |
+| `activated_at`               | integer   | Timestamp of CTA activation                                  |
+
+Example of a success response:
+
+```json
+{
+    "cta": [
+        {
+            "id": 12345,
+            "title": "hey",
+            "text": "support our foundation!",
+            "button_text": "Donate",
+            "button_url": "https://paypal.com/donate?to=ourfoundation&amount=5",
+            "created_at": 1606982795,
+            "is_active": true,
+            "channel_id": 3344,
+            "activated_at": 1564148933
+        }
+    ]
+}
+```
+
+
+## Creating CTA
+```
+POST https://api.video.ibm.com/users/{userId}/ctas.json
+```
+| PARAMETER | TYPE | IMPORTANCE | DESCRIPTION |
+| - | - | - | - |
+| title | string | REQUIRED | CTA title
+| text | string | REQUIRED | CTA text
+| button_text | string | REQUIRED | CTA button text
+| button_url | string | REQUIRED | CTA button link url
+
+### Success response
+
+```
+HTTP/1.1 201 Created
+Location: https://api.video.ibm.com/users/{userId}/ctas/{ctaId}.json
+```
+
+
+## Uploading (adding/updating) CTA image
+
+```
+PUT https://api.video.ibm.com/users/{userId}/ctas/{ctaId}/image.json
+```
+
+### Request
+
+- The logo must be passed in the HTTP body.
+- Supported image type:
+    - image/jpeg
+    - image/png
+    - image/gif
+- Image ratio must be 1:1
+- Minimum image dimensions: 200 x 200 pixels
+
+
+## CTA activation
+
+```
+PUT https://api.video.ibm.com/users/{userId}/ctas/{ctaId}/live.json
+
+```
+| PARAMETER | TYPE | IMPORTANCE | DESCRIPTION |
+| - | - | - | - |
+| channel_id | int | REQUIRED | The channel id where the CTA is activated
+
+### Success
+200 OK HTTP status code
+
+### Errors
+
+| HTTP STATUS CODE  | DESCRIPTION |
+| - | - |
+| 403 | Resource ownership mismatch |
+| 404 | Resource not found |
+| 409 | Conflicting status. e.g.: CTA is active on a different channel |
+
+
+## CTA deactivation
+```
+DELETE https://api.video.ibm.com/users/{userId}/ctas/{ctaId}/live.json
+```
+
+### Success
+
+200 OK HTTP status code
+
+### Errors
+
+| HTTP STATUS CODE  | DESCRIPTION |
+| - | - |
+| 403 | Resource ownership mismatch |
+| 404 | Resource not found |
+
+## CTA deletion
+```
+DELETE https://api.video.ibm.com/users/{userId}/ctas/{ctaId}.json
+```
+
+### Success
+
+200 OK HTTP status code
+
+### Errors
+
+| HTTP STATUS CODE  | DESCRIPTION |
+| - | - |
+| 403 | Resource ownership mismatch |
+| 404 | Resource not found |
+| 409 | Conflicting status. e.g.: CTA is active on a channel |
+
+## Updating a CTA
+
+```
+PUT https://api.video.ibm.com/users/{userId}/ctas/{ctaId}.json
+```
+| PARAMETER | TYPE | IMPORTANCE | DESCRIPTION |
+| - | - | - | - |
+| title | string | REQUIRED | CTA title
+| text | string | REQUIRED | CTA text
+| button_text | string | REQUIRED | CTA button text
+| button_url | string | REQUIRED | CTA button link url
+
+### Success
+
+200 OK HTTP status code
+
+### Errors
+| HTTP STATUS CODE  | DESCRIPTION |
+| - | - |
+| 400 | Field validation failed |
+| 403 | Resource ownership mismatch |
+| 404 | Resource not found |

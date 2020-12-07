@@ -111,6 +111,9 @@
 - title: QnA
   pages:
     - path: /channel-api-qna
+- title: Live CTA
+  pages:
+    - path: /channel-api-live-cta
 - title: PHP Sample Code
   pages:
     - path: /channel-api-php-sample-code
