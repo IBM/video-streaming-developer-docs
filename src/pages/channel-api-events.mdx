@@ -6,7 +6,7 @@ description: Events
 ## Creating an event
 
 ```
-POST https://api.video.ibm.com/channels/CHANNEL_ID/event.json
+POST https://api.video.ibm.com/v2/channels/CHANNEL_ID/events.json
 ```
 
 The parameters for the POST request:
@@ -26,13 +26,13 @@ The parameters for the POST request:
 
 ```
 HTTP/1.1 201 Created
-Location: https://api.video.ibm.com/channels/CHANNEL_ID/event/4552.json
+Location: https://api.video.ibm.com/v2/channels/CHANNEL_ID/events/4552.json
 ```
 
 ## Listing Events
 
 ```
-GET https://api.video.ibm.com/channels/CHANNEL_ID/event.json
+GET https://api.video.ibm.com/v2/channels/CHANNEL_ID/events.json
 ```
 
 The query parameters for the Listing Events GET request:
@@ -75,9 +75,9 @@ Upon success a response with HTTP status “200 OK” is returned with the follo
         }
     ],
     "paging": {
-        "previous": "https://api.video.ibm.com/channels/CHANNEL_ID/event.json?
+        "previous": "https://api.video.ibm.com/v2/channels/CHANNEL_ID/events.json?
 pagesize=PAGE_SIZE&page=PREVIOUS_PAGE",
-        "next": "https://api.video.ibm.com/channels/CHANNEL_ID/event.json?
+        "next": "https://api.video.ibm.com/v2/channels/CHANNEL_ID/events.json?
 pagesize=PAGE_SIZE&page=NEXT_PAGE",
         "page_count": 8,
         "item_count": 38
@@ -95,7 +95,7 @@ Possible error responses:
 ## Listing Specific Event
 
 ```
-GET https://api.video.ibm.com/channels/CHANNEL_ID/event/EVENT_ID.json
+GET https://api.video.ibm.com/v2/channels/CHANNEL_ID/events/EVENT_ID.json
 ```
 
 Upon success a response with HTTP status “200 OK” is returned with the following response:
@@ -120,7 +120,7 @@ Upon success a response with HTTP status “200 OK” is returned with the follo
 ## Event deletion
 
 ```
-DELETE https://api.video.ibm.com/channels/CHANNEL_ID/event/EVENT_ID.json
+DELETE https://api.video.ibm.com/v2/channels/CHANNEL_ID/events/EVENT_ID.json
 ```
 
 ### Success response
@@ -139,7 +139,7 @@ Possible error responses:
 ## Updating an event
 
 ```
-PUT https://api.video.ibm.com/channels/CHANNEL_ID/event/EVENT_ID.json
+PUT https://api.video.ibm.com/v2/channels/CHANNEL_ID/events/EVENT_ID.json
 ```
 
 The parameters for the POST request:
