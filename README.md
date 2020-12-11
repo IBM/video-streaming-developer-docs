@@ -84,6 +84,5 @@ To mark your PR as work in progress (eg.: you wrote documentation to a feature w
 In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title. 
 
 #### To add MDX support for your editor:
-
 - PHPStorm IDE: https://youtrack.jetbrains.com/issue/WEB-32599#focus=streamItem-27-3699900.0-0
 - VS Code: https://github.com/silvenon/vscode-mdx
