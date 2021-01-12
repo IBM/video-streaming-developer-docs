@@ -652,7 +652,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 | KEY      | TYPE  | IMPORTANCE | DESCRIPTION                                                                                                                                        |
 | -------- | ----- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `set`    | array | OPTIONAL   | Key-value pairs of Channel IDs and access levels. Access level: `channel.admin` or the ID of one of the Organization's [Custom Role](custom-roles) |
+| `set`    | array | OPTIONAL   | An array of key-value pairs of Channel IDs (`id`) and access levels (`role`). Access level: `channel.admin` or the ID of one of the Organization's [Custom Role](custom-roles) |
 | `delete` | array | OPTIONAL   | List of Channel IDs which you want to revoke access from the administrator                                                                         |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
@@ -665,7 +665,7 @@ Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
 
-set[12348765]=channel.admin&set[12348764]=channel.admin&delete[]=123454&delete[]=123456
+set[0][id]=12348765&set[0][role]=channel.admin&set[1][id]=12348764&set[1][role]=channel.admin&delete[]=123454&delete[]=123456
 ```
 
 Note that the token in the above call is only an example.
