@@ -513,13 +513,13 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 ### Parameters
 
-| KEY            | TYPE   | IMPORTANCE | DESCRIPTION                                       |
-| -------------- | ------ | ---------- | ------------------------------------------------- |
-| `access_level` | string | REQUIRED   | Access level: `org_admin`, `limited`, `no_access` |
+| KEY            | TYPE   | IMPORTANCE | DESCRIPTION                                           |
+| -------------- | ------ | ---------- | ----------------------------------------------------- |
+| `access_level` | string | REQUIRED   | Access level: `account_admin`, `limited`, `no_access` |
 
 If you update a user's access level they will lose any previously set permission settings under the Organization.
 
-Users modified to `limited` access can't access the Account, you have to add Channel level access right(s) to them. ([Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
+**Users modified to `limited` access can't access the Account, you have to add Channel level access right(s) to them. ([Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))**
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -593,7 +593,7 @@ Upon success, a set of key-value pairs is returned under a `channels` element wi
 The `access_level` value is one of the followings:
 
 - `channel.admin`
-- one of the Organization's [Custom Role](custom-roles)
+- a permission from one of the Organization's [Custom Role](/organization-api/custom-roles)
 
 Additionally, there is a `paging` element in the response with the following values:
 
@@ -652,7 +652,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 | KEY      | TYPE  | IMPORTANCE | DESCRIPTION                                                                                                                                        |
 | -------- | ----- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `set`    | array | OPTIONAL   | An array of key-value pairs of Channel IDs (`id`) and access levels (`role`). Access level: `channel.admin` or the ID of one of the Organization's [Custom Role](custom-roles) |
+| `set`    | array | OPTIONAL   | An array of key-value pairs of Channel IDs (`id`) and access levels (`role`). Access level: `channel.admin` or a permission from one of the Organization's [Custom Role](/organization-api/custom-roles) |
 | `delete` | array | OPTIONAL   | List of Channel IDs which you want to revoke access from the administrator                                                                         |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
@@ -717,7 +717,7 @@ Upon success, a set of key-value pairs is returned under a `channels` element wi
 The `all_channel_access` value is one of the followings:
 
 - `channel.admin`
-- one of the Organization's [Custom Role](custom-roles)
+- a permission from one of the Organization's [Custom Role](/organization-api/custom-roles)
 
 Example of a success response:
 
@@ -757,7 +757,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 The `all_channel_access` value must be one of the followings:
 
 - `channel.admin`
-- one of the Organization's [Custom Role](custom-roles)
+- a permission from one of the Organization's [Custom Role](/organization-api/custom-roles)
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
