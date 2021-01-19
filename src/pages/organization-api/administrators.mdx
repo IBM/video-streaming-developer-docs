@@ -513,13 +513,13 @@ Make sure the `email` parameter is base64 encoded in the URL.
 
 ### Parameters
 
-| KEY            | TYPE   | IMPORTANCE | DESCRIPTION                                       |
-| -------------- | ------ | ---------- | ------------------------------------------------- |
-| `access_level` | string | REQUIRED   | Access level: `org_admin`, `limited`, `no_access` |
+| KEY            | TYPE   | IMPORTANCE | DESCRIPTION                                           |
+| -------------- | ------ | ---------- | ----------------------------------------------------- |
+| `access_level` | string | REQUIRED   | Access level: `account_admin`, `limited`, `no_access` |
 
 If you update a user's access level they will lose any previously set permission settings under the Organization.
 
-Users modified to `limited` access can't access the Account, you have to add Channel level access right(s) to them. ([Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))
+**Users modified to `limited` access can't access the Account, you have to add Channel level access right(s) to them. ([Update an administrator’s channel level accesses](#update-an-administrator's-channel-level-accesses), [Set all Channel access levels](#set-all-channel-access-levels))**
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
