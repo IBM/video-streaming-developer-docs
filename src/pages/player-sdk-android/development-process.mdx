@@ -25,7 +25,7 @@ Each certificate generates a different **Key Hash**.
 *   The **release key** (or App Signing key) is used to sign your app when you release it to the Google Play Store (release build).
 *   (Optional) The third type has been recently introduced with **Google Play App Signing**.
 Using this feature when you upload your release build to the Play Store Google will sign it again with your true release key.
-Therefore, you will must generate key hashes for all three of your keys (Debug key, Upload key, App Signing key - managed by Google).
+Therefore, you must generate key hashes for all three of your keys (Debug key, Upload key, App Signing key - managed by Google).
 For more information visit: [Google Play App Signing](https://support.google.com/googleplay/android-developer/answer/7384423)
 
 
@@ -198,7 +198,7 @@ IBM Video Streaming Player SDK version 1.3.0 introduced changes in the user faci
 
 To receive state changes and other events from the player you need to set listeners. There are mandatory and optional ones, 
 but all listeners must be set prior to calling `ustreamPlayer.attach()` on your player instance. This should
-happen in the `onResume()` or `onStart()` callback of your activity or fragment. Calling `attach()` is an important step, this is where
+happen in the `onResume()` or `onStart()` callback of your `Activity` or `Fragment`. Calling `attach()` is an important step, this is where
 your listeners and the player view is bound to the Player SDK. Forgetting to call this will cause the player to not render 
 video upon viewing, and you will not receive any callback on your listeners.
 Also, since version 0.9.0 this is the place to set your `PlayerView` to the IBM Video Streaming player.
@@ -262,7 +262,7 @@ selected (live or recorded).
 ### Catching callbacks
 
 There are eight different listeners that you can add to the Player SDK instance to receive callbacks. Some of these 
-listeners are mandatory, others are optional, but each listener represents a group of functionalities of of the Player SDK.
+listeners are mandatory, others are optional, but each listener represents a group of functionalities of the Player SDK.
 
 The eight listeners are:
 
