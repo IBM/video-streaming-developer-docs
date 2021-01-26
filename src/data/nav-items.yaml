@@ -102,6 +102,9 @@
       path: /channel-api-channel-page-design/featured-videos
     - title: Playlists on channel page
       path: /channel-api-channel-page-design/playlists-on-channel-page
+- title: Caption autopublish
+  pages:
+    - path: /channel-api-caption-autopublish
 - title: Events
   pages:
     - path: /channel-api-events
