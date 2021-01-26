@@ -1,0 +1,134 @@
+---
+title: Manage audio tracks
+description: Manage audio tracks
+---
+
+## Get the audio tracks of a video
+
+```
+GET https://api.video.ibm.com/videos/{videoId}/audio/tracks.json
+```
+
+### Success response
+
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs under a `tracks` element.
+
+| KEY        | TYPE    | DESCRIPTION |
+| ---------- | ------- | ----------- |
+| `language` | string  | Language    |
+| `country`  | string  | Country     |
+| `streamId` | int     | Stream ID   |
+| `default`  | boolean | Default     |
+| `disabled` | boolean | Disabled    |
+
+Example of a success response:
+
+```json
+{
+  "tracks": [
+    {
+      "language": "en",
+      "country": "US",
+      "streamId": 12,
+      "default": false,
+      "disabled": false
+    },
+    {
+      "language": "fr",
+      "country": "00",
+      "streamId": 13,
+      "default": false,
+      "disabled": false
+    },
+    {
+      "language": "es",
+      "country": "00",
+      "streamId": 14,
+      "default": false,
+      "disabled": false
+    },
+    {
+      "language": "nl",
+      "country": "00",
+      "streamId": 1,
+      "default": true,
+      "disabled": false
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE     | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token` | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found`     | Video does not exist                                                                  |
+| 503 Service Unavailable |                 | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get available audio languages
+
+```
+GET https://api.video.ibm.com/videos/audio/languages.json
+```
+
+### Success response
+
+Upon success a response with HTTP status "200 OK" is returned with the following key-value pairs.
+
+| KEY                | TYPE    | DESCRIPTION                                                                                             |
+| ------------------ | ------- | ------------------------------------------------------------------------------------------------------- |
+| `watson_supported` | object  | Languages supported by [IBM Watson Speech to Text](https://www.ibm.com/watson/services/speech-to-text/) |
+| `other`            | object  |                                                                                                         |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE     | ERROR CONDITIONS                                                                        |
+| ----------------------- | --------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token` | The provided access token is missing, revoked, expired or malformed                     |
+| 503 Service Unavailable |                 | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Set audio track language
+
+```
+PUT https://api.video.ibm.com/videos/{videoId}/audio/{streamId}/language.json
+```
+
+### Parameters
+
+| KEY        | TYPE   | IMPORTANCE | DESCRIPTION                                                                                                                            |
+| ---------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `language` | string | REQUIRED   | One of the keys from [Get available audio languages](/channel-api-video-management/manage-audio-tracks#get-available-audio-languages)  |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+POST /channels/1234/settings/qna.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+language=pt-BR
+```
+
+### Success response
+
+Upon success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid `language`                                                                      |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 404 Not Found           | `not_found`         | Stream not found                                                                        |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
