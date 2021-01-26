@@ -105,6 +105,9 @@
 - title: Events
   pages:
     - path: /channel-api-events
+- title: Chat
+  pages:
+    - path: /channel-api-chat
 - title: Poll
   pages:
     - path: /channel-api-poll
