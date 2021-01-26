@@ -50,6 +50,8 @@
       path: /channel-api-video-management/manage-video-chapters
     - title: Manage captions
       path: /channel-api-video-management/manage-captions
+    - title: Manage audio tracks
+      path: /channel-api-video-management/manage-audio-tracks
 - title: Playlists
   pages:
     - title: Get playlist information
