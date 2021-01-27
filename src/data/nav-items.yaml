@@ -50,6 +50,8 @@
       path: /channel-api-video-management/manage-video-chapters
     - title: Manage captions
       path: /channel-api-video-management/manage-captions
+    - title: Manage audio tracks
+      path: /channel-api-video-management/manage-audio-tracks
 - title: Playlists
   pages:
     - title: Get playlist information
@@ -102,6 +104,8 @@
       path: /channel-api-channel-page-design/featured-videos
     - title: Playlists on channel page
       path: /channel-api-channel-page-design/playlists-on-channel-page
+    - title: Cover image
+      path: /channel-api-channel-page-design/cover-image
 - title: Off Air Settings
   pages:
     - title: Overview
@@ -113,6 +117,9 @@
 - title: Events
   pages:
     - path: /channel-api-events
+- title: Chat
+  pages:
+    - path: /channel-api-chat
 - title: Poll
   pages:
     - path: /channel-api-poll
