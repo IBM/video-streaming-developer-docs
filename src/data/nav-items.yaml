@@ -114,6 +114,9 @@
       path: /channel-api-off-air-settings/manage-selected-videos
     - title: Manage slideshow
       path: /channel-api-off-air-settings/manage-slideshow
+- title: Caption autopublish
+  pages:
+    - path: /channel-api-caption-autopublish
 - title: Events
   pages:
     - path: /channel-api-events
