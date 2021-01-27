@@ -1,0 +1,244 @@
+---
+title: Manage slideshow
+description: Manage slideshow
+---
+
+## Get Slideshow
+
+Returns the slideshow images
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/settings/off-air/slideshow.json
+```
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with a `slideshow` array of the following key-value pairs.
+
+| KEY         | TYPE   | DESCRIPTION |
+| ----------- | ------ | ----------- |
+| `id`        | string | Id          |
+| `title`     | string | title       |
+| `fileName`  | string | Filename    |
+| `createdAt` | string | Upload time |
+| `url`       | string | URL         |
+
+Example of a success response:
+
+```json
+{
+  "slideshow": [
+    {
+      "id": "6867410",
+      "title": "Image 1",
+      "fileName": "44203712_223x223_1611153920.jpg",
+      "createdAt": "2021-01-20 06:45:25",
+      "url": "https://ustvstaticcdn1-a.akamaihd.net/images/uphoto_file/4/4/2/0/44203712/th/smalls2_120_44203712_223x223_1611153920.jpg"
+    },
+    ...
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Reorder Slideshow
+
+```
+PUT https://api.video.ibm.com/channels/{channelId}/settings/off-air/slideshow.json
+```
+
+### Parameters
+
+| KEY         | TYPE  | IMPORTANCE | DESCRIPTION         |
+| ----------- | ----- | ---------- | ------------------- |
+| `slideshow` | int[] | REQUIRED   | Slideshow image ids |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+**You have to send every image id. For removing images use the [Delete image](/channel-api-off-air-settings/manage-slideshow#delete-image) call.**
+
+Example of the request:
+
+```
+POST /channels/1234/settings/off-air/slideshow.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+slideshow[]=123979122&slideshow[]=124044209
+```
+
+Note that the token in the above call is only an example.
+
+### Success response
+
+Upon success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid `slideshow`                                                                     |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Upload a new slideshow image
+
+```
+POST https://api.video.ibm.com/channels/{channelId}/settings/off-air/images.json
+```
+
+### Request
+
+The image must be passed in the HTTP body.
+
+- Supported image types:
+	- image/jpeg
+	- image/png
+	- image/gif
+- Maximum image size: 10 MB
+
+### Success response
+
+Upon success the response body is empty with an HTTP Status code of 201.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid (eg. too large image)                                                           |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get a slideshow image
+
+Returns a slideshow image
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/settings/off-air/images/{imageId}.json
+```
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs under `image`.
+
+| KEY         | TYPE   | DESCRIPTION |
+| ----------- | ------ | ----------- |
+| `id`        | string | Id          |
+| `title`     | string | title       |
+| `fileName`  | string | Filename    |
+| `createdAt` | string | Upload time |
+| `url`       | string | URL         |
+
+Example of a success response:
+
+```json
+{
+  "image": {
+    "id": "6867410",
+    "title": "Image 1",
+    "fileName": "44203712_223x223_1611153920.jpg",
+    "createdAt": "2021-01-20 06:45:25",
+    "url": "https://ustvstaticcdn1-a.akamaihd.net/images/uphoto_file/4/4/2/0/44203712/th/smalls2_120_44203712_223x223_1611153920.jpg"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 404 Not Found           | `not_found`         | Image not found                                                                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Change image title
+
+```
+PUT https://api.video.ibm.com/channels/{channelId}/settings/off-air/images/{imageId}.json
+```
+
+### Parameters
+
+| KEY     | TYPE   | IMPORTANCE | DESCRIPTION               |
+| ------- | ------ | ---------- | ------------------------- |
+| `title` | string | REQUIRED   | Title, maximum length: 50 |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+PUT /channels/1234/settings/off-air/images/6867410.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+title=New title
+```
+
+Note that the token in the above call is only an example.
+
+### Success response
+
+Upon success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid `title`                                                                     |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 404 Not Found           | `not_found`         | Image not found                                                                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete image
+
+```
+DELETE https://api.video.ibm.com/channels/{channelId}/settings/off-air/images/{imageId}.json
+```
+
+Example of the request:
+
+```
+DELETE /channels/1234/settings/off-air/images/6867410.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+```
+
+Note that the token in the above call is only an example.
+
+### Success response
+
+Upon success the response body is empty with an HTTP Status code of 204.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 403 Unauthorized        | `lack_of_ownership` | The provided access token could not access the given channel                            |
+| 404 Not Found           | `not_found`         | Image not found                                                                         |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

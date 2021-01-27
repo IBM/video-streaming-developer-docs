@@ -106,6 +106,14 @@
       path: /channel-api-channel-page-design/playlists-on-channel-page
     - title: Cover image
       path: /channel-api-channel-page-design/cover-image
+- title: Off Air Settings
+  pages:
+    - title: Overview
+      path: /channel-api-off-air-settings/overview
+    - title: Manage selected videos
+      path: /channel-api-off-air-settings/manage-selected-videos
+    - title: Manage slideshow
+      path: /channel-api-off-air-settings/manage-slideshow
 - title: Events
   pages:
     - path: /channel-api-events
