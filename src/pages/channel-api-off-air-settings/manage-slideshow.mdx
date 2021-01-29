@@ -103,13 +103,24 @@ POST https://api.video.ibm.com/channels/{channelId}/settings/off-air/images.json
 
 ### Request
 
-The image must be passed in the HTTP body.
+The image must be passed in the HTTP body as binary data.
 
 - Supported image types:
 	- image/jpeg
 	- image/png
 	- image/gif
 - Maximum image size: 10 MB
+
+CURL example:
+
+```
+curl --location --request POST 'https://git.api.video.ibm.com.lh/channels/1234/settings/off-air/images.json' \
+--header 'Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950' \
+--header 'Content-Type: image/png' \
+--data-binary '@/path/to/your/new/slideshow/image.png'
+```
+
+Note that the token in the above call is only an example.
 
 ### Success response
 
