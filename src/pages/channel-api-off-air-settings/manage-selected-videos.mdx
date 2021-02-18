@@ -15,7 +15,7 @@ GET https://api.video.ibm.com/channels/{channelId}/settings/off-air/selected.jso
 
 Upon success a response with HTTP status “200 OK” is returned with the following key-value pairs.
 
-| KEY      | TYPE  | DESCRIPTION  	    |
+| KEY      | TYPE  | DESCRIPTION        |
 | -------- | ----- | ------------------ |
 | `videos` | int[] | Selected video ids |
 
@@ -44,12 +44,12 @@ Possible error responses:
 ## Set Selected Videos
 
 ```
-PUT https://api.video.ibm.com/channels/{channelId}/settings/off-air/mode.json
+PUT https://api.video.ibm.com/channels/{channelId}/settings/off-air/selected.json
 ```
 
 ### Parameters
 
-| KEY        | TYPE  | IMPORTANCE | DESCRIPTION  							  |
+| KEY        | TYPE  | IMPORTANCE | DESCRIPTION                               |
 | ---------- | ----- | ---------- | ----------------------------------------- |
 | `videos`   | int[] | REQUIRED   | Video ids (only published videos allowed) |
 
@@ -58,7 +58,7 @@ The Content-Type of the request should be **application/x-www-form-urlencoded**.
 Example of the request:
 
 ```
-POST /channels/1234/settings/off-air/selected.json HTTP/1.1
+PUT /channels/1234/settings/off-air/selected.json HTTP/1.1
 Host: api.video.ibm.com
 Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
 Content-Type: application/x-www-form-urlencoded
