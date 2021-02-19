@@ -431,6 +431,38 @@ Example CTA object when activated:
 }
 ```
 
+### error
+
+Fired when an unexpected event occures.
+
+Returns an object:
+
+- `name` (string) error name
+- `message` (string) error message
+
+Available error type(s):
+
+- `autoplayRejected`
+
+###### Example
+
+```js
+viewer.addListener('error', function(event) {
+    switch (event.name) {
+        case 'autoplayRejected':
+            // TODO: display fallback button
+            console.log(event.message);
+            break;
+        // no default
     }
+});
+```
+
+Example autoplayRejected error:
+
+```json
+{
+    "name": "autoplayRejected",
+    "message": "detailed error message"
 }
 ```
