@@ -305,6 +305,20 @@ Called when the currently loaded content playback is started or stopped. Sends d
 viewer.addListener('playing', callback);
 ```
 
+### seekStarted
+
+Called when a user or system initiated seek started.
+
+- `from` (number) - previous position in sec
+- `to` (number) - next position in sec
+- `initiator` (string) - user|system
+
+###### Example
+
+```js
+viewer.addListener('seekStarted', callback);
+```
+
 ### size
 
 Called when the stream size is available. Sent data is the size of the calculated embed iframe according to the player width, and the stream aspect ratio. The player bar height is included, if the controls are visible.
