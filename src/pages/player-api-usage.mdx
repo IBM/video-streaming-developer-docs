@@ -319,6 +319,16 @@ Called when a user or system initiated seek started.
 viewer.addListener('seekStarted', callback);
 ```
 
+### seekCompleted
+
+Called when a user or system initiated seek completed.
+
+###### Example
+
+```js
+viewer.addListener('seekCompleted', callback);
+```
+
 ### size
 
 Called when the stream size is available. Sent data is the size of the calculated embed iframe according to the player width, and the stream aspect ratio. The player bar height is included, if the controls are visible.
