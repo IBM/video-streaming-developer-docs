@@ -293,6 +293,16 @@ Called when the currently loaded and played recorded video reaches its end.
 viewer.addListener('finished', callback);
 ```
 
+### contentAvailable
+
+Called when all metadata required to start playback is available.
+
+###### Example
+
+```js
+viewer.addListener('contentAvailable', callback);
+```
+
 ### playing
 
 Called when the currently loaded content playback is started or stopped. Sends data along the event:
