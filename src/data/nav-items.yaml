@@ -33,6 +33,8 @@
     - title: Basic video management
       path: /channel-api-video-management/basic-video-management
     - title: Upload videos
+      path: /channel-api-video-management/upload-videos-new
+    - title: Upload videos (via FTP)
       path: /channel-api-video-management/upload-videos
     - title: Copy a video
       path: /channel-api-video-management/copy-a-video
