@@ -62,6 +62,8 @@
       path: /channel-api-playlists/create-and-manage-playlists
     - title: Manage Content of Playlist
       path: /channel-api-playlists/manage-content-of-playlist
+    - title: Live Playlist
+      path: /channel-api-playlists/live-playlist
 - title: Security
   pages:
     - title: Overview
