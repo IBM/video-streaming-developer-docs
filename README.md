@@ -6,14 +6,14 @@ A documentation site for IBM Video Streaming APIs, SDKs and use cases - [URL](ht
 
 With this repository Video Streaming developers can easily update their API and SDK documentations.
 The site content is in `mdx` format.
-MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
+MDX is like an extension of markdown documents. MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
 
 ## How to contribute
 To collaborate with this repository in GitHub you need to follow these steps:
 - Fork the repository into your own GitHub
 - Clone the repository to your local machine
 - Create a new branch for your changes
-- Make some changes and commit them with useful messages
+- Make some changes and commit them with useful messages ([Conventional Commit messages](https://www.conventionalcommits.org/en/v1.0.0/) preferred)
 - Push the changes to your repository
 - Create a Pull Request from your repository back to the original one
 
