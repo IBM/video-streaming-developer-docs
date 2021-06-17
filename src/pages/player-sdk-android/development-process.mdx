@@ -200,7 +200,7 @@ To receive state changes and other events from the player you need to set listen
 but all listeners must be set prior to calling `ustreamPlayer.attach()` on your player instance. This should
 happen in the `onResume()` or `onStart()` callback of your `Activity` or `Fragment`. Calling `attach()` is an important step, this is where
 your listeners and the player view is bound to the Player SDK. Forgetting to call this will cause the player to not render 
-video upon viewing, and you will not receive any callback on your listeners.
+video on your `View`, and you will not receive any callback on your listeners.
 Also, since version 0.9.0 this is the place to set your `PlayerView` to the IBM Video Streaming player.
 The reason behind this is, now you can optionally pre-buffer your player by calling `ustreamPlayer.pause()` without the need to add a `PlayerView`.
 PlayerView can be set later, when it is appropriate. For example, a news feed like application's `PlayerView`s will be in a `RecyclerView`.
