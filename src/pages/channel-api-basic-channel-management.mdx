@@ -14,11 +14,13 @@ GET https://api.video.ibm.com/users/self/channels.json
 
 The parameters for the GET request:
 
-| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION                             |
-| ---------- | ------- | ---------- | --------------------------------------- |
-| `q`        | string  | OPTIONAL   | Search for text in channel related data |
-| `p`        | integer | OPTIONAL   | Requested page number (1 by default)    |
-| `pagesize` | integer | OPTIONAL   | Requested page size (100 by default)    |
+| PARAMETER   | TYPE    | IMPORTANCE | DESCRIPTION                             |
+| ----------- | ------- | ---------- | --------------------------------------- |
+| `q`         | string  | OPTIONAL   | Search for text in channel related data |
+| `sort`      | string  | OPTIONAL   | Search sorting criteria.  Possible values: `recent` (default), `popular`, `title`, `duration`, `relevance` |
+| `direction` | string  | OPTIONAL   | Search sorting order.  Possible values: `desc` (default), `asc` |
+| `p`         | integer | OPTIONAL   | Requested page number (1 by default)    |
+| `pagesize`  | integer | OPTIONAL   | Requested page size (100 by default)    |
 
 ### Success response
 
