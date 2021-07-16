@@ -1,0 +1,125 @@
+---
+title: Initialization
+description: Chat 2.0 initialization
+---
+
+## Initialization
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/chat.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `chat` root object.
+
+|KEY|TYPE|DESCRIPTION|
+|---|---|---|
+|`stream_data`|object|Data for connect|
+|`stream_data`.`api_base_url`|string|Service base url|
+|`stream_data`.`api_key`|string|Api key for the service|
+|`stream_data`.`channel_id`|string|Channel id for the connection|
+|`stream_data`.`channel_type`|string|Channel type|
+|`stream_data`.`team`|string|Team identifier|
+|`user`|object|User related data|
+|`user`.`default_name`|string¦null|Default name based on the token|
+|`user`.`id`|string|User identifier|
+|`user`.`has_verified_user`|boolean|Is the user known based on the access token or generated randomly|
+|`user`.`token`|string|Token for the service|
+
+Example of a success response:
+
+```json
+{
+  "chat": {
+    "stream_data": {
+      "api_base_url": "https://chat-proxy-us-east.stream-io-api.com",
+      "api_key": "abc123",
+      "channel_id": "channel_12345678",
+      "channel_type": "chatroom",
+      "team": "team_12345678"
+    },
+    "user": {
+      "default_name": "John Smith",
+      "id": "ee11cbb19052e40b07aac0ca060c23ee",
+      "has_verified_user": true,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJOb3RoaW5nIHRvIHNlZSBoZXJlIn0.JBqm9SULSLYo2f8-MD7JCQZX-Iyc7dUJ-Tm6kIvDxjA"
+    }
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Initialize a group chat
+
+```
+POST https://api.video.ibm.com/channels/{channelId}/chat/groups.json
+```
+
+### Parameters
+
+| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
+| ---------- | ------ | ---------- | ----------- |
+| `participant_ids`   | string[] | REQUIRED   | Ids of other participants in the group/direct chat |
+| `chat_token`   | string | REQUIRED   | Chat token returned at initialization |
+| `name`   | string | OPTIONAL   | Name of the group chat |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+POST /channels/1234/chat/groups.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+participant_ids[]=abcdef12345&participant_ids[]=abcdef12346&chat_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJOb3RoaW5nIHRvIHNlZSBoZXJlIn0.JBqm9SULSLYo2f8-MD7JCQZX-Iyc7dUJ-Tm6kIvDxjA&name=Our%20chat
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `group` root object.
+
+|KEY|TYPE|DESCRIPTION|
+|---|---|---|
+|`channel_id`|string|Id of the new group chat|
+|`channel_type`|string|Type of the new group chat|
+|`team`|string|Team the group chat belongs to|
+
+Example of a success response:
+
+```json
+{
+  "group": {
+    "channel_id": "private_1234",
+    "channel_type": "groupchat",
+    "team": "team_12345678"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
