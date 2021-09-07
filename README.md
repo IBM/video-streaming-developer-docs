@@ -63,7 +63,7 @@ in order to create a new page, you have to
 
 The build and deployment process is automated with Travis CI and triggered by pushing to the master branch.
 
-You can check the deployment logs here: https://travis-ci.org/github/IBM/video-streaming-developer-docs
+You can check the deployment logs here: https://app.travis-ci.com/github/IBM/video-streaming-developer-docs
 
 For a change, please create a branch, and make a pull request to master.
 On every merge to master, deployment will start automatically, triggered by Travis.
