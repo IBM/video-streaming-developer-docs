@@ -11,5 +11,5 @@ jobs:
       - uses: actions/checkout@v1
       - uses: enriikke/gatsby-gh-pages-action@v2.2.0
         with:
-          access-token: ${{ secrets.DEV_DOCS_TOKEN }}
+          access-token: ${{ secrets.DEV_DOCS_FORK_TOKEN }}
           deploy-brach: gh-pages
