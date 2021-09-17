@@ -12,4 +12,4 @@ jobs:
       - uses: enriikke/gatsby-gh-pages-action@v2.2.0
         with:
           access-token: ${{ secrets.DEV_DOCS_FORK_TOKEN }}
-          deploy-brach: gh-pages
+          deploy-branch: gh-pages
