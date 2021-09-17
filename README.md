@@ -65,7 +65,7 @@ The project uses this Github Action to build and publish the site: [Gatsby Publi
 
 ### Tips
 
-#### WIP
+#### :construction_worker_man: WIP
 
 To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title. 
 In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title. 
