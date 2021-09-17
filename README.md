@@ -17,7 +17,7 @@ To collaborate with this repository in GitHub you need to follow these steps:
 - Push the changes to your repository
 - Create a Pull Request from your repository back to the original one
 
-Then the codeowners will review your Pull Request and if the PR is accepted and merged into master Travis CI will deploy the new version of the site.
+Then the codeowners will review your Pull Request and if the PR is accepted and merged into master a Github Action will build and push the site to the `gh-pages` branch and the deployment is done. 
 
 ## How To
 
@@ -61,20 +61,7 @@ in order to create a new page, you have to
 
 ## Deployment
 
-The build and deployment process is automated with Travis CI and triggered by pushing to the master branch.
-
-You can check the deployment logs here: https://travis-ci.org/github/IBM/video-streaming-developer-docs
-
-For a change, please create a branch, and make a pull request to master.
-On every merge to master, deployment will start automatically, triggered by Travis.
-After 5-10 minutes, the changes will takes effect on the developer site live environment
-https://developers.video.ibm.com/
-
-### Additional details about build and deployment
-
-Travis runs `gatsby build --prefix-paths`, which generates the production code in the /public directory.  
-Then gh-pages node command will copy the `/public` directory's content into gh-pages branch.
-The github pages url serves the content of the gh-pages branch.
+The project uses this Github Action to build and publish the site: [Gatsby Publish](https://github.com/marketplace/actions/gatsby-publish)
 
 ### Tips
 
