@@ -18,8 +18,9 @@
   },
   "dependencies": {
     "@carbon/icons-react": "^10.13.0",
-    "gatsby": "^2.21.17",
-    "gatsby-theme-carbon": "^1.24.1",
+    "gatsby": "^3.14.0",
+    "gatsby-plugin-manifest": "^3.14.0",
+    "gatsby-theme-carbon": "^2.0.0",
     "ibm-video-streaming-web-player-api": "^1.2.0",
     "md5": "^2.2.1",
     "prop-types": "^15.7.2",
