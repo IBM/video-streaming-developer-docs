@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
 import { HeaderSideNavItems, SideNav, SideNavItems } from 'carbon-components-react';
-import { useNavItems } from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItemProvider';
+import { useNavItems as themeUseNavItems } from 'gatsby-theme-carbon/src/util/NavItems';
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
 import LeftNavHeaderMenus from '../Header/LeftNavHeaderMenus';
@@ -12,7 +12,7 @@ import { sideNav } from './LeftNav.module.scss';
 const LeftNav = ({ location, homepage, is404 }) => {
   const { leftNavIsOpen } = useContext(NavContext);
 
-  let navItems = useNavItems();
+  let navItems = themeUseNavItems();
 
   if (!location) {
     return '';
