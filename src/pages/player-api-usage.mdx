@@ -260,7 +260,16 @@ The embedded player dispatches several events during playback. This method adds 
 The event handler callback receives two arguments:
 
 - `type` the type of the event
-- `data` optional data sent along the event
+- `data` optional data sent along the event (this can be an array, object or boolean variable)
+
+For example:
+
+```js
+viewer.addListener('playing', function (type, data) {
+    console.log(type); // "playing"
+    console.log(data); // true or false
+});
+```
 
 Available events for `addListener` and `removeListener`:
 
@@ -313,7 +322,9 @@ Called when the currently loaded content playback is started or stopped. Sends d
 ###### Example
 
 ```js
-viewer.addListener('playing', callback);
+viewer.addListener('playing', function(type, playing) {
+    ...
+});
 ```
 
 ### seekStarted
@@ -327,7 +338,10 @@ Called when a user or system initiated seek started.
 ###### Example
 
 ```js
-viewer.addListener('seekStarted', callback);
+viewer.addListener('seekStarted', function(type, data) {
+    const { from, to, initiator } = data;
+    ...
+});
 ```
 
 ### seekCompleted
@@ -371,7 +385,9 @@ Receives the following array of quality based objects
 ###### Example
 
 ```js
-viewer.addListener('quality', callback);
+viewer.addListener('quality', function(type, qualities) {
+    ...
+});
 ```
 Example quality object from the quality array:
 ```json
@@ -400,14 +416,16 @@ Returns an array containing closed captions as objects.
 
 - `index` (number) unique index of the closed caption
 - `label` (string) displayed label of the closed caption
-- `language` (string) ISO language code of the closed caption 
+- `language` (string) ISO language code of the closed caption
 - `country` (string) ISO code of country
 - `active` (boolean) height of the quality version in pixels
 
 ###### Example
 
 ```js
-viewer.addListener('cc', callback);
+viewer.addListener('cc', function(type, captions) {
+    ...
+});
 ```
 Example cc object from the cc array:
 ```json
@@ -424,7 +442,7 @@ Example cc object from the cc array:
 
 Called when the video player content changes for some reason. Same data as received in `getProperty('content')`
 
-Received arguments: `data` (object)
+Received arguments: `data` (array)
 
 ###### Example
 
@@ -482,11 +500,11 @@ Available error type(s):
 ###### Example
 
 ```js
-viewer.addListener('error', function(event) {
-    switch (event.name) {
+viewer.addListener('error', function(type, errorEvent) {
+    switch (errorEvent.name) {
         case 'autoplayRejected':
             // TODO: display fallback button
-            console.log(event.message);
+            console.log(errorEvent.message);
             break;
         // no default
     }
