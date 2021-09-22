@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - "10"
-deploy:
-  provider: script
-  script: npm install && npm run deploy_from_ci
-  skip_cleanup: true
-  on:
-    branch: master

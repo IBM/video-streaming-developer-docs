@@ -6,18 +6,18 @@ A documentation site for IBM Video Streaming APIs, SDKs and use cases - [URL](ht
 
 With this repository Video Streaming developers can easily update their API and SDK documentations.
 The site content is in `mdx` format.
-MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
+MDX is like an extension of markdown documents. MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
 
 ## How to contribute
 To collaborate with this repository in GitHub you need to follow these steps:
 - Fork the repository into your own GitHub
 - Clone the repository to your local machine
 - Create a new branch for your changes
-- Make some changes and commit them with useful messages
+- Make some changes and commit them with useful messages ([Conventional Commit messages](https://www.conventionalcommits.org/en/v1.0.0/) preferred)
 - Push the changes to your repository
 - Create a Pull Request from your repository back to the original one
 
-Then the codeowners will review your Pull Request and if the PR is accepted and merged into master Travis CI will deploy the new version of the site.
+Then the codeowners will review your Pull Request and if the PR is accepted and merged into master a Github Action will build and push the site to the `gh-pages` branch and the deployment is done. 
 
 ## How To
 
@@ -61,24 +61,11 @@ in order to create a new page, you have to
 
 ## Deployment
 
-The build and deployment process is automated with Travis CI and triggered by pushing to the master branch.
-
-You can check the deployment logs here: https://travis-ci.org/github/IBM/video-streaming-developer-docs
-
-For a change, please create a branch, and make a pull request to master.
-On every merge to master, deployment will start automatically, triggered by Travis.
-After 5-10 minutes, the changes will takes effect on the developer site live environment
-https://developers.video.ibm.com/
-
-### Additional details about build and deployment
-
-Travis runs `gatsby build --prefix-paths`, which generates the production code in the /public directory.  
-Then gh-pages node command will copy the `/public` directory's content into gh-pages branch.
-The github pages url serves the content of the gh-pages branch.
+The project uses this Github Action to build and publish the site: [Gatsby Publish](https://github.com/marketplace/actions/gatsby-publish)
 
 ### Tips
 
-#### WIP
+#### :construction_worker_man: WIP
 
 To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title. 
 In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title. 
