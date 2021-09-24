@@ -1,18 +1,14 @@
 import React, { useContext } from 'react';
 import cx from 'classnames';
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
-import {
-  nav,
-  open,
-  divider,
-  link,
-  linkDisabled,
-} from 'gatsby-theme-carbon/src/components/Switcher/Switcher.module.scss';
+import { divider, link, linkDisabled } from 'gatsby-theme-carbon/src/components/Switcher/Switcher.module.scss';
+import { nav, open } from './SwitcherShadow.module.scss';
 
 const Switcher = ({ children }) => {
   const { switcherIsOpen } = useContext(NavContext);
 
   return (
+    // eslint-disable-next-line jsx-a11y/role-supports-aria-props
     <nav
       className={cx(nav, { [open]: switcherIsOpen })}
       aria-label="IBM Watson Media"
@@ -56,6 +52,8 @@ export const SwitcherLink = ({ disabled, children, href: hrefProp, ...rest }) =>
 const DefaultChildren = () => {
   return (
     <>
+      <SwitcherDivider>Product portfolio</SwitcherDivider>
+
       <SwitcherLink href="https://video.ibm.com/">IBM Watson Media</SwitcherLink>
 
       <SwitcherDivider>Learn more</SwitcherDivider>

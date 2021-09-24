@@ -29,6 +29,7 @@ const CustomHeader = ({ homepage, is404, theme, location }) => {
   const { leftNavIsOpen, toggleNavState, switcherIsOpen, searchIsOpen } = useContext(NavContext);
   const { isSearchEnabled } = useMetadata();
   const label = 'IBM Video Streaming Developers Site';
+
   return (
     <>
       <Header aria-label={label} className={cx(header, headerShadow)}>
