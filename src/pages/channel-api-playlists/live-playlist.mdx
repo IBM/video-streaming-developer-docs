@@ -1,0 +1,383 @@
+---
+title: Live Playlist
+description:
+---
+
+## Get a list of Live playlists
+
+```
+GET /channels/{channelId}/live-playlists.json
+```
+
+Example request with CURL:
+
+```
+curl -X GET\
+    -H "Accept: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists.json"
+```
+
+### Parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION |
+| ----------- | ------ | ---------- | ----------- |
+| `channelId` | string | REQUIRED   | Channel ID  |
+
+### Success response
+
+Upon success, a set of key-value pairs is returned under a `live_playlists` element.
+
+| PARAMETER          | TYPE              | DESCRIPTION                                     |
+| ------------------ | ----------------- | ----------------------------------------------- |
+| `id`               | string            |                                                 |
+| `is_live`          | boolean           |                                                 |
+| `total_duration`   | integer           |                                                 |
+| `title`            | string            |                                                 |
+| `is_replay`        | boolean           |                                                 |
+| `loop`             | boolean           |                                                 |
+| `is_enabled`       | boolean           |                                                 |
+| `video_ids`        | array of integers |                                                 |
+| `scheduling.from`  | integer           | Unix timestamp (UTC). Must be in the future.    |
+| `scheduling.to`    | integer           | Unix timestamp (UTC). Must be larger then from. |
+| `pager.previous`   | string            | Previous page URL                               |
+| `pager.next`       | string            | Next page URL                                   |
+| `pager.page_count` | integer           | Number of pages                                 |
+| `pager.item_count` | integer           | Number of items                                 |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized   |             |                  |
+| 403 Forbidden      |             |                  |
+| 500 Server error   |             |                  |
+
+## Create a new Live playlist
+
+```
+POST /channels/{channelId}/live-playlists.json
+```
+
+Example request with CURL:
+
+```
+curl -X POST\
+    -H "Accept: application/json"\
+    -H "Content-Type: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists.json"
+```
+
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId` | string | REQUIRED   | Channel ID       |
+
+Body parameters
+
+| PARAMETER         | TYPE              | IMPORTANCE |
+| ----------------- | ----------------- | ---------- |
+| `title`           | string            | REQUIRED   |
+| `is_replay`       | boolean           | REQUIRED   |
+| `loop`            | boolean           | REQUIRED   |
+| `is_enabled`      | boolean           | REQUIRED   |
+| `video_ids`       | array of integers | REQUIRED   |
+| `scheduling.from` | integer           | REQUIRED   |
+| `scheduling.to`   | integer           |            |
+
+### Success response
+
+| PARAMETER         | TYPE              | IMPORTANCE |
+| ----------------- | ----------------- | ---------- |
+| `title`           | string            | REQUIRED   |
+| `is_replay`       | boolean           | REQUIRED   |
+| `loop`            | boolean           | REQUIRED   |
+| `is_enabled`      | boolean           | REQUIRED   |
+| `video_ids`       | array of integers | REQUIRED   |
+| `scheduling.from` | integer           | REQUIRED   |
+| `scheduling.to`   | integer           |            |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE                              |
+| ------------------ | ---------------------------------------- |
+| 400 Bad request    | {errors:[{field: string, error: string}] |
+| 401 Unauthorized   |                                          |
+| 403 Forbidden      |                                          |
+| 409 Conflict       | {error: string, hint: string}            |
+| 500 Server error   |                                          |
+
+## Get a Live playlist
+
+```
+GET /channels/{channelId}/live-playlists/{id}.json
+```
+
+Example request with CURL:
+
+```
+curl \
+    -X GET\
+    -H "Accept: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists/{id}.json"
+```
+
+### Parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId` | string | REQUIRED   | Channel ID       |
+| `id`        | string | REQUIRED   | Live Playlist ID |
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned.
+
+| PARAMETER         | TYPE              | DESCRIPTION |
+| ----------------- | ----------------- | ----------- |
+| `id`              | string            |             |
+| `is_live`         | boolean           |             |
+| `total_duration`  | integer           |             |
+| `title`           | string            |             |
+| `is_replay`       | boolean           |             |
+| `loop`            | boolean           |             |
+| `is_enabled`      | boolean           |             |
+| `video_ids`       | array of integers |             |
+| `scheduling.from` | integer           |             |
+| `scheduling.to`   | integer           |             |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized   |             |                  |
+| 403 Forbidden      |             |                  |
+| 404 Not Found      |             |                  |
+| 500 Server error   |             |                  |
+
+## Modify a live playlist
+
+```
+PUT /channels/{channelId}/live-playlists/{id}.json
+```
+
+Example request with CURL:
+
+```
+curl -X PUT\
+    -H "Accept: application/json"\
+    -H "Content-Type: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists/{id}.json"
+```
+
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId` | string | REQUIRED   | Channel ID       |
+| `id`        | string | REQUIRED   | Live Playlist ID |
+
+Body parameters
+
+| PARAMETER         | TYPE              | IMPORTANCE |
+| ----------------- | ----------------- | ---------- |
+| `title`           | string            | REQUIRED   |
+| `is_replay`       | boolean           | REQUIRED   |
+| `loop`            | boolean           | REQUIRED   |
+| `is_enabled`      | boolean           | REQUIRED   |
+| `video_ids`       | array of integers | REQUIRED   |
+| `scheduling.from` | integer           | REQUIRED   |
+| `scheduling.to`   | integer           |            |
+
+### Success response
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE                              |
+| ------------------ | ---------------------------------------- |
+| 204 No content     |                                          |
+| 400 Bad request    | {errors:[{field: string, error: string}] |
+| 401 Unauthorized   |                                          |
+| 403 Forbidden      |                                          |
+| 404 Not Found      |                                          |
+| 409 Conflict       | {error: string, hint: string}            |
+| 500 Server error   |                                          |
+
+## Delete a Live playlist
+
+```
+DELETE /channels/{channelId}/live-playlists/{id}.json
+```
+
+Example request with CURL:
+
+```
+curl \
+    -X DELETE\
+    -H "Accept: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists/{id}.json"
+```
+
+### Parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId` | string | REQUIRED   | Channel ID       |
+| `id`        | string | REQUIRED   | Live Playlist ID |
+
+### Responses
+
+### Success response
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE                                   | ERROR CONDITIONS |
+| ------------------ | --------------------------------------------- | ---------------- |
+| 204 No content     |                                               |                  |
+| 401 Unauthorized   |                                               |                  |
+| 403 Forbidden      |                                               |                  |
+| 404 Not Found      |                                               |                  |
+| 409 Conflict       | {Required: error error: string, hint: string} |                  |
+| 500 Server error   |                                               |                  |
+
+## Get the currently live playlist
+
+```
+GET /channels/{channelId}/live-playlists/live.json
+```
+
+Example request with CURL:
+
+```
+curl -X GET\
+    -H "Accept: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists/live.json"
+```
+
+
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION |
+| ----------- | ------ | ---------- | ----------- |
+| `channelId` | string | REQUIRED   | Channel ID  |
+
+### Success response
+
+Upon success a response with HTTP status “200 OK” is returned.
+
+| PARAMETER         | TYPE              | DESCRIPTION |
+| ----------------- | ----------------- | ----------- |
+| `id`              | string            |             |
+| `is_live`         | boolean           |             |
+| `total_duration`  | integer           |             |
+| `title`           | string            |             |
+| `is_replay`       | boolean           |             |
+| `loop`            | boolean           |             |
+| `is_enabled`      | boolean           |             |
+| `video_ids`       | array of integers |             |
+| `scheduling.from` | integer           |             |
+| `scheduling.to`   | integer           |             |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE | ERROR CONDITIONS |
+| ------------------ | ----------- | ---------------- |
+| 401 Unauthorized   |             |                  |
+| 403 Forbidden      |             |                  |
+| 404 Not Found      |             |                  |
+| 500 Server error   |             |                  |
+
+## Go live with the playlist
+
+```
+PUT /channels/{channelId}/live-playlists/live/{id}.json
+```
+
+Example request with CURL:
+
+```
+curl -X PUT\
+    -H "Accept: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists/live/{id}.json"
+```
+
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId` | string | REQUIRED   | Channel ID       |
+| `id`        | string | REQUIRED   | Live Playlist ID |
+
+### Success response
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE                                   | ERROR CONDITIONS |
+| ------------------ | --------------------------------------------- | ---------------- |
+| 204 No content     |                                               |                  |
+| 401 Unauthorized   |                                               |                  |
+| 403 Forbidden      |                                               |                  |
+| 404 Not Found      |                                               |                  |
+| 409 Conflict       | {Required: error error: string, hint: string} |                  |
+| 500 Server error   |                                               |                  |
+
+## Stop streaming the playlist
+
+```
+DELETE /channels/{channelId}/live-playlists/live/{id}.json
+```
+
+Example request with CURL:
+
+```
+curl \
+    -X DELETE\
+    -H "Accept: application/json"\
+    "https://api.video.ibm.com/channels/{channelId}/live-playlists/live/{id}.json"
+```
+
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId` | string | REQUIRED   | Channel ID       |
+| `id`        | string | REQUIRED   | Live Playlist ID |
+
+### Responses
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE | ERROR VALUE                   |
+| ------------------ | ----------------------------- |
+| 204 No content     |                               |
+| 401 Unauthorized   |                               |
+| 403 Forbidden      |                               |
+| 404 Not Found      |                               |
+| 409 Conflict       | {error: string, hint: string} |
+| 500 Server error   |                               |
