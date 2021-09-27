@@ -1,5 +1,6 @@
 import React from 'react';
-import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon';
+import { HomepageCallout, HomepageBanner } from 'gatsby-theme-carbon';
+import ShadowedHomepageBanner from './Banner';
 import HomepageTemplate from './HomepageTemplate';
 
 import Carbon from '../../images/hero@2x.png';
@@ -13,7 +14,7 @@ const FirstRightText = () => (
 );
 
 const customProps = {
-  Banner: <HomepageBanner renderText={() => false} image={Carbon} />,
+  Banner: <ShadowedHomepageBanner renderText={() => false} image={Carbon} />,
   FirstCallout: (
     <HomepageCallout backgroundColor="#161616" color="white" leftText={FirstLeftText} rightText={FirstRightText} />
   ),
