@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Row, Column } from 'gatsby-theme-carbon/src/components/Grid';
-import { column, row, grid } from './Banner.module.scss';
+import { column, row, grid } from 'gatsby-theme-carbon/src/components/Homepage/Banner.module.scss';
+import { column as columnClone } from './Banner.module.scss';
 
 const HomepageBanner = ({ image, position, renderText }) => (
   <Grid
@@ -13,7 +14,7 @@ const HomepageBanner = ({ image, position, renderText }) => (
     position={position}
   >
     <Row className={row}>
-      <Column className={column}>{renderText()}</Column>
+      <Column className={`${column} ${columnClone}`}>{renderText()}</Column>
     </Row>
   </Grid>
 );
