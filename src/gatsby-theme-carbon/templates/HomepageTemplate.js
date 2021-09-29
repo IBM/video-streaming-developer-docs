@@ -16,7 +16,6 @@ const Homepage = ({ children, Banner, FirstCallout, location, pageContext }) => 
       pageKeywords={keywords}
       titleType={titleType}
       homepage
-      theme="dark"
       location={location}
     >
       {Banner}

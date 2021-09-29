@@ -15,7 +15,7 @@ import {
 
 const CustomCard = ({ href, title, content, theme, decorator }) => {
   const customCardInnerClasses = cx(customCardInner, {
-    [customCardDark]: theme === 'dark',
+    [customCardDark]: theme === 'light',
     [customCardContentDecorator]: decorator,
   });
 
