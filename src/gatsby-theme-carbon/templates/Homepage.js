@@ -16,7 +16,7 @@ const FirstRightText = () => (
 const customProps = {
   Banner: <HomepageBanner renderText={() => false} image={Carbon} />,
   FirstCallout: (
-    <HomepageCallout backgroundColor="#161616" color="white" leftText={FirstLeftText} rightText={FirstRightText} />
+    <HomepageCallout backgroundColor="#000000" color="white" leftText={FirstLeftText} rightText={FirstRightText} />
   ),
 };
 

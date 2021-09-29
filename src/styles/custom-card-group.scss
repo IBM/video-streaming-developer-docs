@@ -5,6 +5,10 @@
     display: block;
   }
 
+  &:first-child {
+    margin-top: 6rem;
+  }
+
   &__third {
     flex: 0 0 calc(100% / 3);
   }
