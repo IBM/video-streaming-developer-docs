@@ -1,6 +1,6 @@
 ---
-title: Settings
-description: Chat 2.0 settings
+title: Chat Settings
+description: Chat settings
 ---
 
 ## Get chat settings in batch
@@ -13,15 +13,15 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `settings` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`threads`.`enabled`|boolean|Threaded messaging on/off|
-|`uploads`.`enabled`|boolean|File uploads are allowed|
-|`reactions`.`enabled`|boolean|Reactions are on/off|
-|`video`.`enabled`|boolean|Video chat status|
-|`profanity_filter`.`enabled`|boolean|Profanity filter status|
-|`flag`.`enabled`|boolean|Message flagging status|
-|`group`.`status`|string|Group/direct chat status. Values: `disabled`, `by-viewers`, `by-moderators`|
+| KEY                          | TYPE    | DESCRIPTION                                                                 |
+| ---------------------------- | ------- | --------------------------------------------------------------------------- |
+| `threads`.`enabled`          | boolean | Threaded messaging on/off                                                   |
+| `uploads`.`enabled`          | boolean | File uploads are allowed                                                    |
+| `reactions`.`enabled`        | boolean | Reactions are on/off                                                        |
+| `video`.`enabled`            | boolean | Video chat status                                                           |
+| `profanity_filter`.`enabled` | boolean | Profanity filter status                                                     |
+| `flag`.`enabled`             | boolean | Message flagging status                                                     |
+| `group`.`status`             | string  | Group/direct chat status. Values: `disabled`, `by-viewers`, `by-moderators` |
 
 Example of a success response:
 
@@ -60,7 +60,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -75,9 +75,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/threads.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `threads` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|boolean|Threaded messaging on/off|
+| KEY       | TYPE    | DESCRIPTION               |
+| --------- | ------- | ------------------------- |
+| `enabled` | boolean | Threaded messaging on/off |
 
 Example of a success response:
 
@@ -96,7 +96,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -109,9 +109,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/threads.json
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `enable`   | string | REQUIRED   | Possible values: `true`, `false` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                      |
+| -------- | ------ | ---------- | -------------------------------- |
+| `enable` | string | REQUIRED   | Possible values: `true`, `false` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -138,7 +138,7 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -153,9 +153,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/uploads.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `uploads` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|boolean|File uploads are allowed|
+| KEY       | TYPE    | DESCRIPTION              |
+| --------- | ------- | ------------------------ |
+| `enabled` | boolean | File uploads are allowed |
 
 Example of a success response:
 
@@ -174,7 +174,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -187,9 +187,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/uploads.json
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `enable`   | string | REQUIRED   | Possible values: `true`, `false` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                      |
+| -------- | ------ | ---------- | -------------------------------- |
+| `enable` | string | REQUIRED   | Possible values: `true`, `false` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -216,7 +216,7 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -231,9 +231,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/reactions.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `reactions` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|boolean|Reactions are on/off|
+| KEY       | TYPE    | DESCRIPTION          |
+| --------- | ------- | -------------------- |
+| `enabled` | boolean | Reactions are on/off |
 
 Example of a success response:
 
@@ -252,7 +252,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -265,9 +265,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/reactions.json
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `enable`   | string | REQUIRED   | Possible values: `true`, `false` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                      |
+| -------- | ------ | ---------- | -------------------------------- |
+| `enable` | string | REQUIRED   | Possible values: `true`, `false` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -294,11 +294,10 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
-
 
 ## Get video chat settings
 
@@ -310,9 +309,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/video.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `video` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|boolean|Video chat status|
+| KEY       | TYPE    | DESCRIPTION       |
+| --------- | ------- | ----------------- |
+| `enabled` | boolean | Video chat status |
 
 Example of a success response:
 
@@ -331,7 +330,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -344,9 +343,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/video.json
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `enable`   | string | REQUIRED   | Possible values: `true`, `false` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                      |
+| -------- | ------ | ---------- | -------------------------------- |
+| `enable` | string | REQUIRED   | Possible values: `true`, `false` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -373,7 +372,7 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -388,9 +387,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/profanity-filte
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `profanity_filter` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|boolean|Profanity filter status|
+| KEY       | TYPE    | DESCRIPTION             |
+| --------- | ------- | ----------------------- |
+| `enabled` | boolean | Profanity filter status |
 
 Example of a success response:
 
@@ -409,7 +408,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -422,9 +421,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/profanity-filte
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `enable`   | string | REQUIRED   | Possible values: `true`, `false` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                      |
+| -------- | ------ | ---------- | -------------------------------- |
+| `enable` | string | REQUIRED   | Possible values: `true`, `false` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -451,7 +450,7 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -466,9 +465,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/flag.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `flag` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|boolean|Message flagging status|
+| KEY       | TYPE    | DESCRIPTION             |
+| --------- | ------- | ----------------------- |
+| `enabled` | boolean | Message flagging status |
 
 Example of a success response:
 
@@ -487,7 +486,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -500,9 +499,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/flag.json
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `enable`   | string | REQUIRED   | Possible values: `true`, `false` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                      |
+| -------- | ------ | ---------- | -------------------------------- |
+| `enable` | string | REQUIRED   | Possible values: `true`, `false` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -529,7 +528,7 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -544,9 +543,9 @@ GET https://api.video.ibm.com/channels/{channelId}/chat/settings/group.json
 
 Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `group` root object.
 
-|KEY|TYPE|DESCRIPTION|
-|---|---|---|
-|`enabled`|string|Group/direct chat status. Values: `disabled`, `by-viewers`, `by-moderators`|
+| KEY       | TYPE   | DESCRIPTION                                                                 |
+| --------- | ------ | --------------------------------------------------------------------------- |
+| `enabled` | string | Group/direct chat status. Values: `disabled`, `by-viewers`, `by-moderators` |
 
 Example of a success response:
 
@@ -565,7 +564,7 @@ Possible error responses:
 | HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
@@ -578,9 +577,9 @@ PUT https://api.video.ibm.com/channels/{channelId}/chat/settings/group.json
 
 ### Parameters
 
-| KEY        | TYPE   | IMPORTANCE | DESCRIPTION |
-| ---------- | ------ | ---------- | ----------- |
-| `status`   | string | REQUIRED   | Controls who can start group/direct chats. Possible values: `disabled`, `by-viewers`, `by-moderators` |
+| KEY      | TYPE   | IMPORTANCE | DESCRIPTION                                                                                           |
+| -------- | ------ | ---------- | ----------------------------------------------------------------------------------------------------- |
+| `status` | string | REQUIRED   | Controls who can start group/direct chats. Possible values: `disabled`, `by-viewers`, `by-moderators` |
 
 The Content-Type of the request should be **application/x-www-form-urlencoded**.
 
@@ -607,8 +606,7 @@ Possible error responses:
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
 | 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
 | 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
-| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                    |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamchat` benefit                                         |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`         | Channel not found                                                                       |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
-
