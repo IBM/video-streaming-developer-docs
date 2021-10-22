@@ -129,9 +129,8 @@
     - path: /channel-api-events
 - title: Chat
   pages:
-    - path: /channel-api-chat
-- title: Chat 2.0
-  pages:
+    - title: Getting Started
+      path: /channel-api-chat-2-0/get-started
     - title: Initialization
       path: /channel-api-chat-2-0/initialization
     - title: Rooms
