@@ -3,7 +3,7 @@ title: Pre-Buffering
 description: Pre-Buffering
 ---
 
-UstreamPlayers initialized with `RECORDED` content can be buffered ahead of time.
+Players initialized with `RECORDED` content can be buffered ahead of time.
 This way an illusion of instantly starting videos can be achieved.
 By the time a player is needed (`PlayerView` is set and `play()` is called) it is likely already in the `Paused` state, and playback can start immediately.
 This feature's most obvious use-case is a newsfeed like playback experience, 
@@ -11,21 +11,21 @@ when video contents are scrolling into the view and need to be started as soon a
 
 ## Usage
 
-- Create a `ustreamPlayer` instance with an ID. (The ID can be the `contentDescriptors.toString()` value for simplicity, if duplicate contents are not required.)
+- Create a `player` instance with an ID. (The ID can be the `contentDescriptors.toString()` value for simplicity, if duplicate contents are not required.)
 - Initialize the created player with a **RECORDED** content.
-- Call `pause()` on the player. The UstreamPlayer will buffer the content then it will wait.
+- Call `pause()` on the player. The Player will buffer the content then it will wait.
 At this stage it is not required to call `setPlayerListener()`, `setErrorListener()` and `attach()` if the callbacks are not relevant for you.
 But you are free to do so if you are interested in the callbacks, but make sure you call `detach()` before changing listeners or playerView on the player,
 and call `attach()` again so these changes can take effect.
 - Later when the player is needed set your listeners and the `playerView`, call `attach()`
-- Call `ustreamPlayer.play()` and if it is buffered the playback will start instantly.
+- Call `player.play()` and if it is buffered the playback will start instantly.
 
 **Example**:
 
 ```java
-UstreamPlayerFactory ustreamPlayerFactory = new UstreamPlayerFactory(API_KEY, activity);
+PlayerFactory playerFactory = new PlayerFactory(API_KEY, activity);
 ContentDescriptor contentDescriptor = new ContentDescriptor(ContentType.RECORDED, 123456L);
-UstreamPlayer player1 = ustreamPlayerFactory.createUstreamPlayer(contentDescriptor.toString());
+Player player1 = playerFactory.createPlayer(contentDescriptor.toString());
 player1.initWithContent(contentDescriptor);
 player1.pause();
 

@@ -3,7 +3,7 @@ title: Changing Tracks
 description: Changing Tracks
 ---
 
-Video streams can contain multiple tracks of different types (usually video, audio and text such as for captions). The player SDK lets you control which of these
+Video streams can contain multiple tracks of different types (usually video, audio and text such as for captions). The Player SDK lets you control which of these
 tracks are selected and presented to the user. See this document's `MediaTrackChangeListener` section or the corresponding javadoc for API reference.
 
 ## Usage
@@ -17,9 +17,9 @@ play a certain media track. A renderer can also be disabled.
 **Example**: Selecting a subtitle / closed captions track
 
 ```java
-UstreamPlayerFactory ustreamPlayerFactory = new UstreamPlayerFactory(API_KEY, activity);
+PlayerFactory playerFactory = new PlayerFactory(API_KEY, activity);
 ContentDescriptor contentDescriptor = new ContentDescriptor(ContentType.RECORDED, 123456L);
-UstreamPlayer player = ustreamPlayerFactory.createUstreamPlayer(contentDescriptor.toString());
+Player player = playerFactory.createPlayer(contentDescriptor.toString());
 player.initWithContent(contentDescriptor);
 player.setMediaTracksChangeListener(mediaTrackChangeListener);
 player.attach();
@@ -32,7 +32,7 @@ public void onMediaTracksChanged(MediaTrackGroupHolder mediaTrackGroups) {
 
 //... When the user selects a subtitle track from the selector:
 void selectTrack(MediaTrack mediaTrack) {
-    ustreamPlayer.selectTrackForRenderer(mediaTracks, null);
+    player.selectTrackForRenderer(mediaTracks, null);
 }
 ```
 

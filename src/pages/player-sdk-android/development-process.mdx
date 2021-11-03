@@ -14,7 +14,7 @@ to register the **Key Hash** of every app in which you will integrate the _IBM V
 Every registered application will have its own _IBM Video Streaming Player SDK key_. Although there is a provided SDK key for the sample 
 app's sample content, you still need to register your **Key Hash** at IBM Video Streaming. This will ensure that you can build the sample 
 project using your own certificates.
-Every time you create an instance of the `UstreamPlayerFactory` you must use your **IBM Video Streaming Player SDK key**.
+Every time you create an instance of the `PlayerFactory` you must use your **IBM Video Streaming Player SDK key**.
 
 ### Generate your Key Hash
 
@@ -34,7 +34,7 @@ There are two ways to generate your **Key Hash**:
 
     Execute this in a debug build **and** a in a release build too:
     
-    Starting with 1.3.0 you can use `tv.ustream.player.android.SignatureUtil.keyHashFromContext(Context)`
+    Starting with 1.3.0 you can use `com.ibm.video.android.player.android.SignatureUtil.keyHashFromContext(Context)`
     to generate or check your current Key Hash from your application. This method basically executes 
     the following lines without printing to the output:
 
@@ -112,7 +112,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'tv.ustream.player:ibm-player-sdk-android-external:1.4.0'
+    implementation 'com.ibm.video.android.player:player-android-external:2.0.0'
 }
 ```
 
@@ -125,7 +125,7 @@ You can find this in the sample application also, just copy those settings.
 Place a `PlayerView` in your layout:
 
 ```xml
-<tv.ustream.player.android.PlayerView
+<com.ibm.video.android.player.android.PlayerView
 android:id="@+id/playerview"
 android:layout_height="match_parent"
 android:layout_width="match_parent" />
@@ -133,33 +133,33 @@ android:layout_width="match_parent" />
 
 ### In your Activity or Fragment
 
-Create a `UstreamPlayerFactory` in your Activity or Fragment with the Activity's context:
+Create a `PlayerFactory` in your Activity or Fragment with the Activity's context:
 
 ```java
-private final UstreamPlayerFactory ustreamPlayerFactory = new UstreamPlayerFactory(USTREAM_PLAYER_SDK_KEY, context);
+private final PlayerFactory playerFactory = new PlayerFactory(USTREAM_PLAYER_SDK_KEY, context);
 ```
 This factory can be used to create or retrieve IBM Video Streaming Player instances.
 IBM Video Streaming Players created for a specific `playerId` will be retained across configuration changes (like orientation change).
-Requesting a player with the same `playerId` will create a new UstreamPlayer interface, but that interface will 
+Requesting a player with the same `playerId` will create a new Player interface, but that interface will
 belong to the same player instance. The previous player for the same id must be detached before attaching a new one.
 
 In your Fragment's `onCreateView()` or Activity's `onCreate()` find your playerView and get a player instance from the factory:
 
 ```java
 final PlayerView playerView = (PlayerView)findViewById(R.id.playerview);
-UstreamPlayer ustreamPlayer = ustreamPlayerFactory.createUstreamPlayer(playerId);
+Player player = playerFactory.createPlayer(playerId);
 ```
 Where `playerId` can be:
 - a constant String value if the Activity will only contain **one** player instance.
 - a persisted String value for every player instance that the Activity contains. (saved in `onSaveInstanceState()` restored in `onCreate()`)
 
-The `tv.ustream.player.api.UstreamPlayer` class is the point where you can interface with the Player SDK. Its methods send 
-events to the player, and its states are observed through the listeners (see below). The `UstreamPlayer`'s methods are 
+The `com.ibm.video.android.player.api.Player` class is the point where you can interface with the Player SDK. Its methods send
+events to the player, and its states are observed through the listeners (see below). The `Player`'s methods are
 explained further in its _Javadoc_.
 
 ## Step 7: Play live or recorded content
 
-After the `ustreamPlayer` is created, initialize it with a live or previously recorded video content. This will most likely be in your
+After the `player` is created, initialize it with a live or previously recorded video content. This will most likely be in your
 Activity's `onCreate()` (Fragment's `onCreateView()`). A player instance can be initialized more than once with different 
 content, but `connect()` or `play()` must be called in order to reconnect to the servers. The `connect()` method is
 optional (a `play()` or `pause()` call will also handle it implicitly) though the player will respond to `play()` calls 
@@ -178,15 +178,15 @@ ContentDescriptor contentDescriptor = new ContentDescriptor(ContentType.LIVE, 12
 ```
 
 ```java
-if (!ustreamPlayer.isInitialized()) {
-    ustreamPlayer.initWithContent(contentDescriptor);
+if (!player.isInitialized()) {
+    player.initWithContent(contentDescriptor);
 
     /*
     If the password (or birthday) is known in advance (and it is known to be required)
     it can be supplied here, for example:
-    ustreamPlayer.setPassword("super-secret");
+    player.setPassword("super-secret");
     */
-    ustreamPlayer.connect();
+    player.connect();
 }
 ```
 
@@ -197,37 +197,37 @@ IBM Video Streaming Player SDK version 1.3.0 introduced changes in the user faci
 ### Setting your listeners
 
 To receive state changes and other events from the player you need to set listeners. There are mandatory and optional ones, 
-but all listeners must be set prior to calling `ustreamPlayer.attach()` on your player instance. This should
+but all listeners must be set prior to calling `player.attach()` on your player instance. This should
 happen in the `onResume()` or `onStart()` callback of your `Activity` or `Fragment`. Calling `attach()` is an important step, this is where
 your listeners and the player view is bound to the Player SDK. Forgetting to call this will cause the player to not render 
 video on your `View`, and you will not receive any callback on your listeners.
 Also, since version 0.9.0 this is the place to set your `PlayerView` to the IBM Video Streaming player.
-The reason behind this is, now you can optionally pre-buffer your player by calling `ustreamPlayer.pause()` without the need to add a `PlayerView`.
+The reason behind this is, now you can optionally pre-buffer your player by calling `player.pause()` without the need to add a `PlayerView`.
 PlayerView can be set later, when it is appropriate. For example, a news feed like application's `PlayerView`s will be in a `RecyclerView`.
 
 ```java
 @Override
 protected void onResume() {
     super.onResume();
-    ustreamPlayer.setPlayerListener(playerListener);
-    ustreamPlayer.setErrorListener(errorListener);
-    ustreamPlayer.setProgressListener(progressListener);
-    ustreamPlayer.setViewerCountListener(viewerCountListener);
-    ustreamPlayer.setLogoClickListener(logoClickListener);
-    ustreamPlayer.setMetaDataListener(metaDataListener);
-    ustreamPlayer.setBufferingListener(bufferingListener);
-    ustreamPlayer.setPlayerView(playerView);
-    ustreamPlayer.attach();
+    player.setPlayerListener(playerListener);
+    player.setErrorListener(errorListener);
+    player.setProgressListener(progressListener);
+    player.setViewerCountListener(viewerCountListener);
+    player.setLogoClickListener(logoClickListener);
+    player.setMetaDataListener(metaDataListener);
+    player.setBufferingListener(bufferingListener);
+    player.setPlayerView(playerView);
+    player.attach();
 }
 ```
 
-You also need to call `ustreamPlayer.detach()` in your Activity's or Fragment's `onPause()` or `onStop()` callback, so your views can 
+You also need to call `player.detach()` in your Activity's or Fragment's `onPause()` or `onStop()` callback, so your views can
 be recycled properly.
 
 ```java
 @Override
 protected void onPause() {
-    ustreamPlayer.detach();
+    player.detach();
     super.onPause();
 }
 ```
@@ -241,16 +241,16 @@ reinitialize views):
 
 ```java
 private void changeContent(ContentDescriptor nextContent) {
-    ustreamPlayer.detach();
-    ustreamPlayer.initWithContent(nextContent);
-    ustreamPlayer.connect();
-    ustreamPlayer.attach();
+    player.detach();
+    player.initWithContent(nextContent);
+    player.connect();
+    player.attach();
 }
 ```
 
 ## Step 8: Handle Player callbacks
 
-### State flow of the Player SDK
+### State flow of the IBM Video Streaming Player SDK
 
 This diagram represents the state flow of the Player SDK, the nodes are the states reported by the player, while the named edges
 are events that can be sent to the player. There is a decision in the flow that happens automatically based on the content 
@@ -281,7 +281,7 @@ The `PlayerListener` is the most important listener, this is also a mandatory on
 an exception. The Player SDK's state is observed through this interface.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 /**
 * Observes the state of the content playback.
@@ -338,7 +338,7 @@ the corresponding callback, then it will return to the stopped state, notifying 
 `PlayerListener.onStopped()`.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 /**
 * Observes the errors that can possibly occur in the player.
@@ -365,6 +365,7 @@ public interface ErrorListener {
     /**
      * The requested content is restricted by age.
      */
+    @Deprecated
     void onAgeLock();
 
     /**
@@ -413,7 +414,7 @@ This is an optional listener, notifying the application about buffering starts a
 previous operation when buffering is completed.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 /**
 * Observes background network communication's state
@@ -441,7 +442,7 @@ The `ProgressListener` provides information about the content's duration and pro
 Duration and progress values are in milliseconds.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 public interface ProgressListener {
     void onPositionUpdated(long positionMs);
@@ -456,7 +457,7 @@ The `ViewerCountListener` provides information about the content's audience (all
 This is an optional listener.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 /**
 * Provides information about the current and total viewer numbers
@@ -496,7 +497,7 @@ public interface ViewerCountListener {
 The displayed logo has been clicked; you should open the URL in the callback's parameter. This is an optional listener.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 import java.net.URI;
 
@@ -521,7 +522,7 @@ public interface LogoClickListener {
 This is an optional listener.
 
 ```java
-package tv.ustream.player.api;
+package com.ibm.video.android.player.api;
 
 /**
 * Observes the metaData of the content
@@ -538,6 +539,7 @@ public interface MetaDataListener {
     * Called when the content's conversation settings become available.
     * @param data Holder for the IRC chat and SocialStream settings.
     */
+    @Deprecated
     void onChatAndSocialStreamData(ChatAndSocialStreamData data);
 }
 ```
@@ -557,7 +559,7 @@ An optional listener to observe track changes in the player (audio, video, text)
 * `onVideoFormatChanged(MediaFormat videoFormat)`
         - called when the video format of the selected video track is changed
 
-The track selection can be controlled with following methods of `UstreamPlayer`:
+The track selection can be controlled with following methods of `Player`:
 * `selectTrackForRenderer(MediaTrack mediaTrack, @Nullable int[] selectedFormatIndices)`
         - selects the supplied media track on the appropriate renderer.
         The Formats identified with the `selectedFormatIndices`'s values will take part in the selection.
@@ -567,7 +569,7 @@ The track selection can be controlled with following methods of `UstreamPlayer`:
 * `disableRenderer(MediaTrack.TrackType trackType)`
         - Commands the appropriate renderer for the provided TrackType to disable rendering.
 
-For more details see javadoc in `MediaTrackChangeListener` and `UstreamPlayer` classes.
+For more details see javadoc in `MediaTrackChangeListener` and `Player` classes.
 
 ### Interactive callbacks
 
@@ -577,28 +579,28 @@ Some of these errors can be resolved by you or the user of your application.
 
 Errors that can be resolved by user (or developer) interaction:
 
-*   `onPasswordLock()` – Call `ustreamPlayer.setPassword(password);` then restart the playback by `ustreamPlayer.play();`
+*   `onPasswordLock()` – Call `player.setPassword(password);` then restart the playback by `player.play();`
 
-*   `onAgeLock()` – Call `ustreamPlayer.setBirthDate(date);` then restart the playback by `ustreamPlayer.play();`
+*   deprecated: ~~`onAgeLock()` – Call `player.setBirthDate(date);` then restart the playback by `player.play();`~~
 
-*   `onHashLock()` – Call `ustreamPlayer.setHash(hash);` then restart the playback by `ustreamPlayer.play();`
+*   `onHashLock()` – Call `player.setHash(hash);` then restart the playback by `player.play();`
 
 Transient errors:
 
 *   `onConnectionError()` – There is a problem with the internet connection,  
-(most likely temporary) try again later by calling: `ustreamPlayer.play();`
+(most likely temporary) try again later by calling: `player.play();`
 
 *   `onUnknownError()` – This indicates a problem that the Player SDK can't determine, 
-(most likely temporary) try again by calling: `ustreamPlayer.play();`
+(most likely temporary) try again by calling: `player.play();`
 
 *   `onViewerHourLimitLock()` – The broadcaster's viewer hours are spent. This user can not watch the stream at the moment, 
-try again by calling: `ustreamPlayer.play();`
+try again by calling: `player.play();`
 
 Other errors:
 
 *   `onInvalidApiKey()` – The provided IBM Video Streaming Player SDK key is not authorized to play this content. You need to create a 
 new Player SDK Factory instance to provide the correct key. The key needs to be set upon factory creation: 
-`new UstreamPlayerFactory(USTREAM_PLAYER_SDK_KEY, context);`
+`new PlayerFactory(USTREAM_PLAYER_SDK_KEY, context);`
 
 *   `onNoSuchContent()` – The requested live channel or recorded video does not exist.
 
@@ -610,7 +612,7 @@ new Player SDK Factory instance to provide the correct key. The key needs to be 
 this content, or your channel has reached its maximum concurrent viewer number. The latter can be resolved by retrying 
 later, to resolve the former the channel's settings must be modified.
 
-These callbacks are found in `tv.ustream.player.api.ErrorListener`.
+These callbacks are found in `com.ibm.video.android.player.api.ErrorListener`.
 
 [Dashboard]: https://video.ibm.com/dashboard
 ["API/SDK access"]: https://video.ibm.com/dashboard/integrations/api-access
