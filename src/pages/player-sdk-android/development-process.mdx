@@ -136,7 +136,7 @@ android:layout_width="match_parent" />
 Create a `PlayerFactory` in your Activity or Fragment with the Activity's context:
 
 ```java
-private final PlayerFactory playerFactory = new PlayerFactory(USTREAM_PLAYER_SDK_KEY, context);
+private final PlayerFactory playerFactory = new PlayerFactory(IBM_PLAYER_SDK_KEY, context);
 ```
 This factory can be used to create or retrieve IBM Video Streaming Player instances.
 IBM Video Streaming Players created for a specific `playerId` will be retained across configuration changes (like orientation change).
@@ -190,7 +190,7 @@ if (!player.isInitialized()) {
 }
 ```
 
-Remember to define a string constant `USTREAM_PLAYER_SDK_KEY` with your actual **IBM Video Streaming Player SDK key**.
+Remember to define a string constant `IBM_PLAYER_SDK_KEY` with your actual **IBM Video Streaming Player SDK key**.
 
 IBM Video Streaming Player SDK version 1.3.0 introduced changes in the user facing interface, see the [CHANGELOG] for details.
 
@@ -600,7 +600,7 @@ Other errors:
 
 *   `onInvalidApiKey()` – The provided IBM Video Streaming Player SDK key is not authorized to play this content. You need to create a 
 new Player SDK Factory instance to provide the correct key. The key needs to be set upon factory creation: 
-`new PlayerFactory(USTREAM_PLAYER_SDK_KEY, context);`
+`new PlayerFactory(IBM_PLAYER_SDK_KEY, context);`
 
 *   `onNoSuchContent()` – The requested live channel or recorded video does not exist.
 
