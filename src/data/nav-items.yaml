@@ -391,6 +391,14 @@
       path: /player-sdk-ios/ad-integration
     - title: Changelog
       path: /player-sdk-ios/changelog
+- title: Player SDK for Google Cast
+  pages:
+    - title: Getting started
+      path: /player-sdk-cast/getting-started
+    - title: Configuration
+      path: /player-sdk-cast/configuration
+    - title: Customization
+      path: /player-sdk-cast/customization
 
 - title: Getting started
   pages:

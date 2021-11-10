@@ -1,0 +1,91 @@
+---
+title: Configuration
+description: Configuration
+---
+
+import { withPrefix } from 'gatsby-link';
+
+## Create credentials
+
+After logging into your account, find [API/SDK access](https://video.ibm.com/dashboard/integrations/api-access) under **Integration & apps** menu item.
+
+Click on `Create credentials` under the **Mobile Player SDK** section to gain access to the for Google Cast Receiver SDK
+
+<Row>
+  <Column colMd={8} colLg={8}>
+
+![Create credentials step](../static-content/google-cast-receiver-config-step-1.png)
+
+  </Column>
+</Row>
+
+Select `Google cast` from the Platform options. Fill `Application name` with your prefered name.
+Fill `Application ID` with the identifier of your Google Cast Application. You can register a new Application [here](https://developers.google.com/cast/docs/registration).
+
+<Row>
+  <Column colMd={8} colLg={8}>
+
+![Configure application name and ID](../static-content/google-cast-receiver-config-step-2.png)
+
+  </Column>
+</Row>
+
+After hitting `Save` you can see your `SDK key` generated. Click on `Download Google Cast Receiver SDK` to download the archive.
+
+<Row>
+  <Column colMd={8} colLg={8}>
+
+![Download archive](../static-content/google-cast-receiver-config-step-3.png)
+
+  </Column>
+</Row>
+
+## SDK usage
+
+Unzip the archive. Edit the `index.html` file.
+Replace `applicationId` and `sdkKey` with corresponding values from the dashboard.
+
+```javascript
+<script>
+  const config = {
+    applicationId: '<your-application-id>',
+    sdkKey: '<your-sdk-key>',
+  };
+  new IBMVideoStreaming.CastPlayer(config);
+</script>
+```
+
+
+
+Serve the content of the bundle on a web server of your choice or upload it to a CDN.
+
+<Row>
+  <Column colMd={8} colLg={8}>
+
+![High level architecture](../static-content/google-cast-receiver-high-level.png)
+
+  </Column>
+</Row>
+
+Your Google Cast Application needs to know where to look for the resources of your customized receiver.
+
+<InlineNotification>
+
+Make sure to set up your Google Cast Application to point to the path where your modified **index.html** is served from.
+
+</InlineNotification>
+
+The receiver SDK is ready to be used. Continue with customizing the receiver or set up the **Player SDK for Android** to be able to cast content and control the receiver.
+
+### Next steps
+
+<CardGroup>
+  <MiniCard
+    title="Customize the receiver"
+    href={withPrefix('/player-sdk-cast/customization')}
+  />
+  <MiniCard
+    title="Set up Player SDK for Android"
+    href={withPrefix('/')}
+  />
+</CardGroup>
