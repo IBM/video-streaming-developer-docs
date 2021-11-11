@@ -159,19 +159,28 @@
 
 - title: Getting started
   pages:
-    - path: /viewer-authentication-api-getting-started
+    - path: /viewer-authentication-api-v2-getting-started
 - title: Implementing viewer authentication
   pages:
-    - path: /viewer-authentication-api-implementing-viewer-authentication
+    - path: /viewer-authentication-api-v2-implementing-viewer-authentication
 - title: Hash lifetime and expiration
   pages:
-    - path: /viewer-authentication-api-hash-lifetime-and-expiration
+    - path: /viewer-authentication-api-v2-hash-lifetime-and-expiration
 - title: Using viewer authentication with other services
   pages:
-    - path: /viewer-authentication-api-using-viewer-authentication-with-other-services
-- title: Hash Authentication Test
+    - path: /viewer-authentication-api-v2-using-viewer-authentication-with-other-services
+- title: Deprecated
   pages:
-    - path: /viewer-authentication-api-hash-authentication-test
+    - title: Getting started
+      path: /viewer-authentication-api-getting-started
+    - title: Implementing viewer authentication
+      path: /viewer-authentication-api-implementing-viewer-authentication
+    - title: Hash lifetime and expiration
+      path: /viewer-authentication-api-hash-lifetime-and-expiration
+    - title: Using viewer authentication with other services
+      path: /viewer-authentication-api-using-viewer-authentication-with-other-services
+    - title: Hash Authentication Test
+      path: /viewer-authentication-api-hash-authentication-test
 
 - title: Getting started
   pages:
