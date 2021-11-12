@@ -33,18 +33,18 @@ If you embed the player to an unprotected page or use IBM's channel page, the pl
 You can enable viewer authentication via API.
 
 1. Generate an RSA key pair with 2048 bits key size
-1. Set the public key and authentication URL to the content (channel or video) via API. ([See more](/viewer-authentication-api-v2-settings-api#set-viewer-authentication-parameters-for-a-channel))
+1. Set the public key and authentication URL to the content (channel or video) via API. [See more](/viewer-authentication-api-v2-settings-api#set-viewer-authentication-parameters-for-a-channel)
     * and store the private key in your system secure way
 
     <InlineNotification kind="warning">
 
-    **DO NOT SHARE PRIVATE KEYS WITH US OR ANYBODY**
+    **Do not share private keys with us or anybody**
 
     </InlineNotification>
 
 We recommend using different key pairs for every content.
 
-By default, every video inherits the settings from the channel but if you want to use different authentication for a video you can set it. ([See more](/viewer-authentication-api-v2-settings-api#set-viewer-authentication-for-a-video))
+By default, every video inherits the settings from the channel but if you want to use different authentication for a video you can set it. [See more](/viewer-authentication-api-v2-settings-api#set-viewer-authentication-for-a-video)
 
 **Example to key generation:**
 ```bash
@@ -59,7 +59,7 @@ Viewer Authenticate Token token is an encrypted JWT (JWE) that contains a signed
 * sub: Subject, the token subject (identifier of the viewer, we recommend e-mail address)
 * iat: Issued at, Unix timestamp in seconds when the token was generated. We will accept the token in the next 60 seconds from this timestamp. (We don't accept tokens with future issued at timestamps)
 
-The JWS is signed with your private key that you set to the content. JWE is encrypted with Watson Media's public key what you can get from API. ([See more](/viewer-authentication-api-v2-settings-api#get-ibm-video-streaming-public-key))
+The JWS is signed with your private key that you set to the content. JWE is encrypted with Watson Media's public key what you can get from API. [See more](/viewer-authentication-api-v2-settings-api#get-ibm-video-streaming-public-key)
 
 ### Viewer Authentication Token Lifecycle
 
