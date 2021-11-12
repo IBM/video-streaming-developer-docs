@@ -159,10 +159,11 @@ Example of a success response:
 
 Possible error responses:
 
-| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
-| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
-| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
-| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Create a channel
 

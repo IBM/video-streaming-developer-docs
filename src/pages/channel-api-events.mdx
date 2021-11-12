@@ -29,6 +29,14 @@ HTTP/1.1 201 Created
 Location: https://api.video.ibm.com/v2/channels/CHANNEL_ID/events/4552.json
 ```
 
+Possible error responses:
+
+| HTTP response code | Error Description                                        |
+| ------------------ | -------------------------------------------------------- |
+| 403                | Resource ownership mismatch                              |
+| 404                | Resource not found                                       |
+| 429                | Too many requests ([Read more](/api-basics-rate-limits)) |
+
 ## Listing Events
 
 ```
@@ -87,10 +95,11 @@ pagesize=PAGE_SIZE&page=NEXT_PAGE",
 
 Possible error responses:
 
-| HTTP response code | Error Description           |
-| ------------------ | --------------------------- |
-| 403                | Resource ownership mismatch |
-| 404                | Resource not found          |
+| HTTP response code | Error Description                                        |
+| ------------------ | -------------------------------------------------------- |
+| 403                | Resource ownership mismatch                              |
+| 404                | Resource not found                                       |
+| 429                | Too many requests ([Read more](/api-basics-rate-limits)) |
 
 ## Listing Specific Event
 
@@ -117,6 +126,16 @@ Upon success a response with HTTP status “200 OK” is returned with the follo
 }
 ```
 
+Possible error responses:
+
+| HTTP response code | Error Description                                        |
+| ------------------ | -------------------------------------------------------- |
+| 400                | Field validation failed                                  |
+| 403                | Resource ownership mismatch                              |
+| 404                | Resource not found                                       |
+| 429                | Too many requests ([Read more](/api-basics-rate-limits)) |
+
+
 ## Event deletion
 
 ```
@@ -131,10 +150,11 @@ Upon success a response with HTTP status “200 OK” is returned.
 
 Possible error responses:
 
-| HTTP response code | Error Description           |
-| ------------------ | --------------------------- |
-| 403                | Resource ownership mismatch |
-| 404                | Resource not found          |
+| HTTP response code | Error Description                                        |
+| ------------------ | -------------------------------------------------------- |
+| 403                | Resource ownership mismatch                              |
+| 404                | Resource not found                                       |
+| 429                | Too many requests ([Read more](/api-basics-rate-limits)) |
 
 ## Updating an event
 
@@ -163,11 +183,12 @@ Upon success a response with HTTP status “200 OK” is returned.
 
 Possible error responses:
 
-| HTTP response code | Error Description           |
-| ------------------ | --------------------------- |
-| 400                | Field validation failed     |
-| 403                | Resource ownership mismatch |
-| 404                | Resource not found          |
+| HTTP response code | Error Description                                        |
+| ------------------ | -------------------------------------------------------- |
+| 400                | Field validation failed                                  |
+| 403                | Resource ownership mismatch                              |
+| 404                | Resource not found                                       |
+| 429                | Too many requests ([Read more](/api-basics-rate-limits)) |
 
 ## Get list of upcoming events on a channel
 

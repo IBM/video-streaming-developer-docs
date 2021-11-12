@@ -51,6 +51,7 @@ Possible error responses:
 | 401 Unauthorized        | `invalid_token`         | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership`     | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`             | Channel was not found                                                                   |
+| 429 Too Many Requests   | `too_many_requests`     | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                         | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Upload the video file
@@ -92,6 +93,7 @@ Possible error responses:
 | 403 Forbidden           | `lack_of_ownership`     | The API user is not allowed to manage the given channel                                 |
 | 404 Not Found           | `not_found`             | Channel or video was not found                                                          |
 | 413 Payload too large   | `file_too_large`        | The incoming file is larger than 4GB                                                    |
+| 429 Too Many Requests   | `too_many_requests`     | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                         | There is a temporary error on the server which makes it impossible to serve the request |
 
 
@@ -119,12 +121,13 @@ Upon success, a response with HTTP status "200 OK" is returned.
 
 Possible error responses:
 
-| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
-| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
-| 400 Bad Request         |             | Invalid parameters. Look at the returned hint value for the exact error.                |
-| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
-| 404 Not Found           | `not_found` | Channel or video was not found                                                          |
-| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         |                     | Invalid parameters. Look at the returned hint value for the exact error.                |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found`         | Channel or video was not found                                                          |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ### Check status of processing
 
