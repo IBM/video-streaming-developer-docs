@@ -1,0 +1,22 @@
+---
+title: Rate Limits
+description: Rate Limits
+---
+
+## Overview
+
+In some API endpoints we apply rate limits. That means you can make limited amount of API request in a specified time intervall from same IP address.
+
+## Headers
+
+If an API endpoint is limited in the header of the response shows your current rate limit status.
+
+| Header                | Description |
+| --------------------- | ----------- |
+| X-RateLimit-Limit     | The number of requests you are allowed to make in the time period |
+| X-RateLimit-Remaining | The number of requests remaining in the current time period |
+| X-RateLimit-Reset     | The time at which the current rate limit usage resets (Unix timestamp) |
+
+## Limit Exceeded
+
+If you exceeded the limit, a `HTTP 429 Too Many Requests` error response returns. You get the limit information header in this case too.
