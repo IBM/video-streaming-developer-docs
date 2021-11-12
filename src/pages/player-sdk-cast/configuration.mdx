@@ -7,12 +7,12 @@ import { withPrefix } from 'gatsby-link';
 
 ## Create credentials
 
-After logging into your account, find [API/SDK access](https://video.ibm.com/dashboard/integrations/api-access) under **Integration & apps** menu item.
+After logging into your account, find the [API/SDK access](https://video.ibm.com/dashboard/integrations/api-access) option under the **Integration & apps** menu item.
 
-Click on `Create credentials` under the **Mobile Player SDK** section to gain access to the for Google Cast Receiver SDK
+Under the **Mobile Player SDK** section, click on `Create credentials`.
 
 <Row>
-  <Column colMd={8} colLg={8}>
+  <Column colLg={8}>
 
 ![Create credentials step](../static-content/google-cast-receiver-config-step-1.png)
 
@@ -23,7 +23,7 @@ Select `Google cast` from the Platform options. Fill `Application name` with you
 Fill `Application ID` with the identifier of your Google Cast Application. You can register a new Application [here](https://developers.google.com/cast/docs/registration).
 
 <Row>
-  <Column colMd={8} colLg={8}>
+  <Column colLg={8}>
 
 ![Configure application name and ID](../static-content/google-cast-receiver-config-step-2.png)
 
@@ -33,17 +33,26 @@ Fill `Application ID` with the identifier of your Google Cast Application. You c
 After hitting `Save` you can see your `SDK key` generated. Click on `Download Google Cast Receiver SDK` to download the archive.
 
 <Row>
-  <Column colMd={8} colLg={8}>
+  <Column colLg={8}>
 
 ![Download archive](../static-content/google-cast-receiver-config-step-3.png)
 
   </Column>
 </Row>
 
-## SDK usage
+## Contents of the archive
 
-Unzip the archive. Edit the `index.html` file.
-Replace `applicationId` and `sdkKey` with corresponding values from the dashboard.
+The downloaded archive is a reference implementation of a Google Cast [Styled Media Receiver], and has the followong content.
+
+- **receiver.html** _Includes sdks, styles and fonts. Configures the Google Cast Receiver SDK._
+- **css**
+  - **receiver.css** _Specifies variables used to customize the cast receiver's ui._
+- **static** _Assets referenced from receiver.css._
+
+## Configure the SDK
+
+Unzip the archive. Edit the `receiver.html` file, and
+replace `applicationId` and `sdkKey` with corresponding values from the dashboard.
 
 ```javascript
 <script>
@@ -55,29 +64,27 @@ Replace `applicationId` and `sdkKey` with corresponding values from the dashboar
 </script>
 ```
 
-
-
-Serve the content of the bundle on a web server of your choice or upload it to a CDN.
+Serve the contents of the directory on a publicly accessible web server of your choice or upload it to a CDN.
 
 <Row>
-  <Column colMd={8} colLg={8}>
+  <Column colLg={8}>
 
 ![High level architecture](../static-content/google-cast-receiver-high-level.png)
 
   </Column>
 </Row>
 
-Your Google Cast Application needs to know where to look for the resources of your customized receiver.
+Your Google Cast Application needs to know where to look for the resources of the customized receiver.
 
 <InlineNotification>
 
-Make sure to set up your Google Cast Application to point to the path where your modified **index.html** is served from.
+In your **Google Cast Application**, make sure that the URL field points to the served receiver.html.
 
 </InlineNotification>
 
 The receiver SDK is ready to be used. Continue with customizing the receiver or set up the **Player SDK for Android** to be able to cast content and control the receiver.
 
-### Next steps
+## Next steps
 
 <CardGroup>
   <MiniCard
@@ -86,6 +93,8 @@ The receiver SDK is ready to be used. Continue with customizing the receiver or 
   />
   <MiniCard
     title="Set up Player SDK for Android"
-    href={withPrefix('/')}
+    href={withPrefix('/player-sdk-android/getting-started')}
   />
 </CardGroup>
+
+[Styled Media Receiver]: https://developers.google.com/cast/docs/styled_receiver
