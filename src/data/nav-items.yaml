@@ -160,7 +160,7 @@
 - title: Getting started
   pages:
     - path: /viewer-authentication-api-v2-getting-started
-- title: Implementing viewer authentication
+- title: API Documentation
   pages:
     - path: /viewer-authentication-api-v2-settings-api
 - title: Deprecated
