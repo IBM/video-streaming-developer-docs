@@ -19,7 +19,7 @@ const Notification = ({ isSuccess, setSuccess }) => {
       subtitle: (
         <span>
           Please check the JSON object or learn how to generate the object in the{' '}
-          <a href={withPrefix('/viewer-authentication-api-getting-started')}>Viewer Authentication API document</a>
+          <a href={withPrefix('/viewer-authentication-api-v2-getting-started')}>Viewer Authentication API document</a>
         </span>
       ),
       kind: 'error',
