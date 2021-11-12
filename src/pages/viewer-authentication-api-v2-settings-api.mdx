@@ -1,0 +1,195 @@
+---
+title: Viewer Authentication API
+description: APIs to set viewer authentication configurations
+---
+
+
+## Get IBM Video Streaming public key
+Get IBM Video Streaming public key to encyript the viewer authentication token
+
+```
+GET /viewer-auth-public-key.json
+```
+
+Example request with CURL:
+
+```
+curl \
+        -X GET\
+        -H "Accept: application/json"\
+        "https://api.video.ibm.com/viewer-auth-public-key.json
+```
+
+### Responses
+
+| HTTP RESPONSE CODE | Description                   |
+| ------------------ | ----------------------------- |
+| 200          | IBM Video Streaming's public key    |
+
+
+## Set viewer authentication parameters for a channel
+Set viewer authentication content public key and auth URL to validate viewer authentication token signature or initaite the authentication
+
+```
+PUT /channels/{channelId}/viewer-auth.json
+```
+
+Example request with CURL:
+
+```
+curl \
+        -X PUT\
+        -H "Accept: application/json"\
+        -H "Content-Type: application/x-www-form-urlencoded"\
+        -d "auth_url=https%3A%2F%2Fvideos.yourcompany.com%2Fcontent-auth-start&public_key=-----BEGIN+PUBLIC+KEY-----%0A+MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB%2BHO2OHmtxzv%2BvD4ANvuNa%0A+hYu4lPdRdnJc0dcOEq4v8EH3JQhTkhhv3CaJgeWNdzEiMAvqazIMa7PCC%2F4STaUd%0A+DClojyq5qbVsy3ISEhltTWGwT7rkMZsw0QLduUeTPSjWC5RiRnsKIoX%2FPpRBWKZF%0A+CfY9g18QXsCuuPkX22RYggvI%2FOQM2XpOgY%2ByK1%2FLZjxLGLcShaKYh8k2tZ0FbCvJ%0A+uv3jg%2FdJ9xsz%2FIgo%2FjDlaC4N7%2FfeiQBZKls8kdk4wOthuanaOs1ZqmdlKOknSzOJ%0A+eH7DMZyURBtSVW%2FiGzOtLFxXfD%2BBDzGuLJvcouaXX%2BG5ugubjilwRvEiblnXU4Ib%0A+AgMBAAE%3D%0A+-----END+PUBLIC+KEY-----"
+        "https://api.video.ibm.com/channels/{channelId}/viewer-auth.json
+```
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId`| integer | REQUIRED   | Numeric channel ID      |
+
+Body parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `auth_url`| string | REQUIRED   | The URL where authentication flow should be initiate      |
+| `public_key`| string | REQUIRED   | The public key of your countent to validate viewer token signature in PEM format      |
+Example
+```
+auth_url=https%3A%2F%2Fvideos.yourcompany.com%2Fcontent-auth-start&public_key=-----BEGIN+PUBLIC+KEY-----%0A+MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB%2BHO2OHmtxzv%2BvD4ANvuNa%0A+hYu4lPdRdnJc0dcOEq4v8EH3JQhTkhhv3CaJgeWNdzEiMAvqazIMa7PCC%2F4STaUd%0A+DClojyq5qbVsy3ISEhltTWGwT7rkMZsw0QLduUeTPSjWC5RiRnsKIoX%2FPpRBWKZF%0A+CfY9g18QXsCuuPkX22RYggvI%2FOQM2XpOgY%2ByK1%2FLZjxLGLcShaKYh8k2tZ0FbCvJ%0A+uv3jg%2FdJ9xsz%2FIgo%2FjDlaC4N7%2FfeiQBZKls8kdk4wOthuanaOs1ZqmdlKOknSzOJ%0A+eH7DMZyURBtSVW%2FiGzOtLFxXfD%2BBDzGuLJvcouaXX%2BG5ugubjilwRvEiblnXU4Ib%0A+AgMBAAE%3D%0A+-----END+PUBLIC+KEY-----
+```
+
+### Responses
+
+| HTTP RESPONSE CODE | Description                   |
+| ------------------ | ----------------------------- |
+| 204          | Viewer authentication key set successfully    |
+| 400          | Bad request    |
+| 401          | Unauthorized    |
+| 403          | Forbidden    |
+| 404          | Not found    |
+| 500          | Server error    |
+
+
+## Remove viewer authentication protection from your channel
+
+
+```
+DELETE /channels/{channelId}/viewer-auth.json
+```
+
+Example request with CURL:
+
+```
+curl \
+        -X DELETE\
+        -H "Accept: application/json"\
+        "https://api.video.ibm.com/channels/{channelId}/viewer-auth.json
+```
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `channelId`| integer | REQUIRED   | Numeric channel ID      |
+
+
+
+### Responses
+
+| HTTP RESPONSE CODE | Description                   |
+| ------------------ | ----------------------------- |
+| 204          | Protection removed from the channel    |
+| 401          | Unauthorized    |
+| 403          | Forbidden    |
+| 404          | Not found    |
+| 500          | Server error    |
+
+
+## Set Viewer Authentication for a video
+Set Viewer Authentication content public key and auth URL to validate viewer authentication token signature or initaite the authentication
+
+```
+PUT /videos/{videoId}/viewer-auth.json
+```
+
+Example request with CURL:
+
+```
+curl \
+        -X PUT\
+        -H "Accept: application/json"\
+        -H "Content-Type: application/x-www-form-urlencoded"\
+        -d "auth_url=https%3A%2F%2Fvideos.yourcompany.com%2Fcontent-auth-start&public_key=-----BEGIN+PUBLIC+KEY-----%0A+MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB%2BHO2OHmtxzv%2BvD4ANvuNa%0A+hYu4lPdRdnJc0dcOEq4v8EH3JQhTkhhv3CaJgeWNdzEiMAvqazIMa7PCC%2F4STaUd%0A+DClojyq5qbVsy3ISEhltTWGwT7rkMZsw0QLduUeTPSjWC5RiRnsKIoX%2FPpRBWKZF%0A+CfY9g18QXsCuuPkX22RYggvI%2FOQM2XpOgY%2ByK1%2FLZjxLGLcShaKYh8k2tZ0FbCvJ%0A+uv3jg%2FdJ9xsz%2FIgo%2FjDlaC4N7%2FfeiQBZKls8kdk4wOthuanaOs1ZqmdlKOknSzOJ%0A+eH7DMZyURBtSVW%2FiGzOtLFxXfD%2BBDzGuLJvcouaXX%2BG5ugubjilwRvEiblnXU4Ib%0A+AgMBAAE%3D%0A+-----END+PUBLIC+KEY-----"
+        "https://api.video.ibm.com/videos/{videoId}/viewer-auth.json
+```
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `videoId`| integer | REQUIRED   | Numeric video ID      |
+
+Body parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `auth_url`| string | REQUIRED   | The URL where authentication flow should be initiate      |
+| `public_key`| string | REQUIRED   | The public key of your countent to validate viewer token signature in PEM format      |
+Example
+```
+auth_url=https%3A%2F%2Fvideos.yourcompany.com%2Fcontent-auth-start&public_key=-----BEGIN+PUBLIC+KEY-----%0A+MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB%2BHO2OHmtxzv%2BvD4ANvuNa%0A+hYu4lPdRdnJc0dcOEq4v8EH3JQhTkhhv3CaJgeWNdzEiMAvqazIMa7PCC%2F4STaUd%0A+DClojyq5qbVsy3ISEhltTWGwT7rkMZsw0QLduUeTPSjWC5RiRnsKIoX%2FPpRBWKZF%0A+CfY9g18QXsCuuPkX22RYggvI%2FOQM2XpOgY%2ByK1%2FLZjxLGLcShaKYh8k2tZ0FbCvJ%0A+uv3jg%2FdJ9xsz%2FIgo%2FjDlaC4N7%2FfeiQBZKls8kdk4wOthuanaOs1ZqmdlKOknSzOJ%0A+eH7DMZyURBtSVW%2FiGzOtLFxXfD%2BBDzGuLJvcouaXX%2BG5ugubjilwRvEiblnXU4Ib%0A+AgMBAAE%3D%0A+-----END+PUBLIC+KEY-----
+```
+
+### Responses
+
+| HTTP RESPONSE CODE | Description                   |
+| ------------------ | ----------------------------- |
+| 204          | Viewer authentication key set successfully    |
+| 400          | Bad request    |
+| 401          | Unauthorized    |
+| 403          | Forbidden    |
+| 404          | Not found    |
+| 500          | Server error    |
+
+
+## Remove viewer authentication protection from your video
+
+
+```
+DELETE /videos/{videoId}/viewer-auth.json
+```
+
+Example request with CURL:
+
+```
+curl \
+        -X DELETE\
+        -H "Accept: application/json"\
+        "https://api.video.ibm.com/videos/{videoId}/viewer-auth.json
+```
+### Parameters
+
+Path parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `videoId`| integer | REQUIRED   | Numeric video ID      |
+
+
+
+### Responses
+
+| HTTP RESPONSE CODE | Description                   |
+| ------------------ | ----------------------------- |
+| 204          | Protection removed from the channel    |
+| 401          | Unauthorized    |
+| 403          | Forbidden    |
+| 404          | Not found    |
+| 500          | Server error    |
