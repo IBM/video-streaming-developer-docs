@@ -53,6 +53,7 @@ Possible error responses:
 | 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
 | 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Add new chapter to the video
@@ -92,6 +93,7 @@ Possible error responses:
 | 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
 | 404 Not Found           | `not_found`         | Video was not found                                                                     |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Get chapter info
@@ -137,6 +139,7 @@ Possible error responses:
 | 401 Unauthorized        |                     | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
 | 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Modify video chapter
@@ -170,6 +173,7 @@ Possible error responses:
 | 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
 | 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Delete video chapter
@@ -198,6 +202,7 @@ Possible error responses:
 | 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
 | 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
 
 ## Delete all chapters of a video
@@ -226,4 +231,5 @@ Possible error responses:
 | 401 Unauthorized        | `unauthorized`      | The provided access token is missing, revoked, expired or malformed                     |
 | 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given video                                   |
 | 404 Not Found           | `not_found`         | Video or chapter was not found                                                          |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
 | 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

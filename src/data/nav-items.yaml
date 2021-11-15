@@ -13,6 +13,9 @@
 - title: Token revocation
   pages:
     - path: /api-basics-token-revocation
+- title: Rate limits
+  pages:
+    - path: /api-basics-rate-limits
 
 - title: Basic channel management
   pages:
