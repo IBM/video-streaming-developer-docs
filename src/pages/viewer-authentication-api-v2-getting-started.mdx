@@ -20,13 +20,25 @@ To implement viewer authentication flow you need to create an application that i
 
 If you have protected pages where you want to use our embedded components, you can pass the authentication token directly to the embed URL in the vt query parameter.
 
-![Viewer Authentication Flow - Embed with Token](/static-content/viewer-auth-embed-with-token.png)
+<Row className="image-card-group">
+  <Column noGutterSm>
+
+![Viewer Authentication Flow - Embed with Token](/static-content/viewer-auth-embed-with-token@2x.png)
+
+</Column>
+</Row>
 
 ### Redirect Flow
 
 If you embed the player to an unprotected page or use IBM's channel page, the player will redirect the viewer to your authentication endpoint. You need to redirect back to the ref URL (passed in query parameter) with authentication token in the vt query parameter.
 
-![Viewer Authentication Flow - Embed with Token](/static-content/viewer-auth-redirect-flow.png)
+<Row className="image-card-group">
+  <Column noGutterSm>
+
+![Viewer Authentication Flow - Embed with Token](/static-content/viewer-auth-redirect-flow@2x.png)
+
+</Column>
+</Row>
 
 ## Viewer Authentication Settings
 
@@ -69,4 +81,10 @@ The JWS is signed with your private key that you set to the content. JWE is encr
 
 ### Token generation method
 
-![Viewer Authentication Flow - Embed with Token](/static-content/viewer-auth-token-generation.png)
+<Row className="image-card-group">
+<Column colMd={12} colLg={10} colXl={8} colMax={8} noGutterSm>
+
+![Viewer Authentication Flow - Embed with Token](/static-content/viewer-auth-token-generation@2x.png)
+
+</Column>
+</Row>
