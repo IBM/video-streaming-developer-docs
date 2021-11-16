@@ -2,6 +2,23 @@
 title: Changelog
 description: Changelog
 ---
+
+## 2.0.0 - 2021-11-10
+### Changed
+- A long due overhaul of namings and packages
+- `UstreamPlayer` interface separated to `Player` & `ModuleAwarePlayer` interfaces
+- See the [migration guide](./migration-guide) for details
+
+### Added
+- Google Cast support added in a form of a new module, [details here](./google-cast-support)
+- Possibility to initialize the players with an initial position, see: `Player.initWithContent(contentDescriptor, initialPosition)`
+
+### Removed
+- Ads Plugin had been removed
+- `ChatAndSocialStream` data is deprecated values provided there should not be relied on
+- Fields `adFree` and `tagline` in `MetaData` class are deprecated
+- Setting a birth date and AgeLock functionality is deprecated
+
 ## 1.5.0 - 2021-06-07
 ### Changed
 - Deprecated **Ads Plugin**. Support is no longer provided for this component.

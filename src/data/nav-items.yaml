@@ -374,10 +374,14 @@
       path: /player-sdk-android/pre-buffering
     - title: Customization
       path: /player-sdk-android/customization
-    - title: Using Plugins in the SDK
+    - title: Google Cast Support
+      path: /player-sdk-android/google-cast-support
+    - title: MediaPlayer Plugins
       path: /player-sdk-android/using-plugins
     - title: Security Extension
       path: /player-sdk-android/security-extension
+    - title: Migration Guide
+      path: /player-sdk-android/migration-guide
     - title: Changelog
       path: /player-sdk-android/changelog
 - title: Player SDK for iOS

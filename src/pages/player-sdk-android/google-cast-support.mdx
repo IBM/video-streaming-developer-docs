@@ -1,0 +1,182 @@
+---
+title: Google Cast Support
+description: Google Cast Support
+---
+
+Google Cast support was introduced in version 2.0.0 of the IBM Player SDK as a separate module.
+It enables casting IBM Live and VoD content to Google Cast enabled devices, such as Chromecast.
+Users of the encompassing application can watch IBM Video content on a big screen even while their device is in a sleep state.
+
+## Providing Cast Integration
+
+Providing Google Cast integration to an application requires two components:
+- a **Cast Sender**: a component inside you Android application, running on the mobile device
+- a **Cast Receiver**: a web application running on the Cast enabled device
+
+The Android Player SDK provides an SDK module to cover the *Sender* and a new IBM Cast Receiver SDK to cover *Receiver* part.
+The sender component controls the receiver. The receiver component enables you to provide your own Design & UX on the Cast enabled device.
+You must implement both components.
+
+### Prerequisites
+
+You must have a registered Google Cast Developer account at https://cast.google.com/publish .
+This is where you will need to setup and later publish your Cast Receiver application.
+IBM Provides the Receiver SDK with which you can easily create your Receiver, and still be able to easily adapt it to your own look and feel.
+
+You must also have a place where you can host your Receiver application. This can be a static web server or a CDN server, it is up to you.
+
+Using the Google Cast Developer Console you can also register test devices to be used during development.
+This helps testing your integration before publishing your Cast Receiver to the public.
+You can find more information on the [Google Cast Developer](https://developers.google.com/cast/docs/developers) site.
+
+## The Sender module
+
+### Importing the module
+
+Adding the SDK module to your application is the same as [adding the core module],
+after you've done that you only need to add the following to your `build.gradle` file:
+
+```gradle
+dependencies {
+//  ...
+    implementation 'com.ibm.video.android.player:player-android-plugin-cast-external:2.0.0'
+//  ...
+}
+```
+
+Do a gradle sync and the new module will be available.
+
+### Playing back content on a Cast Device
+
+Using the Cast Player is much the same as using the local Player, but there are some minor, yet key differences.
+The Cast Player is *not* capable to play back content on your local device. It can only send content to a single cast device and a single content at a time.
+
+**Binding your Cast Receiver Application to the SDK module**
+
+The Cast module of the SDK needs to be aware of your very own Cast Receiver Application that you've created above.
+You must set your unique *Cast Application ID* as a meta-data value in your `AndroidManifest.xml`.
+This can be done multiple ways -- directly in the manifest file or through `build.gradle` --,
+but the important thing is that you end up with a `meta-data` key: `com.ibm.video.android.player.cast.RECEIVER_APP_ID`
+pointing to your *Cast Application ID*.
+
+Example:
+```xml
+<meta-data
+    android:name="com.ibm.video.android.player.cast.RECEIVER_APP_ID"
+    android:value="FF1233ABCDEF"
+/>
+```
+
+A detailed example can be found in the provided sample application code.
+
+**Making your Activity Cast aware**
+
+In order to be able to cast content to a device you need to make your Activity aware of Cast sessions and states.
+For simplicity we recommend using the built-in `CastButtonFactory` and `MediaRouteButton` of the *Google Cast SDK*.
+To make this work you only need to make two simple steps.
+
+Add an entry to your Activity's `menu.xml` file:
+```xml
+<item
+    android:id="@+id/media_route_menu_item"
+    android:title="Cast"
+    app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+    app:showAsAction="always"
+/>
+```
+
+Then create the appropriate Cast button in your Activity's `onCreateOptionsMenu(Menu)` method:
+```java
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    super.onCreateOptionsMenu(menu);
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu_cast_player_activity, menu);
+
+    CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
+    return true;
+}
+```
+
+After this whenever a compatible Cast device is in the vicinity a Cast button will appear in your menu.
+This button can be used to create a *CastSession* for which you can initialize a Cast player.
+
+**Creating a Cast player**
+
+Create a `CastPlayerFactory` in your Activity and pass the Activity's instance to the constructor:
+
+```java
+private final CastPlayerFactory castPlayerFactory = new CastPlayerFactory(activity);
+```
+
+This factory can be used to create or retrieve the IBM Video Streaming Cast Player instance.
+The Cast Player instance created is essentially a singleton, this factory does not support creating multiple Cast players
+due to the nature of Google Cast protocol. This is a key difference comparing to the local player.
+
+The CastPlayerFactory will give you a `com.ibm.video.android.player.api.Player` class, which is the point where you can interface with the Cast Player. Its methods send
+events to the Cast Receiver, and its states are observed through the listeners (see below). The `Player`'s methods are
+explained further in its _Javadoc_ and [here].
+
+**Details of using player interface**
+
+1. [Playing back live or recorded content](./development-process#step-7:-play-live-or-recorded-content)
+2. [Handling Player callbacks](./development-process#step-8:-handle-player-callbacks)
+3. [Changing Tracks](./changing-tracks)
+
+**Summary of key differences between local & cast player**
+
+1. The `CastPlayerFactory` does not need an SDK key, however the Cast Receiver does instead.
+2. `CastPlayerFactory` needs a *Cast Application ID* set in your manifest that uniquely identifies your own Cast Receiver application.
+2. The created Cast Player instance is effectively singleton, there can always be only one.
+3. Setting the following does nothing in-case of Cast player
+    - `Player.setPlayerView(PlayerView)` -- The Cast player does not render anything on a local view, only on the Cast device
+    - `Player.setBirthDate(Calendar)` -- This functionality is not implemented for Cast, and it is being removed from local player too.
+    - `Player.setLogoClickListener(LogoClickListener)` -- Listener set here is ignored, Cast device does not handle interactivity on its UI.
+4. The state transition graph is different for Cast Player than it is for [local player](./development-process#state-flow-of-the-player-sdk).
+    - Calling `Player.connect()` on a Cast Player will transition it to PAUSED (`onPaused()`) state instead of (`onReady`)
+    - READY (`onReady`) state is not (or not always) reported
+5. Cast Player should not be stopped when your activity goes to the background. Let it keep playing on the big-screen. However you still need to detach!
+
+
+### Using the Cast and local player together
+
+Currently the Cast player can only play back content on a Cast device and the local player can only do so locally on the android device.
+Therefore at this time it is your responsibility to integrate together these two players in your application's codebase.
+
+The simplest way is to create and use your local player as usual, and also listen to an available Cast Session, when it becomes available
+create a Cast player and set & attach your listeners there.
+
+**CAUTION**:
+Always make sure to stop the local player when transitioning to a Cast device.
+Playing back content on both at the same time is not only a bad UX but will also **count double to your viewer hours**!
+
+Use the following high-level guide to implement handover between local and Cast players:
+
+**Transitioning to Cast player**
+
+1. Create your local player
+2. Set and attach your listeners
+3. Register a `SessionManagerListener` to watch for an available *CastSession*
+    - Acquire the `CastContext`
+    - Add a listener to the `CastSessionManager` in `onStart()` (and remove it in `onStop()`) of your Activity
+4. When a *CastSession* becomes available you can start the handover
+5. Take note of the progress of local player
+6. Detach (`Player.detach()`) and stop the local player
+7. Create the Cast player using `CastPlayerFactory.createPlayer()`
+8. Initialize the cast player with the same content and use the saved position. `Player.initWithContent(contentDescriptor, initialPosition)`
+9. Set the same listeners to the Cast player and attach them
+10. Call `Player.play()` on the Cast player
+
+**Transitioning to local player**
+
+1. When the CastSession has ended you will receive a call to `onSessionEnded(CastSession, int)`
+2. Take note of the Cast player's progress
+3. Detach & tear down the Cast player using `detach()` and `destroy()`
+4. Start the local player at the right position
+    - Either seek the player to the last known position of Cast player
+    - Or if it has been destroyed then initialize it with the position and same content `Player.initWithContent(contentDescriptor, initialPosition)`
+5. Set the same listeners to the local player and attach them
+6. Call `connect()` or `pause()` on the local player -- recommended UX is to not automatically play content when transitioning back from Cast to local player.
+
+Future versions of the SDK *might* provide integrated support to handle Cast & local player together
+and take off the burden of our SDK users.

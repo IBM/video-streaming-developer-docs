@@ -1,0 +1,60 @@
+---
+title: Migration Guide
+description: Migration Guide
+---
+
+Certain SDK versions differ in significant ways, this section aims to help you with the migration between these versions.
+
+## Migrating from 1.5.0 to 2.0.0
+
+The 2.0.0 version of the Player SDK contains many elements that have changed on the user facing API.
+There were renames, moves, removals and additions of new API elements.
+
+### Importing the SDK
+
+Both the Maven group and Maven artifact names have changed for the SDK.
+The previous `tv.ustream.player` group is now `com.ibm.video.android.player` for every Player SDK library.
+The artifact names have also been streamlined.
+
+Thus the following changes need to be applied in your `build.gradle` file:
+
+| Component \ Version | 1.5.0                                                              | 2.0.0                                                                  |
+|---------------------|--------------------------------------------------------------------|------------------------------------------------------------------------|
+| Core Android player | tv.ustream.player:ibm-player-sdk-android-external:1.5.+            | com.ibm.video.android.player:player-android-external:2.0.+             |
+| Ads Plugin          | tv.ustream.player:ibm-player-sdk-android-plugin-ads-external:1.5.+ | No longer supported, library removed, please remove from dependencies  |
+| Google Cast Player  | Not Available                                                      | com.ibm.video.android.player:player-android-plugin-cast-external:2.0.+ |
+| Player UI           | tv.ustream.player:ibm-player-sdk-android-ui:0.3.0                  | com.ibm.video.android.player:player-ui:0.3.0                           |
+
+Please note that the Ads plugin is no longer supported and we have removed it from version 2.0.0 of the SDK.
+Also note that the new SDK version brings Google Cast support as a separate optional component for you to use.
+
+### Dealing with package moves/renames
+
+Quite literally all of the SDK classes have been moved to new packages in order to streamline them.
+This can be intimidating at first, as all of you SDK class imports are now broken.
+But bear with us, this is easier to solve than it looks. After you've set up you new dependencies inside
+your `build.gradle` file then follow these simple steps:
+
+1. Sync the changes using Gradle
+2. Go to the source files in which you use the IBM Player SDK
+3. Delete the now unknown, old, "red" imports of SDK classes
+4. Then you can just auto-import the files again with the help of your IDE.
+5. When all seems good try and build your project
+6. If it fails it will tell you exactly where the problem is. Go back to step 2. Repeat until it compiles.
+
+To give you some deeper insight into the changes, in general only the top-level packages have changed.
+Meaning that `tv.ustream.*` (or `ibm.playersdk.ui.*` in case of UI components) have changed to `com.ibm.video.android.*`.
+The inner structure stayed the same as it was in case of the core components, however there were
+restructures & simplifications in case of the UI components library.
+
+### API class renames
+
+Some API classes had to be renamed in the SDK and some functionality had to be refactored slightly for flexibility.
+Unfortunately the IDE can not automatically resolve this, but you can use the handy table below as a guide.
+
+| Component \ Version | 1.5.0                | 2.0.0             | Notes                                                                          |
+|---------------------|----------------------|-------------------|--------------------------------------------------------------------------------|
+| Core Android player | UstreamPlayerFactory | PlayerFactory     |                                                                                |
+| Core Android player | UstreamPlayer        | Player            | Managing the MediaPlayerModule is removed from the interface's responsibility. |
+| Core Android player | UstreamPlayer        | ModuleAwarePlayer | Managing the MediaPlayerModule is moved here.                                  |
+| UI Components       | SimpleErrorListener  | NoOpErrorListener | To better reflect what it does.                                                |
