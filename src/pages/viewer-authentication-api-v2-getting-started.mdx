@@ -64,9 +64,9 @@ ssh-keygen -t rsa -b 2048 -E SHA512 -m PEM -P "" -f content_1234567.key
 openssl rsa -in content_1234567.key -pubout -outform PEM -out content_1234567.key.pub
 ```
 
-## Viewer Authenticate Token
+## Viewer Authentication Token
 
-Viewer Authenticate Token token is an encrypted JWT (JWE) that contains a signed JWT (JWS) with the following mandatory claims:
+Viewer Authentication Token token is an encrypted JWT (JWE) that contains a signed JWT (JWS) with the following mandatory claims:
 
 * sub: Subject, the token subject (identifier of the viewer, we recommend e-mail address)
 * iat: Issued at, Unix timestamp in seconds when the token was generated. We will accept the token in the next 60 seconds from this timestamp. (We don't accept tokens with future issued at timestamps)
