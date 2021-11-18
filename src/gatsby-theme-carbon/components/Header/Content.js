@@ -15,7 +15,7 @@ export default [
         title: 'Channel API',
       },
       {
-        path: '/viewer-authentication-api-getting-started',
+        path: '/viewer-authentication-api-v2-getting-started',
         title: 'Viewer Authentication API',
       },
       {

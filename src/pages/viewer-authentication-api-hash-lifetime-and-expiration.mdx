@@ -1,7 +1,13 @@
 ---
-title: Hash lifetime and expiration
-description: Hash lifetime and expiration
+title: Deprecated - Hash lifetime and expiration
+description: Deprecated - Hash lifetime and expiration
 ---
+
+<InlineNotification kind="warning">
+
+**Deprecation Warning:** This API is deprecated and it is scheduled to be removed on 03/01/2022. Please use (or migrate to) the new version of the [Viewer Authentication](/viewer-authentication-api-v2-getting-started).
+
+</InlineNotification>
 
 Once a hash is successfully validated by IBM Video Streaming, the player will store the hash in the end user’s browser. This lets the viewer resume watching the video when returning to the page without having authenticate again.
 
@@ -42,4 +48,3 @@ When validating the authentication response the IBM Video Streaming infrastructu
 - If the expiration was hashed properly
 
 This way we can make sure that the expiration date comes from you and it has not been tampered with on the client side.
-

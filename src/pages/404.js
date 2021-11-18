@@ -11,7 +11,7 @@ const links = [
     text: 'Channel API',
   },
   {
-    href: '/viewer-authentication-api-getting-started',
+    href: '/viewer-authentication-api-v2-getting-started',
     text: 'Viewer Authentication API',
   },
   {

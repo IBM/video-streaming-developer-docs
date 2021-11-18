@@ -1,7 +1,13 @@
 ---
-title: Getting started
-description: Getting started
+title: Deprecated - Getting started
+description: Deprecated - Getting started
 ---
+
+<InlineNotification kind="warning">
+
+**Deprecation Warning:** This API is deprecated and it is scheduled to be removed on 03/01/2022. Please use (or migrate to) the new version of the [Viewer Authentication](/viewer-authentication-api-v2-getting-started).
+
+</InlineNotification>
 
 ## Introduction
 
@@ -29,5 +35,3 @@ To implement the viewer authentication flow you need to create an application th
 2. When the authentication is completed your service passes an authentication response to the player.
 3. If the authentication was successful, the player passes the authentication response to IBM Video Streaming infrastructure in a validation request.
 4. The IBM Video Streaming infrastructure validates the authentication response received from your service and passes a validation response to the player. If the response is positive, the viewer can start watching the video.
-
-
