@@ -395,8 +395,6 @@
       path: /player-sdk-ios/pre-buffering
     - title: Customization
       path: /player-sdk-ios/customization
-    - title: Ad Integration
-      path: /player-sdk-ios/ad-integration
     - title: Changelog
       path: /player-sdk-ios/changelog
 - title: Player SDK for Google Cast
