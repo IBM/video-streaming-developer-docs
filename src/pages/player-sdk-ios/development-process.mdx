@@ -23,7 +23,7 @@ The created credentials entry will have a "Download iOS Player SDK" button at th
 
 ## Step 3: Explore the SDK package
 
-The provided zip archive contains the binary framework and a sample application.
+The provided zip archive contains the binary frameworks and a sample application.
 
 ## Step 4: Create (or open) your project
 
@@ -31,7 +31,7 @@ Open the project that you would like to integrate the SDK in.
 
 ## Step 5: Add the SDK to the project
 
-Drag IBMVideoPlayerSDK.xcframework into the Embedded Binaries section of your target.
+Drag IBMVideoPlayerSDK.xcframework and IBMCoreSDK.xcframework into the Embedded Binaries section of your target.
 
 ## Step 6: Register your app at IBM
 
@@ -66,7 +66,7 @@ USUstreamPlayer.configure(withApiKey:<#place your SDK key here#>)
 
 ##### Objective-C
 ```objc
-@import iOSPlayerSDK;
+#import <IBMVideoPlayerSDK/IBMVideoPlayerSDK.h>
 
 self.ustreamPlayer = [[USUstreamPlayer alloc] init];
 self.ustreamPlayer.delegate = self;
@@ -76,7 +76,7 @@ self.ustreamPlayer.view.frame = self.view.bounds;
 
 ##### Swift
 ```swift
-import iOSPlayerSDK
+import IBMVideoPlayerSDK
 
 self.ustreamPlayer = USUstreamPlayer()
 self.ustreamPlayer.delegate = self
@@ -141,14 +141,18 @@ Callbacks listed below are "interactive", this means they can be used to reconne
 When the Player sends the callback: `playerRequiresPassword:` it waits for a password belonging to the locked content. You can provide the password using `continueWithPassword:`
 When you provide the password, the server validates it and starts playing the content if the password is valid. Otherwise it calls back again with `playerRequiresPassword:`.
 
-#### Age lock
+#### Age lock (deprecated)
 
 When the Player sends either callback `playerRequiresAgeConfirmation:ageRequired:` or `playerRequiresBirthdate:` you need to ask the user's birth date without hints to the required age. If the user-specified age is not less than the required age, you can continue the playback with `continueWithAgeConfirmed`.
 
-#### Hash lock
+#### Hash lock (deprecated)
 
-Implementing custom viewer authentication flow is possible using the [Viewer Authentication API](https://developers.video.ibm.com/channel-api/viewer-authentication-api.html). If the channel or video is set up with custom viewer authentication, the player sends the callback `playerRequiresHash:` where the application should present the custom authentication flow for the user. For more information on implementing the flow please refer to the [Viewer Authentication API documentation](https://developers.video.ibm.com/channel-api/viewer-authentication-api.html).
-Once the authentication flow is finished, `USUstreamPlayer` `continueWithHash:` should be called with the resulting `hash` object of the authentication flow. If the provided `hash` object is validated the player gains access to the restricted resource and starts playing it back.
+A deprecated custom viewer authentication flow. Use [Viewer auth] instead.
 
-[Dashboard]: https://www.ustream.tv/dashboard
-["API/SDK access"]: https://www.ustream.tv/dashboard/integrations/api-access
+#### Viewer auth
+
+Implementing custom viewer authentication flow is possible using the [Viewer Authentication API](https://developers.video.ibm.com/viewer-authentication-api-v2-getting-started). If the channel or video is set up with custom viewer authentication, the player sends the callback `playerRequiresViewerAuthToken:fromURL:` where the application should present the custom authentication flow for the user. For more information on implementing the flow please refer to the [Viewer Authentication API documentation](https://developers.video.ibm.com/viewer-authentication-api-v2-getting-started).
+Once the authentication flow is finished, `USUstreamPlayer` `continueWithViewerAuthToken:` should be called with the resulting `token` object of the authentication flow. If the provided `token` object is validated the player gains access to the restricted resource and starts playing it back.
+
+[Dashboard]: https://video.ibm.com/dashboard
+["API/SDK access"]: https://video.ibm.com/dashboard/integrations/api-access
