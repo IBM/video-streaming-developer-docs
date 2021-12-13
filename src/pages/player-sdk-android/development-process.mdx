@@ -363,15 +363,10 @@ public interface ErrorListener {
     void onPasswordLock();
 
     /**
-     * The requested content is restricted by age.
-     */
-    @Deprecated
-    void onAgeLock();
-
-    /**
      * The requested content requires a HashLock authentication
      * or the provided Hash is invalid/expired.
      */
+    @Deprecated
     void onHashLock();
 
     /**
@@ -592,12 +587,6 @@ Errors that can be resolved by user (or developer) interaction:
 #### Password lock
 The requested content requires a password. This is represented by receiving an `onPasswordLock()` callback.
 After acquiring the password, call `player.setPassword(password);` then restart the playback by `player.play();`.
-
-#### Age lock (*deprecated*)
-The requested content is only available for viewers above a certain age. This is represented by receiving an `onAgeLock()` callback.
-After asking for the viewer's birthday, call `player.setBirthDate(date);` then restart the playback by `player.play();`.
-
-*This feature is deprecated and it will be removed in version 2.1.0 of the SDK.*
 
 #### Hash lock (*deprecated*)
 The requested content requires a valid hash token to be unlocked. This is represented by receiving an `onHashLock()` callback.
