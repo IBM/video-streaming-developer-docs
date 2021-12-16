@@ -259,7 +259,7 @@ selected (live or recorded).
 ![State flow diagram](../static-content/android-state-flow-diagram.png "State flow diagram")
 
 
-### Catching callbacks
+### Generic callbacks
 
 There are eight different listeners that you can add to the Player SDK instance to receive callbacks. Some of these 
 listeners are mandatory, others are optional, but each listener represents a group of functionalities of the Player SDK.
@@ -363,15 +363,10 @@ public interface ErrorListener {
     void onPasswordLock();
 
     /**
-     * The requested content is restricted by age.
-     */
-    @Deprecated
-    void onAgeLock();
-
-    /**
      * The requested content requires a HashLock authentication
      * or the provided Hash is invalid/expired.
      */
+    @Deprecated
     void onHashLock();
 
     /**
@@ -395,6 +390,16 @@ public interface ErrorListener {
      * that Your clients will not be able to watch your streams at the moment.
      */
     void onViewerHourLimitLock();
+
+    /**
+     * The requested content requires Viewer Authentication
+     * or the provided viewer authentication token is invalid/expired.
+     *
+     * @param authUrl   an address where the authentication is handled
+     *
+     * @see Player#setViewerAuthToken(String)
+     */
+    void onViewerAuthLock(String authUrl);
 
     /**
      * Connection error.
@@ -579,41 +584,89 @@ Some of these errors can be resolved by you or the user of your application.
 
 Errors that can be resolved by user (or developer) interaction:
 
-*   `onPasswordLock()` – Call `player.setPassword(password);` then restart the playback by `player.play();`
+#### Password lock
+The requested content requires a password. This is represented by receiving an `onPasswordLock()` callback.
+After acquiring the password, call `player.setPassword(password);` then restart the playback by `player.play();`.
 
-*   deprecated: ~~`onAgeLock()` – Call `player.setBirthDate(date);` then restart the playback by `player.play();`~~
+#### Hash lock (*deprecated*)
+The requested content requires a valid hash token to be unlocked. This is represented by receiving an `onHashLock()` callback.
+After authenticating with your Hash service ([old Viewer Authentication](../viewer-authentication-api-getting-started)) and receiving a hash,
+call `player.setHash(hash);` then restart the playback by `player.play();`
 
-*   `onHashLock()` – Call `player.setHash(hash);` then restart the playback by `player.play();`
+*This feature is deprecated and it is scheduled to be removed in 2022 Q1. Please migrate to Viewer Authentication instead.*
 
-Transient errors:
+#### Viewer Authentication
+The requested content requires Viewer Authentication. This is represented by receiving
+an `onViewerAuthLock(authUrl)` callback. Use the url provided in the `authUrl` parameter to determine
+where to go to authenticate. After receiving the token, call `player.setViewerAuthToken(token)`
+then restart the playback by (for example) `player.play();`.
 
-*   `onConnectionError()` – There is a problem with the internet connection,  
-(most likely temporary) try again later by calling: `player.play();`
+Viewer Authentication is replacing "Hash lock". It is a modernised and hardened version of authentication.
+Please migrate your code to this version. For more information on the flow please refer to the [Viewer Authentication API documentation].
 
-*   `onUnknownError()` – This indicates a problem that the Player SDK can't determine, 
-(most likely temporary) try again by calling: `player.play();`
+### Transient errors
+Some errors may occur only temporarily, these might be resolved by retrying the playback with the exact same parameters.
 
-*   `onViewerHourLimitLock()` – The broadcaster's viewer hours are spent. This user can not watch the stream at the moment, 
+#### Connection Error
+This is a network error, and it is represented by a call to `onConnectionError()`.
+Connection errors can happen for various reasons, but most likely there is a problem with the internet connection,
+(usually it is only temporary) you can try again later by calling: `player.play();`
+
+The player will try to resolve most of the connection problems internally, but sometimes it is unable to do so.
+
+#### Viewer Hour Limit lock
+The broadcaster's viewer hours are spent. This user can not watch the stream at the moment,
 try again by calling: `player.play();`
 
-Other errors:
+This error is presented by a call to `onViewerHourLimitLock()`.
 
-*   `onInvalidApiKey()` – The provided IBM Video Streaming Player SDK key is not authorized to play this content. You need to create a 
-new Player SDK Factory instance to provide the correct key. The key needs to be set upon factory creation: 
-`new PlayerFactory(IBM_PLAYER_SDK_KEY, context);`
+#### Unknown Error
+This indicates a problem that the Player SDK couldn't determine, (most likely only temporary)
+try again by calling: `player.play();`
 
-*   `onNoSuchContent()` – The requested live channel or recorded video does not exist.
+This error is presented by a call to `onUnknownError()`.
 
-*   `onContentNotPlayable()` – The requested recorded video is not available in a playable format.
+### Other errors
+There are certain errors that could happen due to certain Account, Channel or Video configurations,
+misconfiguration of the Player instance or even due to context related parameters (even geo location of the viewer).
+These errors can not be resolved by the viewers nor will go away by themselves.
 
-*   `onGeoLock()` – The requested content is not playable in the user's current geo location.
+#### Invalid API Key
+This is a misconfiguration of the Player SDK. The provided IBM Video Streaming Player SDK key is
+not authorized to play this content. You need to create a new Player SDK Factory instance to provide
+the correct key. The key needs to be set upon factory creation: `new PlayerFactory(IBM_PLAYER_SDK_KEY, context);`.
 
-*   `onRestricted()` – There are security restrictions set for the channel, that does not enable the Player SDK to play 
-this content, or your channel has reached its maximum concurrent viewer number. The latter can be resolved by retrying 
+This error is presented by a call to `onInvalidApiKey()`.
+
+#### No Such Content
+This is a misconfiguration of the Player SDK. The requested live channel or recorded video does not exist.
+
+This error is presented by a call to `onNoSuchContent()`.
+
+#### Content Not Playable
+The requested recorded video is not available in a playable format. The Player couldn't acquire a
+format to play that this device supports.
+
+This error is presented by a call to `onContentNotPlayable()`.
+
+#### Geo lock
+The requested content is not playable in the user's current geo location.
+This can happen if account, channel or video specific restrictions have been applied on the [Dashboard].
+
+This error is presented by a call to `onGeoLock()`.
+
+#### General Restriction
+There are security restrictions set for the channel, that do not enable the Player SDK to play
+this content, or your channel has reached its maximum concurrent viewer number. The latter can be resolved by retrying
 later, to resolve the former the channel's settings must be modified.
 
-These callbacks are found in `com.ibm.video.android.player.api.ErrorListener`.
+This error is presented by a call to `onRestricted()`.
 
+All of these callbacks discussed in sections [Interactive callbacks](#interactive-callbacks),
+[Transient errors](#transient-errors) and [Other errors](#other-errors) can be found in
+`com.ibm.video.android.player.api.ErrorListener`.
+
+[Viewer Authentication API documentation]: ../viewer-authentication-api-v2-getting-started
 [Dashboard]: https://video.ibm.com/dashboard
 ["API/SDK access"]: https://video.ibm.com/dashboard/integrations/api-access
 [CHANGELOG]: changelog
