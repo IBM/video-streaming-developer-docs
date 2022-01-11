@@ -183,6 +183,9 @@
 - title: Usage
   pages:
     - path: /player-api-usage
+- title: URL Parameters
+  pages:
+    - path: /player-api-url-parameters
 - title: Examples
   pages:
     - title: Basic embed
