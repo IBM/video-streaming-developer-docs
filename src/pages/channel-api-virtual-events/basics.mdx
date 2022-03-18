@@ -1,0 +1,454 @@
+---
+title: Virtual Events Basics
+description: Virtual Events Basics
+---
+
+## Create a virtual event
+
+```
+POST /channels/{channelId}/virtual-events.json
+```
+
+### Parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `title`| string | REQUIRED   | Title of the virtual event      |
+| `timezone`| string | REQUIRED   | Time zone of the event. See [available timezones](/channel-api-events#list-of-supported-time-zones)     |
+| `start_at`| string | REQUIRED   | Event start date and time. ISO 8601 datetime without time zone component      |
+| `end_at`| string | REQUIRED   | Event end date and time. ISO 8601 datetime without time zone component      |
+| `gate_open_at`| string | REQUIRED   | Registration open date and time. ISO 8601 datetime without time zone component |
+| `gate_close_at`| string | REQUIRED   | Registration closing date and time. ISO 8601 datetime without time zone component   |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+POST /channels/123/virtual-events.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+title=Ongoing+event&timezone=America%2FLos_Angeles&start_at=2020-10-10+10%3A10%3A10&end_at=2020-10-11+10%3A10%3A10&gate_open_at=2020-10-10+10%3A10%3A10&gate_close_at=2020-10-11+10%3A10%3A10
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `virtual_event` root object.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Event ID                                                                                                                                                              |
+| `title`        | string    | Title of the event                                                                                                                     |
+| `timezone`     | string    | Event time zone string. See [available timezones](/channel-api-events#list-of-supported-time-zones)             |
+| `start_at`     | string    | Event start date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `end_at`       | string    | Event end date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_open_at` | string    | Registration open date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_close_at` | string    | Registration closing date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `registration_form_enabled`   | boolean   | Is the registration form available                                                                                                                    |
+| `registration_form_url`   | string | Link to the registration form |
+| `event_secret`     | string | Shared secret to sign the event form url                                                                                                                                                  |
+| `status`   | string   | One of `past`, `started`, `open`, `future`                                                                                                                  |
+
+Example of a success response:
+
+```json
+{
+  "virtual_event": {
+    "id": 100,
+    "title": "Ongoing event",
+    "timezone": "America/Los_Angeles",
+    "start_at": "2020-10-10 10:10:10",
+    "end_at": "2020-10-11 10:10:10",
+    "gate_open_at": "2020-10-10 10:10:10",
+    "gate_close_at": "2020-10-11 10:10:10",
+    "registration_form_enabled": true,
+    "registration_form_url": "https://circa.com/form.php?id=1",
+    "event_secret": "71b9160323456f94410e99835c197e6b66c97de6",
+    "status": "started"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 409 Conflict            | `conflict`          | Overlapping events                                                                      |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## List virtual events
+
+```
+GET /channels/{channelId}/virtual-events.json
+```
+
+### Query Parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `filter[search_text]`| string | OPTIONAL   | Search text      |
+| `filter[status]`| string | OPTIONAL   | Event status filter (`past`/`open`/`started`/`future`)      |
+| `filter[registration_form_enabled]`| string | OPTIONAL   | Filter events with given registration form status (`true`/`false`)     |
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `virtual_events` root array.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Event ID                                                                                                                                                              |
+| `title`        | string    | Title of the event                                                                                                                     |
+| `timezone`     | string    | Event time zone string. See [available timezones](/channel-api-events#list-of-supported-time-zones)             |
+| `start_at`     | string    | Event start date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `end_at`       | string    | Event end date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_open_at` | string    | Registration open date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_close_at` | string    | Registration closing date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `registration_form_enabled`   | boolean   | Is the registration form available                                                                                                                    |
+| `registration_form_url`   | string | Link to the registration form |
+| `event_secret`     | string | Shared secret to sign the event form url                                                                                                                                                  |
+| `status`   | string   | One of `past`, `started`, `open`, `future`                                                                                                                  |
+
+Additionally there is a `paging` element in the response with the following values:
+
+| KEY          | TYPE   | DESCRIPTION                           |
+| ------------ | ------ | ------------------------------------- |
+| `previous`   | string | Link to the previous page (if exists) |
+| `next`       | string | Link to the next page (if exists)     |
+| `page_count` | number | Number of available pages             |
+| `item_count` | number | Total number of items                 |
+
+Example of a success response:
+
+```json
+{
+  "virtual_events": [
+    {
+      "id": 100,
+      "title": "Artificial intelligence Conference",
+      "timezone": "America/Los_Angeles",
+      "start_at": "2020-10-10 10:00:00",
+      "end_at": "2020-10-10 11:00:00",
+      "gate_open_at": "2020-10-10 08:00:00",
+      "gate_close_at": "2020-10-10 11:00:00",
+      "registration_form_enabled": true,
+      "registration_form_url": "https://circa.com/form.php?id=1",
+      "event_secret": "71b9160323456f94410e99835c197e6b66c97de6",
+      "status": "started"
+    }
+  ],
+  "paging": {
+    "previous": "https://api.video.ibm.com/channels/123/virtual-events.json?page=1",
+    "next": "https://api.video.ibm.com/channels/123/virtual-events.json?page=3",
+    "page_count": 10,
+    "item_count": 10
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Get details of a virtual event
+
+```
+GET /channels/{channelId}/virtual-events/{eventId}.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `virtual_event` root object.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Event ID                                                                                                                                                              |
+| `title`        | string    | Title of the event                                                                                                                     |
+| `timezone`     | string    | Event time zone string. See [available timezones](/channel-api-events#list-of-supported-time-zones)             |
+| `start_at`     | string    | Event start date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `end_at`       | string    | Event end date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_open_at` | string    | Registration open date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_close_at` | string    | Registration closing date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `registration_form_enabled`   | boolean   | Is the registration form available                                                                                                                    |
+| `registration_form_url`   | string | Link to the registration form |
+| `event_secret`     | string | Shared secret to sign the event form url                                                                                                                                                  |
+| `status`   | string   | One of `past`, `started`, `open`, `future`                                                                                                                  |
+
+Example of a success response:
+
+```json
+{
+  "virtual_event": {
+    "id": 100,
+    "title": "Ongoing event",
+    "timezone": "America/Los_Angeles",
+    "start_at": "2020-10-10 10:10:10",
+    "end_at": "2020-10-11 10:10:10",
+    "gate_open_at": "2020-10-10 10:10:10",
+    "gate_close_at": "2020-10-11 10:10:10",
+    "registration_form_enabled": true,
+    "registration_form_url": "https://circa.com/form.php?id=1",
+    "event_secret": "71b9160323456f94410e99835c197e6b66c97de6",
+    "status": "started"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel or event                                |
+| 404 Not Found           | `not_found`         | Channel or event not found                                                                       |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Update a virtual event
+
+```
+PUT /channels/{channelId}/virtual-events/{eventId}.json
+```
+
+### Parameters
+
+| PARAMETER   | TYPE   | IMPORTANCE | DESCRIPTION      |
+| ----------- | ------ | ---------- | ---------------- |
+| `title`| string | REQUIRED   | Title of the virtual event      |
+| `timezone`| string | REQUIRED   | Time zone of the event. See [available timezones](/channel-api-events#list-of-supported-time-zones)     |
+| `start_at`| string | REQUIRED   | Event start date and time. ISO 8601 datetime without time zone component      |
+| `end_at`| string | REQUIRED   | Event end date and time. ISO 8601 datetime without time zone component      |
+| `gate_open_at`| string | REQUIRED   | Registration open date and time. ISO 8601 datetime without time zone component |
+| `gate_close_at`| string | REQUIRED   | Registration closing date and time. ISO 8601 datetime without time zone component   |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+PUT /channels/123/virtual-events/100.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+title=Ongoing+event+2&timezone=America%2FLos_Angeles&start_at=2020-10-10+10%3A10%3A10&end_at=2020-10-11+10%3A10%3A10&gate_open_at=2020-10-10+10%3A10%3A10&gate_close_at=2020-10-11+10%3A10%3A10
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `virtual_event` root object.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Event ID                                                                                                                                                              |
+| `title`        | string    | Title of the event                                                                                                                     |
+| `timezone`     | string    | Event time zone string. See [available timezones](/channel-api-events#list-of-supported-time-zones)             |
+| `start_at`     | string    | Event start date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `end_at`       | string    | Event end date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_open_at` | string    | Registration open date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_close_at` | string    | Registration closing date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `registration_form_enabled`   | boolean   | Is the registration form available                                                                                                                    |
+| `registration_form_url`   | string | Link to the registration form |
+| `event_secret`     | string | Shared secret to sign the event form url                                                                                                                                                  |
+| `status`   | string   | One of `past`, `started`, `open`, `future`                                                                                                                  |
+
+Example of a success response:
+
+```json
+{
+  "virtual_event": {
+    "id": 100,
+    "title": "Ongoing event 2",
+    "timezone": "America/Los_Angeles",
+    "start_at": "2020-10-10 10:10:10",
+    "end_at": "2020-10-11 10:10:10",
+    "gate_open_at": "2020-10-10 10:10:10",
+    "gate_close_at": "2020-10-11 10:10:10",
+    "registration_form_enabled": true,
+    "registration_form_url": "https://circa.com/form.php?id=1",
+    "event_secret": "71b9160323456f94410e99835c197e6b66c97de6",
+    "status": "started"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel or event                                 |
+| 404 Not Found           | `not_found`         | Channel or event not found                                                                       |
+| 409 Conflict            | `conflict`          | Overlapping events                                                                      |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Delete a virtual event
+
+```
+DELETE /channels/{channelId}/virtual-events/{eventId}.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status "204 No Content" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel or event                                 |
+| 404 Not Found           | `not_found`         | Channel or event not found                                                                       |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## List sessions of a virtual event
+
+```
+GET /channels/{channelId}/virtual-events/{eventId}/sessions.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `sessions` root array.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Event ID                                                                                                                                                              |
+| `title`        | string    | Title of the session                                                                                                                     |
+| `description`  | string    | Description of the session                                                                                                                     |
+| `timezone`     | string    | Session time zone string. See [available timezones](/channel-api-events#list-of-supported-time-zones)             |
+| `start_at`     | string    | Session start date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `end_at`       | string    | Session end date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+
+Example of a success response:
+
+```json
+{
+  "sessions": [
+    {
+      "id": 100,
+      "title": "Deep Learning applications",
+      "description": "In this session we discuss the application of Deep Learning.",
+      "timezone": "America/Los_Angeles",
+      "start_at": "2020-10-10 10:00:00",
+      "end_at": "2020-10-10 11:00:00"
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel or event                                |
+| 404 Not Found           | `not_found`         | Channel or event not found                                                              |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Close a virtual event
+
+This endpoint sets the gate close time to the current timestamp, which means that the event closes immediately.
+
+```
+POST /channels/{channelId}/virtual-events/{eventId}/close.json
+```
+
+### Parameters
+
+This request doesn't require request body parameters.
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `virtual_event` root object.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Event ID                                                                                                                                                              |
+| `title`        | string    | Title of the event                                                                                                                     |
+| `timezone`     | string    | Event time zone string. See [available timezones](/channel-api-events#list-of-supported-time-zones)             |
+| `start_at`     | string    | Event start date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `end_at`       | string    | Event end date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_open_at` | string    | Registration open date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `gate_close_at` | string    | Registration closing date and time. ISO 8601 datetime without time zone component                                                                                                                                                    |
+| `registration_form_enabled`   | boolean   | Is the registration form available                                                                                                                    |
+| `registration_form_url`   | string | Link to the registration form |
+| `event_secret`     | string | Shared secret to sign the registration form url                                                                                                                                                  |
+| `status`   | string   | One of `past`, `started`, `open`, `future`                                                                                                                  |
+
+Example of a success response:
+
+```json
+{
+  "virtual_event": {
+    "id": 100,
+    "title": "Ongoing event",
+    "timezone": "America/Los_Angeles",
+    "start_at": "2020-10-10 10:10:10",
+    "end_at": "2020-10-11 10:10:10",
+    "gate_open_at": "2020-10-10 10:10:10",
+    "gate_close_at": "2020-10-11 10:10:10",
+    "registration_form_enabled": true,
+    "registration_form_url": "https://circa.com/form.php?id=1",
+    "event_secret": "71b9160323456f94410e99835c197e6b66c97de6",
+    "status": "past"
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The feature is not enabled for the user                                                 |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel or event                                |
+| 404 Not Found           | `not_found`         | Channel or event not found                                                              |
+| 409 Conflict            | `conflict`          | The event has already ended or has been closed                                          |
+| 500 Server Error        | `server_error`      | An error occurred                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
