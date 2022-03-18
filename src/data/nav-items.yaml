@@ -128,6 +128,14 @@
 - title: Events
   pages:
     - path: /channel-api-events
+- title: Virtual Events
+  pages:
+    - title: Basics
+      path: /channel-api-virtual-events/basics
+    - title: Registration
+      path: /channel-api-virtual-events/registration
+    - title: CSV Export
+      path: /channel-api-virtual-events/csv-export
 - title: Chat
   pages:
     - title: Getting Started
