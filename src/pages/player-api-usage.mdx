@@ -137,6 +137,16 @@ viewer.callMethod('cc', 1); //enables the closed caption with index 1
 viewer.callMethod('cc', -1); //disables the closed caption
 ```
 
+### webkitEnterFullscreen (iOS)
+
+Calls `webkitEnterFullscreen` on the `HTMLVideoElement` to access the video's native fullscreen UI.
+
+###### Example
+
+```js
+viewer.callMethod('webkitEnterFullscreen');
+```
+
 ## getProperty
 
 Retrieves a property of the embed player. This method is __asynchronous__, the data will be passed to a callback function, given as argument.
@@ -482,6 +492,7 @@ Returns an object:
 Available error type(s):
 
 - `autoplayRejected`
+- `webkitEnterFullscreenRejected`
 
 ###### Example
 
@@ -492,16 +503,11 @@ viewer.addListener('error', function(type, errorEvent) {
             // TODO: display fallback button
             console.log(errorEvent.message);
             break;
+        case 'webkitEnterFullscreenRejected':
+            // TODO: browser prevented the request, user gesture is needed
+            console.log(errorEvent.message);
+            break;
         // no default
     }
 });
-```
-
-Example autoplayRejected error:
-
-```json
-{
-    "name": "autoplayRejected",
-    "message": "detailed error message"
-}
 ```
