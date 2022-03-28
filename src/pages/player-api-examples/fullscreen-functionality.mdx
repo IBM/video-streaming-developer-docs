@@ -16,7 +16,7 @@ Third party player controls should implement the fullscreen functionality on the
 ### Example
 
 <EmbedPlayer
-  src="https://www.ustream.tv/embed/1524?hideFullscreen"
+  src="https://video.ibm.com/embed/1524?hideFullscreen"
   controls={['fullscreen']}
 />
 
@@ -35,11 +35,11 @@ document.addEventListener("MSFullscreenChange", changeHandler, false);
 fullScreenBtn.addEventListener('click',onFullScreenBtnClick);
 
 // check if the current state is fullscreen or not
-function isFullScreen () {
+function isFullScreen() {
   return document.fullScreen ||
     document.webkitIsFullScreen ||
     document.mozfullScreen ||
-	document.msFullscreenElement;
+    document.msFullscreenElement;
 }
 
 // change everything on other change events too
@@ -95,18 +95,18 @@ function onFullScreenBtnClick () {
 ### CSS
 
 ```css
-#Viewer {
+#Container {
   position: relative;
   width: 640px;
   height: 390px;
 }
 
-#Viewer.fullscreen {
+#Container.fullscreen {
   width: 100%;
   height: 100%;
 }
 
-#FullScreen {
+#fullScreenBtn {
   cursor: pointer;
   position: absolute;
   bottom: 10px;
