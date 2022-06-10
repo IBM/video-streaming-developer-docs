@@ -56,7 +56,7 @@ Possible error responses:
 
 ## Upload the video file
 
-In this stage you need to upload the video file in 1MB parts. You can find an example of this in the downloadable PHP sample code: https://developers.video.ibm.com/video-replacement-api-php-sample-code
+In this stage you need to upload the video file in 1MB parts. You can find an example of this in the downloadable PHP sample code: [Replacement API Example](https://github.com/ustream/api-docs/raw/gh-pages/assets/ustream_replacement_api_example.zip)
 
 Before you start uploading the parts, you will need to calculate the total number of parts and the total size of the file.
 
@@ -165,7 +165,7 @@ Possible error responses:
 The cancel signal tells to our server that it should cancel the video replacement upload process.
 
 ```
-GET https://api.video.ibm.com/videos/{video_id}/replacement/cancel.json
+POST https://api.video.ibm.com/videos/{video_id}/replacement/cancel.json
 ```
 
 ### Parameters
