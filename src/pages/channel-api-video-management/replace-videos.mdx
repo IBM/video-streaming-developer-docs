@@ -1,0 +1,190 @@
+---
+title: Replace videos
+description: Channel API Video management Replace videos
+---
+
+To replace a video you must do the following steps:
+
+1. Initiate replace process by an API call. In the response you can find the video ID and an upload ID that you will have to send with every request.
+2. Upload the new video in 1MB parts. You might need to make several requests in this stage until all the parts of the video file have been uploaded.
+3. When the upload is finished, send an "upload complete" signal, which will start the processing of your video.
+4. Call the API to check the status of processing the video.
+
+## Initialize a replace
+
+Initiate the replace process.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/replacement.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER              | TYPE    | IMPORTANCE | DESCRIPTION                                         |
+| ---------------------- | ------- | ---------- | ----------------------------------------------------|
+| `regenerateThumbnail`  | boolean | REQUIRED   | After replace, new thumbnail will generate          |
+| `regenerateTranscript` | boolean | REQUIRED   | After replace, new captions will generate           |
+
+### Success response
+
+Upon success a response with HTTP status "201 Created" is returned with the key-value pairs containing the video ID and upload ID.
+
+Example of a success response:
+
+```json
+{
+  "videoId": 1234567890,
+  "uploadId": "28691235606490ab81a8c0.96744426"
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE             | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `protect_level_invalid` | Invalid protect level has been sent                                                     |
+| 401 Unauthorized        | `invalid_token`         | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership`     | The API user is not allowed to manage the given video                                   |
+| 404 Not Found           | `not_found`             | Video was not found                                                                     |
+| 409 Conflict            | `replace_in_progress`   | Video replacement is already in progress                                                |
+| 429 Too Many Requests   | `too_many_requests`     | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
+| 503 Service Unavailable |                         | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Upload the video file
+
+In this stage you need to upload the video file in 1MB parts. You can find an example of this in the downloadable PHP sample code: [Replacement API Example](https://github.com/ustream/api-docs/raw/gh-pages/assets/ustream_replacement_api_example.zip)
+
+Before you start uploading the parts, you will need to calculate the total number of parts and the total size of the file.
+
+To upload one part send a multi-part file request to this endpoint:
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/replacement/part.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER        | TYPE   | IMPORTANCE | DESCRIPTION                                                   |
+| ---------------- | ------ | ---------- | ------------------------------------------------------------- |
+| `uploadId`       | string | REQUIRED   | The upload ID from the init response                          |
+| `partIndex`      | int    | REQUIRED   | The index of the current part                                 |
+| `totalPartCount` | int    | REQUIRED   | The total number of parts that will be uploaded               |
+| `totalFileSize`  | int    | REQUIRED   | The total size of the video file                              |
+| `file`           | binary | REQUIRED   | The current file part's content                               |
+
+### Success response
+
+Upon success a response with HTTP status "200 OK" is returned with the key-value pairs containing the video ID and upload ID.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE             | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         |                         | Invalid parameters. Look at the returned hint value for the exact error.                |
+| 401 Unauthorized        | `invalid_token`         | The provided access token is missing, revoked, expired or malformed                     |
+| 403 Forbidden           | `lack_of_ownership`     | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`             | Video was not found                                                                     |
+| 413 Payload too large   | `file_too_large`        | The incoming file is larger than 4GB                                                    |
+| 429 Too Many Requests   | `too_many_requests`     | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
+| 503 Service Unavailable |                         | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Send "upload completed" signal
+
+The "upload completed" signal tells to our server that it can start to process the file.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/replacement/completed.json
+```
+
+### Parameters
+
+The parameters for the POST request:
+
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                          |
+| ---------- | ------ | ---------- | ------------------------------------ |
+| `uploadId` | string | REQUIRED   | The upload ID from the init response |
+
+### Success response
+
+Upon success, a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         |                     | Invalid parameters. Look at the returned hint value for the exact error.                |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired, or malformed                    |
+| 404 Not Found           | `not_found`         | Channel or video was not found                                                          |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                              |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+### Check status of processing
+
+Returns the status of processing the specific video.
+
+```
+GET https://api.video.ibm.com/channels/{channel_id}/uploads/{video_id}.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+Upon success a response with HTTP status "200 OK" is returned with a key-value pair.
+
+| KEY      | TYPE   | DESCRIPTION                                                                                                              |
+| -------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `status` | string | The current status. Possible values: `initiated`, `transferred`, `queued`, `pending`, `transcoding`, `complete`, `error` |
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE | ERROR CONDITIONS                                                                        |
+| ----------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        |             | The provided access token is missing, revoked, expired or malformed                     |
+| 404 Not Found           | `not_found` | Channel was not found                                                                   |
+| 503 Service Unavailable |             | There is a temporary error on the server which makes it impossible to serve the request |
+
+
+## Cancel the video replacement process
+
+The cancel signal tells to our server that it should cancel the video replacement upload process.
+
+```
+POST https://api.video.ibm.com/videos/{video_id}/replacement/cancel.json
+```
+
+### Parameters
+
+This request has no parameters.
+
+### Success response
+
+Upon success, a response with HTTP status "200 OK" is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                                                                            |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request         |                     | Invalid parameters. Look at the returned hint value for the exact error.                                                                    |
+| 401 Unauthorized        |                     | The provided access token is missing, revoked, expired, or malformed                                                                        |
+| 404 Not Found           | `not_found`         | Video was not found                                                                                                                         |
+| 409 Conflict            | `cannot_cancel`     | Video replacement cannot be cancelled at the given status. Possible statuses: `transferred`, `queued`, `pending`, `transcoding`, `complete` |
+| 429 Too Many Requests   | `too_many_requests` | Rate limit exceeded ([Read more](/api-basics-rate-limits))                                                                                  |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request                                                     |
