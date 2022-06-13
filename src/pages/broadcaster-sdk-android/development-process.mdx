@@ -2,19 +2,20 @@
 title: Development Process
 description: Development Process
 ---
-import { Link } from 'gatsby';
 
 ## Step 1: Download SDK package
-Before you download the SDK package, go to the [API/SDK acccess](https://video.ibm.com/dashboard/integrations/api-access) page of the Dashboard and create a Channel API access for your application. When creating the credentials make sure to select "Native application" at the end.
+Before you download the SDK package, go to the [API/SDK access](https://video.ibm.com/dashboard/integrations/api-access) page of the Dashboard and create a Channel API access for your application. When creating the credentials make sure to select "Native application" at the end.
 
 When you've created your API access you can download the SDK package from the "Broadcaster SDK" section of this same page. Use the "Download Android Broadcaster SDK" button.
+
+*If you're using the EU cluster you can create your access on the dashboard of the EU cluster.*
 
 ## Step 2: Explore the SDK package
 The downloaded zip archive contains the sample application, and inside the `m2repository` folder the packaged SDK and its IBM specific dependencies.
 
 ## Step 3: Create (or open) your project
 Open the project that you would like to integrate the SDK in.
-The SDK uses the followng permissions:
+The SDK uses the following permissions:
 - `android.permission.INTERNET`
 - `android.permission.CAMERA`
 - `android.permission.RECORD_AUDIO`
@@ -23,7 +24,7 @@ The latter two, of course should be requested dynamically when needed, just like
 
 The SDK also requires the Android device — on which the resulting application is installed — to have at least one camera.
 
-You don't need to update the `AndroidManifest.xml` of your application with these persmissons, as they will be automatically added during the manifest merge process.
+You don't need to update the `AndroidManifest.xml` of your application with these permissions, as they will be automatically added during the manifest merge process.
 
 ## Step 4: Add the SDK to the project
 Import from local repo: copy the `m2repository` folder to your project. In your project's `build.gradle` put the Video Streaming SDK dependency:
@@ -37,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.ibm.cloudvideo.android.broadcaster:sdk:0.7.+'
+    implementation 'com.ibm.video.android.broadcaster:sdk:1.0.+'
 }
 ```
 
@@ -46,8 +47,9 @@ You can find this in the sample application as well, just copy those settings.
 ## Step 5: Create Broadcaster
 Setting up a broadcaster session in your app can be done in a few easy steps. The main component you instantiate is an `AndroidBroadcaster` object. This class is responsible for the whole broadcast session — that is making connection with the broadcaster server, gathering the audio and video data through the AudioRecord and Camera2 APIs of Android, and present a preview of the captured frames using a TextureView.
 
-The AndroidBroadcaster class has multiple configuration options upon creation, many of them has sane defaults already set up.
+The AndroidBroadcaster class has multiple configuration options upon creation, many of them have sane defaults already set up.
 The constructor parameters _in order of importance, not actual order_ are:
+- `regionalCluster`: this is a mandatory parameter since 1.0.0. This instructs the SDK which IBM WM server cluster it can connect to. If you're a customer of the EU cluster, use: `RegionalCluster.EU`, otherwise `RegionalCluster.WW`
 - `channelId`: this is a mandatory and crucial value. This is the IBM (Enterprise) Video Streaming channel's id that will be used to broadcast to
 - `accessToken`: this is a mandatory and crucial value. This is the access token that is used to access the IBM Channel API. For more information see: [Step 7](#step-7:-authenticating-to-the-broadcast-server "Authentication")
 - `context`: is the context of the current activity. Used for various operations, for example getting available cameras
@@ -60,13 +62,14 @@ The constructor parameters _in order of importance, not actual order_ are:
 - `callbackLooper`: the Android Looper that will be used to execute callbacks on. By default it is the Looper from which the broadcaster has been instantiated
 - `targetBitrate`: is a the desired output bitrate (in bit/s) after encoding the video. Default value is 3 Mbit/s. Please note: the resulting actual output bitrate value may vary depending on the underlying encoder of the device and the captured input content
 - `targetFps`: a Double value representing the desired output frames / second of the video stream. Default value is 25.0 fps
-- `camera2Listener`: is an optional listener which can be used to get notified about camera related events. Has a default value, that ignores all events. In a tipical use-case you don't need to use this listener
+- `camera2Listener`: is an optional listener which can be used to get notified about camera related events. Has a default value, that ignores all events. In a typical use-case you don't need to use this listener
 
 For example:
 
 _Kotlin_
 ```kotlin
 androidBroadcaster = AndroidBroadcaster(
+                regionalCluster,
                 this@BroadcastActivity,
                 textureView,
                 cameraManager.cameraIdList,
@@ -82,9 +85,13 @@ androidBroadcaster = AndroidBroadcaster(
 The IBM Video Streaming SDK doesn't provide any user interface besides the captured preview. To help get started with building your own UI, you can find a basic UI implementation in the sample app.
 
 ## Step 7: Authenticating to the broadcast server
-To be able to start the actual broadcast session, you need a **Channel ID** to broadcast to and an **Access Token** which authenticates your broadcast. Both can be obtained using IBM Video Streaming Channel API. For further details, please refer the [Channel API Documentation]. Once you obtained the Channel ID and the Access Token you can use them to start the actual broadcast.
+To be able to start the actual broadcast session, you need a **RegionalCluster**, a **Channel ID** to broadcast to and an **Access Token** which authenticates your broadcast. The first one represents the cluster your account belongs to.
+The latter two can be obtained using IBM Video Streaming Channel API. For further details, please refer the [Channel API Documentation]. Once you obtained the Channel ID and the Access Token you can use them to start the actual broadcast.
 
-The SDK as a convenience provides an implementation of the IBM Video Streaming Authentication Flow, see <Link to='/broadcaster-sdk-android/aux-features#authentication'>Athentication</Link> in the Auxiliary Features section. Example usage can also be found in the provided sample application.
+The previous versions of the SDK have provided an implementation of IBM Video Streaming Authentication Flow, however starting with version 1.0.0 this is not the case anymore.
+Authentication with the platform happens using standard OpenID & OAuth2.0, thus we've transitioned to using an open-source implementation in the sample project.
+You can read more about the topic in the [Migration Guide](./migration-guide) and at [Authentication](./aux-features#authentication) in the Auxiliary Features section.
+Example usage can also be found in the provided sample application.
 
 ## Step 8: Starting the broadcaster
 
@@ -140,7 +147,7 @@ This will transition the SDK instance through the following states:
 
 ### Cleaning up resources
 
-When the SDK instance is known to be not required anymore, you should tear it down comepletely by calling:
+When the SDK instance is known to be not required anymore, you should tear it down completely by calling:
 
 _Kotlin_
 ```kotlin

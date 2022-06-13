@@ -11,11 +11,9 @@ This document describes the basic steps and components of the SDK to make an And
 
 ## Before you begin
 
-*To our clients using a regional cluster -  please [contact us] for information on SDK support.*
-
 ### Account prerequisites
 Before going into details, please note that the document assumes the following:
-*  You have a registered user at [IBM Watson Media].
+*  You have a registered user at [IBM Watson Media] (or at [IBM WM EU Cluster]).
 *  You have a basic understanding how to use the [Channel API][Channel API Documentation].
 
 If you have questions, please [contact us].
@@ -26,10 +24,24 @@ The SDK uses the Gradle build system, and it is deployed as an AAR file inside a
 
 The sample application also uses Gradle.
 
-We recommend using the latest version of Android Studio for development.
+We recommend using the latest stable version of Android Studio for development.
 
 The supported minimum Android API level is 21 (Android version 5.0).
 
+### Using Regional Clusters
+
+IBM Watson Media hosts an additional Server Cluster in the EU, besides the original world-wide one.
+These so called regional clusters are completely distinct entities, there's no data transfer among them. A customer account can only reside in one of them.
+You can read more about the topic in [this article](https://blog.video.ibm.com/streaming-product-updates/server-cluster-in-europe-for-streaming-video/).
+
+Because of the complete separation of data summarized above, the updated Broadcaster SDK will need to be explicitly supplied with a "regional cluster" parameter.
+Given this parameter the SDK will know which servers it can access to reach the resources that belong to the desired customer account.
+
+Please also note that an SDK access always belongs to a specific IBM WM cluster. If you'd like to access accounts in different clusters,
+you will need to setup multiple SDK accesses, more specifically "Channel API Access" in case of the Broadcaster SDK for each regional cluster.
+Then you can use these accesses in your application, you can find an example in the supplied sample project.
+
 [IBM Watson Media]: http://video.ibm.com/
-[Channel API Documentation]: https://ibm.github.io/video-streaming-developer-docs/channel-api-basic-channel-management "IBM Video Streaming Channel API"
+[IBM WM EU Cluster]: http://eu.video.ibm.com/
+[Channel API Documentation]: https://developers.video.ibm.com/channel-api-basic-channel-management "IBM Video Streaming Channel API"
 [contact us]: https://video.ibm.com/enterprise-video/contact

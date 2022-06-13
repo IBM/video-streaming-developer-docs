@@ -441,8 +441,10 @@
       path: /broadcaster-sdk-android/development-process
     - title: Diagnosing a problem
       path: /broadcaster-sdk-android/diagnosing-a-problem
-    - title: Auxiliary features
+    - title: Auxiliary Features
       path: /broadcaster-sdk-android/aux-features
+    - title: Migration Guide
+      path: /broadcaster-sdk-android/migration-guide
     - title: Changelog
       path: /broadcaster-sdk-android/changelog
 - title: Broadcaster SDK for iOS

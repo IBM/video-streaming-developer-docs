@@ -4,31 +4,31 @@ description: Auxiliary features
 ---
 
 ## Authentication
-IBM Video Streaming SDK provides a secure way to authenticate users with IBM ID or legacy Ustream account and getting access for IBM Channel API features for example listing or broadcasting. `OAuthAuthenticator` wraps up [IBM Video Streaming Channel APIs Authentication flow] and implements a basic authentication service that presents the IBM Video Streaming authentication site in an embedded `CustomTab` on Android.
+IBM Video Streaming SDK usage requires users to authenticate with an IBM ID or a legacy Ustream account to get access to SDK and IBM Channel API features for example broadcasting or listing.
 
-To use the authenticator obtain the necessary configuration parameters from you Channel API credentials using the Dashboard's [API/SDK access] page.
+The authentication happens using **OpenID Connect** which in turn handles the authorization part using **OAuth2.0** protocol.
+Earlier versions of the SDK had provided a custom in-house implementation of the above two protocol's Authorization Code flow.
+However with the introduction of version 1.0.0 of the SDK, we have removed support for this authorization component.
+Instead we encourage you to use your favourite OpenID Connect & OAuth2.0 implementation, this can provide greater flexibility in your application.
 
-Current authentication flow:
+Of course we are still providing an example implementation in the provided sample application, but from now on using the official, open-source [AppAuth-Android] library provided by the [OpenID Foundation].
+You can find detailed documentation on how to use the auth library on the linked GitHub repository if you need information beyond what the sample application provides.
 
-1. Set up the authentication client by creating a new `OAuthAuthenticator` instance. You will need to supply the following parameters: 
-    - `savedInstanceState` of your Activity or Fragment, so the client can persist its state
-    - `clientConfiguration` that contains the `redirectUrl` which will be used by the backend service to call back to your application once login is finished and your `clientId` that identifies the current API using application
-    - `errorHandler` which will notify you about possible errors occurring during authentication
-2. Check whether you need to start the authentication process based on the Activity's current `Intent` parameter using `authenticator.shouldStartAuthentication(intent)`
-3. Start the authentication process (if needed) using: `authenticator.startAuthentication(applicationContext)`. It is important to supply _Application Context_ so your Activity can be destroyed and recreated during a configuration change
-4. When your activity is changing configuration or going into the background let the Authenticator save its state by calling `authenticator.onSaveInstanceState(outState)` in your Activity's / Fragment's `onSaveInstanceState(outState: Bundle?)` method
-5. In your `AndroidManifest.xml` listen to the `redirectUrl` (a.k.a callback url) using an intent filter. This way when the login is complete the browser can open the application and the authentication can be completed. See the sample app for details
-6. When the Activity receives the new `Intent` after a successful authentication, you can request an Access Token from it by calling `authenticator.parseIntentForAccessToken(intent, tokenAvailableLambda)`. The result lambda can be called from a worker thread, so please make sure to post the result to the Main Thread
-7. When the above described `tokenAvailableLambda` is called it will return you a `TokenContainer` object that will be used to access the IBM Channel API services. The `TokenContainer` holds the following:
-    - `accessToken`: the token with which the Channel API can be used
-    - `expiresAt`: an expiration date in Unix Epoch timestamp
-    - `refreshToken`: that can be used to refresh the Access Token when it has passed its expiration date
-    - `idToken`: contains information related to authenticity checking of tokens
-    - `subject`: either the email address of the logged in user or the user name (in case of a legacy Ustream account)
-    - `userType`: this is a legacy feature. Describes the type of the logged in account. Distinguishes between SSO (value: `external`) and legacy user logins (value: `simple`)
+**Basic steps of authentication & authorization**:
+1. Acquiring OpenID configuration
+2. Loading the authentication endpoint in a `CustomTab`
+3. User authenticates through their login provider
+4. User receives an ID Token & Authorization Code
+5. Authorization can be used to obtain Access Token using the token endpoint provided by OpenID configuration
 
-For more details see the sample app or visit [IBM Video Streaming Channel API] page for more information about Channel API usage.
+Please note that this is a very basic description of what actually happens, and focuses on only the *Authorization Code flow*. OpenID and OAuth2.0 is capable of much more than just this.
+For details about authenticating with IBM Video Streaming services see: [API Authentication](https://developers.video.ibm.com/api-basics-authentication) and [API Native app support].
+
+For more details about accessing channel based resources from the API see the sample app or visit [IBM Video Streaming Channel API].
 
 [API/SDK access]: https://video.ibm.com/dashboard/integrations/api-access
-[IBM Video Streaming Channel APIs Authentication flow]: https://ibm.github.io/video-streaming-developer-docs/api-basics-authentication
-[IBM Video Streaming Channel API]: https://ibm.github.io/video-streaming-developer-docs/channel-api-basic-channel-management
+[API Authentication]: https://developers.video.ibm.com/api-basics-authentication
+[API Native app support]: https://developers.video.ibm.com/api-basics-native-apps
+[IBM Video Streaming Channel API]: https://developers.video.ibm.com/channel-api-basic-channel-management
+[AppAuth-Android]: https://github.com/openid/AppAuth-Android
+[OpenID Foundation]: https://openid.net/
