@@ -3,9 +3,24 @@ title: Changelog
 description: Changelog
 ---
 
+## 1.0.0 - 2022-06-10
+### Added
+- RegionalCluster support; enables the possibility to connect to the IBM WM instance running in EU too. See details in [getting started](./getting-started#using-regions-clusters)
+
+### Changed
+- A long due overhaul of namings and packages throughout the SDK
+- `AndroidBroadcaster` constructor requires `regionalCluster` parameter explicitly specified
+- `UstreamApiClient` requires `serviceUrl` parameter explicitly specified
+- See the [migration guide](./migration-guide) and the sample project for details
+
+### Removed
+- OAuth capabilities removed from `UstreamApiClient`, it was limited anyway
+- The "Authorizer" auxiliary library has been replaced with OpenID AppAuth-Android library.
+- See the [migration guide](./migration-guide) and the sample project for details
+
 ## 0.7.0 - 2020-07-21
 ### Changed
-- Migrated from old Compatlib to AndroidX
+- Migrated from old Compat Lib to AndroidX
 - Migrated to new restapi module (com.ibm.cloudvideo.android.restapi v0.2.3)
 - Fixed connection issues on older Android versions
 
