@@ -7,6 +7,7 @@ description: Development Process
 
 Request an SDK package from your Customer Success representative.
 
+* If you're using the EU cluster you can create your access on the dashboard of the EU cluster. To download the SDK package please [contact us](https://video.ibm.com/enterprise-video/contact). *
 
 ## Step 2: Explore the SDK package
 
@@ -34,6 +35,8 @@ For example:
 ```objc
 @import IBMWatsonMediaBroadcasterSDK
 
+[IBMWatsonMediaBroadcaster configureWithRegionalCluster:IBMWatsonMediaRegionalClusterWorldWide];
+
 self.frameSource = [IBMWatsonMediaCaptureSessionFrameSource new];
 self.broadcastPreview = [[IBMWatsonMediaBroadcasterPreview alloc] initWithFrame:self.view.bounds];
 self.broadcasterConfig = [IBMWatsonMediaBroadcasterConfig configWithPreset:IBMWatsonMediaVideoPreset720];
@@ -46,12 +49,14 @@ self.broadcaster.presenter = self.broadcastPreview;
 ```swift
 import IBMWatsonMediaBroadcasterSDK
 
-frameSource = IBMWatsonMedia.CaptureSessionFrameSource()
-broadcastPreview = IBMWatsonMedia.BroadcasterPreview(frame: view.bounds)
-broadcasterConfig = IBMWatsonMedia.BroadcasterConfig(preset: .preset720)
-broadcaster = IBMWatsonMedia.Broadcaster(frameSource: frameSource, config: broadcasterConfig)
+IBMWatsonMediaBroadcaster.configure(withRegionalCluster: .worldWide)
+
+frameSource = IBMWatsonMediaCaptureSessionFrameSource()
+broadcastPreview = IBMWatsonMediaBroadcasterPreview(frame: view.bounds)
+broadcasterConfig = IBMWatsonMediaBroadcasterConfig(preset: .preset720)
+broadcaster = IBMWatsonMediaBroadcaster(frameSource: frameSource, config: broadcasterConfig)
 broadcaster.presenter = broadcastPreview
-broadcaster.add(self)
+broadcaster.addListener(self)
 ```
 
 For using the default camera and microphone you have to provide the following keys in your application's info.plist file:
