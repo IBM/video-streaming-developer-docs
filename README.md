@@ -35,14 +35,18 @@ Check out this article template file for available mdx components:
 
 ## Local development
 
-1. Prerequisite:
 
-   - Install NodeJS - `brew install node`
-
-2. Check out the repo
-3. CD into the repo dir
-4. Install the dependencies - `npm install`
-5. Run the site locally - `npm run dev`
+1. Check out the repo
+2. CD into the repo dir
+3. If Docker is already installed
+    * Run: `docker run -it --rm -v $(pwd):/data -w=/data --user=$(id -u):$(id -g) -p 8000:8000 node:18 /bin/bash`
+    * Stay in the container and jump to #5, no need to install NodeJS, but still must run the `npm` commands below.
+4. Make sure NodeJS is installed, if not: `brew install node` or see https://nodejs.org/en/download/
+5. Install the dependencies: `npm install`
+    * Note: some package installation may hang. Just press `Ctrl+C` and restart the command
+6. Run the site locally: `npm run dev`
+7. Wait for the the address to be displayed, it may take a while
+8. Open the [site](http://localhost:8000/) in the browser, changes in the source should be displayed automatically
 
 ## Creating a new page
 
@@ -50,14 +54,14 @@ in order to create a new page, you have to
 
 1. extend the nav items file:
    `src/data/nav-items.yaml`
-   
+
    Each api url must starts with the api name. `api-basics`, `channel-api`, `viewer-authentication`, `player-api`, `analytics-api`
 2. pages are in markdown format. Create the new mdx file in the `src/pages/` directory, or edit an existing mdx file.
    Pages can be in the root in the pages directory. For example `/player-api-usage`,
    or it can be in a separate directory, `/player-api-examples/basic-embed`. Use directory is page if grouped in a main menu, use file if it stands alone.
    Examples of page contents can be found here:
-   - [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
-   - [Source mdx file for Example Article page](https://github.com/IBM/video-streaming-developer-docs/blob/master/src/pages/channel-api-topic.mdx)
+    - [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
+    - [Source mdx file for Example Article page](https://github.com/IBM/video-streaming-developer-docs/blob/master/src/pages/channel-api-topic.mdx)
 
 ## Deployment
 
@@ -67,8 +71,8 @@ The project uses this Github Action to build and publish the site: [Gatsby Publi
 
 #### :construction_worker_man: WIP
 
-To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title. 
-In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title. 
+To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title.
+In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title.
 
 #### To add MDX support for your editor:
 - PHPStorm IDE: https://youtrack.jetbrains.com/issue/WEB-32599#focus=streamItem-27-3699900.0-0
