@@ -23,7 +23,7 @@ and call `attach()` again so these changes can take effect.
 **Example**:
 
 ```java
-PlayerFactory playerFactory = new PlayerFactory(API_KEY, activity);
+PlayerFactory playerFactory = new PlayerFactory(RegionalCluster.WORLD_WIDE, API_KEY, activity);
 ContentDescriptor contentDescriptor = new ContentDescriptor(ContentType.RECORDED, 123456L);
 Player player1 = playerFactory.createPlayer(contentDescriptor.toString());
 player1.initWithContent(contentDescriptor);

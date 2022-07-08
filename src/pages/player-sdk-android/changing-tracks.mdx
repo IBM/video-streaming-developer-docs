@@ -17,7 +17,7 @@ play a certain media track. A renderer can also be disabled.
 **Example**: Selecting a subtitle / closed captions track
 
 ```java
-PlayerFactory playerFactory = new PlayerFactory(API_KEY, activity);
+PlayerFactory playerFactory = new PlayerFactory(RegionalCluster.WORLD_WIDE, API_KEY, activity);
 ContentDescriptor contentDescriptor = new ContentDescriptor(ContentType.RECORDED, 123456L);
 Player player = playerFactory.createPlayer(contentDescriptor.toString());
 player.initWithContent(contentDescriptor);
