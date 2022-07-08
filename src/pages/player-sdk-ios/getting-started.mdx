@@ -11,12 +11,10 @@ This document describes the basic steps to make a mobile app using the Player SD
 
 ## Before you begin
 
-*To our clients using a regional cluster -  please [contact us] for information on SDK support.*
-
 ### Account prerequisites
 
 Please note that document assumes the following:
-*   You have a registered user at [video.ibm.com](https://video.ibm.com/).
+*   You have a registered user at [IBM Watson Media] (or at [IBM WM EU Cluster]).
 *   Your IBM Video Streaming user is entitled to use the IBM Video Streaming Player SDK specifically. Log-in to [Dashboard],
 and check ["API/SDK access"] under the "Integrations & Apps" section.
 
@@ -30,6 +28,21 @@ We recommend using the most recent version of Xcode.
 
 #### Minimum OS version
 
-The Player SDK requires iOS 8.0 or above.
+The Player SDK requires iOS 11.0 or above.
+
+### Using Regional Clusters
+
+IBM Watson Media hosts an additional Server Cluster in the EU, besides the original world-wide one.
+These so called regional clusters are completely distinct entities, there's no data transfer among them. A customer account can only reside in one of them.
+You can read more about the topic in [this article](https://blog.video.ibm.com/streaming-product-updates/server-cluster-in-europe-for-streaming-video/).
+
+Because of the complete separation of data summarized above, the updated Player SDK will need to be explicitly supplied with a "regional cluster" parameter.
+Given this parameter the SDK will know which servers it can access to reach the resources that belong to the desired customer account.
+
+Please also note that an SDK access always belongs to a specific *IBM WM Account* on a specific IBM WM cluster. If you'd like to access different accounts,
+you will need to setup multiple SDK accesses, more specifically "Mobile Player SDK Accesses" in case of the Player SDK for each regional cluster.
+Then you can use these accesses in your application, you can find an example in the supplied sample project.
 
 [contact us]: https://video.ibm.com/enterprise-video/contact
+[IBM Watson Media]: http://video.ibm.com/
+[IBM WM EU Cluster]: http://eu.video.ibm.com/
