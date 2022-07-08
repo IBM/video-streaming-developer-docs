@@ -2,6 +2,16 @@
 title: Changelog
 description: Changelog
 ---
+## 2.2.0 - 2022-06-22
+### Added
+- Regional Cluster support; enables the possibility to connect to the IBM WM instance running in EU too. See details in [getting started](./getting-started#using-regions-clusters)
+
+### Changed
+- Extended Player API (both PlayerFactory & CastPlayerFactory) with RegionalCluster parameter, which is required to initiate player connection to the specific cluster on which your content resides
+- Fixed an occasional crash that might occur if an internal message would arrive earlier than expected
+- Updated some dependencies
+- Fixed crashing when Gson 2.9.0 is used
+- Cast Player communication protocol has been upgraded to v2 in order to support Regional Clusters. This means that if you use the Cast Player you'll need to update your cast receiver application with the latest IBM Google Cast SDK. See [Google Cast Support](./google-cast-support#cast-player-module-and-ibm-google-cast-sdk-compatibility) for more information.
 
 ## 2.1.0 - 2021-12-15
 ### Changed

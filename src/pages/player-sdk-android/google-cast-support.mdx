@@ -39,7 +39,7 @@ after you've done that you only need to add the following to your `build.gradle`
 ```gradle
 dependencies {
 //  ...
-    implementation 'com.ibm.video.android.player:player-android-plugin-cast-external:2.0.0'
+    implementation 'com.ibm.video.android.player:player-android-plugin-cast-external:2.2.0'
 //  ...
 }
 ```
@@ -180,3 +180,26 @@ Use the following high-level guide to implement handover between local and Cast 
 
 Future versions of the SDK *might* provide integrated support to handle Cast & local player together
 and take off the burden of our SDK users.
+
+## Cast Player module & IBM Google Cast SDK compatibility
+
+The Android Player SDK's Google Cast module needs to communicate with the [IBM Video Streaming Google Cast SDK] and vice versa.
+These two software components achieve this by utilizing a shared communication protocol. The versions of this protocol define
+the compatibility of the two SDKs. If they both support the particular version of the protocol they are compatible and can interact with one another.
+
+While we keep close attention to keep the protocol unchanged, sometimes it is unavoidable to do so, and must introduce these breaking changes.
+The introduction of Regional Cluster support is such example.
+
+Whenever the Cast protocol version changes you'll need to upgrade both the Player SDK and the Google Cast SDK in your ecosystem.
+To make figuring out compatibility as painless as possible, we will maintain this handy table below to help you figure out which versions of the SDKs can talk to each other.
+
+### Compatibility matrix
+
+| Cast protocol \ SDK Versions | IBM Player SDK for Android       | IBM Google Cast SDK               |
+|------------------------------|----------------------------------|-----------------------------------|
+| Cast protocol v1             | v2.0.0 - v2.1.0                  | v1.0.0 - v1.1.0                   |
+| Cast protocol v2             | v2.2.0 ->                        | v2.0.0 ->                         |
+
+*All versions are inclusive.*
+
+[IBM Video Streaming Google Cast SDK]: https://developers.video.ibm.com/player-sdk-cast/getting-started
