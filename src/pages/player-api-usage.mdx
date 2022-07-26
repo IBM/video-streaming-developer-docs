@@ -147,6 +147,41 @@ Calls `webkitEnterFullscreen` on the `HTMLVideoElement` to access the video's na
 viewer.callMethod('webkitEnterFullscreen');
 ```
 
+## Showing and hiding components
+
+Toggle the visibility of different components by calling one of the methods below: 
+
+- `hideAudioSwitch`
+- `hideCTA`
+- `hidePlayScreen`
+- `hideCaptionSearch`
+- `hideChapters`
+- `hideCustomLogo`
+- `hideLogo`
+- `hideShare`
+- `hideFacebook`
+- `hideTwitter`
+- `hideCopyLink`
+- `hideEmbedCode`
+- `hideCC`
+- `hideTitle`
+- `hideViewerNumbers`
+- `hideLiveBadge`
+- `hideReplayBadge`
+- `hideFullscreen`
+- `hidePlaybackSpeed`
+- `hideSeekbar`
+- `showTheatre`
+- `showPopout`
+
+The default value of all of them is **false**.
+
+###### Example
+
+```js
+viewer.callMethod('hideCTA',true);
+```
+
 ## getProperty
 
 Retrieves a property of the embed player. This method is __asynchronous__, the data will be passed to a callback function, given as argument.
