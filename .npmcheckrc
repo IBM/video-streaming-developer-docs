@@ -1,0 +1,24 @@
+{
+  "depcheck": {
+    "ignoreMatches": [
+      "@commitlint/cli",
+      "@commitlint/config-conventional",
+      "react-dom",
+      "babel-eslint",
+      "eslint",
+      "eslint-config-airbnb",
+      "eslint-plugin-html",
+      "eslint-plugin-import",
+      "eslint-plugin-jsx-a11y",
+      "eslint-plugin-prettier",
+      "eslint-plugin-react",
+      "eslint-plugin-react-hooks",
+      "gatsby-cli",
+      "gh-pages",
+      "prettier",
+      "stylelint",
+      "stylelint-config-recommended-scss",
+      "stylelint-scss",
+    ]
+  }
+}

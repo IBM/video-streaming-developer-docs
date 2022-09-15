@@ -14,43 +14,44 @@
     "predeploy": "npm run build",
     "serve": "gatsby serve",
     "format": "prettier --write \"**/*.{css,scss,json,html,yaml}\"",
-    "serve:prefix": "gatsby serve --prefix-paths"
+    "serve:prefix": "gatsby serve --prefix-paths",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@carbon/icons-react": "^10.13.0",
-    "gatsby": "^3.14.0",
-    "gatsby-plugin-manifest": "^3.14.0",
-    "gatsby-theme-carbon": "^2.1.4",
+    "gatsby": "^3.3.0",
+    "gatsby-plugin-manifest": "^3.7.1",
+    "gatsby-theme-carbon": "^2.3.2",
     "ibm-video-streaming-web-player-api": "^1.2.0",
     "md5": "^2.2.1",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1 || ^17.0.0",
-    "react-dom": "^16.13.1 || ^17.0.0",
+    "react": "^16.13.1 || ^17.0.2",
+    "react-dom": "^16.13.1 || ^17.0.2",
     "react-helmet": "^6.0.0",
     "smooth-scroll": "^16.1.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb": "^18.2.1",
+    "eslint": "^8.4.1",
+    "eslint-config-airbnb": "^19.0.2",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-config-wesbos": "2.1.0",
-    "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-config-wesbos": "3.0.2",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react": "^7.21.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "gatsby-cli": "2.12.12",
-    "gh-pages": "^2.2.0",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.9",
+    "gh-pages": "^4.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.0.2",
-    "stylelint": "^13.2.1",
-    "stylelint-config-recommended-scss": "^4.2.0",
-    "stylelint-scss": "^3.16.0"
+    "stylelint": "^14.11.0",
+    "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-scss": "^4.3.0"
   },
   "eslintIgnore": [
     "**/node_modules/",
@@ -58,12 +59,6 @@
     "**/.cache/",
     "**/build/"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "eslint --fix"
