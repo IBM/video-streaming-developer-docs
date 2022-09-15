@@ -1,5 +1,6 @@
 // This is where your application styles could go.
-@import '~gatsby-theme-carbon/src/styles/internal/_website-side-nav.scss';
+/* stylelint-disable scss/at-import-no-partial-leading-underscore */
+@import '~gatsby-theme-carbon/src/styles/internal/_website-side-nav';
 
 .truste_cookie_prefs,
 #teconsent {
