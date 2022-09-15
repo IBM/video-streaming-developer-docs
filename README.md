@@ -6,7 +6,7 @@ A documentation site for IBM Video Streaming APIs, SDKs and use cases - [URL](ht
 
 With this repository Video Streaming developers can easily update their API and SDK documentations.
 The site content is in `mdx` format.
-MDX is like an extension of markdown documents. MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
+MDX is like an extension of Markdown documents. MDX is an author-able format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
 
 ## How to contribute
 To collaborate with this repository in GitHub you need to follow these steps:
@@ -17,7 +17,7 @@ To collaborate with this repository in GitHub you need to follow these steps:
 - Push the changes to your repository
 - Create a Pull Request from your repository back to the original one
 
-Then the codeowners will review your Pull Request and if the PR is accepted and merged into master a Github Action will build and push the site to the `gh-pages` branch and the deployment is done. 
+Then the code owners will review your Pull Request and if the PR is accepted and merged into master a Github Action will build and push the site to the `gh-pages` branch and the deployment is done. 
 
 ## How To
 
@@ -25,7 +25,7 @@ The site content and page structure can be found here: `src/pages/`
 
 For example, you want to update the [Channel API/Security/Embed Restriction](https://developers.video.ibm.com/channel-api-security/embed-restriction/) page. Just navigate to `src/pages/channel-api-security/` folder and update the `embed-restriction.mdx` file.
 
-You can use Github UI to edit this file or you can checkout the repo and edit locally.
+You can use GitHub UI to edit this file, or you can check out the repo and edit locally.
 For local development you can find instructions below.
 
 Check out this article template file for available mdx components:
@@ -45,7 +45,7 @@ Check out this article template file for available mdx components:
 5. Install the dependencies: `npm install`
     * Note: some package installation may hang. Just press `Ctrl+C` and restart the command
 6. Run the site locally: `npm run dev`
-7. Wait for the the address to be displayed, it may take a while
+7. Wait for the address to be displayed, it may take a while
 8. Open the [site](http://localhost:8000/) in the browser, changes in the source should be displayed automatically
 
 ## Creating a new page
@@ -56,8 +56,8 @@ in order to create a new page, you have to
    `src/data/nav-items.yaml`
 
    Each api url must starts with the api name. `api-basics`, `channel-api`, `viewer-authentication`, `player-api`, `analytics-api`
-2. pages are in markdown format. Create the new mdx file in the `src/pages/` directory, or edit an existing mdx file.
-   Pages can be in the root in the pages directory. For example `/player-api-usage`,
+2. pages are in Markdown format. Create the new mdx file in the `src/pages/` directory, or edit an existing mdx file.
+   Pages can be in the root in the 'pages' directory. For example `/player-api-usage`,
    or it can be in a separate directory, `/player-api-examples/basic-embed`. Use directory is page if grouped in a main menu, use file if it stands alone.
    Examples of page contents can be found here:
     - [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
@@ -65,14 +65,14 @@ in order to create a new page, you have to
 
 ## Deployment
 
-The project uses this Github Action to build and publish the site: [Gatsby Publish](https://github.com/marketplace/actions/gatsby-publish)
+The project uses this GitHub Action to build and publish the site: [Gatsby Publish](https://github.com/marketplace/actions/gatsby-publish)
 
 ### Tips
 
 #### :construction_worker_man: WIP
 
-To mark your PR as work in progress (eg.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title.
-In this case merge is prevented by the WIP check. If the PR is ready to be merged (eg.: the documented feature is released) you could remove WIP from the title.
+To mark your PR as work in progress (e.g.: you wrote documentation to a feature which is not released yet) write WIP inside the PR's title.
+In this case merge is prevented by the WIP check. If the PR is ready to be merged (e.g.: the documented feature is released) you could remove WIP from the title.
 
 #### To add MDX support for your editor:
 - PHPStorm IDE: https://youtrack.jetbrains.com/issue/WEB-32599#focus=streamItem-27-3699900.0-0
