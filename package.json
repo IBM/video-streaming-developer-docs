@@ -15,7 +15,8 @@
     "serve": "gatsby serve",
     "format": "prettier --write \"**/*.{css,scss,json,html,yaml}\"",
     "serve:prefix": "gatsby serve --prefix-paths",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@carbon/icons-react": "^10.13.0",
@@ -24,6 +25,7 @@
     "gatsby-theme-carbon": "^2.3.2",
     "ibm-video-streaming-web-player-api": "^1.2.0",
     "md5": "^2.2.1",
+    "patch-package": "^6.4.7",
     "prop-types": "^15.7.2",
     "react": "^16.13.1 || ^17.0.2",
     "react-dom": "^16.13.1 || ^17.0.2",

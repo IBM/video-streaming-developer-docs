@@ -1,0 +1,13 @@
+diff --git a/node_modules/gatsby/package.json b/node_modules/gatsby/package.json
+index 03cc1d2..37b43a4 100644
+--- a/node_modules/gatsby/package.json
++++ b/node_modules/gatsby/package.json
+@@ -125,7 +125,7 @@
+     "prop-types": "^15.7.2",
+     "query-string": "^6.13.1",
+     "raw-loader": "^4.0.2",
+-    "react-dev-utils": "^11.0.3",
++    "react-dev-utils": "^12.0.1",
+     "react-refresh": "^0.9.0",
+     "redux": "^4.0.5",
+     "redux-thunk": "^2.3.0",
