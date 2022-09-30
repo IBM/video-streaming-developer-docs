@@ -3,6 +3,12 @@ title: Using MediaPlayer Plugins
 description: Using MediaPlayer Plugins
 ---
 
+<InlineNotification kind="warning">
+
+Please note that as of November 1st, 2022 the IBM Watson Media Player SDK will not receive new updates or support. You may find information for alternative methods to create customized viewer experiences with our APIs on our [Developer Tools](https://developers.video.ibm.com/player-api-examples/custom-ui) pages. Users may also continue to access Watson Media through the web, both at [video.ibm.com](http://video.ibm.com/) and through Embedded modules.
+
+</InlineNotification>
+
 IBM Video Streaming Player SDK version 1.1.0 introduced a plugin system which enables you to extend the media player with additional features.
 Plugins will be provided by IBM and must be provided during player initialization in `Player.initWithContent(ContentDescriptor, MediaPlayerModule)`.
 These extensions may require different player views than `com.ibm.video.android.player.android.PlayerView`. PlayerView requirements for a plugin will always be stated
