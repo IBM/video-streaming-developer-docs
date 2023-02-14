@@ -68,6 +68,18 @@ The parameters for the PUT request:
 
 `*` Data type may vary based on selected field.
 
+Example requests for different data types:
+
+| TYPE     | DESCRIPTION                                                                               | EXAMPLE RAW REQUEST BODY                            |
+|----------|-------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| string   | a string value                                                                            | `value=test+value`                                  |
+| float    | a numeric value                                                                           | `value=3.1415926536`                                |
+| tag_list | tags separated by commas                                                                  | `value=tag1,tag2,tag3`                              |
+| bool     | `true` or `false`                                                                         | `value=true`                                        |
+| enum     | array of enum item ids returned by the `/custom-metadata-fields/{field_id}.json` endpoint | `value[]=123&value[]=124`                           |
+| datetime | ISO8601 format                                                                            | `value=2023-02-27T16:30:10%2B0100`                  |
+| link     | link url and text                                                                         | `value[url]=https%3A%2F%2Fibm.com&value[text]=IBM ` |
+
 ### Success response
 
 Upon success, a response with HTTP status "204 No Content" is returned.
