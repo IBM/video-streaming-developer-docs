@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import { HeaderSideNavItems, SideNav, SideNavItems } from 'carbon-components-react';
+import { HeaderSideNavItems, SideNav, SideNavItems } from '@carbon/react';
 import { useNavItems as themeUseNavItems } from 'gatsby-theme-carbon/src/util/NavItems';
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';

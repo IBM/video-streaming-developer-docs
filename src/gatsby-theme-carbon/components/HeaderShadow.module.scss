@@ -1,6 +1,6 @@
 .headerShadow .headerNameShadow {
-  @include carbon--type-style('body-short-02');
-  transition: opacity $duration--fast-02 $carbon--standard-easing;
+  @include type-style('body-short-02');
+  transition: opacity $duration-fast-02 $standard-easing;
   color: $inverse-01;
   text-decoration: none;
   left: 3rem;

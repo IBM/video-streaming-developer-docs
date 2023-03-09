@@ -1,5 +1,5 @@
 import React from 'react';
-import { InlineNotification } from 'carbon-components-react';
+import { InlineNotification } from '@carbon/react';
 import { withPrefix } from 'gatsby-link';
 import { inlineNotification } from './HashAuthentication.module.scss';
 

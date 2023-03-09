@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextInput } from 'carbon-components-react';
+import { Button, TextInput } from '@carbon/react';
 import * as styles from './Property.module.scss';
 
 export const Property = ({

@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { ArrowRight20 } from '@carbon/icons-react';
+import { ArrowRight } from '@carbon/icons-react';
 import cx from 'classnames';
 
 import {
@@ -21,14 +21,16 @@ const CustomCard = ({ href, title, content, theme, decorator }) => {
 
   const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
+  const getCardItem = (hrefParam, children) => <a href={hrefParam}>{children}</a>;
+
   return (
     <div className={`${customCard}`}>
-      <ConditionalWrapper condition={href} wrapper={(children) => <a href={href}>{children}</a>}>
+      <ConditionalWrapper condition={href} wrapper={(children) => getCardItem(href, children)}>
         <div className={customCardInnerClasses}>
           <h4 className={customCardTitle}>{title}</h4>
           <div className={customCardContent}>{content}</div>
           <div className={customCardIcon}>
-            <ArrowRight20 aria-label="Open" />
+            <ArrowRight size={20} aria-label="Open" />
           </div>
         </div>
       </ConditionalWrapper>

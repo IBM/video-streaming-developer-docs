@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import { Row, Column } from 'gatsby-theme-carbon/src/components/Grid';
-import { Loading, Button } from 'carbon-components-react';
+import { Loading, Button } from '@carbon/react';
 import { MediaSwitcher } from './Modules/MediaSwitcher';
 import { BasicControls, CustomControls, AdvancedControls, FullScreenControls, MultiControls } from './Controls';
 import * as styles from './index.module.scss';
@@ -134,13 +134,9 @@ const BasicEmbed = ({ src, controls = [], dynamic = false, withMediaSwitcher = f
     }
   };
 
-  const isLive = () => {
-    return activeLabels.indexOf('LIVE') !== -1;
-  };
+  const isLive = () => activeLabels.indexOf('LIVE') !== -1;
 
-  const hasControl = (conrol) => {
-    return controls.indexOf(conrol) !== -1;
-  };
+  const hasControl = (conrol) => controls.indexOf(conrol) !== -1;
 
   useEffect(() => {
     if (!frame.current) {
@@ -215,7 +211,7 @@ const BasicEmbed = ({ src, controls = [], dynamic = false, withMediaSwitcher = f
                 className={styles.iframe}
                 allowFullScreen
                 frameBorder="0"
-                referrerpolicy="no-referrer-when-downgrade"
+                referrerPolicy="no-referrer-when-downgrade"
               />
               <div className={loadingClasses}>
                 <Loading active={!ready} />

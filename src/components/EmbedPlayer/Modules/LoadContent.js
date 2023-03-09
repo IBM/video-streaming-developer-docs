@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextInput, Dropdown } from 'carbon-components-react';
+import { Button, TextInput, Dropdown } from '@carbon/react';
 import * as styles from './LoadContent.module.scss';
 
 const restrictValue = (value) => {
@@ -10,13 +10,9 @@ const restrictValue = (value) => {
   return parsed.toString();
 };
 
-const toInternalValue = (type) => {
-  return type === 'Video' ? 'recorded' : 'channel';
-};
+const toInternalValue = (type) => (type === 'Video' ? 'recorded' : 'channel');
 
-const toDisplayValue = (content) => {
-  return content[0] === 'recorded' ? 'Video' : 'Channel';
-};
+const toDisplayValue = (content) => (content[0] === 'recorded' ? 'Video' : 'Channel');
 
 export const LoadContent = ({ content = [], disabled = false, placeholder = 'Content Id', onLoad = () => {} } = {}) => {
   const [channelType, setChannelType] = useState(toDisplayValue(content));
