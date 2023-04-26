@@ -11,7 +11,7 @@ const Switcher = ({ children }) => {
     // eslint-disable-next-line jsx-a11y/role-supports-aria-props
     <nav
       className={cx(nav, { [open]: switcherIsOpen })}
-      aria-label="IBM Watson Media"
+      aria-label="IBM Video Streaming"
       aria-expanded={switcherIsOpen}
       tabIndex="-1"
     >
@@ -49,19 +49,17 @@ export const SwitcherLink = ({ disabled, children, href: hrefProp, ...rest }) =>
 
 // https://css-tricks.com/using-css-transitions-auto-dimensions/
 // Note: if you change this, update the max-height in the switcher stylesheet
-const DefaultChildren = () => {
-  return (
-    <>
-      <SwitcherDivider>Product portfolio</SwitcherDivider>
+const DefaultChildren = () => (
+  <>
+    <SwitcherDivider>Product portfolio</SwitcherDivider>
 
-      <SwitcherLink href="https://video.ibm.com/">IBM Watson Media</SwitcherLink>
+    <SwitcherLink href="https://video.ibm.com/">IBM Video Streaming</SwitcherLink>
 
-      <SwitcherDivider>Learn more</SwitcherDivider>
+    <SwitcherDivider>Learn more</SwitcherDivider>
 
-      <SwitcherLink href="https://support.video.ibm.com/hc/en-us">Browse our Support Center</SwitcherLink>
-    </>
-  );
-};
+    <SwitcherLink href="https://support.video.ibm.com/hc/en-us">Browse our Support Center</SwitcherLink>
+  </>
+);
 
 Switcher.defaultProps = {
   children: <DefaultChildren />,

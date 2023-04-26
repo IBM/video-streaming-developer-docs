@@ -71,7 +71,7 @@ Viewer Authentication Token token is an encrypted JWT (JWE) that contains a sign
 * sub: Subject, the token subject (identifier of the viewer, we recommend e-mail address)
 * iat: Issued at, Unix timestamp in seconds when the token was generated. We will accept the token in the next 60 seconds from this timestamp. (We don't accept tokens with future issued at timestamps)
 
-The JWS is signed with your private key that you set to the content. The JWE is encrypted with Watson Media's public key that you can get from the API. [See more](/viewer-authentication-api-v2-settings-api#get-ibm-video-streaming-public-key)
+The JWS is signed with your private key that you set to the content. The JWE is encrypted with Video Streaming's public key that you can get from the API. [See more](/viewer-authentication-api-v2-settings-api#get-ibm-video-streaming-public-key)
 
 ### Viewer Authentication Token Lifecycle
 
