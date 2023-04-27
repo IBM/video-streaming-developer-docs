@@ -36,9 +36,9 @@ jobs:
       - name: Add CNAME record
         run: |
           echo 'developers.video.ibm.com' > public/CNAME
-      # - name: Deploy
-      #   run: |
-      #     git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      #     npx gh-pages -d public -u "github-actions <github-actions@github.com>"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.DEV_DOCS_TOKEN }}
+      - name: Deploy
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d public -u "github-actions <github-actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEV_DOCS_TOKEN }}
