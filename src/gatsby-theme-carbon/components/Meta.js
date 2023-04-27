@@ -41,11 +41,11 @@ window.digitalData = {
     page: {
       pageInfo: {
         ibm: {
-        siteID: 'IBM_WatsonMedia'
+        siteID: 'IBM_VideoStreaming'
       }
       },
         category: {
-        primaryCategory: 'IBM_WatsonMedia'
+        primaryCategory: 'IBM_VideoStreaming'
       }
     }
 };`}

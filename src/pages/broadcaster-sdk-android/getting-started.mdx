@@ -5,7 +5,7 @@ description: Getting Started
 
 <InlineNotification kind="warning">
 
-Please note that as of November 1st, 2022 IBM has discontinued support for the Watson Media Broadcaster SDK. It will not receive updates or technical support and may not fully function. For SDKs you have already downloaded, please do not use them to build applications to access the broadcasting functionality, and delete them from your archives. You may find information on alternative methods to broadcast live video to your channel on our [Support Center](https://support.video.ibm.com/hc/en-us/categories/200545448-Broadcasting-on-IBM-Watson-Media).
+Please note that as of November 1st, 2022 IBM has discontinued support for the Video Streaming Broadcaster SDK. It will not receive updates or technical support and may not fully function. For SDKs you have already downloaded, please do not use them to build applications to access the broadcasting functionality, and delete them from your archives. You may find information on alternative methods to broadcast live video to your channel on our [Support Center](https://support.video.ibm.com/hc/en-us/categories/200545448-Broadcasting-on-IBM-Watson-Media).
 
 </InlineNotification>
 
@@ -19,7 +19,7 @@ This document describes the basic steps and components of the SDK to make an And
 
 ### Account prerequisites
 Before going into details, please note that the document assumes the following:
-*  You have a registered user at [IBM Watson Media] (or at [IBM WM EU Cluster]).
+*  You have a registered user at [IBM Video Streaming] (or at [IBM WM EU Cluster]).
 *  You have a basic understanding how to use the [Channel API][Channel API Documentation].
 
 If you have questions, please [contact us].
@@ -36,7 +36,7 @@ The supported minimum Android API level is 21 (Android version 5.0).
 
 ### Using Regional Clusters
 
-IBM Watson Media hosts an additional Server Cluster in the EU, besides the original world-wide one.
+IBM Video Streaming hosts an additional Server Cluster in the EU, besides the original world-wide one.
 These so called regional clusters are completely distinct entities, there's no data transfer among them. A customer account can only reside in one of them.
 You can read more about the topic in [this article](https://blog.video.ibm.com/streaming-product-updates/server-cluster-in-europe-for-streaming-video/).
 
@@ -47,7 +47,7 @@ Please also note that an SDK access always belongs to a specific IBM WM cluster.
 you will need to setup multiple SDK accesses, more specifically "Channel API Access" in case of the Broadcaster SDK for each regional cluster.
 Then you can use these accesses in your application, you can find an example in the supplied sample project.
 
-[IBM Watson Media]: http://video.ibm.com/
+[IBM Video Streaming]: http://video.ibm.com/
 [IBM WM EU Cluster]: http://eu.video.ibm.com/
 [Channel API Documentation]: https://developers.video.ibm.com/channel-api-basic-channel-management "IBM Video Streaming Channel API"
 [contact us]: https://video.ibm.com/enterprise-video/contact
