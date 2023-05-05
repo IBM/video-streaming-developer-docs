@@ -124,7 +124,7 @@
 - title: Caption autopublish
   pages:
     - path: /channel-api-caption-autopublish
-- title: Watson Live Captioning
+- title: IBM Captioning for Live Streaming
   pages:
     - path: /channel-api-watson-live-captioning
 - title: Events
