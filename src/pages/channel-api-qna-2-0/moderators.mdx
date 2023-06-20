@@ -1,0 +1,197 @@
+---
+title: Q&A Moderators
+description: Q&A moderators
+---
+
+## List Q&A moderators of a channel
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/qna/moderators.json
+```
+
+### Parameters
+
+The query parameters for the GET request:
+
+| PARAMETER  | TYPE    | IMPORTANCE | DESCRIPTION         |
+| ---------- | ------- | ---------- | ------------------- |
+| `after`    | string  | OPTIONAL   | Page start ID       |
+| `pagesize` | integer | OPTIONAL   | Requested page size |
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `moderators` root array.
+
+| KEY          | TYPE   | DESCRIPTION                                     |
+| ------------ | ------ | ----------------------------------------------- |
+| `id`         | string | Moderator user id                               |
+| `identifier` | string | Original identifier. E.g. email address, SSO id |
+
+Additionally there is a `paging` element in the response with the following values:
+
+| KEY          | TYPE   | DESCRIPTION                                               |
+| ------------ | ------ | --------------------------------------------------------- |
+| `previous`   | string | Link to the previous page (if exists)                     |
+| `next`       | string | Link to the next page (if exists)                         |
+| `page_count` | number | Because of the infinite pager its value will be always -1 |
+| `item_count` | number | Because of the infinite pager its value will be always -1 |
+
+Example of a success response:
+
+```json
+{
+  "moderators": [
+    {
+      "id": "aaf8cf45ceca54735af57cc80faa0220",
+      "identifier": "moderator@company.com"
+    }
+  ],
+  "paging": {
+    "previous": "https://api.video.ibm.com/channels/{channelId}/qna/moderators.json?after=2c52ceaa1730520454ef0fadcc6d2e83",
+    "next": "https://api.video.ibm.com/channels/{channelId}/qna/moderators.json?after=891c4af952dc2d1fd8e4251b8481038c",
+    "page_count": -1,
+    "item_count": -1
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Add moderators
+
+```
+POST https://api.video.ibm.com/channels/{channelId}/qna/moderators.json
+```
+
+### Parameters
+
+| KEY           | TYPE     | IMPORTANCE | DESCRIPTION                                                            |
+| ------------- | -------- | ---------- | ---------------------------------------------------------------------- |
+| `identifiers` | string[] | REQUIRED   | List of identifiers (email addresses, SSO ids) to promote as moderator |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+POST /channels/1234/qna/moderators.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+identifiers[]=moderator%40company.com&identifiers[]=alreadymoderator%40company.com
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `moderators_added` root object.
+
+| KEY          | TYPE   | DESCRIPTION                                     |
+| ------------ | ------ | ----------------------------------------------- |
+| `id`         | string | Moderator user id                               |
+| `identifier` | string | Original identifier. E.g. email address, SSO id |
+
+Additionally there might be an `errors` element if some identifiers could not be added for some reason:
+
+| KEY          | TYPE   | DESCRIPTION                                               |
+| ------------ | ------ | --------------------------------------------------------- |
+| `identifier` | string | Identifier of the moderator to be added                   |
+| `reason`     | string | Reason response code. Possible value: `already_moderator` |
+
+Example of a success response:
+
+```json
+{
+  "moderators_added": [
+    {
+      "id": "aaf8cf45ceca54735af57cc80faa0220",
+      "identifier": "moderator@company.com"
+    }
+  ],
+  "errors": [
+    {
+      "identifier": "alreadymoderator@company.com",
+      "reason": "already_moderator"
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete a moderator
+
+```
+DELETE https://api.video.ibm.com/channels/{channelId}/qna/moderators/{moderatorId}.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “"204" No content” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Moderator count
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/qna/moderators/count.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned.
+
+| KEY     | TYPE   | DESCRIPTION                    |
+| ------- | ------ | ------------------------------ |
+| `count` | number | Moderator count on the channel |
+
+Example of a success response:
+
+```json
+{
+  "count": 23
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
