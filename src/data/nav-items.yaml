@@ -158,6 +158,16 @@
 - title: QnA
   pages:
     - path: /channel-api-qna
+- title: Q&A (v2)
+  pages:
+    - title: Getting Started
+      path: /channel-api-qna-2-0/get-started
+    - title: Initialization
+      path: /channel-api-qna-2-0/initialization
+    - title: Moderators
+      path: /channel-api-qna-2-0/moderators
+    - title: Export
+      path: /channel-api-qna-2-0/export
 - title: Live CTA
   pages:
     - path: /channel-api-live-cta
