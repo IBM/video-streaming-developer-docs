@@ -1,0 +1,42 @@
+.sideNavShadow {
+  padding-top: 0 !important;
+
+  :global(.cds--side-nav__items) {
+    padding: 0;
+  }
+
+  :global(.cds--side-nav__header-navigation) {
+    margin: $spacing-05 0;
+    @include breakpoint-down('lg') {
+      display: none;
+    }
+  }
+
+  :global(.sidenav-list--notitle) {
+    padding-top: $spacing-05 !important;
+  }
+}
+
+.leftNavShadowWrapper :global(.cds--side-nav__navigation) {
+  border-right: 1px solid $background-inverse;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  z-index: 9999;
+}
+
+.sideNavWhiteShadow {
+  border-right: 0 none !important;
+}
+
+.title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 16px 16px 14px 16px;
+  color: $text-primary;
+  border-bottom: 1px solid $border-subtle-01;
+  background-color: $background;
+  list-style-type: none;
+
+  &:hover {
+    background-color: $background !important;
+  }
+}
