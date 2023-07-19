@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useMetadata } from 'gatsby-theme-carbon/src/util/hooks';
 
-const Meta = ({ pageTitle, pageDescription, pageKeywords, titleType }) => {
+function Meta({ pageTitle, pageDescription, pageKeywords, titleType }) {
   const { title, description, keywords, lang } = useMetadata();
 
   const getPageTitle = () => {
@@ -41,11 +41,11 @@ window.digitalData = {
     page: {
       pageInfo: {
         ibm: {
-        siteID: 'IBM_WatsonMedia'
+        siteID: 'IBM_VideoStreaming'
       }
       },
         category: {
-        primaryCategory: 'IBM_WatsonMedia'
+        primaryCategory: 'IBM_VideoStreaming'
       }
     }
 };`}
@@ -54,6 +54,6 @@ window.digitalData = {
       <html lang={lang} />
     </Helmet>
   );
-};
+}
 
 export default Meta;

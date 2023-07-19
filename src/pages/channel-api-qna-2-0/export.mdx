@@ -1,0 +1,297 @@
+---
+title: Q&A Export
+description: Q&A export
+---
+
+## List export tasks for a channel
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/qna/exports.json
+```
+
+### Query Parameters
+
+| PARAMETER  | TYPE   | IMPORTANCE | DESCRIPTION                              |
+| ---------- | ------ | ---------- | ---------------------------------------- |
+| `page`     | number | OPTIONAL   | Page number. The first page's index is 1 |
+| `pagesize` | number | OPTIONAL   | Size of a page.                          |
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `exports` root array.
+Timestamp ares Unix timestamps in seconds.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Task ID                                                                                                                                                              |
+| `status`       | string    | Values: `init`, `pending`, `completed`, `failed`                                                                                                                     |
+| `requested_at` | timestamp | Export init date                                                                                                                                                     |
+| `expires_at`   | timestamp | Export expiration                                                                                                                                                    |
+| `is_expired`   | boolean   | An export lives up 24 hours, after expiration it will expire, and needs to be deleted manually                                                                       |
+| `start_date`   | timestamp | Export starting time                                                                                                                                                 |
+| `end_date`     | timestamp | Export ending time                                                                                                                                                   |
+| `part_count`   | number    | An export can contain up to 25 rooms (including direct and room conversations). If the requested export contains more, there will be multiple parts (tasks) created. |
+| `part`         | number    | Part number                                                                                                                                                          |
+| `file_size`    | number    | Export size in bytes if the export is completed                                                                                                                      |
+| `download_url` | string    | Url where the export json file can be downloaded                                                                                                                     |
+
+Additionally there is a `paging` element in the response with the following values:
+
+| KEY          | TYPE   | DESCRIPTION                           |
+| ------------ | ------ | ------------------------------------- |
+| `previous`   | string | Link to the previous page (if exists) |
+| `next`       | string | Link to the next page (if exists)     |
+| `page_count` | number | Number of available pages             |
+| `item_count` | number | Total number of items                 |
+
+Example of a success response:
+
+```json
+{
+  "exports": [
+    {
+      "id": 123,
+      "status": "init",
+      "requested_at": 1622111094,
+      "expires_at": 1622311094,
+      "is_expired": false,
+      "start_date": 1622111094,
+      "end_date": 1632111094,
+      "part_count": 1,
+      "part": 1,
+      "file_size": null,
+      "download_url": null
+    }
+  ],
+  "paging": {
+    "previous": "https://api.video.ibm.com/channels/CHANNEL_ID/qna/exports.json?page=1",
+    "next": "https://api.video.ibm.com/channels/CHANNEL_ID/qna/exports.json?page=3",
+    "page_count": 32,
+    "item_count": 1
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Initialize an export
+
+```
+POST https://api.video.ibm.com/channels/{channelId}/qna/exports.json
+```
+
+### Parameters
+
+| KEY               | TYPE      | IMPORTANCE | DESCRIPTION                                                        |
+| ----------------- | --------- | ---------- | ------------------------------------------------------------------ |
+| `start_date`      | timestamp | REQUIRED   | Start date of the export                                           |
+| `end_date`        | timestamp | REQUIRED   | End date of the export                                             |
+
+The Content-Type of the request should be **application/x-www-form-urlencoded**.
+
+Example of the request:
+
+```
+POST /channels/1234/qna/exports.json HTTP/1.1
+Host: api.video.ibm.com
+Authorization: Bearer 3c2573673b782f6544405a22636f3d5d3b6f3950
+Content-Type: application/x-www-form-urlencoded
+
+start_date=1622111094&end_date=1623111094
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `exports` root array.
+Timestamps are Unix timestamps in seconds.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Task ID                                                                                                                                                              |
+| `status`       | string    | Values: `init`, `pending`, `completed`, `failed`                                                                                                                     |
+| `requested_at` | timestamp | Export init date                                                                                                                                                     |
+| `expires_at`   | timestamp | Export expiration                                                                                                                                                    |
+| `is_expired`   | boolean   | An export lives up 24 hours, after expiration it will expire, and needs to be deleted manually                                                                       |
+| `start_date`   | timestamp | Export starting time                                                                                                                                                 |
+| `end_date`     | timestamp | Export ending time                                                                                                                                                   |
+| `part_count`   | number    | An export can contain up to 25 rooms (including direct and room conversations). If the requested export contains more, there will be multiple parts (tasks) created. |
+| `part`         | number    | Part number                                                                                                                                                          |
+| `file_size`    | number    | Export size in bytes if the export is completed                                                                                                                      |
+| `download_url` | string    | Url where the export json file can be downloaded                                                                                                                     |
+
+Example of a success response:
+
+```json
+{
+  "exports": [
+    {
+      "id": 123,
+      "status": "init",
+      "requested_at": 1622111094,
+      "expires_at": 1622311094,
+      "is_expired": false,
+      "start_date": 1622111094,
+      "end_date": 1632111094,
+      "part_count": 1,
+      "part": 1,
+      "file_size": null,
+      "download_url": null
+    }
+  ]
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 400 Bad Request         | `bad_request`       | Invalid value was supplied                                                              |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Get an export task on a channel
+
+```
+GET https://api.video.ibm.com/channels/{channelId}/qna/exports/{taskId}.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `export` root object.
+Timestamps are Unix timestamps in seconds.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Task ID                                                                                                                                                              |
+| `status`       | string    | Values: `init`, `pending`, `completed`, `failed`                                                                                                                     |
+| `requested_at` | timestamp | Export init date                                                                                                                                                     |
+| `expires_at`   | timestamp | Export expiration                                                                                                                                                    |
+| `is_expired`   | boolean   | An export lives up 24 hours, after expiration it will expire, and needs to be deleted manually                                                                       |
+| `start_date`   | timestamp | Export starting time                                                                                                                                                 |
+| `end_date`     | timestamp | Export ending time                                                                                                                                                   |
+| `part_count`   | number    | An export can contain up to 25 rooms (including direct and room conversations). If the requested export contains more, there will be multiple parts (tasks) created. |
+| `part`         | number    | Part number                                                                                                                                                          |
+| `file_size`    | number    | Export size in bytes if the export is completed                                                                                                                      |
+| `download_url` | string    | Url where the export json file can be downloaded                                                                                                                     |
+
+Example of a success response:
+
+```json
+{
+  "export": {
+    "id": 123,
+    "status": "init",
+    "requested_at": 1622111094,
+    "expires_at": 1622311094,
+    "is_expired": false,
+    "start_date": 1622111094,
+    "end_date": 1632111094,
+    "part_count": 1,
+    "part": 1,
+    "file_size": null,
+    "download_url": null
+  }
+}
+```
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Delete an export task
+
+```
+DELETE https://api.video.ibm.com/channels/{channelId}/qna/exports/{taskId}.json
+```
+
+### Success response
+
+Upon success, a response with HTTP status “"204" No content” is returned.
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |
+
+## Restart an export task
+
+```
+POST https://api.video.ibm.com/channels/{channelId}/qna/exports/{taskId}/restart.json
+```
+
+Upon success, a response with HTTP status “200 OK” is returned with the following key-value pairs inside the `export` root object.
+Timestamps are Unix timestamps in seconds.
+
+| KEY            | TYPE      | DESCRIPTION                                                                                                                                                          |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | number    | Task ID                                                                                                                                                              |
+| `status`       | string    | Values: `init`, `pending`, `completed`, `failed`                                                                                                                     |
+| `requested_at` | timestamp | Export init date                                                                                                                                                     |
+| `expires_at`   | timestamp | Export expiration                                                                                                                                                    |
+| `is_expired`   | boolean   | An export lives up 24 hours, after expiration it will expire, and needs to be deleted manually                                                                       |
+| `start_date`   | timestamp | Export starting time                                                                                                                                                 |
+| `end_date`     | timestamp | Export ending time                                                                                                                                                   |
+| `part_count`   | number    | An export can contain up to 25 rooms (including direct and room conversations). If the requested export contains more, there will be multiple parts (tasks) created. |
+| `part`         | number    | Part number                                                                                                                                                          |
+| `file_size`    | number    | Export size in bytes if the export is completed                                                                                                                      |
+| `download_url` | string    | Url where the export json file can be downloaded                                                                                                                     |
+
+Example of a success response:
+
+```json
+{
+  "export": {
+    "id": 123,
+    "status": "init",
+    "requested_at": 1622111094,
+    "expires_at": 1622311094,
+    "is_expired": false,
+    "start_date": 1622111094,
+    "end_date": 1632111094,
+    "part_count": 1,
+    "part": 1,
+    "file_size": null,
+    "download_url": null
+  }
+}
+```
+
+### Error responses
+
+Possible error responses:
+
+| HTTP RESPONSE CODE      | ERROR VALUE         | ERROR CONDITIONS                                                                        |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| 401 Unauthorized        | `invalid_token`     | The provided access token is missing, revoked, expired or malformed                     |
+| 402 Payment Required    | `invalid_request`   | The user does not have the `streamqna` benefit                                         |
+| 403 Forbidden           | `lack_of_ownership` | The API user is not allowed to manage the given channel                                 |
+| 404 Not Found           | `not_found`         | Channel not found                                                                       |
+| 503 Service Unavailable |                     | There is a temporary error on the server which makes it impossible to serve the request |

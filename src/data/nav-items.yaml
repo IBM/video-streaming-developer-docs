@@ -124,7 +124,7 @@
 - title: Caption autopublish
   pages:
     - path: /channel-api-caption-autopublish
-- title: Watson Live Captioning
+- title: IBM Captioning for Live Streaming
   pages:
     - path: /channel-api-watson-live-captioning
 - title: Events
@@ -158,6 +158,16 @@
 - title: QnA
   pages:
     - path: /channel-api-qna
+- title: Q&A (v2)
+  pages:
+    - title: Getting Started
+      path: /channel-api-qna-2-0/get-started
+    - title: Initialization
+      path: /channel-api-qna-2-0/initialization
+    - title: Moderators
+      path: /channel-api-qna-2-0/moderators
+    - title: Export
+      path: /channel-api-qna-2-0/export
 - title: Live CTA
   pages:
     - path: /channel-api-live-cta
