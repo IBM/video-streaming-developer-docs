@@ -18,7 +18,7 @@
 }
 
 .leftNavShadowWrapper :global(.cds--side-nav__navigation) {
-  border-right: 1px solid $background-inverse;
+  border-right: 1px solid $border-subtle-00;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
   z-index: 9999;
 }
