@@ -27,6 +27,10 @@ module.exports = {
           subDirectory: '',
           branch: 'master',
         },
+        theme: {
+          homepage: 'g10',
+          interior: 'g10',
+        },
       },
     },
   ],

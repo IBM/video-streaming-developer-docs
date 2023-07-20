@@ -1,5 +1,9 @@
 .callout-link {
-  @include carbon--type-style('body-long-02');
+  @include type-style('body-long-02');
   margin-top: $spacing-06;
   display: block;
+}
+
+.homepageBackToTop :global(button svg) {
+  fill: $field-01;
 }

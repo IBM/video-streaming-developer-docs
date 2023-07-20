@@ -9,16 +9,20 @@ import EditLink from 'gatsby-theme-carbon/src/components/EditLink';
 import NextPrevious from 'gatsby-theme-carbon/src/components/NextPrevious';
 import PageTabs from 'gatsby-theme-carbon/src/components/PageTabs';
 import Main from 'gatsby-theme-carbon/src/components/Main';
+import useMetadata from 'gatsby-theme-carbon/src/util/hooks/useMetadata';
+import LastModifiedDate from 'gatsby-theme-carbon/src/components/LastModifiedDate';
 
-const Default = ({ pageContext, children, location, Title }) => {
+function Default({ pageContext, children, location, Title }) {
   const { frontmatter = {}, relativePagePath, titleType } = pageContext;
-  const { tabs, title, theme, description, keywords } = frontmatter;
+  const { tabs, title, theme: frontmatterTheme, description, keywords, date } = frontmatter;
+
+  const { interiorTheme } = useMetadata();
 
   // get the path prefix if it exists
   const {
     site: { pathPrefix },
   } = useStaticQuery(graphql`
-    query PATH_PREFIX_QUERY_SHADOW {
+    query PATH_PREFIX_QUERY {
       site {
         pathPrefix
       }
@@ -34,6 +38,9 @@ const Default = ({ pageContext, children, location, Title }) => {
   };
 
   const currentTab = getCurrentTab();
+
+  const theme = frontmatterTheme || interiorTheme;
+
   return (
     <Layout
       tabs={tabs}
@@ -45,16 +52,17 @@ const Default = ({ pageContext, children, location, Title }) => {
       titleType={titleType}
       location={location}
     >
-      <PageHeader title={Title ? <Title /> : title} label="label" tabs={tabs} />
-      {tabs && <PageTabs slug={slug} tabs={tabs} currentTab={currentTab} />}
+      <PageHeader title={Title ? <Title /> : title} label="label" tabs={tabs} theme={theme} />
+      {tabs && <PageTabs title={title} slug={slug} tabs={tabs} currentTab={currentTab} />}
       <Main padded>
         {children}
         <EditLink relativePagePath={relativePagePath} />
+        <LastModifiedDate date={date} />
       </Main>
       <NextPrevious pageContext={pageContext} location={location} slug={slug} tabs={tabs} currentTab={currentTab} />
       <Utils />
     </Layout>
   );
-};
+}
 
 export default Default;

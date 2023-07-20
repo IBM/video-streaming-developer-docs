@@ -1,11 +1,13 @@
 .headerShadow .headerNameShadow {
   @include type-style('body-short-02');
+  padding: 0 $spacing-07 0 $spacing-05;
   transition: opacity $duration-fast-02 $standard-easing;
   color: $inverse-01;
   text-decoration: none;
-  left: 3rem;
+  left: $spacing-07;
   white-space: nowrap;
   height: 1.375rem;
+  border: 0.125rem solid transparent;
   border-top: 1px solid transparent;
   display: table-cell;
 

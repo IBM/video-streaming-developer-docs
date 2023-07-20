@@ -5,8 +5,9 @@ import BackToTopBtn from 'gatsby-theme-carbon/src/components/BackToTopBtn';
 import NextPrevious from 'gatsby-theme-carbon/src/components/NextPrevious';
 import Layout from '../components/Layout';
 import Carbon from '../../images/carbon.jpg';
+import { homepageBackToTop } from './Homepage.module.scss';
 
-const Homepage = ({ children, Banner, FirstCallout, location, pageContext }) => {
+function Homepage({ children, Banner, FirstCallout, location, pageContext }) {
   const { frontmatter = {}, titleType } = pageContext;
   const { title, description, keywords } = frontmatter;
   return (
@@ -23,10 +24,12 @@ const Homepage = ({ children, Banner, FirstCallout, location, pageContext }) => 
       {FirstCallout}
       <Main>{children}</Main>
       <NextPrevious isHomepage location={location} pageContext={pageContext} />
-      <BackToTopBtn />
+      <div className={homepageBackToTop}>
+        <BackToTopBtn />
+      </div>
     </Layout>
   );
-};
+}
 
 Homepage.defaultProps = {
   Banner: <HomepageBanner renderText={() => <h1>IBM Video Streaming APIs</h1>} image={Carbon} />,

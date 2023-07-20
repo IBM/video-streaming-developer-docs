@@ -1,22 +1,55 @@
-import React, { useContext } from 'react';
-import classnames from 'classnames';
-import { HeaderSideNavItems, SideNav, SideNavItems } from 'carbon-components-react';
-import { useNavItems as themeUseNavItems } from 'gatsby-theme-carbon/src/util/NavItems';
+import React, { useContext, useRef, useEffect } from 'react';
+import { HeaderSideNavItems, SideNav, SideNavItems } from '@carbon/react';
+import { useNavItems } from 'gatsby-theme-carbon/src/util/NavItems';
+import cx from 'classnames';
+
 import NavContext from 'gatsby-theme-carbon/src/util/context/NavContext';
 import LeftNavItem from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavItem';
+import LeftNavResourceLinks from 'gatsby-theme-carbon/src/components/LeftNav/ResourceLinks';
+
+import LeftNavWrapper from 'gatsby-theme-carbon/src/components/LeftNav/LeftNavWrapper';
+import * as styles from 'gatsby-theme-carbon/src/components/LeftNav/LeftNav.module.scss';
+import useMetadata from 'gatsby-theme-carbon/src/util/hooks/useMetadata';
+import { leftNavShadowWrapper, sideNavShadow, sideNavWhiteShadow } from './LeftNavShadow.module.scss';
 import LeftNavHeaderMenus from '../Header/LeftNavHeaderMenus';
-
 import Title from './Title';
-import { sideNav } from './LeftNav.module.scss';
+import MainNavContent from '../MainNavContent';
 
-const LeftNav = ({ location, homepage, is404 }) => {
-  const { leftNavIsOpen } = useContext(NavContext);
+function LeftNav({ location, homepage, is404, theme }) {
+  const { leftNavIsOpen, leftNavScrollTop, setLeftNavScrollTop, toggleNavState } = useContext(NavContext);
 
-  let navItems = themeUseNavItems();
+  const sideNavRef = useRef();
+  const sideNavListRef = useRef();
 
-  if (!location) {
-    return '';
-  }
+  useEffect(() => {
+    sideNavListRef.current = sideNavRef.current.querySelector('.sidenav-list');
+  }, []);
+
+  useEffect(() => {
+    sideNavListRef.current.addEventListener('scroll', (e) => {
+      setLeftNavScrollTop(e.target.scrollTop);
+    });
+  }, [setLeftNavScrollTop]);
+
+  useEffect(() => {
+    if (leftNavScrollTop >= 0 && !sideNavListRef?.current.scrollTop) {
+      sideNavListRef.current.scrollTop = leftNavScrollTop;
+    }
+  }, [leftNavScrollTop]);
+
+  const getLeftNavClassNames = () => {
+    if (theme === 'dark' || homepage) {
+      return styles.sideNavDark;
+    }
+    return [styles.sideNavWhite, sideNavWhiteShadow];
+  };
+
+  let navItems = useNavItems();
+  const { navigationStyle } = useMetadata();
+
+  const closeSwitcher = () => {
+    toggleNavState('switcherIsOpen', 'close');
+  };
 
   const { pathname } = location;
   let mainPathName = '';
@@ -45,7 +78,7 @@ const LeftNav = ({ location, homepage, is404 }) => {
   }
 
   if (homepage || is404) {
-    navItems = [];
+    navItems = MainNavContent;
   } else {
     navItems = navItems.filter((item) => {
       let showMainMenu = false;
@@ -63,31 +96,41 @@ const LeftNav = ({ location, homepage, is404 }) => {
     });
   }
 
-  const renderNavItems = () =>
-    navItems.map((item, i) => <LeftNavItem items={item.pages} category={item.title} key={i} />);
-
   return (
-    <SideNav
+    <LeftNavWrapper
+      className={cx(leftNavShadowWrapper, {
+        'cds--g100': homepage,
+      })}
       expanded={leftNavIsOpen}
-      aria-label="Side navigation"
-      className={classnames(
-        {
-          'bx--side-nav--website': true,
-          'bx--side-nav--website--light': !homepage,
-          'bx--side-nav--emptycontent': homepage || is404,
-        },
-        sideNav,
-      )}
+      onClick={closeSwitcher}
+      onKeyPress={closeSwitcher}
     >
-      <SideNavItems>
-        <HeaderSideNavItems>
-          <LeftNavHeaderMenus />
-        </HeaderSideNavItems>
-        {title && <Title>{title}</Title>}
-        {renderNavItems()}
-      </SideNavItems>
-    </SideNav>
+      <SideNav
+        ref={sideNavRef}
+        aria-label="Side navigation"
+        expanded={leftNavIsOpen}
+        defaultExpanded={leftNavIsOpen}
+        isPersistent={!navigationStyle}
+        className={cx(getLeftNavClassNames(), sideNavShadow)}
+      >
+        <SideNavItems
+          className={cx('sidenav-list', {
+            'sidenav-list--notitle': !title,
+          })}
+        >
+          <HeaderSideNavItems>
+            <LeftNavHeaderMenus />
+          </HeaderSideNavItems>
+          {title && <Title>{title}</Title>}
+          {navItems.map((item, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <LeftNavItem items={item.pages} category={item.title} key={i} hasDivider={item.hasDivider} />
+          ))}
+          <LeftNavResourceLinks />
+        </SideNavItems>
+      </SideNav>
+    </LeftNavWrapper>
   );
-};
+}
 
 export default LeftNav;

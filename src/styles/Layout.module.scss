@@ -1,0 +1,7 @@
+.layout :global {
+  margin-top: $spacing-09;
+
+  :global(.container--homepage) {
+    background-color: $background;
+  }
+}

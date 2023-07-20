@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, FormGroup, TextInput, TextArea, Button } from 'carbon-components-react';
+import { Form, FormGroup, TextInput, TextArea, Button } from '@carbon/react';
 import md5 from 'md5';
 import Notification from './Notification';
 
@@ -101,43 +101,41 @@ const HashAuthenticationTest = () => {
   };
 
   return (
-    <>
-      <Form onSubmit={submit}>
-        <FormGroup>
-          <TextInput
-            id="ChannelSecret"
-            invalid={!!secretError}
-            invalidText={secretError}
-            labelText="Channel Secret Key"
-            placeholder="28e55ffa9bbd9a18dccde7f8a8d8cca"
-            onChange={(e) => setSecret(e.target.value)}
-            onFocus={(e) => setSecret(e.target.value)}
-            onBlur={(e) => setSecret(e.target.value)}
-            light
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextArea
-            cols={50}
-            id="AuthenticationHash"
-            invalid={!!jsonError}
-            invalidText={jsonError}
-            labelText="JSON object with authentication hash"
-            placeholder='[{"user":"user@example.com"},{"hash":"0253acee466a26b0327617b55851116e"},{"hashExpire":1520694398}]'
-            onChange={(e) => setJson(e.target.value)}
-            onFocus={(e) => setJson(e.target.value)}
-            onBlur={(e) => setJson(e.target.value)}
-            rows={4}
-            light
-          />
-        </FormGroup>
-        <Button kind="primary" tabIndex={0} type="submit">
-          Run authentication test
-        </Button>
+    <Form onSubmit={submit}>
+      <FormGroup>
+        <TextInput
+          id="ChannelSecret"
+          invalid={!!secretError}
+          invalidText={secretError}
+          labelText="Channel Secret Key"
+          placeholder="28e55ffa9bbd9a18dccde7f8a8d8cca"
+          onChange={(e) => setSecret(e.target.value)}
+          onFocus={(e) => setSecret(e.target.value)}
+          onBlur={(e) => setSecret(e.target.value)}
+          light
+        />
+      </FormGroup>
+      <FormGroup>
+        <TextArea
+          cols={50}
+          id="AuthenticationHash"
+          invalid={!!jsonError}
+          invalidText={jsonError}
+          labelText="JSON object with authentication hash"
+          placeholder='[{"user":"user@example.com"},{"hash":"0253acee466a26b0327617b55851116e"},{"hashExpire":1520694398}]'
+          onChange={(e) => setJson(e.target.value)}
+          onFocus={(e) => setJson(e.target.value)}
+          onBlur={(e) => setJson(e.target.value)}
+          rows={4}
+          light
+        />
+      </FormGroup>
+      <Button kind="primary" tabIndex={0} type="submit">
+        Run authentication test
+      </Button>
 
-        <Notification isSuccess={success} setSuccess={setSuccess} />
-      </Form>
-    </>
+      <Notification isSuccess={success} setSuccess={setSuccess} />
+    </Form>
   );
 };
 
