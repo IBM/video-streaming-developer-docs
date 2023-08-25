@@ -1,0 +1,12 @@
+# Example configuration file that:
+#  - Ignores lodash dependency
+#  - Disables version-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "gatsby"
