@@ -5,10 +5,10 @@
 .dropdown {
   min-width: 40%;
 
-  div:global(.bx--dropdown) {
+  div:global(.#{$prefix}--dropdown) {
     border-right: 1px solid #161616;
 
-    &:global(.bx--dropdown--disabled) {
+    &:global(.#{$prefix}--dropdown--disabled) {
       border-right-color: transparent !important;
     }
   }

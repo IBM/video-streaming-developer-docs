@@ -7,9 +7,10 @@ import MainNavContent from '../MainNavContent';
 
 function HeaderNav() {
   const navItems = MainNavContent;
+  const label = 'IBM Video Streaming Developers Site';
 
   return (
-    <HeaderNavigation className="cds--g100" aria-label="Carbon Design System">
+    <HeaderNavigation className="cds--g100" aria-label={label}>
       {navItems.map(({ pages, title }) => (
         <HeaderNavItem items={pages} category={title} key={title} />
       ))}

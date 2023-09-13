@@ -10,24 +10,27 @@ const labels = [
   { name: 'ENDED', type: 'magenta' },
 ];
 
-export const BasicControls = ({ onPlay, onPause, ready, activeLabels }) => (
-  <div className={styles.toolboxRow}>
-    <div>
-      <Button onClick={onPlay} renderIcon={PlayFilledAlt} size={16} disabled={!ready}>
-        Play
-      </Button>
-      <Button kind="secondary" renderIcon={PauseFilled} size={16} onClick={onPause} disabled={!ready}>
-        Pause
-      </Button>
+// eslint-disable-next-line import/prefer-default-export
+export function BasicControls({ onPlay, onPause, ready, activeLabels }) {
+  return (
+    <div className={styles.toolboxRow}>
+      <div>
+        <Button onClick={onPlay} renderIcon={PlayFilledAlt} size="md" disabled={!ready}>
+          Play
+        </Button>
+        <Button kind="secondary" renderIcon={PauseFilled} size="md" onClick={onPause} disabled={!ready}>
+          Pause
+        </Button>
+      </div>
+      <div className={styles.labels}>
+        {labels
+          .filter((label) => activeLabels.some((activeLabel) => activeLabel === label.name))
+          .map((label) => (
+            <Tag key={label} type={label.type}>
+              {label.name}
+            </Tag>
+          ))}
+      </div>
     </div>
-    <div className={styles.labels}>
-      {labels
-        .filter((label) => activeLabels.some((activeLabel) => activeLabel === label.name))
-        .map((label) => (
-          <Tag key={label} type={label.type}>
-            {label.name}
-          </Tag>
-        ))}
-    </div>
-  </div>
-);
+  );
+}

@@ -53,15 +53,15 @@
 }
 
 .volume :global {
-  .bx--form-item {
+  .#{$prefix}--form-item {
     align-items: initial;
 
-    .bx--slider-container {
-      .bx--slider {
+    .#{$prefix}--slider-container {
+      .#{$prefix}--slider {
         min-width: 8.5rem;
       }
 
-      .bx--slider__range-label:last-of-type {
+      .#{$prefix}--slider__range-label:last-of-type {
         margin-right: 0;
       }
     }

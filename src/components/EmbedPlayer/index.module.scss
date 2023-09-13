@@ -19,7 +19,7 @@
   justify-content: center;
   background: #000;
 
-  & > div:global(.bx--loading-overlay) {
+  & > div:global(.#{$prefix}--loading-overlay) {
     position: initial;
   }
 

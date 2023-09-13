@@ -1,27 +1,31 @@
-.tile:global(.bx--tile) {
+.tile:global(.#{$prefix}--tile) {
   display: flex;
   margin: 0 -8px;
-  padding: 8px;
+  padding: $spacing-03;
 }
 
 .content {
-  padding-left: 16px;
+  padding-left: $spacing-05;
+}
+
+.tag {
+  margin-left: $spacing-03 !important;
 }
 
 .title {
   display: flex;
   align-items: center;
-  padding-bottom: 8px;
+  padding-bottom: $spacing-03;
 
-  & > span:global(.bx--tag) {
-    margin-left: 8px;
+  & > span:global(.#{$prefix}--tag) {
+    margin-left: $spacing-03;
   }
 }
 
 .wrapper {
   &:not(:first-of-type),
   &:not(:last-of-type) {
-    margin: 16px 0;
+    margin: $spacing-05 0;
   }
 }
 
