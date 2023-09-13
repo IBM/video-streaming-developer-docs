@@ -32,13 +32,13 @@ npm install ibm-video-streaming-web-player-api
 Create an instance of the Embed API by providing the ID of the iframe. The iframe code should look like this:
 
 ```html
-<iframe id="PlayerIframe" src="https://video.ibm.com/embed/1524" width="640" height="480" allowfullscreen webkitallowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe id="PlayerIframe" src="https://video.ibm.com/embed/recorded/131906526" width="640" height="480" allowfullscreen webkitallowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
 ```
 ```js
 let viewer = PlayerAPI('PlayerIframe');
 ```
 
-Content Owners can customize their Player's user experience by [using query parameters](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#parameters) in the src url above. The list of available URL parameters and their effects can be found here: [URL Parameters](/player-api-url-parameters) 
+Content Owners can customize their Player's user experience by [using query parameters](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#parameters) in the src url above. The list of available URL parameters and their effects can be found here: [URL Parameters](/player-api-url-parameters)
 
 ## Method Calls
 
@@ -85,7 +85,7 @@ Loads a channel or a video in the player. Requires two additional arguments:
 
 ```js
 viewer.callMethod('load', 'video', 5903947);
-viewer.callMethod('load', 'channel', 1524);
+viewer.callMethod('load', 'channel', 6540154);
 ```
 
 ### seek
@@ -149,7 +149,7 @@ viewer.callMethod('webkitEnterFullscreen');
 
 ## Showing and hiding components
 
-Toggle the visibility of different components by calling one of the methods below: 
+Toggle the visibility of different components by calling one of the methods below:
 
 - `hideAudioSwitch`
 - `hideCTA`
@@ -242,7 +242,7 @@ Get the current content type and ID as an array.
 
 ```js
 viewer.getProperty('content', function (content) {
-    // content == ['channel', 1524]
+    // content == ['channel', 6540154]
     // or
     // content == ['recorded', 12345678]
     ...
@@ -256,10 +256,10 @@ Get the actual content type and ID as an array. This will return the currently p
 ###### Example
 
 ```js
-viewer.callMethod('load', 'channel', 1524);
+viewer.callMethod('load', 'channel', 6540154);
 // ...
 viewer.getProperty('playingContent', function (content) {
-    // content == ['channel', 1524]
+    // content == ['channel', 6540154]
     //  - if it's live, or
     // content == ['recorded', 123456]
     //  - if it's off-air and has off-air video content, or

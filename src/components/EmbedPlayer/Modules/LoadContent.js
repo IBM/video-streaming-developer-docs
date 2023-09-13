@@ -14,7 +14,8 @@ const toInternalValue = (type) => (type === 'Video' ? 'recorded' : 'channel');
 
 const toDisplayValue = (content) => (content[0] === 'recorded' ? 'Video' : 'Channel');
 
-export const LoadContent = ({ content = [], disabled = false, placeholder = 'Content Id', onLoad = () => {} } = {}) => {
+// eslint-disable-next-line import/prefer-default-export
+export function LoadContent({ content = [], disabled = false, placeholder = 'Content Id', onLoad = () => {} } = {}) {
   const [channelType, setChannelType] = useState(toDisplayValue(content));
   const [channelId, setChannelId] = useState(content[1]);
 
@@ -43,10 +44,10 @@ export const LoadContent = ({ content = [], disabled = false, placeholder = 'Con
           onChange={(e) => setChannelId(restrictValue(e.target.value))}
           disabled={disabled}
         />
-        <Button disabled={disabled} onClick={() => onLoad(toInternalValue(channelType), channelId)} size="field">
+        <Button disabled={disabled} onClick={() => onLoad(toInternalValue(channelType), channelId)} size="md">
           Load
         </Button>
       </div>
     </div>
   );
-};
+}

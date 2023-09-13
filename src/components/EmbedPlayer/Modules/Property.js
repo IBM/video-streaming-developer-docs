@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Button, TextInput } from '@carbon/react';
 import * as styles from './Property.module.scss';
 
-export const Property = ({
+// eslint-disable-next-line import/prefer-default-export
+export function Property({
   disabled,
   value,
   onRequest,
@@ -11,7 +12,7 @@ export const Property = ({
   readOnly,
   placeholder,
   restrictValue = (v) => v,
-} = {}) => {
+} = {}) {
   const [interactiveValue, setValue] = useState(null);
 
   return (
@@ -30,10 +31,10 @@ export const Property = ({
             disabled={disabled}
           />
         )}
-        <Button disabled={disabled} onClick={readOnly ? onRequest : () => onRequest(interactiveValue)} size="field">
+        <Button disabled={disabled} onClick={readOnly ? onRequest : () => onRequest(interactiveValue)} size="md">
           {text}
         </Button>
       </div>
     </div>
   );
-};
+}
