@@ -1,34 +1,57 @@
 export default [
   {
-    title: 'APIs',
+    title: 'API basics',
     pages: [
       {
         path: '/api-basics-overview',
-        title: 'API basics',
       },
+    ],
+  },
+  {
+    title: 'Organization API',
+    pages: [
       {
         path: '/organization-api-getting-started',
-        title: 'Organization API',
       },
+    ],
+  },
+  {
+    title: 'Channel API',
+    pages: [
       {
         path: '/channel-api-basic-channel-management',
-        title: 'Channel API',
       },
+    ],
+  },
+  {
+    title: 'Viewer Authentication API',
+    pages: [
       {
         path: '/viewer-authentication-api-v2-getting-started',
-        title: 'Viewer Authentication API',
       },
+    ],
+  },
+  {
+    title: 'Player API',
+    pages: [
       {
         path: '/player-api-getting-started',
-        title: 'Player API',
       },
+    ],
+  },
+  {
+    title: 'Analytics API',
+    pages: [
       {
         path: '/analytics-api-getting-started',
-        title: 'Analytics API',
       },
+    ],
+  },
+  {
+    title: 'ECDN API',
+    pages: [
       {
         path: '/ecdn-api-getting-started',
-        title: 'ECDN API',
       },
     ],
   },

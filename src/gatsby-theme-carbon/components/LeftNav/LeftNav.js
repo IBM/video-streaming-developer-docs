@@ -108,7 +108,6 @@ function LeftNav({ location, homepage, is404, theme }) {
         aria-label="Side navigation"
         expanded={leftNavIsOpen}
         defaultExpanded={leftNavIsOpen}
-        inert
         isPersistent={!navigationStyle}
         className={cx(getLeftNavClassNames(), sideNavShadow)}
       >
