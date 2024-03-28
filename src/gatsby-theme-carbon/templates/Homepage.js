@@ -12,7 +12,7 @@ function FirstRightText() {
   return (
     <p>
       Control the viewing experience for your audience. Create your own streaming applications, customize interfaces,
-      analyze engagement and access telemetry data with the APIs and SDKs of the IBM Video Streaming platform.
+      analyze engagement and access telemetry data with the APIs of the IBM Video Streaming platform.
     </p>
   );
 }

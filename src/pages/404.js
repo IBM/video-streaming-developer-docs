@@ -26,16 +26,10 @@ const links = [
     href: '/ecdn-api-overview',
     text: 'ECDN API',
   },
-  {
-    href: '/broadcaster-sdk',
-    text: 'Broadcaster SDK',
-  },
-  {
-    href: '/player-sdk',
-    text: 'Player SDK',
-  },
 ];
 
-const Custom404 = ({ location }) => <FourOhFour links={links} location={location} />;
+function Custom404({ location }) {
+  return <FourOhFour links={links} location={location} />;
+}
 
 export default Custom404;

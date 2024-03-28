@@ -1,10 +1,10 @@
 # Developer Tools
 
-A documentation site for IBM Video Streaming APIs, SDKs and use cases - [URL](https://ibm.github.io/video-streaming-developer-docs//)
+A documentation site for IBM Video Streaming APIs and use cases - [URL](https://ibm.github.io/video-streaming-developer-docs//)
 
 ## About
 
-With this repository Video Streaming developers can easily update their API and SDK documentations.
+With this repository Video Streaming developers can easily update their API documentations.
 The site content is in `mdx` format.
 MDX is like an extension of Markdown documents. MDX is an author-able format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast 🚀. MDX seeks to make writing with Markdown and JSX simpler while being more expressive.
 
