@@ -3,10 +3,10 @@ import React from 'react';
 import { HeaderNavigation } from '@carbon/react';
 import HeaderNavItem from 'gatsby-theme-carbon/src/components/HeaderNav/HeaderNavItem';
 
-import MainNavContent from '../MainNavContent';
+import MainNavContentHeader from '../MainNavContentHeader';
 
 function HeaderNav() {
-  const navItems = MainNavContent;
+  const navItems = MainNavContentHeader;
   const label = 'IBM Video Streaming Developers Site';
 
   return (

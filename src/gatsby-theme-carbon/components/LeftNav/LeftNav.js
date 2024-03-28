@@ -61,8 +61,6 @@ function LeftNav({ location, homepage, is404, theme }) {
     'analytics-api': 'Analytics API',
     'ecdn-api': 'ECDN API',
     'organization-api': 'Organization API',
-    'broadcaster-sdk': 'Broadcaster SDK',
-    'player-sdk': 'Player SDK',
   };
 
   Object.keys(availableMainPaths).forEach((availableMainPath) => {
@@ -110,7 +108,6 @@ function LeftNav({ location, homepage, is404, theme }) {
         aria-label="Side navigation"
         expanded={leftNavIsOpen}
         defaultExpanded={leftNavIsOpen}
-        inert
         isPersistent={!navigationStyle}
         className={cx(getLeftNavClassNames(), sideNavShadow)}
       >

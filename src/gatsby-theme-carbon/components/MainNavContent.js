@@ -1,47 +1,57 @@
 export default [
   {
-    title: 'APIs',
+    title: 'API basics',
     pages: [
       {
         path: '/api-basics-overview',
-        title: 'API basics',
-      },
-      {
-        path: '/organization-api-getting-started',
-        title: 'Organization API',
-      },
-      {
-        path: '/channel-api-basic-channel-management',
-        title: 'Channel API',
-      },
-      {
-        path: '/viewer-authentication-api-v2-getting-started',
-        title: 'Viewer Authentication API',
-      },
-      {
-        path: '/player-api-getting-started',
-        title: 'Player API',
-      },
-      {
-        path: '/analytics-api-getting-started',
-        title: 'Analytics API',
-      },
-      {
-        path: '/ecdn-api-getting-started',
-        title: 'ECDN API',
       },
     ],
   },
   {
-    title: 'SDKs',
+    title: 'Organization API',
     pages: [
       {
-        path: '/broadcaster-sdk',
-        title: 'Broadcaster SDK',
+        path: '/organization-api-getting-started',
       },
+    ],
+  },
+  {
+    title: 'Channel API',
+    pages: [
       {
-        path: '/player-sdk',
-        title: 'Player SDK',
+        path: '/channel-api-basic-channel-management',
+      },
+    ],
+  },
+  {
+    title: 'Viewer Authentication API',
+    pages: [
+      {
+        path: '/viewer-authentication-api-v2-getting-started',
+      },
+    ],
+  },
+  {
+    title: 'Player API',
+    pages: [
+      {
+        path: '/player-api-getting-started',
+      },
+    ],
+  },
+  {
+    title: 'Analytics API',
+    pages: [
+      {
+        path: '/analytics-api-getting-started',
+      },
+    ],
+  },
+  {
+    title: 'ECDN API',
+    pages: [
+      {
+        path: '/ecdn-api-getting-started',
       },
     ],
   },

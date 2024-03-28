@@ -2,7 +2,7 @@
 import React, { useLayoutEffect } from 'react';
 
 import Container from 'gatsby-theme-carbon/src/components/Container';
-import Switcher from 'gatsby-theme-carbon/src/components/Switcher';
+import Switcher, { SwitcherDivider, SwitcherLink } from 'gatsby-theme-carbon/src/components/Switcher';
 import useMetadata from 'gatsby-theme-carbon/src/util/hooks/useMetadata';
 import Meta from './Meta';
 import LeftNav from './LeftNav/LeftNav';
@@ -33,7 +33,14 @@ function Layout({ children, homepage, theme, titleType, pageTitle, pageDescripti
     <div className={layout}>
       <Meta titleType={titleType} pageTitle={pageTitle} pageDescription={pageDescription} pageKeywords={pageKeywords} />
       <Header homepage={homepage} />
-      {isSwitcherEnabled && <Switcher />}
+      {isSwitcherEnabled && (
+        <Switcher>
+          <SwitcherDivider>Product portfolio</SwitcherDivider>
+          <SwitcherLink href="https://video.ibm.com/">IBM Watson Media</SwitcherLink>
+          <SwitcherDivider>Learn more</SwitcherDivider>
+          <SwitcherLink href="https://support.video.ibm.com/hc/en-us">Browse our Support Center</SwitcherLink>
+        </Switcher>
+      )}
       <LeftNav homepage={homepage} is404Page={is404} location={location} theme={theme} />
       <Container homepage={homepage} theme={theme}>
         {children}
