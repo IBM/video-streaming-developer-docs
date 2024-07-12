@@ -1,7 +1,7 @@
 import React from 'react';
 import { Media } from './ExampleMedia';
 import imgIBM from '../../../images/example-channel-ibm.jpg';
-import imgNASA from '../../../images/example-channel-nasa.jpg';
+import imgDemo from '../../../images/example-channel-demo.jpg';
 
 const medias = [
   {
@@ -12,12 +12,11 @@ const medias = [
     imgUrl: imgIBM,
   },
   {
-    title: 'NASA Public',
+    title: 'Demo channel',
     type: 'channel',
     id: 25964588,
-    description:
-      'NASA TV airs a variety of regularly scheduled, pre-recorded educational and public relations programming 24 hours a day on its various channels.',
-    imgUrl: imgNASA,
+    description: 'Demo channel',
+    imgUrl: imgDemo,
   },
 ];
 
