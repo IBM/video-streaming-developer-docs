@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
-import imgMulti1 from '../../../images/example-multiview-1.png';
 import * as styles from './index.module.scss';
 
 const views = [
   {
-    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_6540154,640x360,b:2020091508.jpg',
+    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_25964588,640x360,b:2020091508.jpg',
     type: 'channel',
-    id: 6540154,
+    id: 25964588,
   },
   {
     url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_17074538,640x360,b:2020091508.jpg',
@@ -21,7 +20,8 @@ const views = [
   },
 ];
 
-export const MultiControls = ({ onMediaChange, ready }) => {
+// eslint-disable-next-line import/prefer-default-export
+export function MultiControls({ onMediaChange, ready }) {
   const [selected, setSelected] = useState(0);
 
   return (
@@ -57,4 +57,4 @@ export const MultiControls = ({ onMediaChange, ready }) => {
       })}
     </div>
   );
-};
+}
