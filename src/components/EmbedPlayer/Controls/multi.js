@@ -4,9 +4,9 @@ import * as styles from './index.module.scss';
 
 const views = [
   {
-    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_25964588,640x360,b:2020091508.jpg',
+    url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_23935269,640x360,b:2020091508.jpg',
     type: 'channel',
-    id: 25964588,
+    id: 23935269,
   },
   {
     url: 'https://ustvstaticcdn1-a.akamaihd.net/i/channel/live/1_17074538,640x360,b:2020091508.jpg',
