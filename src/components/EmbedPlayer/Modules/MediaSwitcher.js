@@ -14,7 +14,7 @@ const medias = [
   {
     title: 'Demo channel',
     type: 'channel',
-    id: 25964588,
+    id: 23935269,
     description: 'Demo channel',
     imgUrl: imgDemo,
   },
