@@ -85,7 +85,7 @@ Loads a channel or a video in the player. Requires two additional arguments:
 
 ```js
 viewer.callMethod('load', 'video', 5903947);
-viewer.callMethod('load', 'channel', 25964588);
+viewer.callMethod('load', 'channel', 23935269);
 ```
 
 ### seek
@@ -242,7 +242,7 @@ Get the current content type and ID as an array.
 
 ```js
 viewer.getProperty('content', function (content) {
-    // content == ['channel', 25964588]
+    // content == ['channel', 23935269]
     // or
     // content == ['recorded', 12345678]
     ...
@@ -256,10 +256,10 @@ Get the actual content type and ID as an array. This will return the currently p
 ###### Example
 
 ```js
-viewer.callMethod('load', 'channel', 25964588);
+viewer.callMethod('load', 'channel', 23935269);
 // ...
 viewer.getProperty('playingContent', function (content) {
-    // content == ['channel', 25964588]
+    // content == ['channel', 23935269]
     //  - if it's live, or
     // content == ['recorded', 123456]
     //  - if it's off-air and has off-air video content, or
