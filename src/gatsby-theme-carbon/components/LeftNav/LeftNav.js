@@ -59,7 +59,6 @@ function LeftNav({ location, homepage, is404, theme }) {
     'viewer-authentication-api': 'Viewer Authentication API',
     'player-api': 'Player API',
     'analytics-api': 'Analytics API',
-    'ecdn-api': 'ECDN API',
     'organization-api': 'Organization API',
   };
 

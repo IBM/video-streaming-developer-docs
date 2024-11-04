@@ -22,10 +22,6 @@ const links = [
     href: '/analytics-api-getting-started',
     text: 'Analytics API',
   },
-  {
-    href: '/ecdn-api-overview',
-    text: 'ECDN API',
-  },
 ];
 
 function Custom404({ location }) {
