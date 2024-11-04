@@ -26,10 +26,6 @@ export default [
         path: '/analytics-api-getting-started',
         title: 'Analytics API',
       },
-      {
-        path: '/ecdn-api-getting-started',
-        title: 'ECDN API',
-      },
     ],
   },
 ];

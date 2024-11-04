@@ -47,12 +47,4 @@ export default [
       },
     ],
   },
-  {
-    title: 'ECDN API',
-    pages: [
-      {
-        path: '/ecdn-api-getting-started',
-      },
-    ],
-  },
 ];
