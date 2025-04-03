@@ -57,6 +57,8 @@
       path: /channel-api-video-management/manage-captions
     - title: Manage audio tracks
       path: /channel-api-video-management/manage-audio-tracks
+    - title: Schedule Visibility Change
+      path: /channel-api-video-management/scheduled-visibility-change
 - title: Playlists
   pages:
     - title: Get playlist information
