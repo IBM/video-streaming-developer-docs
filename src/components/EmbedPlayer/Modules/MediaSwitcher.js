@@ -1,15 +1,14 @@
 import React from 'react';
 import { Media } from './ExampleMedia';
-import imgIBM from '../../../images/example-channel-ibm.jpg';
 import imgDemo from '../../../images/example-channel-demo.jpg';
 
 const medias = [
   {
     title: 'IBM @ CES',
     type: 'recorded',
-    id: 81056340,
-    description: 'IBM CEO Ginni Rometty 2016 CES Keynote.',
-    imgUrl: imgIBM,
+    id: 133979911,
+    description: 'IBM Video Streaming',
+    imgUrl: 'https://ustvstaticcdn2-a.akamaihd.net/i/channel/picture/2/2/3/0/22305497/22305497,192x192,r:4.jpg',
   },
   {
     title: 'Demo channel',
