@@ -136,13 +136,16 @@ GET https://api.video.ibm.com/channels/{channel_id}/videos.json
 
 The query parameters for the GET request:
 
-| PARAMETER         | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                                                                          |
-| ----------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `page`            | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                        |
-| `pagesize`        | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                                                                                                |
-| `q`               | string  | OPTIONAL   | Search for text in video related data. Only works for public videos, and if no filter parameter is set.                                                                              |
-| `sort`            | string  | OPTIONAL   | Set sorting order of the videos. Possible values: `recent` – orders based on the `created_at` field; `popular` – orders based on the `views` field. The default value is `recent`. |
-| `filter[protect]` | set     | OPTIONAL   | Filter videos by protection levels. Values: `public`, `private` (default: `public`). The values should be comma separated without whitespace included.                                |
+| PARAMETER                 | TYPE    | IMPORTANCE | DESCRIPTION                                                                                                                                                                          |
+| ------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `page`                    | integer | OPTIONAL   | Requested page number (value is 1 by default)                                                                                                                                        |
+| `pagesize`                | integer | OPTIONAL   | Requested page size (value is 50 by default, max. 50)                                                                                                                                |
+| `q`                       | string  | OPTIONAL   | Search for text in video related data. Only works for public videos, and if no filter parameter is set.                                                                              |
+| `sort`                    | string  | OPTIONAL   | Set sorting order of the videos. Possible values: `recent` – orders based on the `created_at` field; `popular` – orders based on the `views` field. The default value is `recent`. |
+| `filter[protect]`         | set     | OPTIONAL   | Filter videos by protection levels. Values: `public`, `private` (default: `public`). The values should be comma separated without whitespace included.                                |
+| `filter[fromdate]`        | integer | OPTIONAL   | Include videos where creation timestamp ≥ the given Unix timestamp                                                                                                                   |
+| `filter[todate]`          | integer | OPTIONAL   | Include videos where creation timestamp ≤ the given Unix timestamp                                                                                                                   |
+| `filter[custom_metadata]` | array   | OPTIONAL   | Filter videos by custom metadata field values. Each entry should use the format `filter[custom_metadata][<field_id>]=<value>`. Supported field types: string, float, and bool. Only videos where the field with the specified ID matches the given value exactly will be returned. Example: `filter[custom_metadata][4356]=john` → returns videos where the custom metadata field with ID 4356 has the value `john` (string). |
 
 ### Success response
 
