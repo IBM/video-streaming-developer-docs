@@ -21,7 +21,7 @@
     "@carbon/icons-react": "^11.17.0",
     "@carbon/react": "^1.32.0",
     "@reach/router": "^1.3.4",
-    "gatsby": "^4.25.7",
+    "gatsby": "^5.0.0",
     "gatsby-plugin-manifest": "^4.25.0",
     "gatsby-theme-carbon": "^3.4.16",
     "ibm-video-streaming-web-player-api": "^1.2.0",
