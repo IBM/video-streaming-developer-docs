@@ -81,8 +81,6 @@
       path: /channel-api-security/embed-restriction
     - title: Sharing control
       path: /channel-api-security/sharing-control
-    - title: Advanced Access Control Lists
-      path: /channel-api-security/advanced-access-control-lists
 - title: White label broadcasting
   pages:
     - title: Overview
