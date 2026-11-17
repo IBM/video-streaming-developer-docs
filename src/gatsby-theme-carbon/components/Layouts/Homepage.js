@@ -1,9 +1,9 @@
 import React from 'react';
 import { HomepageCallout } from 'gatsby-theme-carbon';
-import { HomepageBanner } from '../components/HomepageClone';
+import { HomepageBanner } from '../HomepageClone';
 import HomepageTemplate from './HomepageTemplate';
 
-import Carbon from '../../images/hero@2x.png';
+import Carbon from '../../../images/hero@2x.png';
 
 function FirstLeftText() {
   return <p>Developer Tools</p>;

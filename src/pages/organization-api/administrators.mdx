@@ -102,7 +102,7 @@ GET https://api.video.ibm.com/organizations/{organizationId}/administrators.json
 | `email`    | string | OPTIONAL   | Filter administrators by email. Minimum 3 characters        |
 | `order`    | string | OPTIONAL   | Order administrators. Allowed values: `email`, `email-desc` |
 | `page`     | number | OPTIONAL   | Page number. The first page's index is 1                    |
-| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50                       |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 &le; `pagesize` &le; 50                       |
 
 Example of the request:
 
@@ -568,7 +568,7 @@ Make sure the `email` parameter is base64 encoded in the URL.
 | ---------- | ------ | ---------- | --------------------------------------------- |
 | `channel`  | number | OPTIONAL   | Filter channels by name. Minimum 2 characters |
 | `page`     | number | OPTIONAL   | Page number. The first page's index is 1      |
-| `pagesize` | number | OPTIONAL   | Size of a page. 1 <= `pagesize` <= 50         |
+| `pagesize` | number | OPTIONAL   | Size of a page. 1 &le; `pagesize` &le; 50         |
 
 Example of the request:
 
