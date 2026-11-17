@@ -3,8 +3,8 @@ import { HomepageBanner } from 'gatsby-theme-carbon/src/components/Homepage';
 import Main from 'gatsby-theme-carbon/src/components/Main';
 import BackToTopBtn from 'gatsby-theme-carbon/src/components/BackToTopBtn';
 import NextPrevious from 'gatsby-theme-carbon/src/components/NextPrevious';
-import Layout from '../components/Layout';
-import Carbon from '../../images/carbon.jpg';
+import Layout from '../Layout';
+import Carbon from '../../../images/carbon.jpg';
 import { homepageBackToTop } from './Homepage.module.scss';
 
 function Homepage({ children, Banner, FirstCallout, location, pageContext }) {

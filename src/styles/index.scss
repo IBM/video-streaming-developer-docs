@@ -6,3 +6,10 @@
 #teconsent {
   display: none !important;
 }
+
+// gatsby-theme-carbon 4 sets `text-wrap: wrap` on code blocks, which breaks lines such as
+// "GET https://..." after the HTTP method. Keep the previous behavior (scroll, no wrapping);
+// blocks that opt in with the `wrap` meta option are more specific and still wrap.
+pre.prism-code {
+  text-wrap: nowrap;
+}

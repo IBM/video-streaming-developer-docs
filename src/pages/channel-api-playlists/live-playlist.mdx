@@ -107,10 +107,10 @@ Possible error responses:
 
 | HTTP RESPONSE CODE | ERROR VALUE                              |
 | ------------------ | ---------------------------------------- |
-| 400 Bad request    | {errors:[{field: string, error: string}] |
+| 400 Bad request    | `{errors:[{field: string, error: string}]` |
 | 401 Unauthorized   |                                          |
 | 403 Forbidden      |                                          |
-| 409 Conflict       | {error: string, hint: string}            |
+| 409 Conflict       | `{error: string, hint: string}` |
 | 500 Server error   |                                          |
 
 ## Get a Live playlist
@@ -208,11 +208,11 @@ Possible error responses:
 | HTTP RESPONSE CODE | ERROR VALUE                              |
 | ------------------ | ---------------------------------------- |
 | 204 No content     |                                          |
-| 400 Bad request    | {errors:[{field: string, error: string}] |
+| 400 Bad request    | `{errors:[{field: string, error: string}]` |
 | 401 Unauthorized   |                                          |
 | 403 Forbidden      |                                          |
 | 404 Not Found      |                                          |
-| 409 Conflict       | {error: string, hint: string}            |
+| 409 Conflict       | `{error: string, hint: string}` |
 | 500 Server error   |                                          |
 
 ## Delete a Live playlist
@@ -251,7 +251,7 @@ Possible error responses:
 | 401 Unauthorized   |                                               |                  |
 | 403 Forbidden      |                                               |                  |
 | 404 Not Found      |                                               |                  |
-| 409 Conflict       | {Required: error error: string, hint: string} |                  |
+| 409 Conflict       | `{Required: error error: string, hint: string}` |                  |
 | 500 Server error   |                                               |                  |
 
 ## Get the currently live playlist
@@ -340,7 +340,7 @@ Possible error responses:
 | 401 Unauthorized   |                                               |                  |
 | 403 Forbidden      |                                               |                  |
 | 404 Not Found      |                                               |                  |
-| 409 Conflict       | {Required: error error: string, hint: string} |                  |
+| 409 Conflict       | `{Required: error error: string, hint: string}` |                  |
 | 500 Server error   |                                               |                  |
 
 ## Stop streaming the playlist
@@ -379,5 +379,5 @@ Possible error responses:
 | 401 Unauthorized   |                               |
 | 403 Forbidden      |                               |
 | 404 Not Found      |                               |
-| 409 Conflict       | {error: string, hint: string} |
+| 409 Conflict       | `{error: string, hint: string}` |
 | 500 Server error   |                               |

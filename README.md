@@ -1,6 +1,6 @@
 # Developer Tools
 
-A documentation site for IBM Video Streaming APIs and use cases - [URL](https://ibm.github.io/video-streaming-developer-docs//)
+A documentation site for IBM Video Streaming APIs and use cases - [URL](https://developers.video.ibm.com/)
 
 ## About
 
@@ -13,7 +13,7 @@ To collaborate with this repository in GitHub you need to follow these steps:
 - Fork the repository into your own GitHub
 - Clone the repository to your local machine
 - Create a new branch for your changes
-- Make some changes and commit them with useful messages ([Conventional Commit messages](https://www.conventionalcommits.org/en/v1.0.0/) preferred)
+- Make some changes and commit them with useful messages. [Conventional Commit messages](https://www.conventionalcommits.org/en/v1.0.0/) are required: a commit-msg hook (commitlint) rejects other formats once you have run `npm install`
 - Push the changes to your repository
 - Create a Pull Request from your repository back to the original one
 
@@ -30,7 +30,7 @@ For local development you can find instructions below.
 
 Check out this article template file for available mdx components:
 
-- [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
+- [Example Article page](https://developers.video.ibm.com/channel-api-topic)
 - [Source mdx file for Example Article page](https://github.com/IBM/video-streaming-developer-docs/blob/master/src/pages/channel-api-topic.mdx)
 
 ## Local development
@@ -39,9 +39,9 @@ Check out this article template file for available mdx components:
 1. Check out the repo
 2. CD into the repo dir
 3. If Docker is already installed
-    * Run: `docker run -it --rm -v $(pwd):/data -w=/data --user=$(id -u):$(id -g) -p 8000:8000 node:18 /bin/bash`
+    * Run: `docker run -it --rm -v $(pwd):/data -w=/data --user=$(id -u):$(id -g) -p 8000:8000 node:24 /bin/bash`
     * Stay in the container and jump to #5, no need to install NodeJS, but still must run the `npm` commands below.
-4. Make sure NodeJS is installed, if not: `brew install node` or see https://nodejs.org/en/download/
+4. Make sure NodeJS 24 or newer is installed (`node -v`), if not: `brew install node` or see https://nodejs.org/en/download/
 5. Install the dependencies: `npm install`
     * Note: some package installation may hang. Just press `Ctrl+C` and restart the command
 6. Run the site locally: `npm run dev`
@@ -60,12 +60,14 @@ in order to create a new page, you have to
    Pages can be in the root in the 'pages' directory. For example `/player-api-usage`,
    or it can be in a separate directory, `/player-api-examples/basic-embed`. Use directory is page if grouped in a main menu, use file if it stands alone.
    Examples of page contents can be found here:
-    - [Example Article page](https://ibm.github.io/video-streaming-developer-docs/channel-api-topic)
+    - [Example Article page](https://developers.video.ibm.com/channel-api-topic)
     - [Source mdx file for Example Article page](https://github.com/IBM/video-streaming-developer-docs/blob/master/src/pages/channel-api-topic.mdx)
 
 ## Deployment
 
-The project uses this GitHub Action to build and publish the site: [Gatsby Publish](https://github.com/marketplace/actions/gatsby-publish)
+When changes are pushed to `master`, the [Publish Developer Docs Site](.github/workflows/deploy.yml) GitHub Action installs the dependencies with `npm ci` on Node.js 24, builds the site with `npm run build` and publishes the `public` folder to the `gh-pages` branch (served at `developers.video.ibm.com`).
+
+To check that the production build works before opening a PR, run `npm run build` and then `npm run serve`.
 
 ### Tips
 
