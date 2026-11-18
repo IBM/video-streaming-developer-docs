@@ -39,6 +39,7 @@
     "@babel/eslint-parser": "^7.29.13",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
+    "@parcel/reporter-dev-server": "file:vendor/parcel-reporter-dev-server",
     "classnames": "^2.5.1",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
@@ -53,18 +54,24 @@
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.1",
+    "picomatch": "file:vendor/picomatch-4",
     "prettier": "^3.10.1",
     "stylelint": "^18.0.0",
     "stylelint-config-recommended-scss": "^18.0.0",
     "stylelint-scss": "^7.5.0"
   },
   "overrides": {
+    "braces": "^3.0.3",
+    "path-to-regexp": "0.1.13",
+    "@parcel/reporter-dev-server": "$@parcel/reporter-dev-server",
     "@reach/router": {
       "react": "$react",
       "react-dom": "$react-dom"
     },
     "xml2js": "^0.6.2",
-    "micromatch": "^4.0.8",
+    "micromatch": {
+      "picomatch": "file:../../vendor/picomatch-2"
+    },
     "resolve-url-loader": "^5.0.0",
     "webpack-dev-middleware": "^7.4.5",
     "@graphql-tools/utils": "^12.0.2",
@@ -73,13 +80,32 @@
     "lodash": "^4.18.1",
     "@ardatan/relay-compiler": {
       "immutable": "^3.8.4"
+    },
+    "lint-staged": {
+      "picomatch": "$picomatch"
+    },
+    "stylelint": {
+      "picomatch": "$picomatch"
+    },
+    "tinyglobby": {
+      "picomatch": "$picomatch"
+    },
+    "@parcel/watcher": {
+      "picomatch": "$picomatch"
+    },
+    "anymatch": {
+      "picomatch": "file:../../vendor/picomatch-2"
+    },
+    "readdirp": {
+      "picomatch": "file:../../vendor/picomatch-2"
     }
   },
   "eslintIgnore": [
     "**/node_modules/",
     "**/public/",
     "**/.cache/",
-    "**/build/"
+    "**/build/",
+    "**/vendor/"
   ],
   "lint-staged": {
     "*.js": [
