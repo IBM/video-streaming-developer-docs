@@ -40,7 +40,9 @@ jobs:
         run: |
           echo 'developers.video.ibm.com' > public/CNAME
       - name: Deploy
-        run: |
-          npx gh-pages -d public -u "github-actions <github-actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          HOST="github.com"
+          REPO_URL="https://x-access-token:${GITHUB_TOKEN}@${HOST}/${GITHUB_REPOSITORY}.git"
+          npx gh-pages -d public -r "$REPO_URL" -u "github-actions <github-actions@github.com>"
