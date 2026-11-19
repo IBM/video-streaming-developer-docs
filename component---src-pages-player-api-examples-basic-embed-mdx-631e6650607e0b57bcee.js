@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkexample=self.webpackChunkexample||[]).push([[9060],{7850:function(e,t,c){c.r(t);var n=c(8453),r=c(6540),a=c(9176);function s(e){return r.createElement(a.A,{src:"https://video.ibm.com/embed/recorded/133979911?volume=0",controls:["basic","advanced"],withMediaSwitcher:!0})}t.default=function(e={}){const{wrapper:t}=Object.assign({},(0,n.R)(),e.components);return t?r.createElement(t,e,r.createElement(s,e)):s()}}}]);
+//# sourceMappingURL=component---src-pages-player-api-examples-basic-embed-mdx-631e6650607e0b57bcee.js.map
