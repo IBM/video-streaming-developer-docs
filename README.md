@@ -42,7 +42,7 @@ Check out this article template file for available mdx components:
     * Run: `docker run -it --rm -v $(pwd):/data -w=/data --user=$(id -u):$(id -g) -p 8000:8000 node:24 /bin/bash`
     * Stay in the container and jump to #5, no need to install NodeJS, but still must run the `npm` commands below.
 4. Make sure NodeJS 24 or newer is installed (`node -v`), if not: `brew install node` or see https://nodejs.org/en/download/
-5. Install the dependencies: `npm install`
+5. Install the dependencies: `npm_config_cache=/tmp/.npm npm install`
     * Note: some package installation may hang. Just press `Ctrl+C` and restart the command
 6. Run the site locally: `npm run dev`
 7. Wait for the address to be displayed, it may take a while
