@@ -1,0 +1,14 @@
+{
+  "name": "decode-uri-component",
+  "description": "A better decodeURIComponent (CommonJS build of 0.5.1 for query-string@6)",
+  "version": "0.5.1-vendored.0",
+  "license": "MIT",
+  "repository": "SamVerschueren/decode-uri-component",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14.16"
+  },
+  "files": [
+    "index.js"
+  ]
+}
