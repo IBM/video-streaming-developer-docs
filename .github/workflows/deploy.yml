@@ -4,6 +4,9 @@ on:
   push:
     branches: [ master ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,11 +39,9 @@ jobs:
       - name: Add CNAME record
         run: |
           echo 'developers.video.ibm.com' > public/CNAME
-      - name: Configure SSH Deploy Key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
       - name: Deploy
         run: |
-          git remote set-url origin git@github.com:${GITHUB_REPOSITORY}.git
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@://github.com{GITHUB_REPOSITORY}.git
           npx gh-pages -d public -u "github-actions <github-actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
